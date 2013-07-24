@@ -3,6 +3,16 @@ var assert = require("assert")
 var Must = require("..")
 var Path = require("path")
 
+describe("Must", function() {
+  it("must be instantiatable", function() {
+    assert(new Must instanceof Must)
+  })
+
+  it("must return an instance of itself when called as a function", function() {
+    assert(Must() instanceof Must)
+  })
+})
+
 describe("Object.prototype.must", function() {
   it("must exist", function() {
     assert(true.must)

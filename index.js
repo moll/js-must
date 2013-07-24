@@ -1,4 +1,6 @@
-exports = module.exports = function() {}
+exports = module.exports = function(obj) {
+  if (!(this instanceof exports)) return new exports(obj)
+}
 
 Object.defineProperty(Object.prototype, "must", {
   get: function() { return new exports(this) },
