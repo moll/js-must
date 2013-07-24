@@ -80,3 +80,17 @@ describe("Must.prototype.true", function() {
     assert.doesNotThrow(function() { false.must.be.true })
   })
 })
+
+describe("Must.prototype.false", function() {
+  it("must not throw when false", function() {
+    assert.doesNotThrow(function() { false.must.be.false() })
+  })
+
+  it("must throw when not false", function() {
+    assert.throws(function() { true.must.be.false() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { true.must.be.false })
+  })
+})
