@@ -21,6 +21,12 @@ Object.defineProperty(Object.prototype, "must", {
   configurable: true
 })
 
+exports.prototype = {
+  get be() {
+    return this
+  }
+}
+
 exports.prototype.true = function() {
   var obj = this.obj instanceof Boolean ? this.obj.valueOf() : this.obj
   assert.strictEqual(obj, true)

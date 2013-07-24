@@ -60,16 +60,23 @@ describe("Global.must", function() {
   })
 })
 
+describe("Must.prototype.be", function() {
+  it("must return itself", function() {
+    var must = true.must
+    assert.strictEqual(must, must.be)
+  })
+})
+
 describe("Must.prototype.true", function() {
   it("must not throw when true", function() {
-    assert.doesNotThrow(function() { true.must.true() })
+    assert.doesNotThrow(function() { true.must.be.true() })
   })
 
   it("must throw when not true", function() {
-    assert.throws(function() { false.must.true() })
+    assert.throws(function() { false.must.be.true() })
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.doesNotThrow(function() { false.must.true })
+    assert.doesNotThrow(function() { false.must.be.true })
   })
 })
