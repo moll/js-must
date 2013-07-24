@@ -1,5 +1,8 @@
+var assert = require("assert")
+
 exports = module.exports = function(obj) {
   if (!(this instanceof exports)) return new exports(obj)
+  this.obj = obj
 }
 
 Object.defineProperty(Object.prototype, "must", {
@@ -17,3 +20,8 @@ Object.defineProperty(Object.prototype, "must", {
   // Without configurable, can't redefine it when reloading this file, e.g.
   configurable: true
 })
+
+exports.prototype.true = function() {
+  var obj = this.obj instanceof Boolean ? this.obj.valueOf() : this.obj
+  assert.strictEqual(obj, true)
+}

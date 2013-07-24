@@ -59,3 +59,17 @@ describe("Global.must", function() {
     delete global.must
   })
 })
+
+describe("Must.prototype.true", function() {
+  it("must not throw when true", function() {
+    assert.doesNotThrow(function() { true.must.true() })
+  })
+
+  it("must throw when not true", function() {
+    assert.throws(function() { false.must.true() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { false.must.true })
+  })
+})
