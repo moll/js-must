@@ -23,16 +23,27 @@ Object.defineProperty(Object.prototype, "must", {
 
 exports.prototype = {
   get be() {
-    return this
+    var equal = this.equal.bind(this)
+    equal.__proto__ = exports.prototype
+    equal.obj = this.obj
+    return equal
   }
 }
 
 exports.prototype.true = function() {
-  var obj = this.obj instanceof Boolean ? this.obj.valueOf() : this.obj
-  assert.strictEqual(obj, true)
+  assert.strictEqual(valueOf(this.obj), true)
 }
 
 exports.prototype.false = function() {
-  var obj = this.obj instanceof Boolean ? this.obj.valueOf() : this.obj
-  assert.strictEqual(obj, false)
+  assert.strictEqual(valueOf(this.obj), false)
+}
+
+exports.prototype.equal = function(expected) {
+  assert.strictEqual(valueOf(this.obj), expected)
+}
+
+function valueOf(obj) {
+  return obj instanceof Boolean ||
+         obj instanceof String ||
+         obj instanceof Number  ? obj.valueOf() : obj
 }
