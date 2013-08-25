@@ -28,6 +28,6 @@
 	"dependencies": {},
 
 	"devDependencies": {
-		"mocha": "1.12.x"
+		"mocha": ">= 1.12.0 < 2"
 	}
 }
