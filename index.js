@@ -71,6 +71,13 @@ Must.prototype.false = function() {
 }
 
 /**
+ * Assert object is `null`.
+ */
+Must.prototype.null = function() {
+  assert.strictEqual(this.obj, null)
+}
+
+/**
  * Assert object strict equality and identity (`===`).
  */
 Must.prototype.equal = function(expected) {

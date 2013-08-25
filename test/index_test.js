@@ -106,24 +106,50 @@ describe("Must.prototype.true", function() {
 
 // Doing false.must automatically converts it to an object.
 describe("Must.prototype.false", function() {
-  it("must pass when false literal", function() {
+  it("must pass given false literal", function() {
     assert.doesNotThrow(function() { Must(false).be.false() })
   })
 
-  it("must pass when false", function() {
+  it("must pass given false", function() {
     assert.doesNotThrow(function() { false.must.be.false() })
   })
 
-  it("must fail when not false literal", function() {
+  it("must fail given not false literal", function() {
     assert.throws(function() { Must(true).be.false() })
   })
 
-  it("must fail when not false object", function() {
+  it("must fail given not false object", function() {
     assert.throws(function() { true.must.be.false() })
   })
 
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { true.must.be.false })
+  })
+})
+
+describe("Must.prototype.null", function() {
+  it("must pass given null", function() {
+    assert.doesNotThrow(function() { Must(null).be.null() })
+  })
+
+  it("must not pass given true", function() {
+    assert.throws(function() { Must(true).be.null() })
+  })
+
+  it("must not pass given false", function() {
+    assert.throws(function() { Must(false).be.null() })
+  })
+
+  it("must not pass given undefined", function() {
+    assert.throws(function() { Must(undefined).be.null() })
+  })
+
+  it("must not pass given empty string", function() {
+    assert.throws(function() { Must("").be.null() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { Must(null).be.null })
   })
 })
 
