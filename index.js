@@ -57,14 +57,14 @@ Must.prototype = {
 }
 
 /**
- * Assert object is `true` or `Boolean(true)`.
+ * Assert object is `true` or `new Boolean(true)`.
  */
 Must.prototype.true = function() {
   assert.strictEqual(unbox(this.obj), true)
 }
 
 /**
- * Assert object is `false` or `Boolean(false)`.
+ * Assert object is `false` or `new Boolean(false)`.
  */
 Must.prototype.false = function() {
   assert.strictEqual(unbox(this.obj), false)
@@ -87,8 +87,8 @@ Must.prototype.undefined = function() {
 /**
  * Assert object is truthy (`!!obj`).
  *
- * `0`, `Number(0)`, `false`, `Boolean(false)`, `null`, `""` and `undefined` are
- * falsy in JavaScript.  Everything else is truthy.
+ * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
+ * `undefined` are falsy in JavaScript.  Everything else is truthy.
  */
 Must.prototype.truthy = function() {
   assert(unbox(this.obj))
@@ -97,8 +97,8 @@ Must.prototype.truthy = function() {
 /**
  * Assert object is falsy (`!obj`).
  *
- * `0`, `Number(0)`, `false`, `Boolean(false)`, `null`, `""` and `undefined` are
- * falsy in JavaScript.  Everything else is truthy.
+ * `0`, `new Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
+ * `undefined` are falsy in JavaScript.  Everything else is truthy.
  */
 Must.prototype.falsy = function() {
   assert(!unbox(this.obj))
