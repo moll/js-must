@@ -91,11 +91,11 @@ describe("Must.prototype.true", function() {
     assert.doesNotThrow(function() { true.must.be.true() })
   })
 
-  it("must fail given not true literal", function() {
+  it("must fail given false literal", function() {
     assert.throws(function() { Must(false).be.true() })
   })
 
-  it("must fail given not true object", function() {
+  it("must fail given false object", function() {
     assert.throws(function() { false.must.be.true() })
   })
 
@@ -114,11 +114,11 @@ describe("Must.prototype.false", function() {
     assert.doesNotThrow(function() { false.must.be.false() })
   })
 
-  it("must fail given not false literal", function() {
+  it("must fail given true literal", function() {
     assert.throws(function() { Must(true).be.false() })
   })
 
-  it("must fail given not false object", function() {
+  it("must fail given true object", function() {
     assert.throws(function() { true.must.be.false() })
   })
 
@@ -244,6 +244,18 @@ describe("Must.prototype.truthy", function() {
     assert.throws(function() { Must(undefined).be.truthy() })
   })
 
+  it("must pass given empty array", function() {
+    assert.doesNotThrow(function() { [].must.be.truthy() })
+  })
+
+  it("must pass given empty object", function() {
+    assert.doesNotThrow(function() { ({}).must.be.truthy() })
+  })
+
+  it("must pass given zero date", function() {
+    assert.doesNotThrow(function() { new Date(0).must.be.truthy() })
+  })
+
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { false.must.be.truthy })
   })
@@ -252,6 +264,88 @@ describe("Must.prototype.truthy", function() {
 describe("Must.prototype.ok", function() {
   it("must be an alias of Must.prototype.truthy", function() {
     assert.strictEqual(Must.prototype.ok, Must.prototype.truthy)
+  })
+})
+
+describe("Must.prototype.falsy", function() {
+  it("must fail given true literal", function() {
+    assert.throws(function() { Must(true).be.falsy() })
+  })
+
+  it("must fail given true object", function() {
+    assert.throws(function() { true.must.be.falsy() })
+  })
+
+  it("must pass given false literal", function() {
+    assert.doesNotThrow(function() { Must(false).be.falsy() })
+  })
+
+  it("must pass given false object", function() {
+    assert.doesNotThrow(function() { false.must.be.falsy() })
+  })
+
+  it("must fail given string literal", function() {
+    assert.throws(function() { Must("falsy").be.falsy() })
+  })
+
+  it("must fail given string object", function() {
+    assert.throws(function() { ("falsy").must.be.falsy() })
+  })
+
+  it("must fail given zero string literal", function() {
+    assert.throws(function() { Must("0").be.falsy() })
+  })
+
+  it("must fail given zero string object", function() {
+    assert.throws(function() { ("0").must.be.falsy() })
+  })
+
+  it("must pass given empty string literal", function() {
+    assert.doesNotThrow(function() { Must("").be.falsy() })
+  })
+
+  it("must pass given empty string object", function() {
+    assert.doesNotThrow(function() { ("").must.be.falsy() })
+  })
+
+  it("must fail given number literal", function() {
+    assert.throws(function() { Must(1).be.falsy() })
+  })
+
+  it("must fail given number object", function() {
+    assert.throws(function() { (1).must.be.falsy() })
+  })
+
+  it("must pass given zero number literal", function() {
+    assert.doesNotThrow(function() { Must(0).be.falsy() })
+  })
+
+  it("must pass given zero number object", function() {
+    assert.doesNotThrow(function() { (0).must.be.falsy() })
+  })
+
+  it("must pass given null", function() {
+    assert.doesNotThrow(function() { Must(null).be.falsy() })
+  })
+
+  it("must pass given undefined", function() {
+    assert.doesNotThrow(function() { Must(undefined).be.falsy() })
+  })
+
+  it("must fail given empty array", function() {
+    assert.throws(function() { [].must.be.falsy() })
+  })
+
+  it("must fail given empty object", function() {
+    assert.throws(function() { ({}).must.be.falsy() })
+  })
+
+  it("must fail given zero date", function() {
+    assert.throws(function() { new Date(0).must.be.falsy() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { false.must.be.falsy })
   })
 })
 
