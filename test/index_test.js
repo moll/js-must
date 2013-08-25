@@ -83,19 +83,19 @@ describe("Must.prototype.be", function() {
 
 // Doing true.must automatically converts it to an object.
 describe("Must.prototype.true", function() {
-  it("must pass when true literal", function() {
+  it("must pass given true literal", function() {
     assert.doesNotThrow(function() { Must(true).be.true() })
   })
 
-  it("must pass when true object", function() {
+  it("must pass given true object", function() {
     assert.doesNotThrow(function() { true.must.be.true() })
   })
 
-  it("must fail when not true literal", function() {
+  it("must fail given not true literal", function() {
     assert.throws(function() { Must(false).be.true() })
   })
 
-  it("must fail when not true object", function() {
+  it("must fail given not true object", function() {
     assert.throws(function() { false.must.be.true() })
   })
 
@@ -176,6 +176,82 @@ describe("Must.prototype.undefined", function() {
 
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(undefined).be.undefined })
+  })
+})
+
+describe("Must.prototype.truthy", function() {
+  it("must pass given true literal", function() {
+    assert.doesNotThrow(function() { Must(true).be.truthy() })
+  })
+
+  it("must pass given true object", function() {
+    assert.doesNotThrow(function() { true.must.be.truthy() })
+  })
+
+  it("must fail given false literal", function() {
+    assert.throws(function() { Must(false).be.truthy() })
+  })
+
+  it("must fail given false object", function() {
+    assert.throws(function() { false.must.be.truthy() })
+  })
+
+  it("must pass given string literal", function() {
+    assert.doesNotThrow(function() { Must("truthy").be.truthy() })
+  })
+
+  it("must pass given string object", function() {
+    assert.doesNotThrow(function() { ("truthy").must.be.truthy() })
+  })
+
+  it("must pass given zero string literal", function() {
+    assert.doesNotThrow(function() { Must("0").be.truthy() })
+  })
+
+  it("must pass given zero string object", function() {
+    assert.doesNotThrow(function() { ("0").must.be.truthy() })
+  })
+
+  it("must fail given empty string literal", function() {
+    assert.throws(function() { Must("").be.truthy() })
+  })
+
+  it("must fail given empty string object", function() {
+    assert.throws(function() { ("").must.be.truthy() })
+  })
+
+  it("must pass given number literal", function() {
+    assert.doesNotThrow(function() { Must(1).be.truthy() })
+  })
+
+  it("must pass given number object", function() {
+    assert.doesNotThrow(function() { (1).must.be.truthy() })
+  })
+
+  it("must fail given zero number literal", function() {
+    assert.throws(function() { Must(0).be.truthy() })
+  })
+
+  it("must fail given zero number object", function() {
+    assert.throws(function() { (0).must.be.truthy() })
+  })
+
+  it("must fail given null", function() {
+    assert.throws(function() { Must(null).be.truthy() })
+  })
+
+  it("must fail given undefined", function() {
+    assert.throws(function() { Must(undefined).be.truthy() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { false.must.be.truthy })
+  })
+})
+
+describe("Must.prototype.ok", function() {
+  it("must be an alias of Must.prototype.truthy", function() {
+    assert.strictEqual(Must.prototype.ok, Must.prototype.truthy)
   })
 })
 

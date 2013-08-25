@@ -85,6 +85,23 @@ Must.prototype.undefined = function() {
 }
 
 /**
+ * Assert object is truthy (`!!obj`).
+ *
+ * `0`, `Number(0)`, `false`, `Boolean(false)`, `null`, `""` and `undefined` are
+ * falsy in JavaScript.  Everything else is truthy.
+ */
+Must.prototype.truthy = function() {
+  assert(unbox(this.obj))
+}
+
+/**
+ * Alias of `truthy`.
+ *
+ * @alias truthy
+ */
+Must.prototype.ok = Must.prototype.truthy 
+
+/**
  * Assert object strict equality and identity (`===`).
  */
 Must.prototype.equal = function(expected) {
