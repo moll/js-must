@@ -382,57 +382,57 @@ describe("Must.prototype.equal", function() {
     assert.throws(function() { true.must.be.equal(new Boolean(false)) })
   })
 
-  it("must pass when comparing equal number literals", function() {
+  it("must pass when comparing equivalent number literals", function() {
     assert.doesNotThrow(function() { Must(42).be.equal(42) })
   })
 
-  it("must pass when comparing equal number objects", function() {
+  it("must pass when comparing equivalent number objects", function() {
     assert.doesNotThrow(function() { (42).must.be.equal(42) })
   })
 
-  it("must fail when comparing unequal number literals", function() {
+  it("must fail when comparing unequivalent number literals", function() {
     assert.throws(function() { Must(42).be.equal(1337) })
   })
 
-  it("must fail when comparing unequal number objects", function() {
+  it("must fail when comparing unequivalent number objects", function() {
     assert.throws(function() { (42).must.be.equal(1337) })
   })
 
-  it("must pass when comparing equal string literals", function() {
+  it("must pass when comparing equivalent string literals", function() {
     assert.doesNotThrow(function() { Must("ok").be.equal("ok") })
   })
 
-  it("must pass when comparing equal string objects", function() {
+  it("must pass when comparing equivalent string objects", function() {
     assert.doesNotThrow(function() { "ok".must.be.equal("ok") })
   })
 
-  it("must fail when comparing unequal string literals", function() {
+  it("must fail when comparing unequivalent string literals", function() {
     assert.throws(function() { Must("ok").be.equal("nok") })
   })
 
-  it("must fail when comparing unequal string objects", function() {
+  it("must fail when comparing unequivalent string objects", function() {
     assert.throws(function() { "ok".must.be.equal("nok") })
   })
 
-  it("must pass when comparing equal date objects", function() {
+  it("must pass when comparing identical date objects", function() {
     assert.doesNotThrow(function() {
       var now = new Date
       now.must.be.equal(now) 
     })
   })
 
-  it("must fail when comparing unequal date objects", function() {
+  it("must fail when comparing unidentical date objects", function() {
     assert.throws(function() { new Date().must.be.equal(new Date) })
   })
 
-  it("must pass when comparing equal regexp objects", function() {
+  it("must pass when comparing identical regexp objects", function() {
     assert.doesNotThrow(function() {
       var obj = new RegExp
       obj.must.be.equal(obj) 
     })
   })
 
-  it("must fail when comparing unequal regexp objects", function() {
+  it("must fail when comparing unidentical regexp objects", function() {
     assert.throws(function() { new RegExp().must.be.equal(new RegExp) })
   })
 })
