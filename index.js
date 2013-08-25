@@ -31,18 +31,18 @@ exports.prototype = {
 }
 
 exports.prototype.true = function() {
-  assert.strictEqual(valueOf(this.obj), true)
+  assert.strictEqual(unbox(this.obj), true)
 }
 
 exports.prototype.false = function() {
-  assert.strictEqual(valueOf(this.obj), false)
+  assert.strictEqual(unbox(this.obj), false)
 }
 
 exports.prototype.equal = function(expected) {
-  assert.strictEqual(valueOf(this.obj), expected)
+  assert.strictEqual(unbox(this.obj), expected)
 }
 
-function valueOf(obj) {
+function unbox(obj) {
   return obj instanceof Boolean ||
          obj instanceof String ||
          obj instanceof Number  ? obj.valueOf() : obj
