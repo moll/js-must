@@ -78,6 +78,13 @@ Must.prototype.null = function() {
 }
 
 /**
+ * Assert object is `undefined`.
+ */
+Must.prototype.undefined = function() {
+  assert.strictEqual(this.obj, undefined)
+}
+
+/**
  * Assert object strict equality and identity (`===`).
  */
 Must.prototype.equal = function(expected) {

@@ -153,6 +153,32 @@ describe("Must.prototype.null", function() {
   })
 })
 
+describe("Must.prototype.undefined", function() {
+  it("must pass given undefined", function() {
+    assert.doesNotThrow(function() { Must(undefined).be.undefined() })
+  })
+
+  it("must not pass given true", function() {
+    assert.throws(function() { Must(true).be.undefined() })
+  })
+
+  it("must not pass given false", function() {
+    assert.throws(function() { Must(false).be.undefined() })
+  })
+
+  it("must not pass given null", function() {
+    assert.throws(function() { Must(null).be.undefined() })
+  })
+
+  it("must not pass given empty string", function() {
+    assert.throws(function() { Must("").be.undefined() })
+  })
+
+  it("must not do anything when not called as a function", function() {
+    assert.doesNotThrow(function() { Must(undefined).be.undefined })
+  })
+})
+
 describe("Must.prototype.equal", function() {
   it("must pass when comparing true literals", function() {
     assert.doesNotThrow(function() { Must(true).be.equal(true) })
