@@ -1,12 +1,32 @@
 var assert = require("assert")
 
-exports = module.exports = function(obj) {
-  if (!(this instanceof exports)) return new exports(obj)
+/**
+ * Main object on which each assertion function is attached to.
+ *
+ * If you wish to add your own matchers, just add them to `Must.prototype`.
+ *
+ * @constructor
+ * @param {Object} obj The object or value you're asserting.
+ */
+var Must = module.exports = function(obj) {
+  if (!(this instanceof Must)) return new Must(obj)
   this.obj = obj
 }
 
+/**
+ * Helper to grab the native unboxed value with `valueOf` from a JavaScript
+ * object such as `Boolean`, `String` or `Number`. Returns other objects as is.
+ *
+ * @param {Object} obj The object you wish to unbox.
+ */
+var unbox = Must.unbox = function(obj) {
+  return obj instanceof Boolean ||
+         obj instanceof String ||
+         obj instanceof Number  ? obj.valueOf() : obj
+}
+
 Object.defineProperty(Object.prototype, "must", {
-  get: function() { return new exports(this) },
+  get: function() { return new Must(this) },
 
   set: function(value) {
     Object.defineProperty(this, "must", {
@@ -21,29 +41,38 @@ Object.defineProperty(Object.prototype, "must", {
   configurable: true
 })
 
-exports.prototype = {
+Must.prototype = {
+  /**
+   * Pass-through property for a fluent chain like `true.must.be.true`.
+   * Also, can be used as an alias of `equal` with `true.must.be(true)`.
+   *
+   * @alias equal
+   */
   get be() {
     var equal = this.equal.bind(this)
-    equal.__proto__ = exports.prototype
+    equal.__proto__ = Must.prototype
     equal.obj = this.obj
     return equal
   }
 }
 
-exports.prototype.true = function() {
+/**
+ * Assert object is `true` or `Boolean(true)`.
+ */
+Must.prototype.true = function() {
   assert.strictEqual(unbox(this.obj), true)
 }
 
-exports.prototype.false = function() {
+/**
+ * Assert object is `false` or `Boolean(false)`.
+ */
+Must.prototype.false = function() {
   assert.strictEqual(unbox(this.obj), false)
 }
 
-exports.prototype.equal = function(expected) {
+/**
+ * Assert object strict equality and identity (`===`).
+ */
+Must.prototype.equal = function(expected) {
   assert.strictEqual(unbox(this.obj), expected)
-}
-
-function unbox(obj) {
-  return obj instanceof Boolean ||
-         obj instanceof String ||
-         obj instanceof Number  ? obj.valueOf() : obj
 }
