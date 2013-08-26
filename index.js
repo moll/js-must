@@ -5,8 +5,9 @@ var assert = require("assert")
  *
  * If you wish to add your own matchers, just add them to `Must.prototype`.
  *
+ * @class Must
  * @constructor
- * @param {Object} obj The object or value you're asserting.
+ * @param obj The object or value you're asserting.
  */
 var Must = module.exports = function(obj) {
   if (!(this instanceof Must)) return new Must(obj)
@@ -17,7 +18,9 @@ var Must = module.exports = function(obj) {
  * Helper to grab the native unboxed value with `valueOf` from a JavaScript
  * object such as `Boolean`, `String` or `Number`. Returns other objects as is.
  *
- * @param {Object} obj The object you wish to unbox.
+ * @method unbox
+ * @static
+ * @param obj The object you wish to unbox.
  */
 var unbox = Must.unbox = function(obj) {
   return obj instanceof Boolean ||
@@ -46,7 +49,7 @@ Must.prototype = {
    * Pass-through property for a fluent chain like `true.must.be.true`.
    * Also, can be used as an alias of `equal` with `true.must.be(true)`.
    *
-   * @alias equal
+   * @method be
    */
   get be() {
     var equal = this.equal.bind(this)
@@ -58,6 +61,8 @@ Must.prototype = {
 
 /**
  * Assert object is `true` or `new Boolean(true)`.
+ *
+ * @method true
  */
 Must.prototype.true = function() {
   assert.strictEqual(unbox(this.obj), true)
@@ -65,6 +70,8 @@ Must.prototype.true = function() {
 
 /**
  * Assert object is `false` or `new Boolean(false)`.
+ *
+ * @method false
  */
 Must.prototype.false = function() {
   assert.strictEqual(unbox(this.obj), false)
@@ -72,6 +79,8 @@ Must.prototype.false = function() {
 
 /**
  * Assert object is `null`.
+ *
+ * @method null
  */
 Must.prototype.null = function() {
   assert.strictEqual(this.obj, null)
@@ -79,6 +88,8 @@ Must.prototype.null = function() {
 
 /**
  * Assert object is `undefined`.
+ *
+ * @method undefined
  */
 Must.prototype.undefined = function() {
   assert.strictEqual(this.obj, undefined)
@@ -89,6 +100,8 @@ Must.prototype.undefined = function() {
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
  * `undefined` are falsy in JavaScript.  Everything else is truthy.
+ *
+ * @method truthy
  */
 Must.prototype.truthy = function() {
   assert(unbox(this.obj))
@@ -99,6 +112,8 @@ Must.prototype.truthy = function() {
  *
  * `0`, `new Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
  * `undefined` are falsy in JavaScript.  Everything else is truthy.
+ *
+ * @method falsy
  */
 Must.prototype.falsy = function() {
   assert(!unbox(this.obj))
@@ -107,12 +122,14 @@ Must.prototype.falsy = function() {
 /**
  * Alias of `truthy`.
  *
- * @alias truthy
+ * @method ok
  */
 Must.prototype.ok = Must.prototype.truthy 
 
 /**
  * Assert object strict equality and identity (`===`).
+ *
+ * @method equal
  */
 Must.prototype.equal = function(expected) {
   assert.strictEqual(unbox(this.obj), expected)
