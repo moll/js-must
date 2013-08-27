@@ -81,50 +81,55 @@ describe("Must.prototype.be", function() {
   })
 })
 
-// Doing true.must automatically converts it to an object.
-describe("Must.prototype.true", function() {
-  it("must pass given true literal", function() {
-    assert.doesNotThrow(function() { Must(true).be.true() })
+function mustPassTrue(name, truthy) {
+  var pass = truthy ? "pass" : "fail"
+  var fail = truthy ? "fail" : "pass"
+  var throws = truthy ? assert.throws : assert.doesNotThrow
+  var doesNotThrow = truthy ? assert.doesNotThrow : assert.throws
+  
+  it("must "+pass+" given true literal", function() {
+    doesNotThrow(function() { Must(true).be[name]() })
   })
 
-  it("must pass given true object", function() {
-    assert.doesNotThrow(function() { true.must.be.true() })
-  })
-
-  it("must fail given false literal", function() {
-    assert.throws(function() { Must(false).be.true() })
-  })
-
-  it("must fail given false object", function() {
-    assert.throws(function() { false.must.be.true() })
-  })
-
-  it("must not do anything when not called as a function", function() {
-    assert.doesNotThrow(function() { false.must.be.true })
-  })
-})
-
-// Doing false.must automatically converts it to an object.
-describe("Must.prototype.false", function() {
-  it("must pass given false literal", function() {
-    assert.doesNotThrow(function() { Must(false).be.false() })
-  })
-
-  it("must pass given false", function() {
-    assert.doesNotThrow(function() { false.must.be.false() })
-  })
-
-  it("must fail given true literal", function() {
-    assert.throws(function() { Must(true).be.false() })
+  it("must "+pass+" when called on true literal", function() {
+    doesNotThrow(function() { true.must.be[name]() })
   })
 
   it("must fail given true object", function() {
-    assert.throws(function() { true.must.be.false() })
+    assert.throws(function() { Must(new Boolean(true)).be[name]() })
+  })
+
+  it("must "+fail+" given false literal", function() {
+    throws(function() { Must(false).be[name]() })
+  })
+
+  it("must "+fail+" when called on false literal", function() {
+    throws(function() { false.must.be[name]() })
+  })
+
+  it("must fail given false object", function() {
+    assert.throws(function() { Must(new Boolean(false)).be[name]() })
+  })
+
+  it("must fail given zero number literal", function() {
+    assert.throws(function() { Must(0).be[name]() })
+  })
+
+  it("must fail when called on zero number literal", function() {
+    assert.throws(function() { (0).must.be[name]() })
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.doesNotThrow(function() { true.must.be.false })
+    assert.doesNotThrow(function() { Must(!truthy).be[name] })
   })
+}
+
+describe("Must.prototype.true", function() {
+  mustPassTrue("true", true)
+})
+
+describe("Must.prototype.false", function() {
+  mustPassTrue("false", false)
 })
 
 describe("Must.prototype.null", function() {
@@ -132,11 +137,11 @@ describe("Must.prototype.null", function() {
     assert.doesNotThrow(function() { Must(null).be.null() })
   })
 
-  it("must not pass given true", function() {
+  it("must not pass given true literal", function() {
     assert.throws(function() { Must(true).be.null() })
   })
 
-  it("must not pass given false", function() {
+  it("must not pass given false literal", function() {
     assert.throws(function() { Must(false).be.null() })
   })
 
@@ -158,11 +163,11 @@ describe("Must.prototype.undefined", function() {
     assert.doesNotThrow(function() { Must(undefined).be.undefined() })
   })
 
-  it("must not pass given true", function() {
+  it("must not pass given true literal", function() {
     assert.throws(function() { Must(true).be.undefined() })
   })
 
-  it("must not pass given false", function() {
+  it("must not pass given false literal", function() {
     assert.throws(function() { Must(false).be.undefined() })
   })
 
@@ -179,86 +184,139 @@ describe("Must.prototype.undefined", function() {
   })
 })
 
-describe("Must.prototype.truthy", function() {
-  it("must pass given true literal", function() {
-    assert.doesNotThrow(function() { Must(true).be.truthy() })
+function mustPassTruthy(name, truthy) {
+  var pass = truthy ? "pass" : "fail"
+  var fail = truthy ? "fail" : "pass"
+  var throws = truthy ? assert.throws : assert.doesNotThrow
+  var doesNotThrow = truthy ? assert.doesNotThrow : assert.throws
+
+  it("must "+pass+" given true literal", function() {
+    doesNotThrow(function() { Must(true).be[name]() })
   })
 
-  it("must pass given true object", function() {
-    assert.doesNotThrow(function() { true.must.be.truthy() })
+  it("must "+pass+" when called on true literal", function() {
+    doesNotThrow(function() { true.must.be[name]() })
   })
 
-  it("must fail given false literal", function() {
-    assert.throws(function() { Must(false).be.truthy() })
+  it("must "+pass+" given true object", function() {
+    doesNotThrow(function() { Must(new Boolean(true)).be[name]() })
   })
 
-  it("must fail given false object", function() {
-    assert.throws(function() { false.must.be.truthy() })
+  it("must "+fail+" given false literal", function() {
+    throws(function() { Must(false).be[name]() })
   })
 
-  it("must pass given string literal", function() {
-    assert.doesNotThrow(function() { Must("truthy").be.truthy() })
+  it("must "+fail+" when called on false literal", function() {
+    throws(function() { false.must.be[name]() })
   })
 
-  it("must pass given string object", function() {
-    assert.doesNotThrow(function() { ("truthy").must.be.truthy() })
+  it("must "+pass+" given false object", function() {
+    doesNotThrow(function() { Must(new Boolean(false)).be[name]() })
   })
 
-  it("must pass given zero string literal", function() {
-    assert.doesNotThrow(function() { Must("0").be.truthy() })
+  it("must "+pass+" given string literal", function() {
+    doesNotThrow(function() { Must("truthy").be[name]() })
   })
 
-  it("must pass given zero string object", function() {
-    assert.doesNotThrow(function() { ("0").must.be.truthy() })
+  it("must "+pass+" when called on string literal", function() {
+    doesNotThrow(function() { "truthy".must.be[name]() })
   })
 
-  it("must fail given empty string literal", function() {
-    assert.throws(function() { Must("").be.truthy() })
+  it("must "+pass+" given string object", function() {
+    doesNotThrow(function() { Must(new String("truthy")).be[name]() })
   })
 
-  it("must fail given empty string object", function() {
-    assert.throws(function() { ("").must.be.truthy() })
+  it("must "+pass+" given zero string literal", function() {
+    doesNotThrow(function() { Must("0").be[name]() })
   })
 
-  it("must pass given number literal", function() {
-    assert.doesNotThrow(function() { Must(1).be.truthy() })
+  it("must "+pass+" when called on zero string literal", function() {
+    doesNotThrow(function() { "0".must.be[name]() })
   })
 
-  it("must pass given number object", function() {
-    assert.doesNotThrow(function() { (1).must.be.truthy() })
+  it("must "+pass+" given zero string object", function() {
+    doesNotThrow(function() { Must(new String("0")).be[name]() })
   })
 
-  it("must fail given zero number literal", function() {
-    assert.throws(function() { Must(0).be.truthy() })
+  it("must "+fail+" given empty string literal", function() {
+    throws(function() { Must("").be[name]() })
   })
 
-  it("must fail given zero number object", function() {
-    assert.throws(function() { (0).must.be.truthy() })
+  it("must "+fail+" when called on empty string literal", function() {
+    throws(function() { "".must.be[name]() })
   })
 
-  it("must fail given null", function() {
-    assert.throws(function() { Must(null).be.truthy() })
+  it("must "+pass+" given empty string object", function() {
+    doesNotThrow(function() { Must(new String("")).be[name]() })
   })
 
-  it("must fail given undefined", function() {
-    assert.throws(function() { Must(undefined).be.truthy() })
+  it("must "+pass+" given number literal", function() {
+    doesNotThrow(function() { Must(1).be[name]() })
   })
 
-  it("must pass given empty array", function() {
-    assert.doesNotThrow(function() { [].must.be.truthy() })
+  it("must "+pass+" when called on number literal", function() {
+    doesNotThrow(function() { (1).must.be[name]() })
   })
 
-  it("must pass given empty object", function() {
-    assert.doesNotThrow(function() { ({}).must.be.truthy() })
+  it("must "+pass+" given number object", function() {
+    doesNotThrow(function() { Must(new Number(1)).be[name]() })
   })
 
-  it("must pass given zero date", function() {
-    assert.doesNotThrow(function() { new Date(0).must.be.truthy() })
+  it("must "+fail+" given zero number literal", function() {
+    throws(function() { Must(0).be[name]() })
+  })
+
+  it("must "+fail+" when called on zero number literal", function() {
+    throws(function() { (0).must.be[name]() })
+  })
+
+  it("must "+pass+" given zero number object", function() {
+    doesNotThrow(function() { Must(new Number(0)).be[name]() })
+  })
+
+  it("must "+fail+" given null", function() {
+    throws(function() { Must(null).be[name]() })
+  })
+
+  it("must "+fail+" given undefined", function() {
+    throws(function() { Must(undefined).be[name]() })
+  })
+
+  it("must "+pass+" given empty array literal", function() {
+    doesNotThrow(function() { Must([]).be[name]() })
+  })
+
+  it("must "+pass+" when called on empty array literal", function() {
+    doesNotThrow(function() { [].must.be[name]() })
+  })
+
+  it("must "+pass+" given empty array object", function() {
+    doesNotThrow(function() { Must(new Array).be[name]() })
+  })
+
+  it("must "+pass+" given empty object literal", function() {
+    doesNotThrow(function() { Must({}).be[name]() })
+  })
+
+  it("must "+pass+" when called on empty object literal", function() {
+    doesNotThrow(function() { ({}).must.be[name]() })
+  })
+
+  it("must "+pass+" given empty object", function() {
+    doesNotThrow(function() { Must(new Object).be[name]() })
+  })
+
+  it("must "+pass+" when called on zero date", function() {
+    doesNotThrow(function() { new Date(0).must.be[name]() })
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.doesNotThrow(function() { false.must.be.truthy })
+    assert.doesNotThrow(function() { Must(!truthy).be[name] })
   })
+}
+
+describe("Must.prototype.truthy", function() {
+  mustPassTruthy("truthy", true)
 })
 
 describe("Must.prototype.ok", function() {
@@ -268,171 +326,140 @@ describe("Must.prototype.ok", function() {
 })
 
 describe("Must.prototype.falsy", function() {
-  it("must fail given true literal", function() {
-    assert.throws(function() { Must(true).be.falsy() })
-  })
-
-  it("must fail given true object", function() {
-    assert.throws(function() { true.must.be.falsy() })
-  })
-
-  it("must pass given false literal", function() {
-    assert.doesNotThrow(function() { Must(false).be.falsy() })
-  })
-
-  it("must pass given false object", function() {
-    assert.doesNotThrow(function() { false.must.be.falsy() })
-  })
-
-  it("must fail given string literal", function() {
-    assert.throws(function() { Must("falsy").be.falsy() })
-  })
-
-  it("must fail given string object", function() {
-    assert.throws(function() { ("falsy").must.be.falsy() })
-  })
-
-  it("must fail given zero string literal", function() {
-    assert.throws(function() { Must("0").be.falsy() })
-  })
-
-  it("must fail given zero string object", function() {
-    assert.throws(function() { ("0").must.be.falsy() })
-  })
-
-  it("must pass given empty string literal", function() {
-    assert.doesNotThrow(function() { Must("").be.falsy() })
-  })
-
-  it("must pass given empty string object", function() {
-    assert.doesNotThrow(function() { ("").must.be.falsy() })
-  })
-
-  it("must fail given number literal", function() {
-    assert.throws(function() { Must(1).be.falsy() })
-  })
-
-  it("must fail given number object", function() {
-    assert.throws(function() { (1).must.be.falsy() })
-  })
-
-  it("must pass given zero number literal", function() {
-    assert.doesNotThrow(function() { Must(0).be.falsy() })
-  })
-
-  it("must pass given zero number object", function() {
-    assert.doesNotThrow(function() { (0).must.be.falsy() })
-  })
-
-  it("must pass given null", function() {
-    assert.doesNotThrow(function() { Must(null).be.falsy() })
-  })
-
-  it("must pass given undefined", function() {
-    assert.doesNotThrow(function() { Must(undefined).be.falsy() })
-  })
-
-  it("must fail given empty array", function() {
-    assert.throws(function() { [].must.be.falsy() })
-  })
-
-  it("must fail given empty object", function() {
-    assert.throws(function() { ({}).must.be.falsy() })
-  })
-
-  it("must fail given zero date", function() {
-    assert.throws(function() { new Date(0).must.be.falsy() })
-  })
-
-  it("must not do anything when not called as a function", function() {
-    assert.doesNotThrow(function() { false.must.be.falsy })
-  })
+  mustPassTruthy("falsy", false)
 })
 
 describe("Must.prototype.equal", function() {
-  it("must pass when comparing true literals", function() {
-    assert.doesNotThrow(function() { Must(true).be.equal(true) })
-  })
+  /**
+   * Booleans
+   */
+  function mustPassTrueEqual(bool) {
+    it("must pass given "+bool+" literals", function() {
+      assert.doesNotThrow(function() { Must(bool).be.equal(bool) })
+    })
 
-  it("must pass when comparing true object to literal", function() {
-    assert.doesNotThrow(function() { true.must.be.equal(true) })
-  })
+    it("must pass given "+bool+" literals when calling on", function() {
+      assert.doesNotThrow(function() { bool.must.be.equal(bool) })
+    })
 
-  it("must fail when comparing true objects", function() {
-    assert.throws(function() { true.must.be.equal(new Boolean(true)) })
-  })
+    it("must fail given "+bool+" literal to object", function() {
+      assert.throws(function() { Must(bool).be.equal(new Boolean(bool)) })
+    })
 
-  it("must fail when comparing true object to false literal", function() {
-    assert.throws(function() { true.must.be.equal(false) })
-  })
+    it("must fail given "+bool+" object to literal", function() {
+      assert.throws(function() { Must(new Boolean(bool)).be.equal(bool) })
+    })
 
-  it("must pass when comparing false literals", function() {
-    assert.doesNotThrow(function() { Must(false).be.equal(false) })
-  })
+    it("must fail given "+bool+" literal with "+!bool, function() {
+      assert.throws(function() { Must(bool).be.equal(!bool) })
+    })
+  }
 
-  it("must pass when comparing false object to literal", function() {
-    assert.doesNotThrow(function() { false.must.be.equal(false) })
-  })
+  mustPassTrueEqual(true)
+  mustPassTrueEqual(false)
 
-  it("must fail when comparing false objects", function() {
-    assert.throws(function() { false.must.be.equal(new Boolean(false)) })
-  })
-
-  it("must fail when comparing true object to false object", function() {
-    assert.throws(function() { true.must.be.equal(new Boolean(false)) })
-  })
-
-  it("must pass when comparing equivalent number literals", function() {
+  /**
+   * Numbers
+   */
+  it("must pass given equivalent number literals", function() {
     assert.doesNotThrow(function() { Must(42).be.equal(42) })
   })
 
-  it("must pass when comparing equivalent number objects", function() {
+  it("must pass given equivalent number literals when calling on", function() {
     assert.doesNotThrow(function() { (42).must.be.equal(42) })
   })
 
-  it("must fail when comparing unequivalent number literals", function() {
+  it("must fail given equivalent number literal to object", function() {
+    assert.throws(function() { Must(42).be.equal(new Number(42)) })
+  })
+
+  it("must fail given equivalent number object to literal", function() {
+    assert.throws(function() { Must(new Number(42)).be.equal(42) })
+  })
+
+  it("must fail given unequivalent number literals", function() {
     assert.throws(function() { Must(42).be.equal(1337) })
   })
 
-  it("must fail when comparing unequivalent number objects", function() {
+  it("must fail given unequivalent number literal when calling on", function() {
     assert.throws(function() { (42).must.be.equal(1337) })
   })
 
-  it("must pass when comparing equivalent string literals", function() {
+  /**
+   * Strings
+   */
+  it("must pass given equivalent string literals", function() {
     assert.doesNotThrow(function() { Must("ok").be.equal("ok") })
   })
 
-  it("must pass when comparing equivalent string objects", function() {
+  it("must pass given equivalent string literals when calling on", function() {
     assert.doesNotThrow(function() { "ok".must.be.equal("ok") })
   })
 
-  it("must fail when comparing unequivalent string literals", function() {
+  it("must fail given equivalent string literal to object", function() {
+    assert.throws(function() { Must("ok").be.equal(new String("ok")) })
+  })
+
+  it("must fail given equivalent string object to literal", function() {
+    assert.throws(function() { Must(new String("ok")).be.equal("ok") })
+  })
+
+  it("must fail given unequivalent string literals", function() {
     assert.throws(function() { Must("ok").be.equal("nok") })
   })
 
-  it("must fail when comparing unequivalent string objects", function() {
+  it("must fail given unequivalent string literals when calling on",
+    function() {
     assert.throws(function() { "ok".must.be.equal("nok") })
   })
 
-  it("must pass when comparing identical date objects", function() {
-    assert.doesNotThrow(function() {
-      var now = new Date
-      now.must.be.equal(now) 
-    })
+  /**
+   * Dates
+   */
+  it("must pass given identical date objects", function() {
+    var now = new Date
+    assert.doesNotThrow(function() { Must(now).be.equal(now) })
   })
 
-  it("must fail when comparing unidentical date objects", function() {
+  it("must pass given identical date objects when calling on", function() {
+    var now = new Date
+    assert.doesNotThrow(function() { now.must.be.equal(now) })
+  })
+
+  it("must fail given unidentical date objects", function() {
+    assert.throws(function() { Must(new Date()).be.equal(new Date) })
+  })
+
+  it("must fail given unidentical date objects when calling on", function() {
     assert.throws(function() { new Date().must.be.equal(new Date) })
   })
 
-  it("must pass when comparing identical regexp objects", function() {
-    assert.doesNotThrow(function() {
-      var obj = new RegExp
-      obj.must.be.equal(obj) 
-    })
+  /**
+   * Regexps
+   */
+  it("must fail given equivalent regexp literals", function() {
+    assert.throws(function() { Must(/a/).must.be.equal(/a/) })
   })
 
-  it("must fail when comparing unidentical regexp objects", function() {
+  it("must fail given equivalent regexp literals when calling on", function() {
+    assert.throws(function() { /a/.must.be.equal(/a/) })
+  })
+
+  it("must pass given identical regexp objects", function() {
+    var regexp = new RegExp
+    assert.doesNotThrow(function() { Must(regexp).be.equal(regexp) })
+  })
+
+  it("must pass given identical regexp objects when calling on", function() {
+    var regexp = new RegExp
+    assert.doesNotThrow(function() { regexp.must.be.equal(regexp) })
+  })
+
+  it("must fail given unidentical regexp objects", function() {
+    assert.throws(function() { Must(new RegExp()).must.be.equal(new RegExp) })
+  })
+
+  it("must fail given unidentical regexp objects when calling on", function() {
     assert.throws(function() { new RegExp().must.be.equal(new RegExp) })
   })
 })

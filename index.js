@@ -14,22 +14,8 @@ var Must = module.exports = function(obj) {
   this.obj = obj
 }
 
-/**
- * Helper to grab the native unboxed value with `valueOf` from a JavaScript
- * object such as `Boolean`, `String` or `Number`. Returns other objects as is.
- *
- * @method unbox
- * @static
- * @param obj The object you wish to unbox.
- */
-var unbox = Must.unbox = function(obj) {
-  return obj instanceof Boolean ||
-         obj instanceof String ||
-         obj instanceof Number  ? obj.valueOf() : obj
-}
-
 Object.defineProperty(Object.prototype, "must", {
-  get: function() { return new Must(this) },
+  get: function() { return new Must(unbox(this)) },
 
   set: function(value) {
     Object.defineProperty(this, "must", {
@@ -65,7 +51,7 @@ Must.prototype = {
  * @method true
  */
 Must.prototype.true = function() {
-  assert.strictEqual(unbox(this.obj), true)
+  assert.strictEqual(this.obj, true)
 }
 
 /**
@@ -74,7 +60,7 @@ Must.prototype.true = function() {
  * @method false
  */
 Must.prototype.false = function() {
-  assert.strictEqual(unbox(this.obj), false)
+  assert.strictEqual(this.obj, false)
 }
 
 /**
@@ -104,7 +90,7 @@ Must.prototype.undefined = function() {
  * @method truthy
  */
 Must.prototype.truthy = function() {
-  assert(unbox(this.obj))
+  assert(this.obj)
 }
 
 /**
@@ -116,7 +102,7 @@ Must.prototype.truthy = function() {
  * @method falsy
  */
 Must.prototype.falsy = function() {
-  assert(!unbox(this.obj))
+  assert(!this.obj)
 }
 
 /**
@@ -132,5 +118,11 @@ Must.prototype.ok = Must.prototype.truthy
  * @method equal
  */
 Must.prototype.equal = function(expected) {
-  assert.strictEqual(unbox(this.obj), expected)
+  assert.strictEqual(this.obj, expected)
+}
+
+function unbox(obj) {
+  return obj instanceof Boolean ||
+         obj instanceof String ||
+         obj instanceof Number  ? obj.valueOf() : obj
 }
