@@ -456,10 +456,39 @@ describe("Must.prototype.equal", function() {
   })
 
   it("must fail given unidentical regexp objects", function() {
-    assert.throws(function() { Must(new RegExp()).must.be.equal(new RegExp) })
+    assert.throws(function() { Must(new RegExp).must.be.equal(new RegExp) })
   })
 
   it("must fail given unidentical regexp objects when calling on", function() {
     assert.throws(function() { new RegExp().must.be.equal(new RegExp) })
+  })
+
+  /**
+   * Arrays
+   */
+  it("must fail given equivalent array literals", function() {
+    assert.throws(function() { Must([1]).must.be.equal([1]) })
+  })
+
+  it("must fail given equivalent array literals when calling on", function() {
+    assert.throws(function() { [1].must.be.equal([1]) })
+  })
+
+  it("must pass given identical array objects", function() {
+    var array = new Array
+    assert.doesNotThrow(function() { Must(array).be.equal(array) })
+  })
+
+  it("must pass given identical array objects when calling on", function() {
+    var array = new Array
+    assert.doesNotThrow(function() { array.must.be.equal(array) })
+  })
+
+  it("must fail given unidentical array objects", function() {
+    assert.throws(function() { Must(new Array()).must.be.equal(new Array) })
+  })
+
+  it("must fail given unidentical array objects when calling on", function() {
+    assert.throws(function() { new Array().must.be.equal(new Array) })
   })
 })
