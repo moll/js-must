@@ -1,5 +1,5 @@
 {
-	"name": "must-be",
+	"name": "must",
 	"version": "0.0.0",
 	"description": "RFC2119 assertion library, does BDD/TDD, is less worse than others and is framework agnostic. Awesome.must.be.true()",
 	"keywords": ["assert", "assertion", "bdd", "test", "testing", "rfc2119"],
