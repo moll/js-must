@@ -1,5 +1,3 @@
-var assert = require("assert")
-
 /**
  * Main object on which each assertion function is attached to.
  *
@@ -9,10 +7,12 @@ var assert = require("assert")
  * @constructor
  * @param obj The object or value you're asserting.
  */
-var Must = module.exports = function(obj) {
-  if (!(this instanceof Must)) return new Must(obj)
-  this.obj = obj
+var Must = module.exports = function(actual) {
+  if (!(this instanceof Must)) return new Must(actual)
+  this.actual = actual
 }
+
+Must.AssertionError = AssertionError
 
 Object.defineProperty(Object.prototype, "must", {
   get: function() { return new Must(unbox(this)) },
@@ -40,7 +40,7 @@ Must.prototype = {
   get be() {
     var equal = this.equal.bind(this)
     equal.__proto__ = Must.prototype
-    equal.obj = this.obj
+    equal.actual = this.actual
     return equal
   }
 }
@@ -51,7 +51,7 @@ Must.prototype = {
  * @method true
  */
 Must.prototype.true = function() {
-  assert.strictEqual(this.obj, true)
+  insist.call(this, this.actual === true, "be", true)
 }
 
 /**
@@ -60,7 +60,7 @@ Must.prototype.true = function() {
  * @method false
  */
 Must.prototype.false = function() {
-  assert.strictEqual(this.obj, false)
+  insist.call(this, this.actual === false, "be", false)
 }
 
 /**
@@ -69,7 +69,7 @@ Must.prototype.false = function() {
  * @method null
  */
 Must.prototype.null = function() {
-  assert.strictEqual(this.obj, null)
+  insist.call(this, this.actual === null, "be", null)
 }
 
 /**
@@ -78,7 +78,7 @@ Must.prototype.null = function() {
  * @method undefined
  */
 Must.prototype.undefined = function() {
-  assert.strictEqual(this.obj, undefined)
+  insist.call(this, this.actual === undefined, "be", undefined)
 }
 
 /**
@@ -90,7 +90,7 @@ Must.prototype.undefined = function() {
  * @method truthy
  */
 Must.prototype.truthy = function() {
-  assert(this.obj)
+  insist.call(this, this.actual, "be truthy")
 }
 
 /**
@@ -102,7 +102,7 @@ Must.prototype.truthy = function() {
  * @method falsy
  */
 Must.prototype.falsy = function() {
-  assert(!this.obj)
+  insist.call(this, !this.actual, "be falsy")
 }
 
 /**
@@ -118,7 +118,7 @@ Must.prototype.ok = Must.prototype.truthy
  * @method equal
  */
 Must.prototype.equal = function(expected) {
-  assert.strictEqual(this.obj, expected)
+  insist.call(this, this.actual === expected, "equal", expected)
 }
 
 function unbox(obj) {
@@ -126,3 +126,32 @@ function unbox(obj) {
          obj instanceof String ||
          obj instanceof Number  ? obj.valueOf() : obj
 }
+
+function insist(ok, message, expected) {
+  if (ok) return
+
+  var msg = JSON.stringify(this.actual) + " must " + message
+  if (arguments.length >= 3) msg += " " + JSON.stringify(expected)
+
+  var opts = {actual: this.actual, caller: arguments.callee.caller}
+  if (arguments.length >= 3) opts.expected = expected
+  throw new AssertionError(msg, opts)
+}
+
+function AssertionError(msg, opts) {
+  this.message = msg
+  if (opts && "actual" in opts) this.actual = opts.actual
+  if (opts && "expected" in opts) this.expected = opts.expected
+  Error.captureStackTrace(this, opts && opts.caller || arguments.callee.caller)
+}
+
+AssertionError.prototype = Object.create(Error.prototype, {
+  constructor: {
+    value: AssertionError,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  }
+})
+
+AssertionError.prototype.name = "AssertionError"

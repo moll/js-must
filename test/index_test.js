@@ -60,6 +60,52 @@ describe("Global.must", function() {
   })
 })
 
+function mustThrowAssertionError(test, props) {
+  describe("AssertionError", function() {
+    it("must be thrown", function() {
+      assert.throws(test, Must.AssertionError)
+    })
+
+    it("must have properties", function() {
+      try { test() }
+      catch (ex) {
+        assert.deepEqual(ex, props)
+      }
+    })
+
+    it("must have stack trace", function() {
+      try { test() }
+      catch (ex) {
+        var stack = ex.stack.split("\n")
+        assert(stack[0].match(/AssertionError/, "must include AssertionError"))
+        assert(stack[1].match(/\/test\//), "must have test at top")
+      }
+    })
+  })
+}
+
+describe("Must.AssertionError", function() {
+  it("must be named \"AssertionError\"", function() {
+    var error = new Must.AssertionError("foo")
+    assert.strictEqual(error.name, "AssertionError")
+  })
+
+  it("must be an instance of Error", function() {
+    var error = new Must.AssertionError("foo")
+    assert(error instanceof Error)
+  })
+
+  it("must have the right constructor", function() {
+    var error = new Must.AssertionError("foo")
+    assert.strictEqual(error.constructor, Must.AssertionError)
+  })
+
+  it("must have constructor as non-enumerable property", function() {
+    var error = new Must.AssertionError("foo")
+    for (var key in error) assert.notEqual(key, "constructor")
+  })
+})
+
 describe("Must.prototype.be", function() {
   it("must return an instance of Must", function() {
     assert(true.must.be instanceof Must)
@@ -78,6 +124,12 @@ describe("Must.prototype.be", function() {
 
     assert.doesNotThrow(function() { var obj = {}; obj.must.be(obj) })
     assert.throws(function() { ({}).must.be({}) })
+  })
+
+  mustThrowAssertionError(function() { true.must.be(42) }, {
+    actual: true,
+    expected: 42,
+    message: "true must equal 42"
   })
 })
 
@@ -122,6 +174,12 @@ function mustPassTrue(name, truthy) {
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(!truthy).be[name] })
   })
+
+  mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
+    actual: !truthy,
+    expected: truthy,
+    message: !truthy + " must be " + truthy
+  })
 }
 
 describe("Must.prototype.true", function() {
@@ -156,6 +214,12 @@ describe("Must.prototype.null", function() {
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(null).be.null })
   })
+
+  mustThrowAssertionError(function() { true.must.be.null() }, {
+    actual: true,
+    expected: null,
+    message: "true must be null"
+  })
 })
 
 describe("Must.prototype.undefined", function() {
@@ -181,6 +245,12 @@ describe("Must.prototype.undefined", function() {
 
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(undefined).be.undefined })
+  })
+
+  mustThrowAssertionError(function() { true.must.be.undefined() }, {
+    actual: true,
+    expected: undefined,
+    message: "true must be undefined"
   })
 })
 
@@ -312,6 +382,11 @@ function mustPassTruthy(name, truthy) {
 
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(!truthy).be[name] })
+  })
+
+  mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
+    actual: !truthy,
+    message: !truthy + " must be " + name
   })
 }
 
@@ -490,5 +565,11 @@ describe("Must.prototype.equal", function() {
 
   it("must fail given unidentical array objects when calling on", function() {
     assert.throws(function() { new Array().must.be.equal(new Array) })
+  })
+
+  mustThrowAssertionError(function() { "secret".must.equal(42) }, {
+    actual: "secret",
+    expected: 42,
+    message: "\"secret\" must equal 42"
   })
 })
