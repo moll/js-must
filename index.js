@@ -32,14 +32,12 @@ Object.defineProperty(Object.prototype, "must", {
 
 Must.prototype = {
   /**
-   * Inverse the assertion.
+   * Pass-through property for a fluent chain.
    *
-   * @property not
+   * @property a
    */
-  get not() {
-    var must = new Must(this.actual)
-    must.negative = !this.negative
-    return must
+  get a() {
+    return this
   },
 
   /**
@@ -52,6 +50,17 @@ Must.prototype = {
     var equal = this.equal.bind(this)
     equal.__proto__ = this
     return equal
+  },
+
+  /**
+   * Inverse the assertion.
+   *
+   * @property not
+   */
+  get not() {
+    var must = new Must(this.actual)
+    must.negative = !this.negative
+    return must
   },
 
   /**

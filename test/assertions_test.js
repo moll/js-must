@@ -97,6 +97,16 @@ describe("Must.prototype.to", function() {
   })
 })
 
+describe("Must.prototype.a", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.a instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { true.must.be.a.true() })
+  })
+})
+
 function mustPassTrue(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
