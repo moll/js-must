@@ -632,7 +632,7 @@ describe("Must.prototype.equal", function() {
       })
 
       it("must pass given "+bool+" literals when calling on", function() {
-        assert.doesNotThrow(function() { bool.must.be.equal(bool) })
+        assert.doesNotThrow(function() { bool.must.equal(bool) })
       })
 
       it("must fail given "+bool+" literal and object", function() {
@@ -658,7 +658,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must pass given equivalent literals when calling on", function() {
-      assert.doesNotThrow(function() { (42).must.be.equal(42) })
+      assert.doesNotThrow(function() { (42).must.equal(42) })
     })
 
     it("must fail given unequivalent literals", function() {
@@ -666,7 +666,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given unequivalent literal when calling on", function() {
-      assert.throws(function() { (42).must.be.equal(1337) })
+      assert.throws(function() { (42).must.equal(1337) })
     })
 
     it("must fail given equivalent literal and object", function() {
@@ -684,7 +684,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must pass given equivalent literals when calling on", function() {
-      assert.doesNotThrow(function() { "ok".must.be.equal("ok") })
+      assert.doesNotThrow(function() { "ok".must.equal("ok") })
     })
 
     it("must fail given unequivalent literals", function() {
@@ -692,7 +692,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given unequivalent literals when calling on", function() {
-      assert.throws(function() { "ok".must.be.equal("nok") })
+      assert.throws(function() { "ok".must.equal("nok") })
     })
 
     it("must fail given equivalent literal and object", function() {
@@ -712,7 +712,7 @@ describe("Must.prototype.equal", function() {
 
     it("must pass given identical objects when calling on", function() {
       var now = new Date
-      assert.doesNotThrow(function() { now.must.be.equal(now) })
+      assert.doesNotThrow(function() { now.must.equal(now) })
     })
 
     it("must fail given equivalent objects", function() {
@@ -720,7 +720,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given equivalent objects when calling on", function() {
-      assert.throws(function() { new Date(42).must.be.equal(new Date(42)) })
+      assert.throws(function() { new Date(42).must.equal(new Date(42)) })
     })
   })
 
@@ -730,7 +730,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given equivalent literals when calling on", function() {
-      assert.throws(function() { /a/.must.be.equal(/a/) })
+      assert.throws(function() { /a/.must.equal(/a/) })
     })
 
     it("must fail given unequivalent literals", function() {
@@ -738,7 +738,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given unequivalent literals when calling on", function() {
-      assert.throws(function() { /a/.must.be.equal(/b/) })
+      assert.throws(function() { /a/.must.equal(/b/) })
     })
 
     it("must pass given identical objects", function() {
@@ -748,7 +748,7 @@ describe("Must.prototype.equal", function() {
 
     it("must pass given identical objects when calling on", function() {
       var regexp = new RegExp
-      assert.doesNotThrow(function() { regexp.must.be.equal(regexp) })
+      assert.doesNotThrow(function() { regexp.must.equal(regexp) })
     })
 
     it("must fail given equivalent objects", function() {
@@ -756,7 +756,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given equivalent objects when calling on", function() {
-      assert.throws(function() { new RegExp().must.be.equal(new RegExp) })
+      assert.throws(function() { new RegExp().must.equal(new RegExp) })
     })
   })
 
@@ -766,7 +766,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given equivalent literals when calling on", function() {
-      assert.throws(function() { [1].must.be.equal([1]) })
+      assert.throws(function() { [1].must.equal([1]) })
     })
 
     it("must pass given identical objects", function() {
@@ -776,7 +776,7 @@ describe("Must.prototype.equal", function() {
 
     it("must pass given identical objects when calling on", function() {
       var array = new Array
-      assert.doesNotThrow(function() { array.must.be.equal(array) })
+      assert.doesNotThrow(function() { array.must.equal(array) })
     })
 
     it("must fail given unidentical objects", function() {
@@ -784,7 +784,7 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must fail given unidentical objects when calling on", function() {
-      assert.throws(function() { new Array().must.be.equal(new Array) })
+      assert.throws(function() { new Array().must.equal(new Array) })
     })
   })
 
