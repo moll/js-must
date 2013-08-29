@@ -32,6 +32,17 @@ Object.defineProperty(Object.prototype, "must", {
 
 Must.prototype = {
   /**
+   * Inverse the assertion.
+   *
+   * @property not
+   */
+  get not() {
+    var must = new Must(this.actual)
+    must.negative = !this.negative
+    return must
+  },
+
+  /**
    * Pass-through property for a fluent chain like `true.must.be.true`.
    * Also, can be used as an alias of `equal` with `true.must.be(true)`.
    *
@@ -39,8 +50,7 @@ Must.prototype = {
    */
   get be() {
     var equal = this.equal.bind(this)
-    equal.__proto__ = Must.prototype
-    equal.actual = this.actual
+    equal.__proto__ = this
     return equal
   }
 }
@@ -128,9 +138,10 @@ function unbox(obj) {
 }
 
 function insist(ok, message, expected) {
-  if (ok) return
+  if (!this.negative ? ok : !ok) return
 
-  var msg = JSON.stringify(this.actual) + " must " + message
+  var not = this.negative ? "not " : ""
+  var msg = JSON.stringify(this.actual) + " must " + not + message
   if (arguments.length >= 3) msg += " " + JSON.stringify(expected)
 
   var opts = {actual: this.actual, caller: arguments.callee.caller}

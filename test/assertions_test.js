@@ -25,13 +25,32 @@ function mustThrowAssertionError(test, props) {
   })
 }
 
+describe("Must.prototype.not", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.not instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { false.must.not.equal(true) })
+  })
+
+  it("must inverse condition each time", function() {
+    assert.doesNotThrow(function() { true.must.not.not.equal(true) })
+  })
+
+  it("must return a new instance of Must", function() {
+    var must = true.must
+    assert.notStrictEqual(must.not, must)
+  })
+})
+
 describe("Must.prototype.be", function() {
   it("must return an instance of Must", function() {
     assert(true.must.be instanceof Must)
   })
 
   it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { (42).must.be.equal(42) })
+    assert.doesNotThrow(function() { true.must.be.true() })
   })
 
   it("must be like Must.prototype.equal", function() {
@@ -49,6 +68,22 @@ describe("Must.prototype.be", function() {
     actual: true,
     expected: 42,
     message: "true must equal 42"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { true.must.not.be(true) })
+    })
+
+    it("must carry over the current state", function() {
+      assert.throws(function() { true.must.not.be.true() })
+    })
+
+    mustThrowAssertionError(function() { true.must.not.be(true) }, {
+      actual: true,
+      expected: true,
+      message: "true must not equal true"
+    })
   })
 })
 
@@ -99,6 +134,18 @@ function mustPassTrue(name, truthy) {
     expected: truthy,
     message: !truthy + " must be " + truthy
   })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { truthy.must.not.be[name]() })
+    })
+
+    mustThrowAssertionError(function() { truthy.must.not.be[name]() }, {
+      actual: truthy,
+      expected: truthy,
+      message: truthy + " must not be " + truthy
+    })
+  })
 }
 
 describe("Must.prototype.true", function() {
@@ -139,6 +186,18 @@ describe("Must.prototype.null", function() {
     expected: null,
     message: "true must be null"
   })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { Must(null).not.be.null() })
+    })
+
+    mustThrowAssertionError(function() { Must(null).not.be.null() }, {
+      actual: null,
+      expected: null,
+      message: "null must not be null"
+    })
+  })
 })
 
 describe("Must.prototype.undefined", function() {
@@ -170,6 +229,18 @@ describe("Must.prototype.undefined", function() {
     actual: true,
     expected: undefined,
     message: "true must be undefined"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { Must(undefined).not.be.undefined() })
+    })
+
+    mustThrowAssertionError(function() { Must(undefined).not.be.undefined() }, {
+      actual: undefined,
+      expected: undefined,
+      message: "undefined must not be undefined"
+    })
   })
 })
 
@@ -306,6 +377,17 @@ function mustPassTruthy(name, truthy) {
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
     actual: !truthy,
     message: !truthy + " must be " + name
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { truthy.must.not.be[name]() })
+    })
+
+    mustThrowAssertionError(function() { truthy.must.not.be[name]() }, {
+      actual: truthy,
+      message: truthy + " must not be " + name
+    })
   })
 }
 
@@ -490,5 +572,17 @@ describe("Must.prototype.equal", function() {
     actual: "secret",
     expected: 42,
     message: "\"secret\" must equal 42"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { "secret".must.not.equal("secret") })
+    })
+
+    mustThrowAssertionError(function() { "secret".must.not.equal("secret") }, {
+      actual: "secret",
+      expected: "secret",
+      message: "\"secret\" must not equal \"secret\""
+    })
   })
 })
