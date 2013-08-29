@@ -52,6 +52,15 @@ Must.prototype = {
     var equal = this.equal.bind(this)
     equal.__proto__ = this
     return equal
+  },
+
+  /**
+   * Pass-through property for a fluent chain like `expect(true).to.be.true()`.
+   *
+   * @property to
+   */
+  get to() {
+    return this
   }
 }
 
