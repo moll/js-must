@@ -432,7 +432,7 @@ describe("Must.prototype.equal", function() {
    * Regexps
    */
   it("must fail given equivalent regexp literals", function() {
-    assert.throws(function() { Must(/a/).must.be.equal(/a/) })
+    assert.throws(function() { Must(/a/).be.equal(/a/) })
   })
 
   it("must fail given equivalent regexp literals when calling on", function() {
@@ -450,7 +450,7 @@ describe("Must.prototype.equal", function() {
   })
 
   it("must fail given unidentical regexp objects", function() {
-    assert.throws(function() { Must(new RegExp).must.be.equal(new RegExp) })
+    assert.throws(function() { Must(new RegExp).be.equal(new RegExp) })
   })
 
   it("must fail given unidentical regexp objects when calling on", function() {
@@ -461,7 +461,7 @@ describe("Must.prototype.equal", function() {
    * Arrays
    */
   it("must fail given equivalent array literals", function() {
-    assert.throws(function() { Must([1]).must.be.equal([1]) })
+    assert.throws(function() { Must([1]).be.equal([1]) })
   })
 
   it("must fail given equivalent array literals when calling on", function() {
@@ -479,7 +479,7 @@ describe("Must.prototype.equal", function() {
   })
 
   it("must fail given unidentical array objects", function() {
-    assert.throws(function() { Must(new Array()).must.be.equal(new Array) })
+    assert.throws(function() { Must(new Array()).be.equal(new Array) })
   })
 
   it("must fail given unidentical array objects when calling on", function() {
