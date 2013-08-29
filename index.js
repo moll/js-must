@@ -33,20 +33,26 @@ Object.defineProperty(Object.prototype, "must", {
 Must.prototype = {
   /**
    * Pass-through property for a fluent chain.
+   * Also, can be used as an alias of `instanceof` with `/a/.must.be.a(RegExp)`.
    *
    * @property a
    */
   get a() {
-    return this
+    var fn = this.instanceof.bind(this)
+    fn.__proto__ = this
+    return fn
   },
 
-  /**
+/**
    * Pass-through property for a fluent chain.
+   * Also, can be used as an alias of `instanceof` with `[].must.be.an(Array)`.
    *
    * @property an
    */
   get an() {
-    return this
+    var fn = this.instanceof.bind(this)
+    fn.__proto__ = this
+    return fn
   },
 
   /**
@@ -56,9 +62,9 @@ Must.prototype = {
    * @method be
    */
   get be() {
-    var equal = this.equal.bind(this)
-    equal.__proto__ = this
-    return equal
+    var fn = this.equal.bind(this)
+    fn.__proto__ = this
+    return fn
   },
 
   /**

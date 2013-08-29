@@ -44,6 +44,63 @@ describe("Must.prototype.not", function() {
   })
 })
 
+describe("Must.prototype.to", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.to instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { true.must.to.true() })
+  })
+})
+
+
+// Can't test an alias because getter functions apparently aren't aliased.
+function mustPassA(name) {
+  it("must return an instance of Must", function() {
+    assert(true.must[name] instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { [].must.be[name].instanceof(Array) })
+  })
+
+  it("must be like Must.prototype.instanceof", function() {
+    assert.doesNotThrow(function() { [].must.be[name](Array) })
+    assert.throws(function() { /a/.must.be[name](Array) })
+  })
+
+  mustThrowAssertionError(function() { "".must.be[name](Array) }, {
+    actual: "",
+    expected: Array,
+    message: "\"\" must be an instance of Array"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { [].must.not.be[name](Array) })
+    })
+
+    it("must carry over the current state", function() {
+      assert.throws(function() { true.must.not.be[name].ok() })
+    })
+
+    mustThrowAssertionError(function() { [].must.not.be[name](Array) }, {
+      actual: [],
+      expected: Array,
+      message: "[] must not be an instance of Array"
+    })
+  })
+}
+
+describe("Must.prototype.a", function() {
+  mustPassA("a")
+})
+
+describe("Must.prototype.an", function() {
+  mustPassA("an")
+})
+
 describe("Must.prototype.be", function() {
   it("must return an instance of Must", function() {
     assert(true.must.be instanceof Must)
@@ -84,36 +141,6 @@ describe("Must.prototype.be", function() {
       expected: true,
       message: "true must not equal true"
     })
-  })
-})
-
-describe("Must.prototype.to", function() {
-  it("must return an instance of Must", function() {
-    assert(true.must.to instanceof Must)
-  })
-
-  it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { true.must.to.true() })
-  })
-})
-
-describe("Must.prototype.a", function() {
-  it("must return an instance of Must", function() {
-    assert(true.must.a instanceof Must)
-  })
-
-  it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { true.must.be.a.true() })
-  })
-})
-
-describe("Must.prototype.an", function() {
-  it("must return an instance of Must", function() {
-    assert(true.must.an instanceof Must)
-  })
-
-  it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { [].must.be.an.instanceof(Array) })
   })
 })
 
