@@ -131,6 +131,15 @@ Must.prototype.equal = function(expected) {
   insist.call(this, this.actual === expected, "equal", expected)
 }
 
+/**
+ * Assert object coercive equality (`==`).
+ *
+ * @method equal
+ */
+Must.prototype.eql = function(expected) {
+  insist.call(this, this.actual == expected, "==", expected)
+}
+
 function unbox(obj) {
   return obj instanceof Boolean ||
          obj instanceof String ||

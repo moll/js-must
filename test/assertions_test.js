@@ -586,3 +586,185 @@ describe("Must.prototype.equal", function() {
     })
   })
 })
+
+describe("Must.prototype.eql", function() {
+  /**
+   * Booleans
+   */
+  function mustPassTrueEql(bool) {
+    it("must pass given "+bool+" literals", function() {
+      assert.doesNotThrow(function() { Must(bool).be.eql(bool) })
+    })
+
+    it("must pass given "+bool+" literals when calling on", function() {
+      assert.doesNotThrow(function() { bool.must.be.eql(bool) })
+    })
+
+    it("must pass given "+bool+" literal to object", function() {
+      assert.doesNotThrow(function() { Must(bool).be.eql(new Boolean(bool)) })
+    })
+
+    it("must pass given "+bool+" object to literal", function() {
+      assert.doesNotThrow(function() { Must(new Boolean(bool)).be.eql(bool) })
+    })
+
+    it("must fail given "+bool+" literal with "+!bool, function() {
+      assert.throws(function() { Must(bool).be.eql(!bool) })
+    })
+  }
+
+  mustPassTrueEql(true)
+  mustPassTrueEql(false)
+
+  /**
+   * Numbers
+   */
+  it("must pass given equivalent number literals", function() {
+    assert.doesNotThrow(function() { Must(42).be.eql(42) })
+  })
+
+  it("must pass given equivalent number literals when calling on", function() {
+    assert.doesNotThrow(function() { (42).must.be.eql(42) })
+  })
+
+  it("must pass given equivalent number literal to object", function() {
+    assert.doesNotThrow(function() { Must(42).be.eql(new Number(42)) })
+  })
+
+  it("must pass given equivalent number object to literal", function() {
+    assert.doesNotThrow(function() { Must(new Number(42)).be.eql(42) })
+  })
+
+  it("must fail given unequivalent number literals", function() {
+    assert.throws(function() { Must(42).be.eql(1337) })
+  })
+
+  it("must fail given unequivalent number literal when calling on", function() {
+    assert.throws(function() { (42).must.be.eql(1337) })
+  })
+
+  /**
+   * Strings
+   */
+  it("must pass given equivalent string literals", function() {
+    assert.doesNotThrow(function() { Must("ok").be.eql("ok") })
+  })
+
+  it("must pass given equivalent string literals when calling on", function() {
+    assert.doesNotThrow(function() { "ok".must.be.eql("ok") })
+  })
+
+  it("must pass given equivalent string literal to object", function() {
+    assert.doesNotThrow(function() { Must("ok").be.eql(new String("ok")) })
+  })
+
+  it("must pass given equivalent string object to literal", function() {
+    assert.doesNotThrow(function() { Must(new String("ok")).be.eql("ok") })
+  })
+
+  it("must fail given unequivalent string literals", function() {
+    assert.throws(function() { Must("ok").be.eql("nok") })
+  })
+
+  it("must fail given unequivalent string literals when calling on",
+    function() {
+    assert.throws(function() { "ok".must.be.eql("nok") })
+  })
+
+  /**
+   * Dates
+   */
+  it("must pass given identical date objects", function() {
+    var now = new Date
+    assert.doesNotThrow(function() { Must(now).be.eql(now) })
+  })
+
+  it("must pass given identical date objects when calling on", function() {
+    var now = new Date
+    assert.doesNotThrow(function() { now.must.be.eql(now) })
+  })
+
+  it("must fail given unidentical date objects", function() {
+    assert.throws(function() { Must(new Date()).be.eql(new Date) })
+  })
+
+  it("must fail given unidentical date objects when calling on", function() {
+    assert.throws(function() { new Date().must.be.eql(new Date) })
+  })
+
+  /**
+   * Regexps
+   */
+  it("must fail given equivalent regexp literals", function() {
+    assert.throws(function() { Must(/a/).be.eql(/a/) })
+  })
+
+  it("must fail given equivalent regexp literals when calling on", function() {
+    assert.throws(function() { /a/.must.be.eql(/a/) })
+  })
+
+  it("must pass given identical regexp objects", function() {
+    var regexp = new RegExp
+    assert.doesNotThrow(function() { Must(regexp).be.eql(regexp) })
+  })
+
+  it("must pass given identical regexp objects when calling on", function() {
+    var regexp = new RegExp
+    assert.doesNotThrow(function() { regexp.must.be.eql(regexp) })
+  })
+
+  it("must fail given unidentical regexp objects", function() {
+    assert.throws(function() { Must(new RegExp).be.eql(new RegExp) })
+  })
+
+  it("must fail given unidentical regexp objects when calling on", function() {
+    assert.throws(function() { new RegExp().must.be.eql(new RegExp) })
+  })
+
+  /**
+   * Arrays
+   */
+  it("must fail given equivalent array literals", function() {
+    assert.throws(function() { Must([1]).be.eql([1]) })
+  })
+
+  it("must fail given equivalent array literals when calling on", function() {
+    assert.throws(function() { [1].must.be.eql([1]) })
+  })
+
+  it("must pass given identical array objects", function() {
+    var array = new Array
+    assert.doesNotThrow(function() { Must(array).be.eql(array) })
+  })
+
+  it("must pass given identical array objects when calling on", function() {
+    var array = new Array
+    assert.doesNotThrow(function() { array.must.be.eql(array) })
+  })
+
+  it("must fail given unidentical array objects", function() {
+    assert.throws(function() { Must(new Array()).be.eql(new Array) })
+  })
+
+  it("must fail given unidentical array objects when calling on", function() {
+    assert.throws(function() { new Array().must.be.eql(new Array) })
+  })
+
+  mustThrowAssertionError(function() { "secret".must.eql(42) }, {
+    actual: "secret",
+    expected: 42,
+    message: "\"secret\" must == 42"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { "secret".must.not.eql("secret") })
+    })
+
+    mustThrowAssertionError(function() { "secret".must.not.eql("secret") }, {
+      actual: "secret",
+      expected: "secret",
+      message: "\"secret\" must not == \"secret\""
+    })
+  })
+})
