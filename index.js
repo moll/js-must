@@ -41,6 +41,15 @@ Must.prototype = {
   },
 
   /**
+   * Pass-through property for a fluent chain.
+   *
+   * @property an
+   */
+  get an() {
+    return this
+  },
+
+  /**
    * Pass-through property for a fluent chain like `true.must.be.true`.
    * Also, can be used as an alias of `equal` with `true.must.be(true)`.
    *
