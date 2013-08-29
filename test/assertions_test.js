@@ -455,20 +455,20 @@ describe("Must.prototype.equal", function() {
     assert.doesNotThrow(function() { (42).must.be.equal(42) })
   })
 
-  it("must fail given equivalent number literal to object", function() {
-    assert.throws(function() { Must(42).be.equal(new Number(42)) })
-  })
-
-  it("must fail given equivalent number object to literal", function() {
-    assert.throws(function() { Must(new Number(42)).be.equal(42) })
-  })
-
   it("must fail given unequivalent number literals", function() {
     assert.throws(function() { Must(42).be.equal(1337) })
   })
 
   it("must fail given unequivalent number literal when calling on", function() {
     assert.throws(function() { (42).must.be.equal(1337) })
+  })
+
+  it("must fail given equivalent number literal to object", function() {
+    assert.throws(function() { Must(42).be.equal(new Number(42)) })
+  })
+
+  it("must fail given equivalent number object to literal", function() {
+    assert.throws(function() { Must(new Number(42)).be.equal(42) })
   })
 
   /**
@@ -482,14 +482,6 @@ describe("Must.prototype.equal", function() {
     assert.doesNotThrow(function() { "ok".must.be.equal("ok") })
   })
 
-  it("must fail given equivalent string literal to object", function() {
-    assert.throws(function() { Must("ok").be.equal(new String("ok")) })
-  })
-
-  it("must fail given equivalent string object to literal", function() {
-    assert.throws(function() { Must(new String("ok")).be.equal("ok") })
-  })
-
   it("must fail given unequivalent string literals", function() {
     assert.throws(function() { Must("ok").be.equal("nok") })
   })
@@ -497,6 +489,14 @@ describe("Must.prototype.equal", function() {
   it("must fail given unequivalent string literals when calling on",
     function() {
     assert.throws(function() { "ok".must.be.equal("nok") })
+  })
+
+  it("must fail given equivalent string literal to object", function() {
+    assert.throws(function() { Must("ok").be.equal(new String("ok")) })
+  })
+
+  it("must fail given equivalent string object to literal", function() {
+    assert.throws(function() { Must(new String("ok")).be.equal("ok") })
   })
 
   /**
@@ -513,11 +513,11 @@ describe("Must.prototype.equal", function() {
   })
 
   it("must fail given unidentical date objects", function() {
-    assert.throws(function() { Must(new Date()).be.equal(new Date) })
+    assert.throws(function() { Must(new Date(42)).be.equal(new Date(42)) })
   })
 
   it("must fail given unidentical date objects when calling on", function() {
-    assert.throws(function() { new Date().must.be.equal(new Date) })
+    assert.throws(function() { new Date(42).must.be.equal(new Date(42)) })
   })
 
   /**
@@ -531,6 +531,15 @@ describe("Must.prototype.equal", function() {
     assert.throws(function() { /a/.must.be.equal(/a/) })
   })
 
+  it("must fail given unequivalent regexp literals", function() {
+    assert.throws(function() { Must(/a/).be.equal(/b/) })
+  })
+
+  it("must fail given unequivalent regexp literals when calling on",
+    function() {
+    assert.throws(function() { /a/.must.be.equal(/b/) })
+  })
+
   it("must pass given identical regexp objects", function() {
     var regexp = new RegExp
     assert.doesNotThrow(function() { Must(regexp).be.equal(regexp) })
@@ -541,11 +550,11 @@ describe("Must.prototype.equal", function() {
     assert.doesNotThrow(function() { regexp.must.be.equal(regexp) })
   })
 
-  it("must fail given unidentical regexp objects", function() {
+  it("must fail given equivalent regexp objects", function() {
     assert.throws(function() { Must(new RegExp).be.equal(new RegExp) })
   })
 
-  it("must fail given unidentical regexp objects when calling on", function() {
+  it("must fail given equivalent regexp objects when calling on", function() {
     assert.throws(function() { new RegExp().must.be.equal(new RegExp) })
   })
 
@@ -694,23 +703,40 @@ describe("Must.prototype.eql", function() {
     assert.doesNotThrow(function() { now.must.be.eql(now) })
   })
 
-  it("must fail given unidentical date objects", function() {
-    assert.throws(function() { Must(new Date()).be.eql(new Date) })
+  it("must pass given equivalent date objects", function() {
+    assert.doesNotThrow(function() { Must(new Date(42)).be.eql(new Date(42)) })
   })
 
-  it("must fail given unidentical date objects when calling on", function() {
-    assert.throws(function() { new Date().must.be.eql(new Date) })
+  it("must pass given equivalent date objects when calling on", function() {
+    assert.doesNotThrow(function() { new Date(42).must.be.eql(new Date(42)) })
+  })
+
+  it("must fail given unequivalent date objects", function() {
+    assert.throws(function() { Must(new Date(69)).be.eql(new Date(42)) })
+  })
+
+  it("must fail given unequivalent date objects when calling on", function() {
+    assert.throws(function() { new Date(69).must.be.eql(new Date(42)) })
   })
 
   /**
    * Regexps
    */
-  it("must fail given equivalent regexp literals", function() {
-    assert.throws(function() { Must(/a/).be.eql(/a/) })
+  it("must pass given equivalent regexp literals", function() {
+    assert.doesNotThrow(function() { Must(/a/).be.eql(/a/) })
   })
 
-  it("must fail given equivalent regexp literals when calling on", function() {
-    assert.throws(function() { /a/.must.be.eql(/a/) })
+  it("must pass given equivalent regexp literals when calling on", function() {
+    assert.doesNotThrow(function() { /a/.must.be.eql(/a/) })
+  })
+
+  it("must fail given unequivalent regexp literals", function() {
+    assert.throws(function() { Must(/a/).be.eql(/b/) })
+  })
+
+  it("must fail given unequivalent regexp literals when calling on",
+    function() {
+    assert.throws(function() { /a/.must.be.eql(/b/) })
   })
 
   it("must pass given identical regexp objects", function() {
@@ -723,12 +749,12 @@ describe("Must.prototype.eql", function() {
     assert.doesNotThrow(function() { regexp.must.be.eql(regexp) })
   })
 
-  it("must fail given unidentical regexp objects", function() {
-    assert.throws(function() { Must(new RegExp).be.eql(new RegExp) })
+  it("must pass given equivalent regexp objects", function() {
+    assert.doesNotThrow(function() { Must(new RegExp).be.eql(new RegExp) })
   })
 
-  it("must fail given unidentical regexp objects when calling on", function() {
-    assert.throws(function() { new RegExp().must.be.eql(new RegExp) })
+  it("must pass given equivalent regexp objects when calling on", function() {
+    assert.doesNotThrow(function() { new RegExp().must.be.eql(new RegExp) })
   })
 
   /**

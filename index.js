@@ -146,7 +146,16 @@ Must.prototype.equal = function(expected) {
  * @method equal
  */
 Must.prototype.eql = function(expected) {
-  insist.call(this, this.actual == expected, "==", expected)
+  insist.call(this, eql(this.actual, expected), "==", expected)
+}
+
+function eql(a, b) {
+  if (a == b) return true
+
+  if (a instanceof Date && b instanceof Date)
+    return +a === +b
+  if (a instanceof RegExp && b instanceof RegExp)
+    return a.toString() === b.toString()
 }
 
 function unbox(obj) {
