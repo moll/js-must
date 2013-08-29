@@ -427,6 +427,140 @@ describe("Must.prototype.falsy", function() {
   mustPassTruthy("falsy", false)
 })
 
+describe("Must.prototype.instanceof", function() {
+  describe("given Boolean", function() {
+    it("must fail given boolean literal", function() {
+      assert.throws(function() { true.must.be.instanceof(Boolean) })
+      assert.throws(function() { false.must.be.instanceof(Boolean) })
+    })
+
+    it("must pass given boolean object", function() {
+      assert.doesNotThrow(function() {
+        Must(new Boolean()).be.instanceof(Boolean)
+      })
+    })
+
+    it("must fail given boolean object when called on", function() {
+      assert.throws(function() { new Boolean().must.be.instanceof(Boolean) })
+    })
+
+    it("must fail given Boolean constructor", function() {
+      assert.throws(function() { Boolean.must.be.instanceof(Boolean) })
+    })
+  })
+
+  describe("given Number", function() {
+    it("must fail given number literal", function() {
+      assert.throws(function() { (42).must.be.instanceof(Number) })
+    })
+
+    it("must pass given number object", function() {
+      assert.doesNotThrow(function() {
+        Must(new Number()).be.instanceof(Number)
+      })
+    })
+
+    it("must fail given number object when called on", function() {
+      assert.throws(function() { new Number().must.be.instanceof(Number) })
+    })
+
+    it("must fail given Number constructor", function() {
+      assert.throws(function() { Number.must.be.instanceof(Number) })
+    })
+  })
+
+  describe("given String", function() {
+    it("must fail given string literal", function() {
+      assert.throws(function() { "".must.be.instanceof(String) })
+    })
+
+    it("must pass given string object", function() {
+      assert.doesNotThrow(function() {
+        Must(new String()).be.instanceof(String)
+      })
+    })
+
+    it("must fail given string object when called on", function() {
+      assert.throws(function() { new String().must.be.instanceof(String) })
+    })
+
+    it("must fail given String constructor", function() {
+      assert.throws(function() { String.must.be.instanceof(String) })
+    })
+  })
+
+  describe("given Array", function() {
+    it("must pass given array literal", function() {
+      assert.doesNotThrow(function() { [].must.be.instanceof(Array) })
+    })
+
+    it("must pass given array object and Array", function() {
+      assert.doesNotThrow(function() { new Array().must.be.instanceof(Array) })
+    })
+
+    it("must fail given Array constructor", function() {
+      assert.throws(function() { Array.must.be.instanceof(Array) })
+    })
+  })
+
+  describe("given RegExp", function() {
+    it("must pass given RegExp literal", function() {
+      assert.doesNotThrow(function() { /a/.must.be.instanceof(RegExp) })
+    })
+
+    it("must pass given regexp object and RegExp", function() {
+      assert.doesNotThrow(function() {
+        new RegExp().must.be.instanceof(RegExp) 
+      })
+    })
+
+    it("must fail given RegExp constructor", function() {
+      assert.throws(function() { RegExp.must.be.instanceof(RegExp) })
+    })
+  })
+
+  describe("given custom constructor", function() {
+    function Foo() {}
+    function Bar() {}
+
+    it("must pass given an instance of it", function() {
+      assert.doesNotThrow(function() { new Foo().must.be.instanceof(Foo) })
+    })
+
+    it("must pass given an instance of it and Object", function() {
+      assert.doesNotThrow(function() { new Foo().must.be.instanceof(Object) })
+    })
+
+    it("must fail given an instance of another", function() {
+      assert.throws(function() { new Bar().must.be.instanceof(Foo) })
+    })
+  })
+
+  mustThrowAssertionError(function() { [].must.be.instanceof(String) }, {
+    actual: [],
+    expected: String,
+    message: "[] must be an instance of String"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { [].must.not.be.instanceof(Array) })
+    })
+
+    mustThrowAssertionError(function() { [].must.not.be.instanceof(Array) }, {
+      actual: [],
+      expected: Array,
+      message: "[] must not be an instance of Array"
+    })
+  })
+})
+
+describe("Must.prototype.instanceOf", function() {
+  it("must be an alias of Must.prototype.instanceof", function() {
+    assert.strictEqual(Must.prototype.instanceOf, Must.prototype.instanceof)
+  })
+})
+
 describe("Must.prototype.equal", function() {
   it("must pass given nulls", function() {
     assert.doesNotThrow(function() { Must(null).be.equal(null) })

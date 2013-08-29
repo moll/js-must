@@ -125,6 +125,29 @@ Must.prototype.falsy = function() {
 }
 
 /**
+ * Assert that object is an instance of something.
+ * Uses `obj instanceof expected`.
+ *
+ * @method instanceof
+ */
+Must.prototype.instanceof = function(expected) {
+  var ok = this.actual instanceof expected
+  insist.call(this, ok, instanceofMessage, expected)
+}
+
+function instanceofMessage(expected) {
+  var type = expected.displayName || expected.name || inspect(expected)
+  return "be an instance of " + type
+}
+
+/**
+ * Alias of `instanceof`.
+ *
+ * @method instanceOf
+ */
+Must.prototype.instanceOf = Must.prototype.instanceof 
+
+/**
  * Alias of `truthy`.
  *
  * @method ok
@@ -168,12 +191,18 @@ function insist(ok, message, expected) {
   if (!this.negative ? ok : !ok) return
 
   var not = this.negative ? "not " : ""
-  var msg = JSON.stringify(this.actual) + " must " + not + message
-  if (arguments.length >= 3) msg += " " + JSON.stringify(expected)
+  var msg = JSON.stringify(this.actual) + " must " + not
+  msg += typeof message == "function" ? message(expected) : message
+  if (typeof message != "function" && arguments.length == 3)
+    msg += " " + inspect(expected)
 
   var opts = {actual: this.actual, caller: arguments.callee.caller}
   if (arguments.length >= 3) opts.expected = expected
   throw new AssertionError(msg, opts)
+}
+
+function inspect(obj) {
+  return JSON.stringify(obj)
 }
 
 function AssertionError(msg, opts) {
