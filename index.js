@@ -130,7 +130,7 @@ Must.prototype.undefined = function() {
  * @method array
  */
 Must.prototype.boolean = function() {
-  insist.call(this, isBoolean(this.actual), "be a boolean")
+  insist.call(this, kindof(this.actual) == "boolean", "be a boolean")
 }
 
 /**
@@ -139,7 +139,7 @@ Must.prototype.boolean = function() {
  * @method number
  */
 Must.prototype.number = function() {
-  insist.call(this, isNumber(this.actual), "be a number")
+  insist.call(this, kindof(this.actual) == "number", "be a number")
 }
 
 /**
@@ -148,7 +148,7 @@ Must.prototype.number = function() {
  * @method string
  */
 Must.prototype.string = function() {
-  insist.call(this, isString(this.actual), "be a string")
+  insist.call(this, kindof(this.actual) == "string", "be a string")
 }
 
 /**
@@ -260,7 +260,7 @@ Must.prototype.instanceOf = Must.prototype.instanceof
  */
 Must.prototype.empty = function() {
   var length
-  if (Array.isArray(this.actual) || isString(this.actual))
+  if (Array.isArray(this.actual) || kindof(this.actual) == "string")
     length = this.actual.length
   else if (typeof this.actual == "object" || typeof this.actual == "function")
     length = Object.keys(this.actual).length
@@ -271,7 +271,7 @@ Must.prototype.empty = function() {
 }
 
 /**
- * Assert object strict equality and identity (`===`).
+ * Assert object strict equality or identity (`===`).
  *
  * @method equal
  */
@@ -280,12 +280,23 @@ Must.prototype.equal = function(expected) {
 }
 
 /**
- * Assert object coercive equality (`==`).
+ * Assert object equality intelligently and by value.
  *
- * @method equal
+ * For most parts it's like strict equality (`===`), but:
+ * - Boolean objects are compared to boolean literals.
+ * - Number objects are compared to number literals.
+ * - String objects are compared to string literals.
+ * - RegExp objects are compared by their pattern and flags.
+ * - Date objects are compared by their value.
+ * - Arrays are compared by recursively.
+ * - Plain objects are compared recursively.
+ *
+ * No type coercion is done and mismatching types fail.
+ *
+ * @method eql
  */
 Must.prototype.eql = function(expected) {
-  insist.call(this, eql(this.actual, expected), "==", expected)
+  insist.call(this, eql(this.actual, expected), "be equivalent to", expected)
 }
 
 /**
@@ -297,7 +308,7 @@ Must.prototype.eql = function(expected) {
  */
 Must.prototype.include = function(expected) {
   var found
-  if (Array.isArray(this.actual) || isString(this.actual))
+  if (Array.isArray(this.actual) || kindof(this.actual) == "string")
     found = ~this.actual.indexOf(expected)
   else
     for (var key in this.actual)
@@ -306,33 +317,64 @@ Must.prototype.include = function(expected) {
   insist.call(this, found, "include", expected)
 }
 
-// These type functions intentionally use instanceof for now to allow
-// inheriting from core prototypes.
-function isBoolean(obj) {
-  return typeof obj == "boolean" || obj instanceof Boolean
-}
-
-function isNumber(obj) {
-  return typeof obj == "number" || obj instanceof Number
-}
-
-function isString(obj) {
-  return typeof obj == "string" || obj instanceof String
-}
-
 function eql(a, b) {
-  if (a == b) return true
+  if (a === b) return true
+  if (a && b && a.constructor !== b.constructor) return false
 
-  if (a instanceof Date && b instanceof Date)
-    return +a === +b
-  if (a instanceof RegExp && b instanceof RegExp)
-    return a.toString() === b.toString()
+  var aType = a && a.constructor === Object ? "hash" : kindof(a)
+  var bType = b && b.constructor === Object ? "hash" : kindof(b)
+  if (aType != bType) return false
+
+  switch (aType) {
+    // To compare literals with their object counterparts, use ==.
+    // Type equivalence is asserted above.
+    case "boolean":
+    case "number":
+    case "string":
+      return a == b
+
+    case "regexp":
+      return a.toString() === b.toString()
+
+    case "date":
+      return +a === +b
+    
+    case "array":
+      if (a.length != b.length) return false
+      if (a.length == 0) return true
+
+      for (var i = 0, l = a.length; i < l; ++i) 
+        if (!eql(a[i], b[i])) return false
+      return true
+
+    case "hash":
+      var aKeys = Object.keys(a)
+      var bKeys = Object.keys(b)
+      if (aKeys.length != bKeys.length) return false
+      if (aKeys.length == 0) return true
+
+      for (var key in a) if (!eql(a[key], b[key])) return false
+      return true
+
+    default:
+      if (typeof a.valueOf == "function" && typeof b.valueOf == "function")
+        return a.valueOf() === b.valueOf()
+      else
+        return false
+  }
 }
 
 function unbox(obj) {
   return obj instanceof Boolean ||
          obj instanceof String ||
          obj instanceof Number  ? obj.valueOf() : obj
+}
+
+function kindof(obj) {
+  if (obj instanceof Date) return "date"
+  if (obj instanceof RegExp) return "regexp"
+  if (Array.isArray(obj)) return "array"
+  return typeof unbox(obj)
 }
 
 function insist(ok, message, expected) {

@@ -613,7 +613,7 @@ describe("Must.prototype.instanceof", function() {
     })
   })
 
-  describe("given custom constructor", function() {
+  describe("given instance", function() {
     function Foo() {}
     function Bar() {}
 
@@ -682,9 +682,6 @@ describe("Must.prototype.equal", function() {
 
       it("must fail given "+bool+" literal and object", function() {
         assert.throws(function() { Must(bool).be.equal(new Boolean(bool)) })
-      })
-
-      it("must fail given "+bool+" object and literal", function() {
         assert.throws(function() { Must(new Boolean(bool)).be.equal(bool) })
       })
 
@@ -708,10 +705,11 @@ describe("Must.prototype.equal", function() {
 
     it("must fail given equivalent literal and object", function() {
       assert.throws(function() { Must(42).be.equal(new Number(42)) })
+      assert.throws(function() { Must(new Number(42)).be.equal(42) })
     })
 
-    it("must fail given equivalent object and literal", function() {
-      assert.throws(function() { Must(new Number(42)).be.equal(42) })
+    it("must fail given string", function() {
+      assert.throws(function() { Must(42).be.equal("42") })
     })
   })
 
@@ -726,10 +724,11 @@ describe("Must.prototype.equal", function() {
 
     it("must fail given equivalent literal and object", function() {
       assert.throws(function() { Must("ok").be.equal(new String("ok")) })
+      assert.throws(function() { Must(new String("ok")).be.equal("ok") })
     })
 
-    it("must fail given equivalent object and literal", function() {
-      assert.throws(function() { Must(new String("ok")).be.equal("ok") })
+    it("must fail given number", function() {
+      assert.throws(function() { Must("42").be.equal(42) })
     })
   })
 
@@ -821,12 +820,16 @@ describe("Must.prototype.eql", function() {
     assert.doesNotThrow(function() { Must(undefined).be.eql(undefined) })
   })
 
-  it("must pass given null and undefined", function() {
-    assert.doesNotThrow(function() { Must(null).be.eql(undefined) })
+  it("must fail given null and undefined", function() {
+    assert.throws(function() { Must(null).be.eql(undefined) })
+    assert.throws(function() { Must(undefined).be.eql(null) })
   })
 
-  it("must pass given undefined and null", function() {
-    assert.doesNotThrow(function() { Must(undefined).be.eql(null) })
+  it("must fail given an empty array and empty object", function() {
+    // Can't think of an assertion library that would be nuts enough to consider
+    // {} equivalent to []. Oh yeah, I can! For fucks sake, this is reason #42
+    // why Must.js is better!
+    assert.throws(function() { Must({}).be.eql([]) })
   })
 
   describe("given Boolean", function() {
@@ -837,9 +840,6 @@ describe("Must.prototype.eql", function() {
 
       it("must pass given "+bool+" literal and object", function() {
         assert.doesNotThrow(function() { Must(bool).be.eql(new Boolean(bool)) })
-      })
-
-      it("must pass given "+bool+" object and literal", function() {
         assert.doesNotThrow(function() { Must(new Boolean(bool)).be.eql(bool) })
       })
 
@@ -859,14 +859,15 @@ describe("Must.prototype.eql", function() {
 
     it("must pass given equivalent literal and object", function() {
       assert.doesNotThrow(function() { Must(42).be.eql(new Number(42)) })
-    })
-
-    it("must pass given equivalent object and literal", function() {
       assert.doesNotThrow(function() { Must(new Number(42)).be.eql(42) })
     })
 
     it("must fail given unequivalent literals", function() {
       assert.throws(function() { Must(42).be.eql(1337) })
+    })
+
+    it("must fail given string", function() {
+      assert.throws(function() { Must(42).eql("42") })
     })
   })
 
@@ -877,14 +878,23 @@ describe("Must.prototype.eql", function() {
 
     it("must pass given equivalent literal and object", function() {
       assert.doesNotThrow(function() { Must("ok").be.eql(new String("ok")) })
-    })
-
-    it("must pass given equivalent object and literal", function() {
       assert.doesNotThrow(function() { Must(new String("ok")).be.eql("ok") })
     })
 
     it("must fail given unequivalent literals", function() {
       assert.throws(function() { Must("ok").be.eql("nok") })
+    })
+
+    it("must fail given equivalent number literal", function() {
+      assert.throws(function() { Must("1").be.eql(1) })
+    })
+
+    it("must fail given equivalent number object", function() {
+      assert.throws(function() { Must("1").be.eql(new Number(1)) })
+    })
+
+    it("must fail given number", function() {
+      assert.throws(function() { Must("42").eql(42) })
     })
   })
 
@@ -922,8 +932,12 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given Array", function() {
-    it("must fail given equivalent literals", function() {
-      assert.throws(function() { Must([1]).be.eql([1]) })
+    it("must pass empty equivalent literals", function() {
+      assert.doesNotThrow(function() { Must([]).be.eql([]) })
+    })
+
+    it("must pass given equivalent literals", function() {
+      assert.doesNotThrow(function() { Must([1]).be.eql([1]) })
     })
 
     it("must pass given identical objects", function() {
@@ -931,8 +945,22 @@ describe("Must.prototype.eql", function() {
       assert.doesNotThrow(function() { Must(array).be.eql(array) })
     })
 
-    it("must fail given equivalent objects", function() {
-      assert.throws(function() { Must(new Array).be.eql(new Array) })
+    it("must fail given an empty and non-empty array", function() {
+      assert.throws(function() { Must([]).be.eql([1]) })
+      assert.throws(function() { Must([1]).be.eql([]) })
+    })
+
+    it("must fail given a smaller and a larger array", function() {
+      assert.throws(function() { Must([1]).be.eql([1, 2]) })
+      assert.throws(function() { Must([1, 2]).be.eql([1]) })
+    })
+
+    it("must pass given equivalent nested literals", function() {
+      assert.doesNotThrow(function() { Must([1, [2], 3]).be.eql([1, [2], 3]) })
+    })
+
+    it("must fail given equivalent nested literals", function() {
+      assert.throws(function() { Must([1, [2], 3]).be.eql([1, [42], 3]) })
     })
   })
 
@@ -949,10 +977,82 @@ describe("Must.prototype.eql", function() {
     })
   })
 
+  describe("given Object", function() {
+    it("must pass given empty objects", function() {
+      assert.doesNotThrow(function() { Must({}).be.eql({}) })
+    })
+
+    it("must fail given empty object and filled object", function() {
+      assert.throws(function() { Must({}).be.eql({a: 42}) })
+      assert.throws(function() { Must({a: 42}).be.eql({}) })
+    })
+
+    it("must fail given a smaller object and larger object", function() {
+      assert.throws(function() { Must({a: 42, b: 69}).be.eql({a: 42}) })
+      assert.throws(function() { Must({a: 42}).be.eql({a: 42, b: 69}) })
+    })
+
+    it("must pass given identical objects", function() {
+      var obj = {a: 42, b: 69}
+      assert.doesNotThrow(function() { Must(obj).be.eql(obj) })
+    })
+
+    it("must pass given equivalent objects", function() {
+      var obj = {a: 42, b: 69}
+      assert.doesNotThrow(function() { Must(obj).be.eql({a: 42, b: 69}) })
+    })
+
+    it("must fail given differently typed objects", function() {
+      assert.throws(function() {Must({a: "42", b: 69}).be.eql({a: 42, b: 69})})
+    })
+  })
+
+  describe("given instance", function() {
+    it("must fail given equivalent instances", function() {
+      function Priceless(value) { this.value }
+      var a = new Priceless(42), b = new Priceless(42)
+      assert.throws(function() { Must(a).eql(b) })
+    })
+
+    it("must fail given different instances", function() {
+      assert.throws(function() { Must(new new Function).eql(new new Function) })
+    })
+
+    it("must pass given identical valueOf outputs", function() {
+      function Valuable(value) { this.value = value }
+      Valuable.prototype.valueOf = function() { return this.value }
+      var a = new Valuable(42), b = new Valuable(42)
+      assert.doesNotThrow(function() { Must(a).eql(b) })
+    })
+
+    it("must fail unequivalent valueOf outputs", function() {
+      function Valuable(value) { this.value = value }
+      Valuable.prototype.valueOf = function() { return this.value }
+      var a = new Valuable(42), b = new Valuable(69)
+      assert.throws(function() { Must(a).eql(b) })
+    })
+
+    it("must fail given differently typed valueOf outputs", function() {
+      function Valuable(value) { this.value = value }
+      Valuable.prototype.valueOf = function() { return this.value }
+      var a = new Valuable(42), b = new Valuable("42")
+      assert.throws(function() { Must(a).eql(b) })
+    })
+
+    it("must fail given identical valueOf outputs from different constructors",
+      function() {
+      function A(value) { this.value }
+      A.prototype.valueOf = function() { return this.value }
+      function B(value) { this.value }
+      B.prototype.valueOf = function() { return this.value }
+      assert.throws(function() { Must(new A(42)).eql(new B(42)) })
+    })
+  })
+
   mustThrowAssertionError(function() { "secret".must.eql(42) }, {
     actual: "secret",
     expected: 42,
-    message: "\"secret\" must == 42"
+    message: "\"secret\" must be equivalent to 42"
   })
 
   describe(".not", function() {
@@ -965,7 +1065,7 @@ describe("Must.prototype.eql", function() {
     mustThrowAssertionError(not, {
       actual: "secret",
       expected: "secret",
-      message: "\"secret\" must not == \"secret\""
+      message: "\"secret\" must not be equivalent to \"secret\""
     })
   })
 })
@@ -1089,7 +1189,7 @@ describe("Must.prototype.empty", function() {
     })
   })
 
-  describe("given custom instance", function() {
+  describe("given instance", function() {
     function Foo() {}
     function Bar() { this.life = 42 }
 
