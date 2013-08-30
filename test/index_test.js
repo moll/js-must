@@ -33,6 +33,51 @@ describe("Object.prototype.must", function() {
     assert.equal(obj.must, 42)
   })
 
+  describe("when called on", function() {
+    it("must unbox boolean", function() {
+      assert.strictEqual(true.must.actual, true)
+    })
+
+    it("must unbox number", function() {
+      assert.strictEqual((42).must.actual, 42)
+    })
+
+    it("must unbox string", function() {
+      assert.strictEqual("foo".must.actual, "foo")
+    })
+
+    it("must not unbox date", function() {
+      var date = new Date
+      date.valueOf = function() {}
+      assert.strictEqual(date.must.actual, date)
+    })
+
+    it("must not unbox RegExp", function() {
+      var regexp = new RegExp
+      regexp.valueOf = function() {}
+      assert.strictEqual(regexp.must.actual, regexp)
+    })
+
+    it("must not unbox array", function() {
+      var array = []
+      array.valueOf = function() {}
+      assert.strictEqual(array.must.actual, array)
+    })
+
+    it("must not unbox object", function() {
+      var object = {}
+      object.valueOf = function() {}
+      assert.strictEqual(object.must.actual, object)
+    })
+
+    it("must not unbox custom instance", function() {
+      function Foo() {}
+      Foo.prototype.valueOf = function() {}
+      var foo = new Foo
+      assert.strictEqual(foo.must.actual, foo)
+    })
+  })
+
   afterEach(function() {
     // Reload to reset the fiddling we did here.
     delete require.cache[Path.resolve(__dirname, "../index.js")]
