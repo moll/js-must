@@ -188,6 +188,16 @@ Must.prototype.function = function() {
 }
 
 /**
+ * Assert object is an.. object.
+ *
+ * @method object
+ */
+Must.prototype.object = function() {
+  var ok = this.actual && typeof this.actual == "object"
+  insist.call(this, ok, "be an object")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and

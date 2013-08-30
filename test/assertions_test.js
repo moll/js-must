@@ -358,6 +358,10 @@ describe("Must.prototype.function", function() {
   mustBeType("function", "be a function", {object: new Function})
 })
 
+describe("Must.prototype.object", function() {
+  mustBeType("object", "be an object", {object: new Object})
+})
+
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
