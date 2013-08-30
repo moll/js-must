@@ -77,15 +77,17 @@ function mustPassA(name) {
   })
 
   describe(".not", function() {
+    function not() { [].must.not.be[name](Array) }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { [].must.not.be[name](Array) })
+      assert.throws(not)
     })
 
     it("must carry over the current state", function() {
       assert.throws(function() { true.must.not.be[name].ok() })
     })
 
-    mustThrowAssertionError(function() { [].must.not.be[name](Array) }, {
+    mustThrowAssertionError(not, {
       actual: [],
       expected: Array,
       message: "[] must not be an instance of Array"
@@ -128,15 +130,17 @@ describe("Must.prototype.be", function() {
   })
 
   describe(".not", function() {
+    function not() { true.must.not.be(true) }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { true.must.not.be(true) })
+      assert.throws(not)
     })
 
     it("must carry over the current state", function() {
       assert.throws(function() { true.must.not.be.true() })
     })
 
-    mustThrowAssertionError(function() { true.must.not.be(true) }, {
+    mustThrowAssertionError(not, {
       actual: true,
       expected: true,
       message: "true must not equal true"
@@ -181,11 +185,13 @@ function mustPassTrue(name, truthy) {
   })
 
   describe(".not", function() {
+    function not() { truthy.must.not.be[name]() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { truthy.must.not.be[name]() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { truthy.must.not.be[name]() }, {
+    mustThrowAssertionError(not, {
       actual: truthy,
       expected: truthy,
       message: truthy + " must not be " + truthy
@@ -233,11 +239,13 @@ describe("Must.prototype.null", function() {
   })
 
   describe(".not", function() {
+    function not() { Must(null).not.be.null() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { Must(null).not.be.null() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { Must(null).not.be.null() }, {
+    mustThrowAssertionError(not, {
       actual: null,
       expected: null,
       message: "null must not be null"
@@ -277,11 +285,13 @@ describe("Must.prototype.undefined", function() {
   })
 
   describe(".not", function() {
+    function not() { Must(undefined).not.be.undefined() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { Must(undefined).not.be.undefined() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { Must(undefined).not.be.undefined() }, {
+    mustThrowAssertionError(not, {
       actual: undefined,
       expected: undefined,
       message: "undefined must not be undefined"
@@ -330,11 +340,13 @@ function mustBeType(name, msg, values) {
   })
 
   describe(".not", function() {
+    function not() { Must(valid).not.be[name]() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { Must(valid).not.be[name]() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { Must(valid).not.be[name]() }, {
+    mustThrowAssertionError(not, {
       actual: valid,
       message: JSON.stringify(valid) + " must not " + msg
     })
@@ -502,11 +514,13 @@ function mustPassTruthy(name, truthy) {
   })
 
   describe(".not", function() {
+    function not() { truthy.must.not.be[name]() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { truthy.must.not.be[name]() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { truthy.must.not.be[name]() }, {
+    mustThrowAssertionError(not, {
       actual: truthy,
       message: truthy + " must not be " + name
     })
@@ -623,11 +637,13 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe(".not", function() {
+    function not() { [].must.not.be.instanceof(Array) }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { [].must.not.be.instanceof(Array) })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { [].must.not.be.instanceof(Array) }, {
+    mustThrowAssertionError(not, {
       actual: [],
       expected: Array,
       message: "[] must not be an instance of Array"
@@ -782,11 +798,13 @@ describe("Must.prototype.equal", function() {
   })
 
   describe(".not", function() {
+    function not() { "secret".must.not.equal("secret") }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { "secret".must.not.equal("secret") })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { "secret".must.not.equal("secret") }, {
+    mustThrowAssertionError(not, {
       actual: "secret",
       expected: "secret",
       message: "\"secret\" must not equal \"secret\""
@@ -938,11 +956,13 @@ describe("Must.prototype.eql", function() {
   })
 
   describe(".not", function() {
+    function not() { "secret".must.not.eql("secret") }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { "secret".must.not.eql("secret") })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { "secret".must.not.eql("secret") }, {
+    mustThrowAssertionError(not, {
       actual: "secret",
       expected: "secret",
       message: "\"secret\" must not == \"secret\""
@@ -1088,11 +1108,13 @@ describe("Must.prototype.empty", function() {
   })
 
   describe(".not", function() {
+    function not() { [].must.not.be.empty() }
+
     it("must invert the assertion", function() {
-      assert.throws(function() { [].must.not.be.empty() })
+      assert.throws(not)
     })
 
-    mustThrowAssertionError(function() { [].must.not.be.empty() }, {
+    mustThrowAssertionError(not, {
       actual: [],
       message: "[] must not be empty"
     })
