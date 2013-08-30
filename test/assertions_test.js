@@ -345,6 +345,10 @@ describe("Must.prototype.string", function() {
 describe("Must.prototype.date", function() {
   mustBeType("date", "be a date", {object: new Date})
 })
+
+describe("Must.prototype.regexp", function() {
+  mustBeType("regexp", "be a regular expression", {object: new RegExp})
+})
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
