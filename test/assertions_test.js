@@ -34,7 +34,7 @@ describe("Must.prototype.not", function() {
     assert.doesNotThrow(function() { false.must.not.equal(true) })
   })
 
-  it("must inverse condition each time", function() {
+  it("must invert condition each time", function() {
     assert.doesNotThrow(function() { true.must.not.not.equal(true) })
   })
 
@@ -77,7 +77,7 @@ function mustPassA(name) {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { [].must.not.be[name](Array) })
     })
 
@@ -128,7 +128,7 @@ describe("Must.prototype.be", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { true.must.not.be(true) })
     })
 
@@ -181,7 +181,7 @@ function mustPassTrue(name, truthy) {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { truthy.must.not.be[name]() })
     })
 
@@ -233,7 +233,7 @@ describe("Must.prototype.null", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { Must(null).not.be.null() })
     })
 
@@ -277,7 +277,7 @@ describe("Must.prototype.undefined", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { Must(undefined).not.be.undefined() })
     })
 
@@ -330,7 +330,7 @@ function mustBeType(name, msg, values) {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { Must(valid).not.be[name]() })
     })
 
@@ -496,7 +496,7 @@ function mustPassTruthy(name, truthy) {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { truthy.must.not.be[name]() })
     })
 
@@ -631,7 +631,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { [].must.not.be.instanceof(Array) })
     })
 
@@ -790,7 +790,7 @@ describe("Must.prototype.equal", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { "secret".must.not.equal("secret") })
     })
 
@@ -946,7 +946,7 @@ describe("Must.prototype.eql", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { "secret".must.not.eql("secret") })
     })
 
@@ -1096,7 +1096,7 @@ describe("Must.prototype.empty", function() {
   })
 
   describe(".not", function() {
-    it("must inverse the assertion", function() {
+    it("must invert the assertion", function() {
       assert.throws(function() { [].must.not.be.empty() })
     })
 
