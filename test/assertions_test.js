@@ -308,6 +308,22 @@ function mustBeType(name, msg, values) {
     assert.throws(function() { Must(undefined).be[name]() })
   })
 
+  if (name != "boolean") it("must fail given true literal", function() {
+    assert.throws(function() { Must(true).be[name]() })
+  })
+
+  if (name != "boolean") it("must fail given false literal", function() {
+    assert.throws(function() { Must(false).be[name]() })
+  })
+
+  if (name != "number") it("must fail given number literal", function() {
+    assert.throws(function() { Must(0).be[name]() })
+  })
+
+  if (name != "string") it("must fail given string literal", function() {
+    assert.throws(function() { Must("").be[name]() })
+  })
+
   mustThrowAssertionError(function() { Must(null).be[name]() }, {
     actual: null,
     message: "null must " + msg
