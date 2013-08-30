@@ -134,6 +134,15 @@ Must.prototype.boolean = function() {
 }
 
 /**
+ * Assert object is a number.
+ *
+ * @method number
+ */
+Must.prototype.number = function() {
+  insist.call(this, isNumber(this.actual), "be a number")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
@@ -228,6 +237,10 @@ Must.prototype.eql = function(expected) {
 // inheriting from core prototypes.
 function isBoolean(obj) {
   return typeof obj == "boolean" || obj instanceof Boolean
+}
+
+function isNumber(obj) {
+  return typeof obj == "number" || obj instanceof Number
 }
 
 function isString(obj) {
