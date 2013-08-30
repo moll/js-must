@@ -179,6 +179,15 @@ Must.prototype.array = function() {
 }
 
 /**
+ * Assert object is a function.
+ *
+ * @method function
+ */
+Must.prototype.function = function() {
+  insist.call(this, typeof this.actual == "function", "be a function")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
