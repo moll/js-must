@@ -470,6 +470,12 @@ function mustPassTruthy(name, truthy) {
     })
   })
 
+  describe("given Function", function() {
+    it("must "+pass+" given function", function() {
+      doesNotThrow(function() { Must(new Function).be[name]() })
+    })
+  })
+
   describe("given objects", function() {
     it("must "+pass+" given empty literal", function() {
       doesNotThrow(function() { Must({}).be[name]() })
@@ -586,6 +592,18 @@ describe("Must.prototype.instanceof", function() {
 
     it("must fail given Array constructor", function() {
       assert.throws(function() { Array.must.be.instanceof(Array) })
+    })
+  })
+
+  describe("given Function", function() {
+    it("must pass given function", function() {
+      assert.doesNotThrow(function() {
+        Must(new Function).be.instanceof(Function) 
+      })
+    })
+
+    it("must pass given Function constructor", function() {
+      assert.doesNotThrow(function() { Function.must.be.instanceof(Function) })
     })
   })
 
@@ -752,6 +770,19 @@ describe("Must.prototype.equal", function() {
     })
   })
 
+  describe("given Function", function() {
+    it("must pass given identical objects", function() {
+      var fn = new Function
+      assert.doesNotThrow(function() { Must(fn).be.equal(fn) })
+    })
+
+    it("must fail given equivalent objects", function() {
+      assert.throws(function() {
+        Must(new Function("foo")).be.equal(new Function("foo")) 
+      })
+    })
+  })
+
   mustThrowAssertionError(function() { "secret".must.equal(42) }, {
     actual: "secret",
     expected: 42,
@@ -890,8 +921,21 @@ describe("Must.prototype.eql", function() {
       assert.doesNotThrow(function() { Must(array).be.eql(array) })
     })
 
-    it("must fail given unidentical objects", function() {
+    it("must fail given equivalent objects", function() {
       assert.throws(function() { Must(new Array).be.eql(new Array) })
+    })
+  })
+
+  describe("given Function", function() {
+    it("must pass given identical objects", function() {
+      var fn = new Function
+      assert.doesNotThrow(function() { Must(fn).be.eql(fn) })
+    })
+
+    it("must fail given equivalent objects", function() {
+      assert.throws(function() {
+        Must(new Function("foo")).be.eql(new Function("foo")) 
+      })
     })
   })
 
