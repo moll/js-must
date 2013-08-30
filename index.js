@@ -125,6 +125,15 @@ Must.prototype.undefined = function() {
 }
 
 /**
+ * Assert object is a boolean (`true` or `false`).
+ *
+ * @method array
+ */
+Must.prototype.boolean = function() {
+  insist.call(this, isBoolean(this.actual), "be a boolean")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
@@ -197,10 +206,6 @@ Must.prototype.empty = function() {
   insist.call(this, length === 0, "be empty")
 }
 
-function isString(obj) {
-  return typeof obj == "string" || obj instanceof String
-}
-
 /**
  * Assert object strict equality and identity (`===`).
  *
@@ -217,6 +222,16 @@ Must.prototype.equal = function(expected) {
  */
 Must.prototype.eql = function(expected) {
   insist.call(this, eql(this.actual, expected), "==", expected)
+}
+
+// These type functions intentionally use instanceof for now to allow
+// inheriting from core prototypes.
+function isBoolean(obj) {
+  return typeof obj == "boolean" || obj instanceof Boolean
+}
+
+function isString(obj) {
+  return typeof obj == "string" || obj instanceof String
 }
 
 function eql(a, b) {
@@ -259,6 +274,12 @@ function AssertionError(msg, opts) {
   Error.captureStackTrace(this, opts && opts.caller || arguments.callee.caller)
 }
 
+/**
+ * Error object thrown when an assertion fails.
+ *
+ * @class AssertionError
+ * @constructor
+ */
 AssertionError.prototype = Object.create(Error.prototype, {
   constructor: {
     value: AssertionError,

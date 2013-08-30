@@ -206,19 +206,19 @@ describe("Must.prototype.null", function() {
     assert.doesNotThrow(function() { Must(null).be.null() })
   })
 
-  it("must not pass given true literal", function() {
+  it("must fail given true literal", function() {
     assert.throws(function() { Must(true).be.null() })
   })
 
-  it("must not pass given false literal", function() {
+  it("must fail given false literal", function() {
     assert.throws(function() { Must(false).be.null() })
   })
 
-  it("must not pass given undefined", function() {
+  it("must fail given undefined", function() {
     assert.throws(function() { Must(undefined).be.null() })
   })
 
-  it("must not pass given empty string", function() {
+  it("must fail given empty string", function() {
     assert.throws(function() { Must("").be.null() })
   })
 
@@ -250,19 +250,19 @@ describe("Must.prototype.undefined", function() {
     assert.doesNotThrow(function() { Must(undefined).be.undefined() })
   })
 
-  it("must not pass given true literal", function() {
+  it("must fail given true literal", function() {
     assert.throws(function() { Must(true).be.undefined() })
   })
 
-  it("must not pass given false literal", function() {
+  it("must fail given false literal", function() {
     assert.throws(function() { Must(false).be.undefined() })
   })
 
-  it("must not pass given null", function() {
+  it("must fail given null", function() {
     assert.throws(function() { Must(null).be.undefined() })
   })
 
-  it("must not pass given empty string", function() {
+  it("must fail given empty string", function() {
     assert.throws(function() { Must("").be.undefined() })
   })
 
@@ -289,6 +289,50 @@ describe("Must.prototype.undefined", function() {
   })
 })
 
+function mustBeType(name, msg, values) {
+  var valid
+
+  for (var type in values) !function(value) {
+    if (valid == null) valid = value
+
+    it("must pass given "+name+" "+type, function() {
+      assert.doesNotThrow(function() { Must(value).be[name]() })
+    })
+  }(values[type])
+
+  it("must fail given null", function() {
+    assert.throws(function() { Must(null).be[name]() })
+  })
+
+  it("must fail given undefined", function() {
+    assert.throws(function() { Must(undefined).be[name]() })
+  })
+
+  mustThrowAssertionError(function() { Must(null).be[name]() }, {
+    actual: null,
+    message: "null must " + msg
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { Must(valid).not.be[name]() })
+    })
+
+    mustThrowAssertionError(function() { Must(valid).not.be[name]() }, {
+      actual: valid,
+      message: JSON.stringify(valid) + " must not " + msg
+    })
+  })
+}
+
+describe("Must.prototype.boolean", function() {
+  mustBeType("boolean", "be a boolean", {
+    "true literal": true,
+    "false literal": false,
+    "true object": new Boolean(true),
+    "false object": new Boolean(false)
+  })
+})
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
