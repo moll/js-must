@@ -152,6 +152,15 @@ Must.prototype.string = function() {
 }
 
 /**
+ * Assert object is a date.
+ *
+ * @method date
+ */
+Must.prototype.date = function() {
+  insist.call(this, this.actual instanceof Date, "be a date")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and

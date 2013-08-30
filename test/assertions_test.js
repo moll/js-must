@@ -341,6 +341,10 @@ describe("Must.prototype.number", function() {
 describe("Must.prototype.string", function() {
   mustBeType("string", "be a string", {literal: "", object: new String})
 })
+
+describe("Must.prototype.date", function() {
+  mustBeType("date", "be a date", {object: new Date})
+})
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
