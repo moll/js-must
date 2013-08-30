@@ -358,12 +358,12 @@ describe("Must.prototype.string", function() {
   mustBeType("string", "be a string", {literal: "", object: new String})
 })
 
-describe("Must.prototype.date", function() {
-  mustBeType("date", "be a date", {object: new Date})
-})
-
 describe("Must.prototype.regexp", function() {
   mustBeType("regexp", "be a regular expression", {object: new RegExp})
+})
+
+describe("Must.prototype.date", function() {
+  mustBeType("date", "be a date", {object: new Date})
 })
 
 describe("Must.prototype.array", function() {
@@ -410,6 +410,24 @@ function mustPassTruthy(name, truthy) {
     })
   })
 
+  describe("given Number", function() {
+    it("must "+pass+" given literal", function() {
+      doesNotThrow(function() { Must(1).be[name]() })
+    })
+
+    it("must "+pass+" given object", function() {
+      doesNotThrow(function() { Must(new Number(1)).be[name]() })
+    })
+
+    it("must "+fail+" given zero literal", function() {
+      throws(function() { Must(0).be[name]() })
+    })
+
+    it("must "+pass+" given zero object", function() {
+      doesNotThrow(function() { Must(new Number(0)).be[name]() })
+    })
+  })
+
   describe("given String", function() {
     it("must "+pass+" given literal", function() {
       doesNotThrow(function() { Must("truthy").be[name]() })
@@ -436,21 +454,9 @@ function mustPassTruthy(name, truthy) {
     })
   })
 
-  describe("given Number", function() {
-    it("must "+pass+" given literal", function() {
-      doesNotThrow(function() { Must(1).be[name]() })
-    })
-
-    it("must "+pass+" given object", function() {
-      doesNotThrow(function() { Must(new Number(1)).be[name]() })
-    })
-
-    it("must "+fail+" given zero literal", function() {
-      throws(function() { Must(0).be[name]() })
-    })
-
-    it("must "+pass+" given zero object", function() {
-      doesNotThrow(function() { Must(new Number(0)).be[name]() })
+  describe("given RegExp", function() {
+    it("must "+pass+" given regexp", function() {
+      doesNotThrow(function() { Must(new RegExp).be[name]() })
     })
   })
 
@@ -476,7 +482,7 @@ function mustPassTruthy(name, truthy) {
     })
   })
 
-  describe("given objects", function() {
+  describe("given Object", function() {
     it("must "+pass+" given empty literal", function() {
       doesNotThrow(function() { Must({}).be[name]() })
     })
@@ -578,6 +584,16 @@ describe("Must.prototype.instanceof", function() {
 
     it("must fail given RegExp constructor", function() {
       assert.throws(function() { RegExp.must.be.instanceof(RegExp) })
+    })
+  })
+
+  describe("given Date", function() {
+    it("must pass given Date object", function() {
+      assert.doesNotThrow(function() { Must(new Date).be.instanceof(Date) })
+    })
+
+    it("must fail given Date constructor", function() {
+      assert.throws(function() { Date.must.be.instanceof(Date) })
     })
   })
 
@@ -725,17 +741,6 @@ describe("Must.prototype.equal", function() {
     })
   })
 
-  describe("given Date", function() {
-    it("must pass given identical objects", function() {
-      var now = new Date
-      assert.doesNotThrow(function() { Must(now).be.equal(now) })
-    })
-
-    it("must fail given equivalent objects", function() {
-      assert.throws(function() { Must(new Date(42)).be.equal(new Date(42)) })
-    })
-  })
-
   describe("given RegExp", function() {
     it("must fail given equivalent literals", function() {
       assert.throws(function() { Must(/a/).be.equal(/a/) })
@@ -752,6 +757,17 @@ describe("Must.prototype.equal", function() {
 
     it("must fail given equivalent objects", function() {
       assert.throws(function() { Must(new RegExp).be.equal(new RegExp) })
+    })
+  })
+
+  describe("given Date", function() {
+    it("must pass given identical objects", function() {
+      var now = new Date
+      assert.doesNotThrow(function() { Must(now).be.equal(now) })
+    })
+
+    it("must fail given equivalent objects", function() {
+      assert.throws(function() { Must(new Date(42)).be.equal(new Date(42)) })
     })
   })
 
@@ -878,21 +894,6 @@ describe("Must.prototype.eql", function() {
     })
   })
 
-  describe("given Date", function() {
-    it("must pass given identical objects", function() {
-      var now = new Date
-      assert.doesNotThrow(function() { Must(now).be.eql(now) })
-    })
-
-    it("must pass given equivalent objects", function() {
-      assert.doesNotThrow(function() { Must(new Date(7)).be.eql(new Date(7)) })
-    })
-
-    it("must fail given unequivalent objects", function() {
-      assert.throws(function() { Must(new Date(69)).be.eql(new Date(42)) })
-    })
-  })
-
   describe("given RegExp", function() {
     it("must pass given equivalent literals", function() {
       assert.doesNotThrow(function() { Must(/a/).be.eql(/a/) })
@@ -908,6 +909,21 @@ describe("Must.prototype.eql", function() {
 
     it("must fail given unequivalent objects", function() {
       assert.throws(function() {Must(new RegExp("a")).be.eql(new RegExp("b"))})
+    })
+  })
+
+  describe("given Date", function() {
+    it("must pass given identical objects", function() {
+      var now = new Date
+      assert.doesNotThrow(function() { Must(now).be.eql(now) })
+    })
+
+    it("must pass given equivalent objects", function() {
+      assert.doesNotThrow(function() { Must(new Date(7)).be.eql(new Date(7)) })
+    })
+
+    it("must fail given unequivalent objects", function() {
+      assert.throws(function() { Must(new Date(69)).be.eql(new Date(42)) })
     })
   })
 
