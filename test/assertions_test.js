@@ -578,7 +578,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe("given Array", function() {
-    it("must pass given array", function() {
+    it("must pass given array literal", function() {
       assert.doesNotThrow(function() { [].must.be.instanceof(Array) })
     })
 
@@ -588,7 +588,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe("given Function", function() {
-    it("must pass given function", function() {
+    it("must pass given function object", function() {
       assert.doesNotThrow(function() {
         Must(new Function).be.instanceof(Function) 
       })
