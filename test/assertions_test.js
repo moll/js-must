@@ -1120,3 +1120,97 @@ describe("Must.prototype.empty", function() {
     })
   })
 })
+
+describe("Must.prototype.include", function() {
+  describe("given String", function() {
+    var literal = "Hello! How are you?"
+    var object = new String(literal)
+
+    it("must pass if given string literal includes string literal", function() {
+      assert.doesNotThrow(function() { Must(literal).include("How") })
+    })
+
+    it("must fail if given string literal does not include string literal",
+      function() {
+      assert.throws(function() { Must(literal).include("good") })
+    })
+
+    it("must pass if given string literal includes string object", function() {
+      assert.doesNotThrow(function() {
+        Must(literal).include(new String("How")) 
+      })
+    })
+
+    it("must fail if given string literal does not include string object",
+      function() {
+      assert.throws(function() { Must(literal).include(new String("good")) })
+    })
+
+    it("must pass if given string object includes string literal", function() {
+      assert.doesNotThrow(function() { Must(object).include("How") })
+    })
+
+    it("must fail if given string object does not include string literal",
+      function() {
+      assert.throws(function() { Must(object).include("good") })
+    })
+
+    it("must pass if given string object includes string object", function() {
+      assert.doesNotThrow(function() {Must(object).include(new String("How"))})
+    })
+
+    it("must fail if given string object does not include string object",
+      function() {
+      assert.throws(function() { Must(object).include(new String("good")) })
+    })
+  })
+
+  describe("given Array", function() {
+    it("must pass if given array includes number literal", function() {
+      assert.doesNotThrow(function() { [1, 2, 3].must.include(2) })
+    })
+
+    it("must fail if given array does not include number literal", function() {
+      assert.throws(function() { [1, 2, 3].must.include(42) })
+    })
+
+    it("must fail if given array includes equivalent number", function() {
+      assert.throws(function() { [1, 2, 3].must.include(new Number(2)) })
+    })
+  })
+
+  describe("given Object", function() {
+    it("must pass if given object includes number literal", function() {
+      assert.doesNotThrow(function() { ({a: 1, b: 2, c: 3}).must.include(2) })
+    })
+
+    it("must fail if given array does not include number literal", function() {
+      assert.throws(function() { ({a: 1, b: 2, c: 3}).must.include(42) })
+    })
+
+    it("must fail if given array includes equivalent number", function() {
+      var obj = ({a: 1, b: 2, c: 3})
+      assert.throws(function() { obj.must.include(new Number(2)) })
+    })
+  })
+
+  mustThrowAssertionError(function() { [1, 2, 3].must.be.include(42) }, {
+    actual: [1, 2, 3],
+    expected: 42,
+    message: "[1,2,3] must include 42"
+  })
+
+  describe(".not", function() {
+    function not() { [1, 42, 3].must.not.include(42) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: [1, 42, 3],
+      expected: 42,
+      message: "[1,42,3] must not include 42"
+    })
+  })
+})

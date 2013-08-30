@@ -288,6 +288,24 @@ Must.prototype.eql = function(expected) {
   insist.call(this, eql(this.actual, expected), "==", expected)
 }
 
+/**
+ * Assert object includes `expected`.
+ * For arrays checks elements, for objects checks property values and for
+ * strings checks the text.
+ *
+ * @method include
+ */
+Must.prototype.include = function(expected) {
+  var found
+  if (Array.isArray(this.actual) || isString(this.actual))
+    found = ~this.actual.indexOf(expected)
+  else
+    for (var key in this.actual)
+      if (this.actual[key] === expected) { found = true; break }
+
+  insist.call(this, found, "include", expected)
+}
+
 // These type functions intentionally use instanceof for now to allow
 // inheriting from core prototypes.
 function isBoolean(obj) {
