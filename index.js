@@ -170,6 +170,15 @@ Must.prototype.regexp = function() {
 }
 
 /**
+ * Assert object is an array.
+ *
+ * @method array
+ */
+Must.prototype.array = function() {
+  insist.call(this, Array.isArray(this.actual), "be an array")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
