@@ -143,6 +143,15 @@ Must.prototype.number = function() {
 }
 
 /**
+ * Assert object is a string.
+ *
+ * @method string
+ */
+Must.prototype.string = function() {
+  insist.call(this, isString(this.actual), "be a string")
+}
+
+/**
  * Assert object is truthy (`!!obj`).
  *
  * `0`, `Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and

@@ -337,6 +337,10 @@ describe("Must.prototype.boolean", function() {
 describe("Must.prototype.number", function() {
   mustBeType("number", "be a number", {literal: 0, object: new Number})
 })
+
+describe("Must.prototype.string", function() {
+  mustBeType("string", "be a string", {literal: "", object: new String})
+})
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
