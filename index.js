@@ -262,7 +262,7 @@ Must.prototype.empty = function() {
   var length
   if (Array.isArray(this.actual) || isString(this.actual))
     length = this.actual.length
-  else if (typeof this.actual == "object")
+  else if (typeof this.actual == "object" || typeof this.actual == "function")
     length = Object.keys(this.actual).length
   else
     length = 1

@@ -1051,6 +1051,22 @@ describe("Must.prototype.empty", function() {
     })
   })
 
+  describe("given Function", function() {
+    it("should pass given an empty object", function() {
+      assert.doesNotThrow(function() { Must(new Function).be.empty() })
+    })
+
+    it("should pass given a non-empty object", function() {
+      assert.doesNotThrow(function() { Must(new Function("a")).be.empty() })
+    })
+
+    it("should fail given a non-empty object with keys", function() {
+      var obj = new Function("a")
+      obj.life = 42
+      assert.throws(function() { Must(obj).be.empty() })
+    })
+  })
+
   describe("given Object", function() {
     it("must pass given an empty literal", function() {
       assert.doesNotThrow(function() { Must({}).be.empty() })
