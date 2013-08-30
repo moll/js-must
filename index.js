@@ -161,9 +161,9 @@ Must.prototype.date = function() {
 }
 
 /**
- * Assert object is a RegExp.
+ * Assert object is a regular expression.
  *
- * @method RegExp
+ * @method regexp
  */
 Must.prototype.regexp = function() {
   insist.call(this, this.actual instanceof RegExp, "be a regular expression")

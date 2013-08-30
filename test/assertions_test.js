@@ -353,6 +353,7 @@ describe("Must.prototype.regexp", function() {
 describe("Must.prototype.array", function() {
   mustBeType("array", "be an array", {literal: [], object: new Array})
 })
+
 function mustPassTruthy(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
