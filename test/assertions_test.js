@@ -1011,3 +1011,136 @@ describe("Must.prototype.eql", function() {
     })
   })
 })
+
+describe("Must.prototype.empty", function() {
+  describe("given Boolean", function() {
+    it("must fail given a true literal", function() {
+      assert.throws(function() { Must(true).be.empty() })
+    })
+
+    it("must fail given a false literal", function() {
+      assert.throws(function() { Must(false).be.empty() })
+    })
+
+    it("must pass given a true object", function() {
+      assert.doesNotThrow(function() { Must(new Boolean(true)).be.empty() })
+    })
+
+    it("must pass given a false object", function() {
+      assert.doesNotThrow(function() { Must(new Boolean(false)).be.empty() })
+    })
+
+    it("must fail given a non-empty object with keys", function() {
+      var obj = new Boolean(false)
+      obj.life = 42
+      assert.throws(function() { Must(obj).be.empty() })
+    })
+  })
+
+  describe("given Number", function() {
+    it("must fail given an zero literal", function() {
+      assert.throws(function() { Must(0).be.empty() })
+    })
+
+    it("must fail given a non-zero literal", function() {
+      assert.throws(function() { Must(1).be.empty() })
+    })
+
+    it("must pass given a zero object", function() {
+      assert.doesNotThrow(function() { Must(new Number).be.empty() })
+    })
+
+    it("must pass given a non-zero object", function() {
+      assert.doesNotThrow(function() { Must(new Number(1)).be.empty() })
+    })
+
+    it("must fail given a non-empty object with keys", function() {
+      var obj = new Number(1)
+      obj.life = 42
+      assert.throws(function() { Must(obj).be.empty() })
+    })
+  })
+
+  describe("given String", function() {
+    it("must pass given an empty literal", function() {
+      assert.doesNotThrow(function() { Must("").be.empty() })
+    })
+
+    it("must fail given a non-empty literal", function() {
+      assert.throws(function() { Must("a").be.empty() })
+    })
+
+    it("must pass given an empty object", function() {
+      assert.doesNotThrow(function() { Must(new String).be.empty() })
+    })
+
+    it("must fail given a non-empty object", function() {
+      assert.throws(function() { Must(new String("a")).be.empty() })
+    })
+  })
+
+  describe("given RegExp", function() {
+    it("must pass given an empty object", function() {
+      assert.doesNotThrow(function() { Must(new RegExp).be.empty() })
+    })
+
+    it("must pass given a non-empty object", function() {
+      assert.doesNotThrow(function() { Must(new RegExp("a")).be.empty() })
+    })
+
+    it("must fail given a non-empty object with keys", function() {
+      var obj = new RegExp("a")
+      obj.life = 42
+      assert.throws(function() { Must(obj).be.empty() })
+    })
+  })
+
+  describe("given Array", function() {
+    it("must pass given an empty literal", function() {
+      assert.doesNotThrow(function() { Must([]).be.empty() })
+    })
+
+    it("must fail given a non-empty literal", function() {
+      assert.throws(function() { Must([1]).be.empty() })
+    })
+  })
+
+  describe("given Object", function() {
+    it("must pass given an empty literal", function() {
+      assert.doesNotThrow(function() { Must({}).be.empty() })
+    })
+
+    it("must fail given a non-empty literal", function() {
+      assert.throws(function() { Must({life: 42}).be.empty() })
+    })
+  })
+
+  describe("given custom instance", function() {
+    function Foo() {}
+    function Bar() { this.life = 42 }
+
+    it("must pass given an empty instance", function() {
+      assert.doesNotThrow(function() { new Foo().must.be.empty() })
+    })
+
+    it("must fail given a non-empty instance", function() {
+      assert.throws(function() { new Bar().must.be.empty() })
+    })
+  })
+
+  mustThrowAssertionError(function() { [1].must.be.empty() }, {
+    actual: [1],
+    message: "[1] must be empty"
+  })
+
+  describe(".not", function() {
+    it("must inverse the assertion", function() {
+      assert.throws(function() { [].must.not.be.empty() })
+    })
+
+    mustThrowAssertionError(function() { [].must.not.be.empty() }, {
+      actual: [],
+      message: "[] must not be empty"
+    })
+  })
+})

@@ -137,6 +137,13 @@ Must.prototype.truthy = function() {
 }
 
 /**
+ * Alias of `truthy`.
+ *
+ * @method ok
+ */
+Must.prototype.ok = Must.prototype.truthy 
+
+/**
  * Assert object is falsy (`!obj`).
  *
  * `0`, `new Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
@@ -172,11 +179,27 @@ function instanceofMessage(expected) {
 Must.prototype.instanceOf = Must.prototype.instanceof 
 
 /**
- * Alias of `truthy`.
+ * Assert that object's is empty.
+ * Checks either the object's `length` for arrays and strings or the count of
+ * (enumrable) keys.
  *
- * @method ok
+ * @method empty
  */
-Must.prototype.ok = Must.prototype.truthy 
+Must.prototype.empty = function() {
+  var length
+  if (Array.isArray(this.actual) || isString(this.actual))
+    length = this.actual.length
+  else if (typeof this.actual == "object")
+    length = Object.keys(this.actual).length
+  else
+    length = 1
+
+  insist.call(this, length === 0, "be empty")
+}
+
+function isString(obj) {
+  return typeof obj == "string" || obj instanceof String
+}
 
 /**
  * Assert object strict equality and identity (`===`).
