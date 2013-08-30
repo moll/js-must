@@ -577,33 +577,9 @@ describe("Must.prototype.instanceof", function() {
     })
   })
 
-  describe("given RegExp", function() {
-    it("must pass given RegExp object", function() {
-      assert.doesNotThrow(function() { Must(new RegExp).be.instanceof(RegExp) })
-    })
-
-    it("must fail given RegExp constructor", function() {
-      assert.throws(function() { RegExp.must.be.instanceof(RegExp) })
-    })
-  })
-
-  describe("given Date", function() {
-    it("must pass given Date object", function() {
-      assert.doesNotThrow(function() { Must(new Date).be.instanceof(Date) })
-    })
-
-    it("must fail given Date constructor", function() {
-      assert.throws(function() { Date.must.be.instanceof(Date) })
-    })
-  })
-
   describe("given Array", function() {
-    it("must pass given array literal", function() {
+    it("must pass given array", function() {
       assert.doesNotThrow(function() { [].must.be.instanceof(Array) })
-    })
-
-    it("must pass given array object and Array", function() {
-      assert.doesNotThrow(function() { new Array().must.be.instanceof(Array) })
     })
 
     it("must fail given Array constructor", function() {
