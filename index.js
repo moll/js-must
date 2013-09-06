@@ -317,6 +317,19 @@ Must.prototype.include = function(expected) {
   insist.call(this, found, "include", expected)
 }
 
+/**
+ * Assert object matches the given regular expression.
+ *
+ * If you pass in a non-RegExp object, it'll be implicitly converted via
+ * `new RegExp(expected)
+ *
+ * @method match
+ */
+Must.prototype.match = function(expected) {
+  var regexp = expected instanceof RegExp ? expected : new RegExp(expected)
+  insist.call(this, regexp.exec(this.actual), "match", expected)
+}
+
 function eql(a, b) {
   if (a === b) return true
   if (a && b && a.constructor !== b.constructor) return false
@@ -392,7 +405,10 @@ function insist(ok, message, expected) {
 }
 
 function inspect(obj) {
-  return JSON.stringify(obj)
+  if (obj instanceof RegExp) return obj.toString()
+
+  // JSON by default ignores keys with undefined values.
+  return JSON.stringify(obj, function(key, value) { return value })
 }
 
 function AssertionError(msg, opts) {

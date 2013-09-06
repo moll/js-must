@@ -1294,7 +1294,7 @@ describe("Must.prototype.include", function() {
     })
   })
 
-  mustThrowAssertionError(function() { [1, 2, 3].must.be.include(42) }, {
+  mustThrowAssertionError(function() { [1, 2, 3].must.include(42) }, {
     actual: [1, 2, 3],
     expected: 42,
     message: "[1,2,3] must include 42"
@@ -1311,6 +1311,72 @@ describe("Must.prototype.include", function() {
       actual: [1, 42, 3],
       expected: 42,
       message: "[1,42,3] must not include 42"
+    })
+  })
+})
+
+describe("Must.prototype.match", function() {
+  describe("given String and RegExp", function() {
+    var literal = "Year 2014 might be like 1984."
+    var object = new String(literal)
+
+    it("must pass if given string literal matches", function() {
+      assert.doesNotThrow(function() { Must(literal).match(/^Year \d+ might/) })
+    })
+
+    it("must fail if given string literal does not match", function() {
+      assert.throws(function() { Must(literal).match(/^\d+ might/) })
+    })
+
+    it("must pass if given string object matches", function() {
+      assert.doesNotThrow(function() { Must(object).match(/^Year \d+ might/) })
+    })
+
+    it("must fail if given string object does not match",
+      function() {
+      assert.throws(function() { Must(object).match(/^\d+ might/) })
+    })
+  })
+
+  describe("given String and String", function() {
+    var literal = "Year 2014 might be like 1984."
+    var object = new String(literal)
+
+    it("must pass if given string literal matches", function() {
+      assert.doesNotThrow(function() {Must(literal).match("^Year \\d+ might")})
+    })
+
+    it("must fail if given string literal does not match", function() {
+      assert.throws(function() { Must(literal).match("^\\d+ might") })
+    })
+
+    it("must pass if given string object matches", function() {
+      assert.doesNotThrow(function() { Must(object).match("^Year \\d+ might") })
+    })
+
+    it("must fail if given string object does not match",
+      function() {
+      assert.throws(function() { Must(object).match("^\\d+ might") })
+    })
+  })
+
+  mustThrowAssertionError(function() { "1984".must.match(/^2014$/) }, {
+    actual: "1984",
+    expected: /^2014$/,
+    message: "\"1984\" must match /^2014$/"
+  })
+
+  describe(".not", function() {
+    function not() { "1984".must.not.match(/^1984$/) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: "1984",
+      expected: /^1984$/,
+      message: "\"1984\" must not match /^1984$/"
     })
   })
 })
