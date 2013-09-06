@@ -1358,6 +1358,12 @@ describe("Must.prototype.match", function() {
       function() {
       assert.throws(function() { Must(object).match("^\\d+ might") })
     })
+
+    mustThrowAssertionError(function() { "1984".must.match("^2014$") }, {
+      actual: "1984",
+      expected: /^2014$/,
+      message: "\"1984\" must match /^2014$/"
+    })
   })
 
   mustThrowAssertionError(function() { "1984".must.match(/^2014$/) }, {

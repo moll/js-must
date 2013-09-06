@@ -327,7 +327,7 @@ Must.prototype.include = function(expected) {
  */
 Must.prototype.match = function(expected) {
   var regexp = expected instanceof RegExp ? expected : new RegExp(expected)
-  insist.call(this, regexp.exec(this.actual), "match", expected)
+  insist.call(this, regexp.exec(this.actual), "match", regexp)
 }
 
 function eql(a, b) {
