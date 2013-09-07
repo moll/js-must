@@ -178,6 +178,10 @@ function mustPassTrue(name, truthy) {
     assert.doesNotThrow(function() { Must(!truthy).be[name] })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { Must(truthy).be[name].call(null) })
+  })
+
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
     actual: !truthy,
     expected: truthy,
@@ -232,6 +236,10 @@ describe("Must.prototype.null", function() {
     assert.doesNotThrow(function() { Must(null).be.null })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { Must(null).be.null.call(null) })
+  })
+
   mustThrowAssertionError(function() { true.must.be.null() }, {
     actual: true,
     expected: null,
@@ -276,6 +284,13 @@ describe("Must.prototype.undefined", function() {
 
   it("must not do anything when not called as a function", function() {
     assert.doesNotThrow(function() { Must(undefined).be.undefined })
+  })
+
+  it("must be bound", function() {
+    // When unbound, the value of actual is most likely to be undefined, so
+    // test with a "not" in this case too.
+    assert.doesNotThrow(function() { Must(undefined).be.undefined.call(null) })
+    assert.throws(function() { Must(null).be.undefined.call(null) })
   })
 
   mustThrowAssertionError(function() { true.must.be.undefined() }, {
@@ -332,6 +347,10 @@ function mustBeType(name, msg, values, inspect) {
 
   if (name != "string") it("must fail given string literal", function() {
     assert.throws(function() { Must("").be[name]() })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { Must(valid).be[name].call(null) })
   })
 
   mustThrowAssertionError(function() { Must(null).be[name]() }, {
@@ -515,6 +534,10 @@ function mustPassTruthy(name, truthy) {
     assert.doesNotThrow(function() { Must(!truthy).be[name] })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { Must(truthy).be[name].call(null) })
+  })
+
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
     actual: !truthy,
     message: !truthy + " must be " + name
@@ -540,7 +563,9 @@ describe("Must.prototype.truthy", function() {
 
 describe("Must.prototype.ok", function() {
   it("must be an alias of Must.prototype.truthy", function() {
-    assert.strictEqual(Must.prototype.ok, Must.prototype.truthy)
+    var a = Object.getOwnPropertyDescriptor(Must.prototype, "ok")
+    var b = Object.getOwnPropertyDescriptor(Must.prototype, "truthy")
+    assert.deepEqual(a, b)
   })
 })
 
@@ -637,6 +662,10 @@ describe("Must.prototype.instanceof", function() {
     })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { [].must.be.instanceof.call(null, Array) })
+  })
+
   mustThrowAssertionError(function() { [].must.be.instanceof(String) }, {
     actual: [],
     expected: String,
@@ -660,7 +689,9 @@ describe("Must.prototype.instanceof", function() {
 
 describe("Must.prototype.instanceOf", function() {
   it("must be an alias of Must.prototype.instanceof", function() {
-    assert.strictEqual(Must.prototype.instanceOf, Must.prototype.instanceof)
+    var a = Object.getOwnPropertyDescriptor(Must.prototype, "instanceOf")
+    var b = Object.getOwnPropertyDescriptor(Must.prototype, "instanceof")
+    assert.deepEqual(a, b)
   })
 })
 
@@ -795,6 +826,10 @@ describe("Must.prototype.equal", function() {
         Must(new Function("foo")).be.equal(new Function("foo")) 
       })
     })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { true.must.equal.call(null, true) })
   })
 
   mustThrowAssertionError(function() { "secret".must.equal(42) }, {
@@ -1056,6 +1091,10 @@ describe("Must.prototype.eql", function() {
     })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { [].must.eql.call(null, []) })
+  })
+
   mustThrowAssertionError(function() { "secret".must.eql(42) }, {
     actual: "secret",
     expected: 42,
@@ -1209,6 +1248,10 @@ describe("Must.prototype.empty", function() {
     })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { [].must.be.empty.call(null) })
+  })
+
   mustThrowAssertionError(function() { [1].must.be.empty() }, {
     actual: [1],
     message: "[1] must be empty"
@@ -1301,6 +1344,10 @@ describe("Must.prototype.include", function() {
     })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { [1, 2, 3].must.include.call(null, 2) })
+  })
+
   mustThrowAssertionError(function() { [1, 2, 3].must.include(42) }, {
     actual: [1, 2, 3],
     expected: 42,
@@ -1373,6 +1420,10 @@ describe("Must.prototype.match", function() {
     })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { "abcd".must.match.call(null, /b/) })
+  })
+
   mustThrowAssertionError(function() { "1984".must.match(/^2014$/) }, {
     actual: "1984",
     expected: /^2014$/,
@@ -1414,6 +1465,12 @@ describe("Must.prototype.throw", function() {
     function fn() { context = this }
     fn.must.not.throw()
     assert.strictEqual(context, global)
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() {
+      !function() { throw 42 }.must.throw.call(null) 
+    })
   })
 
   var noThrower = function() { 42 }

@@ -38,7 +38,7 @@ Must.prototype = {
    * @property a
    */
   get a() {
-    var fn = this.instanceof.bind(this)
+    var fn = this.instanceof
     fn.__proto__ = this
     return fn
   },
@@ -50,7 +50,7 @@ Must.prototype = {
    * @property an
    */
   get an() {
-    var fn = this.instanceof.bind(this)
+    var fn = this.instanceof
     fn.__proto__ = this
     return fn
   },
@@ -62,7 +62,7 @@ Must.prototype = {
    * @method be
    */
   get be() {
-    var fn = this.equal.bind(this)
+    var fn = this.equal
     fn.__proto__ = this
     return fn
   },
@@ -210,13 +210,6 @@ Must.prototype.truthy = function() {
 }
 
 /**
- * Alias of `truthy`.
- *
- * @method ok
- */
-Must.prototype.ok = Must.prototype.truthy 
-
-/**
  * Assert object is falsy (`!obj`).
  *
  * `0`, `new Number(0)`, `false`, `new Boolean(false)`, `null`, `""` and
@@ -243,13 +236,6 @@ function instanceofMessage(expected) {
   var type = expected.displayName || expected.name || inspect(expected)
   return "be an instance of " + type
 }
-
-/**
- * Alias of `instanceof`.
- *
- * @method instanceOf
- */
-Must.prototype.instanceOf = Must.prototype.instanceof 
 
 /**
  * Assert that object's is empty.
@@ -340,6 +326,36 @@ Must.prototype.throw = function() {
   try { this.actual.call(null) } catch (ex) { threw = true; exception = ex }
   insist.call(this, threw, "throw")
 }
+
+// NOTE: Setting up aliases must come after getter wrapping so their
+// properties are equal.
+Object.getOwnPropertyNames(Must.prototype).forEach(function(name) {
+  var props = Object.getOwnPropertyDescriptor(Must.prototype, name)
+  if (props.get || typeof props.value != "function") return
+  var fn = props.value
+
+  Object.defineProperty(Must.prototype, name, {
+    get: function() { return fn.bind(this) },
+    configurable: true,
+    enumrable: true
+  })
+})
+
+/**
+ * Alias of `truthy`.
+ *
+ * @method ok
+ */
+Object.defineProperty(Must.prototype, "ok",
+  Object.getOwnPropertyDescriptor(Must.prototype, "truthy"))
+
+/**
+ * Alias of `instanceof`.
+ *
+ * @method instanceOf
+ */
+Object.defineProperty(Must.prototype, "instanceOf",
+  Object.getOwnPropertyDescriptor(Must.prototype, "instanceof"))
 
 function eql(a, b) {
   if (a === b) return true
