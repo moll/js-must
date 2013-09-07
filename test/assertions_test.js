@@ -126,6 +126,16 @@ describe("Must.prototype.be", function() {
   })
 })
 
+describe("Must.prototype.have", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.have instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { true.must.have.true() })
+  })
+})
+
 describe("Must.prototype.not", function() {
   it("must return an instance of Must", function() {
     assert(true.must.not instanceof Must)

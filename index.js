@@ -62,6 +62,15 @@ Must.prototype = {
   },
 
   /**
+   * Pass-through property for a fluent chain like `[1, 2].must.have.length(2)`.
+   *
+   * @property have
+   */
+  get have() {
+    return this
+  },
+
+  /**
    * Inverse the assertion.
    *
    * @property not
