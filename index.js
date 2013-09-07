@@ -337,7 +337,7 @@ Must.prototype.match = function(expected) {
  */
 Must.prototype.throw = function() {
   var threw, exception
-  try { this.actual() } catch (ex) { threw = true; exception = ex }
+  try { this.actual.call(null) } catch (ex) { threw = true; exception = ex }
   insist.call(this, threw, "throw")
 }
 

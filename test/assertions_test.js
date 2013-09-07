@@ -1409,6 +1409,13 @@ describe("Must.prototype.throw", function() {
     assert.throws(function() { !function() {}.must.throw() })
   })
 
+  it("must invoke function in global context", function() {
+    var context
+    function fn() { context = this }
+    fn.must.not.throw()
+    assert.strictEqual(context, global)
+  })
+
   var noThrower = function() { 42 }
   mustThrowAssertionError(function() { noThrower.must.throw() }, {
     actual: noThrower,
