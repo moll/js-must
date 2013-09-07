@@ -1556,3 +1556,55 @@ describe("Must.prototype.length", function() {
     })
   })
 })
+
+describe("Must.prototype.property", function() {
+  it("must pass if object has property with identical value", function() {
+    assert.doesNotThrow(function() {
+      ({love: 42}).must.have.property("love", 42) 
+    })
+  })
+
+  it("must fail if object has property with equivalent value", function() {
+    assert.throws(function() {
+      ({love: 42}).must.have.property("love", new Number(42)) 
+    })
+  })
+
+  it("must fail if object doesn't have property", function() {
+    assert.throws(function() { ({}).must.have.property("love", 42) })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() {
+      ({love: 42}).must.have.property.call(null, "love", 42) 
+    })
+  })
+
+  it("must fail gracefully if given null", function() {
+    function test() { Must(null).have.property("love", 42) }
+    assert.throws(test, Must.AssertionError)
+  })
+
+  it("must fail gracefully if given undefined", function() {
+    function test() { Must(undefined).have.property("love", 42) }
+    assert.throws(test, Must.AssertionError)
+  })
+
+  mustThrowAssertionError(function() { ({}).must.have.property("love", 42) }, {
+    actual: {},
+    message: "{} must have property \"love\" equal to 42"
+  })
+
+  describe(".not", function() {
+    function not() { ({love: 42}).must.not.have.property("love", 42) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: {love: 42},
+      message: "{\"love\":42} must not have property \"love\" equal to 42"
+    })
+  })
+})

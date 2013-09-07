@@ -339,6 +339,17 @@ Must.prototype.length = function(expected) {
   insist.call(this, this.actual.length == expected, "have length of", expected)
 }
 
+/**
+ * Assert that an object has a property `property` *equal* to `expected`.
+ *
+ * @method property
+ */
+Must.prototype.property = function(property, expected) {
+  var ok = this.actual && this.actual[property] === expected
+  var msg = "have property \"" + property + "\" equal to " + inspect(expected)
+  insist.call(this, ok, msg)
+}
+
 // NOTE: Setting up aliases must come after getter wrapping so their
 // properties are equal.
 Object.getOwnPropertyNames(Must.prototype).forEach(function(name) {
