@@ -1393,3 +1393,39 @@ describe("Must.prototype.match", function() {
     })
   })
 })
+
+describe("Must.prototype.throw", function() {
+  it("must pass if function throws", function() {
+    assert.doesNotThrow(function() { !function() { throw 5 }.must.throw() })
+  })
+
+  it("must pass even if function throws undefined", function() {
+    assert.doesNotThrow(function() {
+      !function() { throw undefined }.must.throw() 
+    })
+  })
+
+  it("must fail if function does not throw", function() {
+    assert.throws(function() { !function() {}.must.throw() })
+  })
+
+  var noThrower = function() { 42 }
+  mustThrowAssertionError(function() { noThrower.must.throw() }, {
+    actual: noThrower,
+    message: "function () { 42 } must throw"
+  })
+
+  describe(".not", function() {
+    function thrower() { throw 42 }
+    function not() { thrower.must.not.throw() }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: thrower,
+      message: "function thrower() { throw 42 } must not throw"
+    })
+  })
+})

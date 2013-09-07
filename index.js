@@ -330,6 +330,17 @@ Must.prototype.match = function(expected) {
   insist.call(this, regexp.exec(this.actual), "match", regexp)
 }
 
+/**
+ * Assert that a function throws.
+ *
+ * @method throw
+ */
+Must.prototype.throw = function() {
+  var threw, exception
+  try { this.actual() } catch (ex) { threw = true; exception = ex }
+  insist.call(this, threw, "throw")
+}
+
 function eql(a, b) {
   if (a === b) return true
   if (a && b && a.constructor !== b.constructor) return false
