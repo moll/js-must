@@ -299,7 +299,7 @@ describe("Must.prototype.undefined", function() {
   })
 })
 
-function mustBeType(name, msg, values) {
+function mustBeType(name, msg, values, inspect) {
   var valid
 
   for (var type in values) !function(value) {
@@ -348,7 +348,7 @@ function mustBeType(name, msg, values) {
 
     mustThrowAssertionError(not, {
       actual: valid,
-      message: JSON.stringify(valid) + " must not " + msg
+      message: inspect + " must not " + msg
     })
   })
 }
@@ -359,35 +359,42 @@ describe("Must.prototype.boolean", function() {
     "false literal": false,
     "true object": new Boolean(true),
     "false object": new Boolean(false)
-  })
+  }, "true")
 })
 
 describe("Must.prototype.number", function() {
-  mustBeType("number", "be a number", {literal: 0, object: new Number})
+  var dump = "0"
+  mustBeType("number", "be a number", {literal: 0, object: new Number}, dump)
 })
 
 describe("Must.prototype.string", function() {
-  mustBeType("string", "be a string", {literal: "", object: new String})
+  var dump = "\"\""
+  mustBeType("string", "be a string", {literal: "", object: new String}, dump)
 })
 
 describe("Must.prototype.regexp", function() {
-  mustBeType("regexp", "be a regular expression", {object: new RegExp})
+  var dump = "/(?:)/"
+  mustBeType("regexp", "be a regular expression", {object: new RegExp}, dump)
 })
 
 describe("Must.prototype.date", function() {
-  mustBeType("date", "be a date", {object: new Date})
+  var dump = "1970-01-01T00:00:00.000Z"
+  mustBeType("date", "be a date", {object: new Date(0)}, dump)
 })
 
 describe("Must.prototype.array", function() {
-  mustBeType("array", "be an array", {literal: [], object: new Array})
+  var dump = "[]"
+  mustBeType("array", "be an array", {literal: [], object: new Array}, dump)
 })
 
 describe("Must.prototype.function", function() {
-  mustBeType("function", "be a function", {object: new Function})
+  var dump = "function () {}"
+  mustBeType("function", "be a function", {object: function() {}}, dump)
 })
 
 describe("Must.prototype.object", function() {
-  mustBeType("object", "be an object", {object: new Object})
+  var dump = "{}"
+  mustBeType("object", "be an object", {object: new Object}, dump)
 })
 
 function mustPassTruthy(name, truthy) {

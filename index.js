@@ -394,7 +394,7 @@ function insist(ok, message, expected) {
   if (!this.negative ? ok : !ok) return
 
   var not = this.negative ? "not " : ""
-  var msg = JSON.stringify(this.actual) + " must " + not
+  var msg = inspect(this.actual) + " must " + not
   msg += typeof message == "function" ? message(expected) : message
   if (typeof message != "function" && arguments.length == 3)
     msg += " " + inspect(expected)
@@ -406,6 +406,8 @@ function insist(ok, message, expected) {
 
 function inspect(obj) {
   if (obj instanceof RegExp) return obj.toString()
+  if (obj instanceof Date) return obj.toISOString()
+  if (typeof obj == "function") return obj.toString()
 
   // JSON by default ignores keys with undefined values.
   return JSON.stringify(obj, function(key, value) { return value })
