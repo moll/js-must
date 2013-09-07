@@ -1510,3 +1510,49 @@ describe("Must.prototype.throw", function() {
     })
   })
 })
+
+describe("Must.prototype.length", function() {
+  describe("given String", function() {
+    it("must pass if length equal", function() {
+      assert.doesNotThrow(function() { "hello".must.have.length(5) })
+    })
+
+    it("must fail if length not equal", function() {
+      assert.throws(function() { "hello".must.have.length(42) })
+    })
+  })
+
+  describe("given Array", function() {
+    it("must pass if length equal", function() {
+      assert.doesNotThrow(function() { [1, 2, 3, 4].must.have.length(4) })
+    })
+
+    it("must fail if length not equal", function() {
+      assert.throws(function() { [1, 2, 3, 4].must.have.length(42) })
+    })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { "hello".must.have.length.call(null, 5) })
+  })
+
+  mustThrowAssertionError(function() { "hello".must.have.length(42) }, {
+    actual: "hello",
+    expected: 42,
+    message: "\"hello\" must have length of 42"
+  })
+
+  describe(".not", function() {
+    function not() { "hello".must.not.have.length(5) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: "hello",
+      expected: 5,
+      message: "\"hello\" must not have length of 5"
+    })
+  })
+})

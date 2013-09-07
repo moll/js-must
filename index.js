@@ -330,6 +330,15 @@ Must.prototype.throw = function() {
   insist.call(this, threw, "throw")
 }
 
+/**
+ * Assert that an object has a length property equal to `expected`.
+ *
+ * @method length
+ */
+Must.prototype.length = function(expected) {
+  insist.call(this, this.actual.length == expected, "have length of", expected)
+}
+
 // NOTE: Setting up aliases must come after getter wrapping so their
 // properties are equal.
 Object.getOwnPropertyNames(Must.prototype).forEach(function(name) {
