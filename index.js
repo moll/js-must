@@ -38,9 +38,7 @@ Must.prototype = {
    * @property a
    */
   get a() {
-    var fn = this.instanceof
-    fn.__proto__ = this
-    return fn
+    return chain.call(this, this.instanceof)
   },
 
 /**
@@ -50,9 +48,7 @@ Must.prototype = {
    * @property an
    */
   get an() {
-    var fn = this.instanceof
-    fn.__proto__ = this
-    return fn
+    return chain.call(this, this.instanceof)
   },
 
   /**
@@ -62,9 +58,7 @@ Must.prototype = {
    * @method be
    */
   get be() {
-    var fn = this.equal
-    fn.__proto__ = this
-    return fn
+    return chain.call(this, this.equal)
   },
 
   /**
@@ -402,6 +396,16 @@ function eql(a, b) {
       else
         return false
   }
+}
+
+function chain(fn) {
+  fn.apply = fn.apply
+  fn.bind = fn.bind
+  fn.call = fn.call
+  fn.name = fn.name
+  fn.toString = fn.toString
+  fn.__proto__ = this
+  return fn
 }
 
 function unbox(obj) {

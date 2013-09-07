@@ -40,6 +40,10 @@ function mustPassA(name) {
     assert.throws(function() { /a/.must.be[name](Array) })
   })
 
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { [].must.be[name].call(null, Array) })
+  })
+
   mustThrowAssertionError(function() { "".must.be[name](Array) }, {
     actual: "",
     expected: Array,
@@ -91,6 +95,10 @@ describe("Must.prototype.be", function() {
 
     assert.doesNotThrow(function() { var obj = {}; obj.must.be(obj) })
     assert.throws(function() { ({}).must.be({}) })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { (42).must.be.call(null, 42) })
   })
 
   mustThrowAssertionError(function() { true.must.be(42) }, {
