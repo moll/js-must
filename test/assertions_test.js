@@ -25,36 +25,6 @@ function mustThrowAssertionError(test, props) {
   })
 }
 
-describe("Must.prototype.not", function() {
-  it("must return an instance of Must", function() {
-    assert(true.must.not instanceof Must)
-  })
-
-  it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { false.must.not.equal(true) })
-  })
-
-  it("must invert condition each time", function() {
-    assert.doesNotThrow(function() { true.must.not.not.equal(true) })
-  })
-
-  it("must return a new instance of Must", function() {
-    var must = true.must
-    assert.notStrictEqual(must.not, must)
-  })
-})
-
-describe("Must.prototype.to", function() {
-  it("must return an instance of Must", function() {
-    assert(true.must.to instanceof Must)
-  })
-
-  it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { true.must.to.true() })
-  })
-})
-
-
 // Can't test an alias because getter functions apparently aren't aliased.
 function mustPassA(name) {
   it("must return an instance of Must", function() {
@@ -145,6 +115,35 @@ describe("Must.prototype.be", function() {
       expected: true,
       message: "true must not equal true"
     })
+  })
+})
+
+describe("Must.prototype.not", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.not instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { false.must.not.equal(true) })
+  })
+
+  it("must invert condition each time", function() {
+    assert.doesNotThrow(function() { true.must.not.not.equal(true) })
+  })
+
+  it("must return a new instance of Must", function() {
+    var must = true.must
+    assert.notStrictEqual(must.not, must)
+  })
+})
+
+describe("Must.prototype.to", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.to instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { true.must.to.true() })
   })
 })
 
