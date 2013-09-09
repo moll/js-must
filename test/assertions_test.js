@@ -1860,6 +1860,11 @@ describe(".prototype.frozen", function() {
     assert.doesNotThrow(function() { frozen.must.be.frozen.call() })
   })
 
+  mustThrowAssertionError(function() { ({}).must.be.frozen() }, {
+    actual: {},
+    message: "{} must be frozen"
+  })
+
   describe(".not", function() {
     function not() { Object.freeze({}).must.not.be.frozen() }
 
