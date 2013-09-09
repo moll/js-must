@@ -590,6 +590,50 @@ describe("Must.prototype.falsy", function() {
   mustPassTruthy("falsy", false)
 })
 
+describe("Must.prototype.exist", function() {
+  it("must fail if null", function() {
+    assert.throws(function() { Must(null).exist() })
+  })
+
+  it("must fail if undefined", function() {
+    assert.throws(function() { Must(undefined).exist() })
+  })
+
+  it("must pass if true", function() {
+    assert.doesNotThrow(function() { Must(true).exist() })
+  })
+
+  it("must pass if false", function() {
+    assert.doesNotThrow(function() { Must(false).exist() })
+  })
+
+  it("must pass if an object", function() {
+    assert.doesNotThrow(function() { Must({}).exist() })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { true.must.exist.call() })
+  })
+
+  mustThrowAssertionError(function() { Must(null).exist() }, {
+    actual: null,
+    message: "null must exist"
+  })
+
+  describe(".not", function() {
+    function not() { true.must.not.exist() }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: true,
+      message: "true must not exist"
+    })
+  })
+})
+
 describe("Must.prototype.instanceof", function() {
   describe("given Boolean", function() {
     it("must fail given boolean literal", function() {
