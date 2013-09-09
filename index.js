@@ -1,4 +1,5 @@
 var unbox = require("./lib/unbox")
+module.exports = Must
 
 /**
  * Main object on which each assertion function is attached to.
@@ -9,7 +10,7 @@ var unbox = require("./lib/unbox")
  * @constructor
  * @param obj The object or value you're asserting.
  */
-var Must = module.exports = function(actual) {
+function Must(actual) {
   if (!(this instanceof Must)) return new Must(actual)
   this.actual = actual
 }
