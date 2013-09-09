@@ -1463,18 +1463,154 @@ describe("Must.prototype.match", function() {
 })
 
 describe("Must.prototype.throw", function() {
-  it("must pass if function throws", function() {
-    assert.doesNotThrow(function() { !function() { throw 5 }.must.throw() })
-  })
+  describe("given nothing", function() {
+    it("must pass if function throws", function() {
+      assert.doesNotThrow(function() { !function() { throw 5 }.must.throw() })
+    })
 
-  it("must pass even if function throws undefined", function() {
-    assert.doesNotThrow(function() {
-      !function() { throw undefined }.must.throw() 
+    it("must pass even if function throws undefined", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw undefined }.must.throw() 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw() })
     })
   })
 
-  it("must fail if function does not throw", function() {
-    assert.throws(function() { !function() {}.must.throw() })
+  describe("given String", function() {
+    it("must pass if function throws with identical message", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw new Error("Oh no!") }.must.throw("Oh no!") 
+      })
+    })
+
+    it("must fail if function throws with part of identical message",
+      function() {
+      assert.throws(function() {
+        !function() { throw new Error("Oh no!") }.must.throw("Oh no") 
+      })
+    })
+
+    it("must fail if function throws with unequivalent message", function() {
+      assert.throws(function() {
+        !function() { throw new Error("Oh yes!") }.must.throw("Oh no!") 
+      })
+    })
+
+    it("must pass if function throws an identical string", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw "Oh no!" }.must.throw("Oh no!") 
+      })
+    })
+
+    it("must fail if function throws with part of identical string",
+      function() {
+      assert.throws(function() {
+        !function() { throw "Oh no!" }.must.throw("Oh no") 
+      })
+    })
+
+    it("must fail if function throws an equivalent string", function() {
+      assert.throws(function() { !function() { throw 42 }.must.throw("42") })
+    })
+
+    it("must fail if function throws an unequivalent string", function() {
+      assert.throws(function() {
+        !function() { throw "Oh yes!" }.must.throw("Oh no!") 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw("Oh no!") })
+    })
+  })
+
+  describe("given RegExp", function() {
+    it("must pass if function throws with matching message", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw new Error("Oh no!") }.must.throw(/no!/) 
+      })
+    })
+
+    it("must fail if function throws with unmatching message", function() {
+      assert.throws(function() {
+        !function() { throw new Error("Oh yes!") }.must.throw(/no!/) 
+      })
+    })
+
+    it("must pass if function throws an matching string", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw "Oh no!" }.must.throw(/no!/) 
+      })
+    })
+
+    it("must fail if function throws an unmatching string", function() {
+      assert.throws(function() {
+        !function() { throw "Oh yes!" }.must.throw(/no!/) 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw(/no!/) })
+    })
+  })
+
+  describe("given Function", function() {
+    function MyError() {}
+
+    it("must pass if function throws instance of function", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw new MyError }.must.throw(MyError) 
+      })
+    })
+
+    it("must fail if function throws instance of other function", function() {
+      assert.throws(function() {
+        !function() { throw new Error }.must.throw(MyError) 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw(MyError) })
+    })
+  })
+
+  describe("given null", function() {
+    it("must pass if function throws null", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw null }.must.throw(null) 
+      })
+    })
+
+    it("must fail if function throws undefined", function() {
+      assert.throws(function() {
+        !function() { throw undefined }.must.throw(null) 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw(null) })
+    })
+  })
+
+  describe("given undefined", function() {
+    it("must pass if function throws undefined", function() {
+      assert.doesNotThrow(function() {
+        !function() { throw undefined }.must.throw(undefined) 
+      })
+    })
+
+    it("must fail if function throws null", function() {
+      assert.throws(function() {
+        !function() { throw null }.must.throw(undefined) 
+      })
+    })
+
+    it("must fail if function does not throw", function() {
+      assert.throws(function() { !function() {}.must.throw(undefined) })
+    })
   })
 
   it("must invoke function in global context", function() {
@@ -1507,6 +1643,15 @@ describe("Must.prototype.throw", function() {
     mustThrowAssertionError(not, {
       actual: thrower,
       message: "function thrower() { throw 42 } must not throw"
+    })
+  })
+
+  describe("given anything", function() {
+    var thrower = function() { throw "Nope!" }
+    mustThrowAssertionError(function() { thrower.must.throw("Oh no!") }, {
+      actual: thrower,
+      expected: "Oh no!",
+      message: "function () { throw \"Nope!\" } must throw \"Oh no!\""
     })
   })
 })
