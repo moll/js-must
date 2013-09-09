@@ -20,4 +20,8 @@ describe("AssertionError", function() {
     var error = new AssertionError
     for (var key in error) assert.notEqual(key, "constructor")
   })
+
+  it("must have name on constructor", function() {
+    assert.strictEqual(AssertionError.name, "AssertionError")
+  })
 })

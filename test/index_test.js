@@ -20,6 +20,10 @@ describe("Must", function() {
     var must = new Must
     for (var key in must) assert.notEqual(key, "constructor")
   })
+
+  it("must have name on constructor", function() {
+    assert.strictEqual(Must.name, "Must")
+  })
 })
 
 describe("Object.prototype.must", function() {
