@@ -1753,3 +1753,31 @@ describe("Must.prototype.property", function() {
     })
   })
 })
+
+describe(".prototype.frozen", function() {
+  it("must pass if object is frozen", function() {
+    assert.doesNotThrow(function() { Object.freeze({}).must.be.frozen() })
+  })
+
+  it("must fail if object is thawed", function() {
+    assert.throws(function() { ({}).must.be.frozen() })
+  })
+
+  it("must be bound", function() {
+    var frozen = Object.freeze({})
+    assert.doesNotThrow(function() { frozen.must.be.frozen.call(null) })
+  })
+
+  describe(".not", function() {
+    function not() { Object.freeze({}).must.not.be.frozen() }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: {},
+      message: "{} must not be frozen"
+    })
+  })
+})
