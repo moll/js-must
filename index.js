@@ -1,3 +1,5 @@
+var Assertions = require("./lib/assertions")
+var AssertionError = require("./lib/assertion_error")
 var unbox = require("./lib/unbox")
 module.exports = Must
 
@@ -15,10 +17,16 @@ function Must(actual) {
   this.actual = actual
 }
 
-// Export Must before requiring assertions, because assertions atm. reference
-// Must for cloning.
-Must.prototype = require("./lib/assertions")
-Must.AssertionError = require("./lib/assertion_error")
+Must.prototype = Assertions
+
+Object.defineProperty(Must.prototype, "constructor", {
+  value: Must,
+  enumerable: false,
+  writable: true,
+  configurable: true
+})
+
+Must.AssertionError = AssertionError
 
 Object.defineProperty(Object.prototype, "must", {
   get: function() { return new Must(unbox(this)) },

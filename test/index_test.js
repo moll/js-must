@@ -11,6 +11,15 @@ describe("Must", function() {
   it("must return an instance of itself when called as a function", function() {
     assert(Must() instanceof Must)
   })
+
+  it("must have a constructor property", function() {
+    assert.strictEqual(new Must().constructor, Must)
+  })
+
+  it("must have constructor as non-enumerable property", function() {
+    var must = new Must
+    for (var key in must) assert.notEqual(key, "constructor")
+  })
 })
 
 describe("Object.prototype.must", function() {
