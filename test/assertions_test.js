@@ -196,7 +196,7 @@ function mustPassTrue(name, truthy) {
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { Must(truthy).be[name].call(null) })
+    assert.doesNotThrow(function() { Must(truthy).be[name].call() })
   })
 
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
@@ -254,7 +254,7 @@ describe("Must.prototype.null", function() {
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { Must(null).be.null.call(null) })
+    assert.doesNotThrow(function() { Must(null).be.null.call() })
   })
 
   mustThrowAssertionError(function() { true.must.be.null() }, {
@@ -306,8 +306,8 @@ describe("Must.prototype.undefined", function() {
   it("must be bound", function() {
     // When unbound, the value of actual is most likely to be undefined, so
     // test with a "not" in this case too.
-    assert.doesNotThrow(function() { Must(undefined).be.undefined.call(null) })
-    assert.throws(function() { Must(null).be.undefined.call(null) })
+    assert.doesNotThrow(function() { Must(undefined).be.undefined.call() })
+    assert.throws(function() { Must(null).be.undefined.call() })
   })
 
   mustThrowAssertionError(function() { true.must.be.undefined() }, {
@@ -367,7 +367,7 @@ function mustBeType(name, msg, values, inspect) {
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { Must(valid).be[name].call(null) })
+    assert.doesNotThrow(function() { Must(valid).be[name].call() })
   })
 
   mustThrowAssertionError(function() { Must(null).be[name]() }, {
@@ -552,7 +552,7 @@ function mustPassTruthy(name, truthy) {
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { Must(truthy).be[name].call(null) })
+    assert.doesNotThrow(function() { Must(truthy).be[name].call() })
   })
 
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
@@ -1266,7 +1266,7 @@ describe("Must.prototype.empty", function() {
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { [].must.be.empty.call(null) })
+    assert.doesNotThrow(function() { [].must.be.empty.call() })
   })
 
   mustThrowAssertionError(function() { [1].must.be.empty() }, {
@@ -1622,7 +1622,7 @@ describe("Must.prototype.throw", function() {
 
   it("must be bound", function() {
     assert.doesNotThrow(function() {
-      !function() { throw 42 }.must.throw.call(null) 
+      !function() { throw 42 }.must.throw.call() 
     })
   })
 
@@ -1813,7 +1813,7 @@ describe(".prototype.frozen", function() {
 
   it("must be bound", function() {
     var frozen = Object.freeze({})
-    assert.doesNotThrow(function() { frozen.must.be.frozen.call(null) })
+    assert.doesNotThrow(function() { frozen.must.be.frozen.call() })
   })
 
   describe(".not", function() {
