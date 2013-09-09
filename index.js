@@ -1,3 +1,5 @@
+var AssertionError = require("./lib/assertion_error")
+
 /**
  * Main object on which each assertion function is attached to.
  *
@@ -472,27 +474,3 @@ function inspect(obj) {
   // JSON by default ignores keys with undefined values.
   return JSON.stringify(obj, function(key, value) { return value })
 }
-
-function AssertionError(msg, opts) {
-  this.message = msg
-  if (opts && "actual" in opts) this.actual = opts.actual
-  if (opts && "expected" in opts) this.expected = opts.expected
-  Error.captureStackTrace(this, opts && opts.caller || arguments.callee.caller)
-}
-
-/**
- * Error object thrown when an assertion fails.
- *
- * @class AssertionError
- * @constructor
- */
-AssertionError.prototype = Object.create(Error.prototype, {
-  constructor: {
-    value: AssertionError,
-    enumerable: false,
-    writable: true,
-    configurable: true
-  }
-})
-
-AssertionError.prototype.name = "AssertionError"
