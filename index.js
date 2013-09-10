@@ -21,7 +21,6 @@ Must.prototype = Assertions
 
 Object.defineProperty(Must.prototype, "constructor", {
   value: Must,
-  enumerable: false,
   writable: true,
   configurable: true
 })
