@@ -42,10 +42,14 @@ describe("Object.prototype.must", function() {
     assert(!true.must)
   })
 
-  it("must allow setting", function() {
+  it("must be non-enumerable", function() {
+    for (var key in this) assert.notEqual(key, "must")
+  })
+
+  it("must be writable", function() {
     var obj = {}
     obj.must = 42
-    assert.equal(obj.must, 42)
+    assert.strictEqual(obj.must, 42)
   })
 
   describe("when called on", function() {

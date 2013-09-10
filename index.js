@@ -33,9 +33,9 @@ Object.defineProperty(Object.prototype, "must", {
   set: function(value) {
     Object.defineProperty(this, "must", {
       value: value,
-      writable: true,
       configurable: true,
-      enumrable: true
+      enumrable: true,
+      writable: true
     })
   },
 
