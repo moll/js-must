@@ -21,6 +21,11 @@ describe("AssertionError", function() {
   })
 
   describe("new", function() {
+    it("must be an instance of AssertionError", function() {
+      var error = new AssertionError("foo")
+      assert(error instanceof AssertionError)
+    })
+
     it("must be an instance of Error", function() {
       var error = new AssertionError("foo")
       assert(error instanceof Error)
