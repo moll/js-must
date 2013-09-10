@@ -4,10 +4,6 @@ var Must = require("..")
 var Path = require("path")
 
 describe("Must", function() {
-  it("must be instantiatable", function() {
-    assert(new Must instanceof Must)
-  })
-
   it("must return an instance of itself when called as a function", function() {
     assert(Must() instanceof Must)
   })
@@ -16,13 +12,19 @@ describe("Must", function() {
     assert.strictEqual(new Must().constructor, Must)
   })
 
-  it("must have constructor as non-enumerable property", function() {
+  it("must have constructor as a non-enumerable property", function() {
     var must = new Must
     for (var key in must) assert.notEqual(key, "constructor")
   })
 
-  it("must have name on constructor", function() {
+  it("must have name", function() {
     assert.strictEqual(Must.name, "Must")
+  })
+
+  describe("new", function() {
+    it("must return an instance of Must", function() {
+      assert(new Must instanceof Must)
+    })
   })
 })
 
@@ -103,14 +105,14 @@ describe("Global.must", function() {
     assert(must instanceof Must)
   })
 
-  it("must be settable to the must function", function() {
-    global.must = Must
-    assert(typeof must == "function")
+  it("must be writable", function() {
+    global.must = 42
+    assert.strictEqual(must, 42)
   })
 
-  it("must be settable to 42", function() {
-    global.must = 42
-    assert.equal(must, 42)
+  it("must be writable to Must", function() {
+    global.must = Must
+    assert.strictEqual(must, Must)
   })
 
   afterEach(function() {
