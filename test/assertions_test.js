@@ -1846,24 +1846,24 @@ describe("Must.prototype.property", function() {
   })
 })
 
-describe(".prototype.enumerableProperty", function() {
+describe(".prototype.enumerable", function() {
   it("must pass if property is enumerable", function() {
     var obj = {love: true}
-    assert.doesNotThrow(function() { obj.must.have.enumerableProperty("love") })
+    assert.doesNotThrow(function() { obj.must.have.enumerable("love") })
   })
 
   it("must pass if inherited property is enumerable", function() {
     function EnumerateThis() {}
     EnumerateThis.prototype.love = 69
     var obj = new EnumerateThis
-    assert.doesNotThrow(function() { obj.must.have.enumerableProperty("love") })
+    assert.doesNotThrow(function() { obj.must.have.enumerable("love") })
   })
   
   it("must fail if property is not enumrable", function() {
     var obj = Object.create(Object.prototype, {
       love: {value: 69, enumerable: false},
     })
-    assert.throws(function() { obj.must.have.enumerableProperty("love") })
+    assert.throws(function() { obj.must.have.enumerable("love") })
   })
   
   it("must fail if inherited property is not enumerable", function() {
@@ -1872,36 +1872,36 @@ describe(".prototype.enumerableProperty", function() {
       love: {value: 69, enumerable: false},
     })
 
-    assert.throws(function() { obj.must.have.enumerableProperty("love") })
+    assert.throws(function() { obj.must.have.enumerable("love") })
   })
 
   it("must fail if property does not exist", function() {
     var obj = {}
-    assert.throws(function() { obj.must.have.enumerableProperty("love") })
+    assert.throws(function() { obj.must.have.enumerable("love") })
   })
 
   it("must pass if object has property named \"propertyIsEnumerable\"",
     function() {
     var obj = {propertyIsEnumerable: false}
     assert.doesNotThrow(function() {
-      obj.must.have.enumerableProperty("propertyIsEnumerable") 
+      obj.must.have.enumerable("propertyIsEnumerable") 
     })
   })
 
   it("must fail gracefully if null", function() {
-    function test() { Must(null).have.enumerableProperty("love") }
+    function test() { Must(null).have.enumerable("love") }
     assert.throws(test, Must.AssertionError)
   })
 
   it("must fail gracefully if undefined", function() {
-    function test() { Must(undefined).have.enumerableProperty("love") }
+    function test() { Must(undefined).have.enumerable("love") }
     assert.throws(test, Must.AssertionError)
   })
 
   it("must be bound", function() {
     var obj = {love: true}
     assert.doesNotThrow(function() {
-      obj.must.have.enumerableProperty.call(null, "love") 
+      obj.must.have.enumerable.call(null, "love") 
     })
   })
 
@@ -1911,14 +1911,14 @@ describe(".prototype.enumerableProperty", function() {
   })
 
   mustThrowAssertionError(function() {
-    enumerables.must.have.enumerableProperty("love") 
+    enumerables.must.have.enumerable("love") 
   }, {
     actual: {life: 42},
     message: "{\"life\":42} must have enumerable property \"love\""
   })
 
   describe(".not", function() {
-    function not() { enumerables.must.not.have.enumerableProperty("life") }
+    function not() { enumerables.must.not.have.enumerable("life") }
 
     it("must invert the assertion", function() {
       assert.throws(not)
