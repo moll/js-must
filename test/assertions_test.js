@@ -426,6 +426,12 @@ describe("Must.prototype.array", function() {
 describe("Must.prototype.function", function() {
   var dump = "function () {}"
   mustBeType("function", "be a function", {object: function() {}}, dump)
+
+  it("must pass given a function with changed __proto__", function() {
+    function fn() {}
+    fn.__proto__ = {}
+    assert.doesNotThrow(function() { fn.must.be.function() })
+  })
 })
 
 describe("Must.prototype.object", function() {
