@@ -1752,43 +1752,54 @@ describe("Must.prototype.length", function() {
   })
 })
 
-describe("Must.prototype.property", function() {
+function mustPassProperty(name, inheritable) {
+  var pass = inheritable ? "pass" : "fail"
+  var fail = inheritable ? "fail" : "pass"
+  var throws = inheritable ? assert.throws : assert.doesNotThrow
+  var doesNotThrow = inheritable ? assert.doesNotThrow : assert.throws
+  var errName = name.replace(/[A-Z]/, function(l) {return " "+l.toLowerCase()})
+
   describe("given name", function() {
     it("must pass if object has property", function() {
-      assert.doesNotThrow(function() { ({love: 7}).must.have.property("love") })
+      assert.doesNotThrow(function() { ({love: 69}).must.have[name]("love") })
     })
 
-    it("must pass if object has inherited property", function() {
-      function Foo() {}
-      Foo.prototype.love = undefined
-      assert.doesNotThrow(function() { new Foo().must.have.property("love") })
+    it("must "+pass+" if object has inherited property", function() {
+      var obj = Object.create({love: 69})
+      doesNotThrow(function() { obj.must.have[name]("love") })
     })
 
     it("must fail if object doesn't have property", function() {
-      assert.throws(function() { ({}).must.have.property("love") })
+      assert.throws(function() { ({}).must.have[name]("love") })
     })
 
-    it("must pass if undefined", function() {
+    it("must pass if object has property as undefined", function() {
       assert.doesNotThrow(function() {
-        ({love: undefined}).must.have.property("love") 
+        ({love: undefined}).must.have[name]("love") 
       })
     })
 
-    mustThrowAssertionError(function() { Must({}).have.property("love") }, {
+    it("must "+pass+" if object has inherited property as undefined",
+      function() {
+      var obj = Object.create({love: undefined})
+      doesNotThrow(function() { obj.must.have[name]("love") })
+    })
+
+    mustThrowAssertionError(function() { Must({}).have[name]("love") }, {
       actual: {},
-      message: "{} must have property \"love\""
+      message: "{} must have "+errName+" \"love\""
     })
 
     describe(".not", function() {
-      function not() { ({love: 42}).must.not.have.property("love") }
+      function not() { ({love: 69}).must.not.have[name]("love") }
 
       it("must invert the assertion", function() {
         assert.throws(not)
       })
 
       mustThrowAssertionError(not, {
-        actual: {love: 42},
-        message: "{\"love\":42} must not have property \"love\""
+        actual: {love: 69},
+        message: "{\"love\":69} must not have "+errName+" \"love\""
       })
     })
   })
@@ -1796,58 +1807,84 @@ describe("Must.prototype.property", function() {
   describe("given name and value", function() {
     it("must pass if object has property with identical value", function() {
       assert.doesNotThrow(function() {
-        ({love: 42}).must.have.property("love", 42) 
+        ({love: 69}).must.have[name]("love", 69) 
       })
+    })
+
+    it("must "+pass+" if object has inherited property with identical value",
+      function() {
+      var obj = Object.create({love: 69})
+      doesNotThrow(function() { obj.must.have[name]("love", 69) })
+    })
+
+    it("must fail if object doesn't have property", function() {
+      assert.throws(function() { ({}).must.have[name]("love", 69) })
     })
 
     it("must fail if object has property with equivalent value", function() {
       assert.throws(function() {
-        ({love: 42}).must.have.property("love", new Number(42)) 
+        ({love: 69}).must.have[name]("love", new Number(69)) 
       })
     })
 
-    it("must fail if object doesn't have property", function() {
-      assert.throws(function() { ({}).must.have.property("love", 42) })
-    })
-
-    it("must pass if value undefined", function() {
+    it("must pass if object has property asserted undefined", function() {
       assert.doesNotThrow(function() {
-        ({love: undefined}).must.have.property("love", undefined) 
+        ({love: undefined}).must.have[name]("love", undefined) 
       })
     })
 
-    mustThrowAssertionError(function() { Must({}).have.property("love", 42) }, {
+    it("must "+pass+" if object has inherited property asserted undefined",
+      function() {
+      var obj = Object.create({love: undefined})
+      doesNotThrow(function() { obj.must.have[name]("love", undefined) })
+    })
+
+    mustThrowAssertionError(function() { Must({}).have[name]("love", 69) }, {
       actual: {},
-      message: "{} must have property \"love\" equal to 42"
+      message: "{} must have "+errName+" \"love\" equal to 69"
     })
 
     describe(".not", function() {
-      function not() { ({love: 42}).must.not.have.property("love", 42) }
+      function not() { ({love: 69}).must.not.have[name]("love", 69) }
 
       it("must invert the assertion", function() {
         assert.throws(not)
       })
 
       mustThrowAssertionError(not, {
-        actual: {love: 42},
-        message: "{\"love\":42} must not have property \"love\" equal to 42"
+        actual: {love: 69},
+        message: "{\"love\":69} must not have "+errName+" \"love\" equal to 69"
       })
     })
   })
 
   it("must fail gracefully if null", function() {
-    function test() { Must(null).have.property("love") }
+    function test() { Must(null).have[name]("love") }
     assert.throws(test, Must.AssertionError)
   })
 
   it("must fail gracefully if undefined", function() {
-    function test() { Must(undefined).have.property("love") }
+    function test() { Must(undefined).have[name]("love") }
     assert.throws(test, Must.AssertionError)
   })
 
   it("must be bound", function() {
     assert.doesNotThrow(function() {
-      ({love: 42}).must.have.property.call(null, "love") 
+      ({love: 69}).must.have[name].call(null, "love") 
+    })
+  })
+}
+
+describe("Must.prototype.property", function() {
+  mustPassProperty("property", true)
+})
+
+describe(".prototype.ownProperty", function() {
+  mustPassProperty("ownProperty", false)
+
+  it("must pass if object has property named hasOwnProperty", function() {
+    assert.doesNotThrow(function() {
+      ({hasOwnProperty: false}).must.have.ownProperty("hasOwnProperty") 
     })
   })
 })
