@@ -7,14 +7,14 @@ function mustThrowAssertionError(test, props) {
       assert.throws(test, Must.AssertionError)
     })
 
-    it("must have properties", function() {
+    it("must have all properties", function() {
       try { test() }
       catch (ex) {
         assert.deepEqual(ex, props)
       }
     })
 
-    it("must have stack trace", function() {
+    it("must have correct stack trace", function() {
       try { test() }
       catch (ex) {
         var stack = ex.stack.split("\n")
