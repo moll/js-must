@@ -1,6 +1,5 @@
 var Assertions = require("./lib/assertions")
 var AssertionError = require("./lib/assertion_error")
-var unbox = require("./lib/unbox")
 module.exports = Must
 
 /**
@@ -42,3 +41,13 @@ Object.defineProperty(Object.prototype, "must", {
   // Without configurable, can't redefine it when reloading this file, e.g.
   configurable: true
 })
+
+function unbox(obj) {
+  // No need to worry about values from other contexts because they won't have
+  // the global "must" property on their objects in the first place. And if
+  // they did, their context would have its own unbox function with correct
+  // references.
+  return obj instanceof Boolean ||
+         obj instanceof String ||
+         obj instanceof Number  ? obj.valueOf() : obj
+}
