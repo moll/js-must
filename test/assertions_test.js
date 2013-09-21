@@ -175,20 +175,34 @@ function mustPassTrue(name, truthy) {
     doesNotThrow(function() { Must(true).be[name]() })
   })
 
-  it("must fail given true object", function() {
-    assert.throws(function() { Must(new Boolean(true)).be[name]() })
+  it("must "+pass+" given true object", function() {
+    doesNotThrow(function() { Must(new Boolean(true)).be[name]() })
   })
 
   it("must "+fail+" given false literal", function() {
     throws(function() { Must(false).be[name]() })
   })
 
-  it("must fail given false object", function() {
-    assert.throws(function() { Must(new Boolean(false)).be[name]() })
+  it("must "+fail+" given false object", function() {
+    throws(function() { Must(new Boolean(false)).be[name]() })
+  })
+
+  it("must fail gracefully if null", function() {
+    function test() { Must(null).be[name]() }
+    assert.throws(test, Must.AssertionError)
+  })
+
+  it("must fail gracefully if undefined", function() {
+    function test() { Must(undefined).be[name]() }
+    assert.throws(test, Must.AssertionError)
   })
 
   it("must fail given zero number literal", function() {
     assert.throws(function() { Must(0).be[name]() })
+  })
+
+  it("must fail given an empty string", function() {
+    assert.throws(function() { Must("").be[name]() })
   })
 
   it("must not do anything when not called as a function", function() {
