@@ -3,13 +3,28 @@ var AssertionError = require("./lib/assertion_error")
 module.exports = Must
 
 /**
- * Main object on which each assertion function is attached to.
+ * The main class that wraps the asserted object and that you call matchers on.
+ * 
+ * Most of the time you'll be using
+ * [`Object.prototype.must`](#Object.prototype.must) to create this wrapper, but
+ * occasionally you might want to assert `null`s or `undefined`s and in those
+ * cases assigning `Must` to something like `expect` or `demand` works nicely.
  *
- * If you wish to add your own matchers, just add them to `Must.prototype`.
+ * **Examples**:
+ * ```javascript
+ * true.must.be.true()
+ * [].must.be.empty()
+ *
+ * var expect = require("must")
+ * expect(null).be.null()
+ *
+ * var demand = require("must")
+ * demand(undefined).be.undefined()
+ * ```
  *
  * @class Must
  * @constructor
- * @param obj The object or value you're asserting.
+ * @param actual
  */
 function Must(actual) {
   if (!(this instanceof Must)) return new Must(actual)

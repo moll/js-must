@@ -1,0 +1,495 @@
+Table of Contents
+-----------------
+### [Must](#Must)
+- [a](#Must.prototype.a)(class)
+- [an](#Must.prototype.an)(class)
+- [be](#Must.prototype.be)(expected)
+- [have](#Must.prototype.have)
+- [not](#Must.prototype.not)
+- [to](#Must.prototype.to)
+- [true](#Must.prototype.true)()
+- [false](#Must.prototype.false)()
+- [null](#Must.prototype.null)()
+- [undefined](#Must.prototype.undefined)()
+- [boolean](#Must.prototype.boolean)()
+- [number](#Must.prototype.number)()
+- [string](#Must.prototype.string)()
+- [date](#Must.prototype.date)()
+- [regexp](#Must.prototype.regexp)()
+- [array](#Must.prototype.array)()
+- [function](#Must.prototype.function)()
+- [object](#Must.prototype.object)()
+- [truthy](#Must.prototype.truthy)()
+- [falsy](#Must.prototype.falsy)()
+- [exist](#Must.prototype.exist)()
+- [instanceof](#Must.prototype.instanceof)(expected)
+- [empty](#Must.prototype.empty)()
+- [equal](#Must.prototype.equal)(expected)
+- [eql](#Must.prototype.eql)(expected)
+- [include](#Must.prototype.include)(expected)
+- [match](#Must.prototype.match)(regexp)
+- [throw](#Must.prototype.throw)([expected])
+- [length](#Must.prototype.length)(expected)
+- [frozen](#Must.prototype.frozen)()
+- [property](#Must.prototype.property)(property, [value])
+- [ownProperty](#Must.prototype.ownProperty)(property, [value])
+- [enumerable](#Must.prototype.enumerable)(property)
+- [nonenumerable](#Must.prototype.nonenumerable)(property)
+- [ok](#Must.prototype.ok)()
+- [instanceOf](#Must.prototype.instanceOf)(expected)
+
+### [AssertionError](#AssertionError)
+
+<a name="Must" />
+Must(actual)
+------------
+The main class that wraps the asserted object and that you call matchers on.
+
+Most of the time you'll be using
+[`Object.prototype.must`](#Object.prototype.must) to create this wrapper, but
+occasionally you might want to assert `null`s or `undefined`s and in those
+cases assigning `Must` to something like `expect` or `demand` works nicely.
+
+**Examples**:
+```javascript
+true.must.be.true()
+[].must.be.empty()
+
+var expect = require("must")
+expect(null).be.null()
+
+var demand = require("must")
+demand(undefined).be.undefined()
+```
+
+<a name="Must.prototype.a" />
+### Must.prototype.a(class)
+Alias of [`instanceof`](#Must.prototype.instanceof).  
+Can also be used a pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+"Hello".must.be.a.string()
+new Date().must.be.a(Date)
+```
+
+<a name="Must.prototype.an" />
+### Must.prototype.an(class)
+Alias of [`instanceof`](#Must.prototype.instanceof).  
+Can also be used a pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+[1, 2].must.be.an.array()
+new AwesomeClass.must.be.an(AwesomeClass)
+```
+
+<a name="Must.prototype.be" />
+### Must.prototype.be(expected)
+Alias of [`equal`](#Must.prototype.equal).  
+Can also be used as a pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+true.must.be.true()
+42.must.be(42)
+```
+
+<a name="Must.prototype.have" />
+### Must.prototype.have
+Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+[1, 2].must.have.length(2)
+```
+
+<a name="Must.prototype.not" />
+### Must.prototype.not
+Inverse the assertion.  
+Use it multiple times to create lots of fun!
+`true.must.not.not.be.true()` :-)
+
+**Examples**:
+```javascript
+true.must.not.be.true()
+[].must.not.be.empty()
+```
+
+<a name="Must.prototype.to" />
+### Must.prototype.to
+Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+var expect = require("must")
+expect(true).to.be.true()
+
+var wish = require("must")
+wish(life).to.be.truthy()
+```
+
+<a name="Must.prototype.true" />
+### Must.prototype.true()
+Assert object is `true` or `new Boolean(true)`.
+
+**Examples**:
+```javascript
+true.must.be.true()
+```
+
+<a name="Must.prototype.false" />
+### Must.prototype.false()
+Assert object is `false` or `new Boolean(false)`.
+
+**Examples**:
+```javascript
+false.must.be.false()
+```
+
+<a name="Must.prototype.null" />
+### Must.prototype.null()
+Assert object is `null`.  
+
+Because JavaScript does not allow method calls on `null`, you'll have to
+wrap an expected null with `Must`. Aliasing `Must` to `expect` or `demand`
+works well.
+
+If you want to assert that an object's property is `null`, see
+[`property`](#Must.prototype.property).
+
+**Examples**:
+```javascript
+var demand = require("must")
+demand(null).be.null()
+```
+
+<a name="Must.prototype.undefined" />
+### Must.prototype.undefined()
+Assert object is `undefined`.
+
+Because JavaScript does not allow method calls on `undefined`, you'll have to
+wrap an expected undefined with `Must`. Aliasing `Must` to `expect` or
+`demand` works well.
+
+If you want to assert that an object's property is `undefined`, see
+[`property`](#Must.prototype.property).
+
+**Examples**:
+```javascript
+var demand = require("must")
+demand(undefined).be.undefined()
+```
+
+<a name="Must.prototype.boolean" />
+### Must.prototype.boolean()
+Assert object is a boolean (`true` or `false`).  
+Considers boxed boolean objects (`new Boolean`) also booleans.
+
+**Examples**:
+```javascript
+true.must.be.a.boolean()
+```
+
+<a name="Must.prototype.number" />
+### Must.prototype.number()
+Assert object is a number.  
+Considers boxed number objects (`new Number`) also numbers.
+
+**Examples**:
+```javascript
+42.must.be.a.number()
+```
+
+<a name="Must.prototype.string" />
+### Must.prototype.string()
+Assert object is a string.  
+Considers boxed string objects (`new String`) also strings.
+
+**Examples**:
+```javascript
+"Hello".must.be.a.string()
+```
+
+<a name="Must.prototype.date" />
+### Must.prototype.date()
+Assert object is a date.
+
+**Examples**:
+```javascript
+new Date().must.be.a.date()
+```
+
+<a name="Must.prototype.regexp" />
+### Must.prototype.regexp()
+Assert object is a regular expression.
+
+**Examples**:
+```javascript
+/[a-z]/.must.be.a.regexp()
+```
+
+<a name="Must.prototype.array" />
+### Must.prototype.array()
+Assert object is an array.
+
+**Examples**:
+```javascript
+[42, 69].must.be.an.array()
+```
+
+<a name="Must.prototype.function" />
+### Must.prototype.function()
+Assert object is a function.
+
+**Examples**:
+```javascript
+(function() {}).must.be.a.function()
+```
+
+<a name="Must.prototype.object" />
+### Must.prototype.object()
+Assert object is an.. object.
+
+**Examples**:
+```javascript
+({}).must.be.an.object()
+```
+
+<a name="Must.prototype.truthy" />
+### Must.prototype.truthy()
+Assert object is truthy (`!!obj`).
+
+Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+Everything else is truthy.
+
+**Examples**:
+```javascript
+42.must.be.truthy()
+"Hello".must.be.truthy()
+```
+
+<a name="Must.prototype.falsy" />
+### Must.prototype.falsy()
+Assert object is falsy (`!obj`).
+
+Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+Everything else is truthy.
+
+**Examples**:
+```javascript
+0.must.be.falsy()
+"".must.be.falsy()
+```
+
+<a name="Must.prototype.exist" />
+### Must.prototype.exist()
+Assert object is exists and thereby is not null or undefined.
+
+**Examples**:
+```javascript
+0.must.exist()
+"".must.exist()
+({}).must.exist()
+```
+
+<a name="Must.prototype.instanceof" />
+### Must.prototype.instanceof(expected)
+Assert that object is an instance of something.  
+Uses `obj instanceof expected`.
+
+**Examples**:
+```javascript
+new Date().must.be.an.instanceof(Date)
+```
+
+<a name="Must.prototype.empty" />
+### Must.prototype.empty()
+Assert that object's is empty.  
+Checks either the `length` for arrays and strings or the count of
+enumrable keys. Inherited keys also counted.
+
+**Examples**:
+```javascript
+"".must.be.empty()
+[].must.be.empty()
+({}).must.be.empty()
+```
+
+<a name="Must.prototype.equal" />
+### Must.prototype.equal(expected)
+Assert object strict equality or identity (`===`).
+
+**Examples**:
+```javascript
+42.must.equal(42)
+
+var date = new Date
+date.must.equal(date)
+```
+
+<a name="Must.prototype.eql" />
+### Must.prototype.eql(expected)
+Assert object equality by value and recursively.
+
+For most parts it checks strict equality (`===`), but:
+- `Boolean` objects are compared to boolean literals.
+- `Number` objects are compared to number literals.
+- `String` objects are compared to string literals.
+- `RegExp` objects are compared by their pattern and flags.
+- `Date` objects are compared by their value.
+- `Array` objects are compared recursively.
+- Plain objects (not class instances) are compared recursively.
+
+**Does not coerce types** so **mismatching types fail**.  
+Inherited enumerable properties are also taken into account.
+
+**Examples**:
+```javascript
+/[a-z]/.must.eql(/[a-z]/)
+new Date(1987, 5, 18).must.eql(new Date(1987, 5, 18))
+["Lisp", 42].must.eql(["Lisp", 42])
+({life: 42, love: 69}).must.eql({life: 42, love: 69})
+```
+
+<a name="Must.prototype.include" />
+### Must.prototype.include(expected)
+Assert object includes `expected`.
+
+For strings it checks the text, for arrays it checks elements and for
+objects the property values. Everything is checked with strict equals
+(`===`).
+
+**Examples**:
+```javascript
+"Hello, John!".must.include("John")
+[1, 42, 3].must.include(42)
+({life: 42, love: 69}).must.include(42)
+```
+
+<a name="Must.prototype.match" />
+### Must.prototype.match(regexp)
+Assert object matches the given regular expression.
+
+If you pass in a non regular expression object, it'll be converted to one
+via `new RegExp(regexp)`.
+
+**Examples**:
+```javascript
+"Hello, John!".must.match(/john/i)
+"Wei wu wei".must.match("wu")
+```
+
+<a name="Must.prototype.throw" />
+### Must.prototype.throw([expected])
+Assert that a function throws.  
+Optionally assert it throws `expected`.
+
+Given `expected`, the error is asserted as follows:
+- A **string** is compared with the exception's `message` property.
+- A **regular expression** is matched against the exception's `message`
+  property.
+- A **function** (a.k.a. constructor) is used to check if the error
+  is an `instanceof` that constructor.
+- All other cases of `expected` are left unspecified for now.
+
+**Examples**:
+```javascript
+function omg() { throw new Error("Everything's amazing and nobody's happy") }
+omg.must.throw()
+omg.must.throw("Everything's amazing and nobody's happy")
+omg.must.throw(/amazing/)
+omg.must.throw(Error)
+```
+
+<a name="Must.prototype.length" />
+### Must.prototype.length(expected)
+Assert that an object has a length property equal to `expected`.
+
+**Examples**:
+```javascript
+"Something or other".must.have.length(18)
+[1, 2, 3, "Four o'clock rock"].must.have.length(4)
+```
+
+<a name="Must.prototype.frozen" />
+### Must.prototype.frozen()
+Assert that an object is frozen with `Object.isFrozen`.
+
+**Examples**:
+```javascript
+Object.freeze({}).must.be.frozen()
+```
+
+<a name="Must.prototype.property" />
+### Must.prototype.property(property, [value])
+Assert that an object has property `property`.  
+Optionally assert it *equals* (`===`) to `value`.
+
+Takes **inherited properties** into account. To not do so, see
+[`ownProperty`](#Must.prototype.ownProperty).
+
+**Examples**:
+```javascript
+(function() {}).must.have.property("call")
+({life: 42, love: 69}).must.have.property("love", 69)
+```
+
+<a name="Must.prototype.ownProperty" />
+### Must.prototype.ownProperty(property, [value])
+Assert that an object has own property `property`.
+Optionally assert it *equals* (`===`) to `value`.
+
+**Does not** take **inherited properties** into account. To do so, see 
+[`property`](#Must.prototype.property).
+
+**Examples**:
+```javascript
+({life: 42, love: 69}).must.have.ownProperty("love", 69)
+```
+
+<a name="Must.prototype.enumerable" />
+### Must.prototype.enumerable(property)
+Assert that an object has an enumerable property `property`.  
+It will fail if the object lacks the property entirely.
+
+This also checks inherited properties in the prototype chain, something which
+`Object.prototype.propertyIsEnumerable` itself does not do.
+
+For checking if a property exists *and* is non-enumerable, see
+[`nonenumerable`](#Must.prototype.nonenumerable).
+
+**Examples**:
+```javascript
+({life: 42, love: 69}).must.have.enumerable("love")
+```
+
+<a name="Must.prototype.nonenumerable" />
+### Must.prototype.nonenumerable(property)
+Assert that an object has a non-enumerable property `property`.  
+It will fail if the object lacks the property entirely.
+
+This also checks inherited properties in the prototype chain, something which
+`Object.prototype.propertyIsEnumerable` itself does not do.
+
+It's the inverse of [`enumrable`](#Must.prototype.enumrable).
+
+**Examples**:
+```javascript
+(function() {}).must.have.nonenumerable("call")
+Object.create({}, {love: {enumrable: false}}).must.have.nonenumerable("love")
+```
+
+<a name="Must.prototype.ok" />
+### Must.prototype.ok()
+Alias of [`truthy`](#Must.prototype.truthy).
+
+<a name="Must.prototype.instanceOf" />
+### Must.prototype.instanceOf(expected)
+Alias of [`instanceof`](#Must.prototype.instanceof).
+
+
+<a name="AssertionError" />
+AssertionError(message, [options])
+----------------------------------
+Error object thrown when an assertion fails.
