@@ -1128,6 +1128,12 @@ describe("Must.prototype.eql", function() {
     it("must fail given differently typed objects", function() {
       assert.throws(function() {Must({a: "42", b: 69}).be.eql({a: 42, b: 69})})
     })
+
+    it("must fail given two different inheriting objects", function() {
+      var a = Object.create({life: 42})
+      var b = Object.create({life: 69})
+      assert.throws(function() { Must(a).be.eql(b) })
+    })
   })
 
   describe("given instance", function() {
