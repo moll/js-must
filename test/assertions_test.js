@@ -1313,12 +1313,16 @@ describe("Must.prototype.empty", function() {
   })
 
   describe("given Object", function() {
-    it("must pass given an empty literal", function() {
+    it("must pass given an empty object", function() {
       assert.doesNotThrow(function() { Must({}).be.empty() })
     })
 
-    it("must fail given a non-empty literal", function() {
+    it("must fail given a non-empty object", function() {
       assert.throws(function() { Must({life: 42}).be.empty() })
+    })
+
+    it("must fail given a non-empty inherited object", function() {
+      assert.throws(function() { Must(Object.create({life: 42})).be.empty() })
     })
   })
 
