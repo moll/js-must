@@ -39,6 +39,9 @@ Must.js API Documentation
 - [ok](#Must.prototype.ok)()
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
+### [Object](#Object)
+- [must](#Object.prototype.must)
+
 ### [AssertionError](#AssertionError)
 
 <a name="Must" />
@@ -488,6 +491,31 @@ Alias of [`truthy`](#Must.prototype.truthy).
 <a name="Must.prototype.instanceOf" />
 ### Must.prototype.instanceOf(expected)
 Alias of [`instanceof`](#Must.prototype.instanceof).
+
+
+<a name="Object" />
+Object
+------
+
+
+<a name="Object.prototype.must" />
+### Object.prototype.must
+Creates an instance of [`Must`](#Must) with the current object for asserting
+and calling matchers on.
+
+This property is non-enumerable just like built-in properties, so
+it'll never interfere with any regular usage of objects.
+
+Please note that JavaScript does not allow method calls on `null` or
+`undefined`, so you'll sometimes have to call [`Must`](#Must) on them by
+hand.  Assigning `require("must")` to `expect` or `demand` works well with
+those cases.
+
+**Examples**:
+```javascript
+true.must.be.true()
+[].must.be.empty()
+```
 
 
 <a name="AssertionError" />

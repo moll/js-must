@@ -39,6 +39,25 @@ Object.defineProperty(Must.prototype, "constructor", {
 
 Must.AssertionError = AssertionError
 
+/**
+ * Creates an instance of [`Must`](#Must) with the current object for asserting
+ * and calling matchers on.
+ *
+ * This property is non-enumerable just like built-in properties, so
+ * it'll never interfere with any regular usage of objects.
+ *
+ * Please note that JavaScript does not allow method calls on `null` or
+ * `undefined`, so you'll sometimes have to call [`Must`](#Must) on them by
+ * hand.  Assigning `require("must")` to `expect` or `demand` works well with
+ * those cases.
+ *
+ * @example
+ * true.must.be.true()
+ * [].must.be.empty()
+ * 
+ * @property must
+ * @for Object
+ */
 Object.defineProperty(Object.prototype, "must", {
   get: function() { return new Must(unbox(this)) },
 
