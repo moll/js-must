@@ -156,8 +156,8 @@ false.must.be.false()
 Assert object is `null`.  
 
 Because JavaScript does not allow method calls on `null`, you'll have to
-wrap an expected null with `Must`. Aliasing `Must` to `expect` or `demand`
-works well.
+wrap an expected null with [`Must`](#Must). Assigning `require("must")` to
+`expect` or `demand` works well.
 
 If you want to assert that an object's property is `null`, see
 [`property`](#Must.prototype.property).
@@ -173,8 +173,8 @@ demand(null).be.null()
 Assert object is `undefined`.
 
 Because JavaScript does not allow method calls on `undefined`, you'll have to
-wrap an expected undefined with `Must`. Aliasing `Must` to `expect` or
-`demand` works well.
+wrap an expected undefined with [`Must`](#Must). Assigning `require("must")`
+to `expect` or `demand` works well.
 
 If you want to assert that an object's property is `undefined`, see
 [`property`](#Must.prototype.property).
