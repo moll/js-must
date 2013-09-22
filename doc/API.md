@@ -43,6 +43,7 @@ Must.js API Documentation
 - [above](#Must.prototype.above)(expected)
 - [least](#Must.prototype.least)(expected)
 - [instanceOf](#Must.prototype.instanceOf)(expected)
+- [lt](#Must.prototype.lt)(expected)
 
 ### [Object](#Object)
 - [must](#Object.prototype.must)
@@ -555,6 +556,10 @@ Assert than object is at least, greater than or equal to (`>=`), `expected`.
 <a name="Must.prototype.instanceOf" />
 ### Must.prototype.instanceOf(expected)
 Alias of [`instanceof`](#Must.prototype.instanceof).
+
+<a name="Must.prototype.lt" />
+### Must.prototype.lt(expected)
+Alias of [`below`](#Must.prototype.below).
 
 
 <a name="Object" />

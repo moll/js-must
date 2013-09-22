@@ -2091,6 +2091,14 @@ describe(".prototype.below", function() {
   })
 })
 
+describe("Must.prototype.lt", function() {
+  it("must be an alias of Must.prototype.below", function() {
+    var a = Object.getOwnPropertyDescriptor(Must.prototype, "lt")
+    var b = Object.getOwnPropertyDescriptor(Must.prototype, "below")
+    assert.deepEqual(a, b)
+  })
+})
+
 describe(".prototype.most", function() {
   it("must pass if below", function() {
     assert.doesNotThrow(function() { (42).must.be.at.most(69) })
