@@ -38,6 +38,7 @@ Must.js API Documentation
 - [enumerable](#Must.prototype.enumerable)(property)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
 - [below](#Must.prototype.below)(expected)
+- [above](#Must.prototype.above)(expected)
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
 ### [Object](#Object)
@@ -507,6 +508,15 @@ Assert than object is below and less than (`<`) `expected`.
 **Examples**:
 ```javascript
 (42).must.be.below(69)
+```
+
+<a name="Must.prototype.above" />
+### Must.prototype.above(expected)
+Assert than object is above and greater than (`>`) `expected`.
+
+**Examples**:
+```javascript
+(69).must.be.above(42)
 ```
 
 <a name="Must.prototype.instanceOf" />

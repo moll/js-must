@@ -2080,3 +2080,41 @@ describe(".prototype.below", function() {
     })
   })
 })
+
+describe(".prototype.above", function() {
+  it("must pass if above", function() {
+    assert.doesNotThrow(function() { (69).must.be.above(42) })
+  })
+
+  it("must fail if equal", function() {
+    assert.throws(function() { (69).must.be.above(69) })
+  })
+
+  it("must fail if below", function() {
+    assert.throws(function() { (69).must.be.above(1337) })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { (69).must.be.above.call(null, 42) })
+  })
+
+  mustThrowAssertionError(function() { (42).must.be.above(69) }, {
+    actual: 42,
+    expected: 69,
+    message: "42 must be above 69"
+  })
+
+  describe(".not", function() {
+    function not() { (69).must.not.be.above(42) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: 69,
+      expected: 42,
+      message: "69 must not be above 42"
+    })
+  })
+})
