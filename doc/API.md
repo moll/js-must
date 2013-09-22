@@ -43,6 +43,9 @@ Must.js API Documentation
 - [must](#Object.prototype.must)
 
 ### [AssertionError](#AssertionError)
+- [actual](#assertionError.actual)
+- [expected](#assertionError.expected)
+- [stack](#assertionError.stack)
 
 <a name="Must" />
 Must(actual)
@@ -522,3 +525,16 @@ true.must.be.true()
 AssertionError(message, [options])
 ----------------------------------
 Error object thrown when an assertion fails.
+
+<a name="assertionError.actual" />
+### assertionError.actual
+The asserted object.
+
+<a name="assertionError.expected" />
+### assertionError.expected
+If the matcher took an argument or asserted against something (like
+`foo.must.be.true()`), then this is the expected value.
+
+<a name="assertionError.stack" />
+### assertionError.stack
+The stack trace starting from the code that called `must`.
