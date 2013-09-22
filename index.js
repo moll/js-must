@@ -57,6 +57,7 @@ Must.AssertionError = AssertionError
  * 
  * @property must
  * @for Object
+ * @on prototype
  */
 Object.defineProperty(Object.prototype, "must", {
   get: function() { return new Must(unbox(this)) },
