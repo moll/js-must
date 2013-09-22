@@ -10,8 +10,7 @@ module.exports = Must
  * occasionally you might want to assert `null`s or `undefined`s and in those
  * cases assigning `Must` to something like `expect` or `demand` works nicely.
  *
- * **Examples**:
- * ```javascript
+ * @example
  * true.must.be.true()
  * [].must.be.empty()
  *
@@ -20,7 +19,6 @@ module.exports = Must
  *
  * var demand = require("must")
  * demand(undefined).be.undefined()
- * ```
  *
  * @class Must
  * @constructor
