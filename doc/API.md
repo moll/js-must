@@ -38,6 +38,7 @@ Must.js API Documentation
 - [null](#Must.prototype.null)()
 - [number](#Must.prototype.number)()
 - [object](#Must.prototype.object)()
+- [own](#Must.prototype.own)(property, [value])
 - [ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
@@ -455,6 +456,10 @@ Assert object is an.. object.
 ```javascript
 ({}).must.be.an.object()
 ```
+
+<a name="Must.prototype.own" />
+### Must.prototype.own(property, [value])
+Alias of [`ownProperty`](#Must.prototype.ownProperty).
 
 <a name="Must.prototype.ownProperty" />
 ### Must.prototype.ownProperty(property, [value])
