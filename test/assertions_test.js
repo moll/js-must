@@ -2228,3 +2228,11 @@ describe(".prototype.least", function() {
     })
   })
 })
+
+describe("Must.prototype.gte", function() {
+  it("must be an alias of Must.prototype.least", function() {
+    var a = Object.getOwnPropertyDescriptor(Must.prototype, "gte")
+    var b = Object.getOwnPropertyDescriptor(Must.prototype, "least")
+    assert.deepEqual(a, b)
+  })
+})

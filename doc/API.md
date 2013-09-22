@@ -46,6 +46,7 @@ Must.js API Documentation
 - [lt](#Must.prototype.lt)(expected)
 - [lte](#Must.prototype.lte)(expected)
 - [gt](#Must.prototype.gt)(expected)
+- [gte](#Must.prototype.gte)(expected)
 
 ### [Object](#Object)
 - [must](#Object.prototype.must)
@@ -570,6 +571,10 @@ Alias of [`most`](#Must.prototype.most).
 <a name="Must.prototype.gt" />
 ### Must.prototype.gt(expected)
 Alias of [`above`](#Must.prototype.above).
+
+<a name="Must.prototype.gte" />
+### Must.prototype.gte(expected)
+Alias of [`least`](#Must.prototype.least).
 
 
 <a name="Object" />
