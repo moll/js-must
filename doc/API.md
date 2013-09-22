@@ -1,5 +1,6 @@
-Table of Contents
------------------
+Must.js API Documentation
+=========================
+
 ### [Must](#Must)
 - [a](#Must.prototype.a)(class)
 - [an](#Must.prototype.an)(class)

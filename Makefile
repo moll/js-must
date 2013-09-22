@@ -21,9 +21,11 @@ publish:
 
 doc: doc.json
 	@mkdir -p doc
-	@~/Documents/Mocumentation/bin/mocument --type yui --sort Must \
-		tmp/doc/data.json \
-		> doc/API.md
+	@~/Documents/Mocumentation/bin/mocument \
+		--type yui \
+		--title Must.js \
+		--sort Must,Object \
+		tmp/doc/data.json > doc/API.md
 
 doc.json:
 	@mkdir -p tmp
