@@ -345,7 +345,7 @@ describe("Must.prototype.undefined", function() {
   })
 })
 
-function mustBeType(name, msg, values, inspect) {
+function mustPassType(name, msg, values, inspect) {
   var valid
 
   for (var type in values) !function(value) {
@@ -404,7 +404,7 @@ function mustBeType(name, msg, values, inspect) {
 }
 
 describe("Must.prototype.boolean", function() {
-  mustBeType("boolean", "be a boolean", {
+  mustPassType("boolean", "be a boolean", {
     "true literal": true,
     "false literal": false,
     "true object": new Boolean(true),
@@ -414,32 +414,32 @@ describe("Must.prototype.boolean", function() {
 
 describe("Must.prototype.number", function() {
   var dump = "0"
-  mustBeType("number", "be a number", {literal: 0, object: new Number}, dump)
+  mustPassType("number", "be a number", {literal: 0, object: new Number}, dump)
 })
 
 describe("Must.prototype.string", function() {
   var dump = "\"\""
-  mustBeType("string", "be a string", {literal: "", object: new String}, dump)
+  mustPassType("string", "be a string", {literal: "", object: new String}, dump)
 })
 
 describe("Must.prototype.regexp", function() {
   var dump = "/(?:)/"
-  mustBeType("regexp", "be a regular expression", {object: new RegExp}, dump)
+  mustPassType("regexp", "be a regular expression", {object: new RegExp}, dump)
 })
 
 describe("Must.prototype.date", function() {
   var dump = "1970-01-01T00:00:00.000Z"
-  mustBeType("date", "be a date", {object: new Date(0)}, dump)
+  mustPassType("date", "be a date", {object: new Date(0)}, dump)
 })
 
 describe("Must.prototype.array", function() {
   var dump = "[]"
-  mustBeType("array", "be an array", {literal: [], object: new Array}, dump)
+  mustPassType("array", "be an array", {literal: [], object: new Array}, dump)
 })
 
 describe("Must.prototype.function", function() {
   var dump = "function () {}"
-  mustBeType("function", "be a function", {object: function() {}}, dump)
+  mustPassType("function", "be a function", {object: function() {}}, dump)
 
   it("must pass given a function with changed __proto__", function() {
     function fn() {}
@@ -450,7 +450,7 @@ describe("Must.prototype.function", function() {
 
 describe("Must.prototype.object", function() {
   var dump = "{}"
-  mustBeType("object", "be an object", {object: new Object}, dump)
+  mustPassType("object", "be an object", {object: new Object}, dump)
 })
 
 function mustPassTruthy(name, truthy) {
