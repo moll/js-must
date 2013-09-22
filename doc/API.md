@@ -172,7 +172,7 @@ new Date().must.be.a.date()
 ### Must.prototype.empty()
 Assert that object's is empty.  
 Checks either the `length` for arrays and strings or the count of
-enumrable keys. Inherited keys also counted.
+enumerable keys. Inherited keys also counted.
 
 **Examples**:
 ```javascript
@@ -401,12 +401,12 @@ It will fail if the object lacks the property entirely.
 This also checks inherited properties in the prototype chain, something which
 `Object.prototype.propertyIsEnumerable` itself does not do.
 
-It's the inverse of [`enumrable`](#Must.prototype.enumrable).
+It's the inverse of [`enumerable`](#Must.prototype.enumerable).
 
 **Examples**:
 ```javascript
 (function() {}).must.have.nonenumerable("call")
-Object.create({}, {love: {enumrable: false}}).must.have.nonenumerable("love")
+Object.create({}, {love: {enumerable: 0}}).must.have.nonenumerable("love")
 ```
 
 <a name="Must.prototype.not" />
