@@ -39,6 +39,7 @@ Must.js API Documentation
 - [enumerable](#Must.prototype.enumerable)(property)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
 - [below](#Must.prototype.below)(expected)
+- [most](#Must.prototype.most)(expected)
 - [above](#Must.prototype.above)(expected)
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
@@ -97,6 +98,11 @@ new AwesomeClass.must.be.an(AwesomeClass)
 <a name="Must.prototype.at" />
 ### Must.prototype.at
 Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+(42).must.be.at.most(69)
+```
 
 <a name="Must.prototype.be" />
 ### Must.prototype.be(expected)
@@ -513,6 +519,15 @@ Assert than object is below and less than (`<`) `expected`.
 **Examples**:
 ```javascript
 (42).must.be.below(69)
+```
+
+<a name="Must.prototype.most" />
+### Must.prototype.most(expected)
+Assert than object is at most, less than or equal to (`<=`), `expected`.
+
+**Examples**:
+```javascript
+(42).must.be.at.most(69)
 ```
 
 <a name="Must.prototype.above" />
