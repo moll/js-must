@@ -780,9 +780,7 @@ describe("Must.prototype.instanceof", function() {
 
 describe("Must.prototype.instanceOf", function() {
   it("must be an alias of Must.prototype.instanceof", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "instanceOf")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "instanceof")
-    assert.deepEqual(a, b)
+    assert.strictEqual(Must.prototype.instanceOf, Must.prototype.instanceof)
   })
 })
 
@@ -2093,9 +2091,7 @@ describe(".prototype.below", function() {
 
 describe("Must.prototype.lt", function() {
   it("must be an alias of Must.prototype.below", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "lt")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "below")
-    assert.deepEqual(a, b)
+    assert.strictEqual(Must.prototype.lt, Must.prototype.below)
   })
 })
 
@@ -2139,9 +2135,7 @@ describe(".prototype.most", function() {
 
 describe("Must.prototype.lte", function() {
   it("must be an alias of Must.prototype.most", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "lte")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "most")
-    assert.deepEqual(a, b)
+    assert.strictEqual(Must.prototype.lte, Must.prototype.most)
   })
 })
 
@@ -2185,9 +2179,7 @@ describe(".prototype.above", function() {
 
 describe("Must.prototype.gt", function() {
   it("must be an alias of Must.prototype.above", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "gt")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "above")
-    assert.deepEqual(a, b)
+    assert.strictEqual(Must.prototype.gt, Must.prototype.above)
   })
 })
 
@@ -2231,8 +2223,6 @@ describe(".prototype.least", function() {
 
 describe("Must.prototype.gte", function() {
   it("must be an alias of Must.prototype.least", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "gte")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "least")
-    assert.deepEqual(a, b)
+    assert.strictEqual(Must.prototype.gte, Must.prototype.least)
   })
 })
