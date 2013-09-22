@@ -77,6 +77,16 @@ describe("Must.prototype.an", function() {
   mustPassA("an")
 })
 
+describe("Must.prototype.at", function() {
+  it("must return an instance of Must", function() {
+    assert(true.must.at instanceof Must)
+  })
+
+  it("must carry over the current state", function() {
+    assert.doesNotThrow(function() { true.must.at.true() })
+  })
+})
+
 function mustPassThroughToEqual(name) {
   it("must return an instance of Must", function() {
     assert(true.must[name] instanceof Must)

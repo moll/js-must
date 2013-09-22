@@ -4,6 +4,7 @@ Must.js API Documentation
 ### [Must](#Must)
 - [a](#Must.prototype.a)(class)
 - [an](#Must.prototype.an)(class)
+- [at](#Must.prototype.at)
 - [be](#Must.prototype.be)(expected)
 - [have](#Must.prototype.have)
 - [is](#Must.prototype.is)(expected)
@@ -92,6 +93,10 @@ Can also be used a pass-through property for a fluent chain.
 [1, 2].must.be.an.array()
 new AwesomeClass.must.be.an(AwesomeClass)
 ```
+
+<a name="Must.prototype.at" />
+### Must.prototype.at
+Pass-through property for a fluent chain.
 
 <a name="Must.prototype.be" />
 ### Must.prototype.be(expected)
