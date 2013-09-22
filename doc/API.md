@@ -6,6 +6,7 @@ Must.js API Documentation
 - [an](#Must.prototype.an)(class)
 - [be](#Must.prototype.be)(expected)
 - [have](#Must.prototype.have)
+- [is](#Must.prototype.is)(expected)
 - [not](#Must.prototype.not)
 - [to](#Must.prototype.to)
 - [true](#Must.prototype.true)()
@@ -109,6 +110,18 @@ Pass-through property for a fluent chain.
 **Examples**:
 ```javascript
 [1, 2].must.have.length(2)
+```
+
+<a name="Must.prototype.is" />
+### Must.prototype.is(expected)
+Alias of [`equal`](#Must.prototype.equal).  
+Can also be used as a pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+var claim = require("must")
+claim(true).is.true()
+claim(42).is(42)
 ```
 
 <a name="Must.prototype.not" />

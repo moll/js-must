@@ -77,45 +77,45 @@ describe("Must.prototype.an", function() {
   mustPassA("an")
 })
 
-describe("Must.prototype.be", function() {
+function mustPassThroughToEqual(name) {
   it("must return an instance of Must", function() {
-    assert(true.must.be instanceof Must)
+    assert(true.must[name] instanceof Must)
   })
 
   it("must carry over the current state", function() {
-    assert.doesNotThrow(function() { true.must.be.true() })
+    assert.doesNotThrow(function() { true.must[name].true() })
   })
 
   it("must be like Must.prototype.equal", function() {
-    assert.doesNotThrow(function() { false.must.be(false) })
-    assert.throws(function() { true.must.be(false) })
+    assert.doesNotThrow(function() { false.must[name](false) })
+    assert.throws(function() { true.must[name](false) })
 
-    assert.doesNotThrow(function() { (42).must.be(42) })
-    assert.throws(function() { (42).must.be(1337) })
+    assert.doesNotThrow(function() { (42).must[name](42) })
+    assert.throws(function() { (42).must[name](1337) })
 
-    assert.doesNotThrow(function() { var obj = {}; obj.must.be(obj) })
-    assert.throws(function() { ({}).must.be({}) })
+    assert.doesNotThrow(function() { var obj = {}; obj.must[name](obj) })
+    assert.throws(function() { ({}).must[name]({}) })
   })
 
   it("must be bound", function() {
-    assert.doesNotThrow(function() { (42).must.be.call(null, 42) })
+    assert.doesNotThrow(function() { (42).must[name].call(null, 42) })
   })
 
-  mustThrowAssertionError(function() { true.must.be(42) }, {
+  mustThrowAssertionError(function() { true.must[name](42) }, {
     actual: true,
     expected: 42,
     message: "true must equal 42"
   })
 
   describe(".not", function() {
-    function not() { true.must.not.be(true) }
+    function not() { true.must.not[name](true) }
 
     it("must invert the assertion", function() {
       assert.throws(not)
     })
 
     it("must carry over the current state", function() {
-      assert.throws(function() { true.must.not.be.true() })
+      assert.throws(function() { true.must.not[name].true() })
     })
 
     mustThrowAssertionError(not, {
@@ -124,6 +124,14 @@ describe("Must.prototype.be", function() {
       message: "true must not equal true"
     })
   })
+}
+
+describe("Must.prototype.be", function() {
+  mustPassThroughToEqual("be")
+})
+
+describe("Must.prototype.is", function() {
+  mustPassThroughToEqual("is")
 })
 
 describe("Must.prototype.have", function() {
