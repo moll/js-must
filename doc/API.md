@@ -37,6 +37,7 @@ Must.js API Documentation
 - [ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [enumerable](#Must.prototype.enumerable)(property)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
+- [below](#Must.prototype.below)(expected)
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
 ### [Object](#Object)
@@ -497,6 +498,15 @@ It's the inverse of [`enumrable`](#Must.prototype.enumrable).
 ```javascript
 (function() {}).must.have.nonenumerable("call")
 Object.create({}, {love: {enumrable: false}}).must.have.nonenumerable("love")
+```
+
+<a name="Must.prototype.below" />
+### Must.prototype.below(expected)
+Assert than object is below and less than (`<`) `expected`.
+
+**Examples**:
+```javascript
+(42).must.be.below(69)
 ```
 
 <a name="Must.prototype.instanceOf" />
