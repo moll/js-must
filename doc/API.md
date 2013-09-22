@@ -99,7 +99,7 @@ Can also be used as a pass-through property for a fluent chain.
 **Examples**:
 ```javascript
 true.must.be.true()
-42.must.be(42)
+(42).must.be(42)
 ```
 
 <a name="Must.prototype.have" />
@@ -217,7 +217,7 @@ Considers boxed number objects (`new Number`) also numbers.
 
 **Examples**:
 ```javascript
-42.must.be.a.number()
+(42).must.be.a.number()
 ```
 
 <a name="Must.prototype.string" />
@@ -284,7 +284,7 @@ Everything else is truthy.
 
 **Examples**:
 ```javascript
-42.must.be.truthy()
+(42).must.be.truthy()
 "Hello".must.be.truthy()
 ```
 
@@ -341,7 +341,7 @@ Assert object strict equality or identity (`===`).
 
 **Examples**:
 ```javascript
-42.must.equal(42)
+(42).must.equal(42)
 
 var date = new Date
 date.must.equal(date)
