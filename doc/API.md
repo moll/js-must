@@ -41,6 +41,7 @@ Must.js API Documentation
 - [below](#Must.prototype.below)(expected)
 - [most](#Must.prototype.most)(expected)
 - [above](#Must.prototype.above)(expected)
+- [least](#Must.prototype.least)(expected)
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
 ### [Object](#Object)
@@ -102,6 +103,7 @@ Pass-through property for a fluent chain.
 **Examples**:
 ```javascript
 (42).must.be.at.most(69)
+(1337).must.be.at.least(1337)
 ```
 
 <a name="Must.prototype.be" />
@@ -528,6 +530,7 @@ Assert than object is at most, less than or equal to (`<=`), `expected`.
 **Examples**:
 ```javascript
 (42).must.be.at.most(69)
+(42).must.be.at.most(42)
 ```
 
 <a name="Must.prototype.above" />
@@ -537,6 +540,16 @@ Assert than object is above and greater than (`>`) `expected`.
 **Examples**:
 ```javascript
 (69).must.be.above(42)
+```
+
+<a name="Must.prototype.least" />
+### Must.prototype.least(expected)
+Assert than object is at least, greater than or equal to (`>=`), `expected`.
+
+**Examples**:
+```javascript
+(69).must.be.at.least(42)
+(42).must.be.at.least(42)
 ```
 
 <a name="Must.prototype.instanceOf" />

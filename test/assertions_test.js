@@ -2166,3 +2166,41 @@ describe(".prototype.above", function() {
     })
   })
 })
+
+describe(".prototype.least", function() {
+  it("must pass if above", function() {
+    assert.doesNotThrow(function() { (69).must.be.at.least(42) })
+  })
+
+  it("must pass if equal", function() {
+    assert.doesNotThrow(function() { (69).must.be.at.least(69) })
+  })
+
+  it("must fail if below", function() {
+    assert.throws(function() { (69).must.be.at.least(1337) })
+  })
+
+  it("must be bound", function() {
+    assert.doesNotThrow(function() { (69).must.be.at.least.call(null, 42) })
+  })
+
+  mustThrowAssertionError(function() { (42).must.be.at.least(69) }, {
+    actual: 42,
+    expected: 69,
+    message: "42 must be at least 69"
+  })
+
+  describe(".not", function() {
+    function not() { (69).must.not.be.at.least(42) }
+
+    it("must invert the assertion", function() {
+      assert.throws(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: 69,
+      expected: 42,
+      message: "69 must not be at least 42"
+    })
+  })
+})
