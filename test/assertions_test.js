@@ -58,7 +58,7 @@ function mustPassA(name) {
     })
 
     it("must carry over the current state", function() {
-      assert.throws(function() { true.must.not.be[name].ok() })
+      assert.throws(function() { true.must.not.be[name].truthy() })
     })
 
     mustThrowAssertionError(not, {
@@ -604,14 +604,6 @@ function mustPassTruthy(name, truthy) {
 
 describe("Must.prototype.truthy", function() {
   mustPassTruthy("truthy", true)
-})
-
-describe("Must.prototype.ok", function() {
-  it("must be an alias of Must.prototype.truthy", function() {
-    var a = Object.getOwnPropertyDescriptor(Must.prototype, "ok")
-    var b = Object.getOwnPropertyDescriptor(Must.prototype, "truthy")
-    assert.deepEqual(a, b)
-  })
 })
 
 describe("Must.prototype.falsy", function() {

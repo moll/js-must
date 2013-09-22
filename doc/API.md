@@ -37,7 +37,6 @@ Must.js API Documentation
 - [ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [enumerable](#Must.prototype.enumerable)(property)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
-- [ok](#Must.prototype.ok)()
 - [instanceOf](#Must.prototype.instanceOf)(expected)
 
 ### [Object](#Object)
@@ -499,10 +498,6 @@ It's the inverse of [`enumrable`](#Must.prototype.enumrable).
 (function() {}).must.have.nonenumerable("call")
 Object.create({}, {love: {enumrable: false}}).must.have.nonenumerable("love")
 ```
-
-<a name="Must.prototype.ok" />
-### Must.prototype.ok()
-Alias of [`truthy`](#Must.prototype.truthy).
 
 <a name="Must.prototype.instanceOf" />
 ### Must.prototype.instanceOf(expected)
