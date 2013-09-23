@@ -25,8 +25,8 @@ Must.js API Documentation
 - [gte](#Must.prototype.gte)(expected)
 - [have](#Must.prototype.have)
 - [include](#Must.prototype.include)(expected)
-- [instanceOf](#Must.prototype.instanceOf)(expected)
-- [instanceof](#Must.prototype.instanceof)(expected)
+- [instanceOf](#Must.prototype.instanceOf)(class)
+- [instanceof](#Must.prototype.instanceof)(class)
 - [is](#Must.prototype.is)(expected)
 - [least](#Must.prototype.least)(expected)
 - [length](#Must.prototype.length)(expected)
@@ -201,7 +201,7 @@ For checking if a property exists *and* is non-enumerable, see
 
 <a name="Must.prototype.enumerableProperty" />
 ### Must.prototype.enumerableProperty(property)
-Alias of [`enumerable`](#Must.prototype.enumerable).
+Alias of [`enumerable`](#Must.prototype.enumerable).  
 
 <a name="Must.prototype.eql" />
 ### Must.prototype.eql(expected)
@@ -292,11 +292,11 @@ Assert object is a function.
 
 <a name="Must.prototype.gt" />
 ### Must.prototype.gt(expected)
-Alias of [`above`](#Must.prototype.above).
+Alias of [`above`](#Must.prototype.above).  
 
 <a name="Must.prototype.gte" />
 ### Must.prototype.gte(expected)
-Alias of [`least`](#Must.prototype.least).
+Alias of [`least`](#Must.prototype.least).  
 
 <a name="Must.prototype.have" />
 ### Must.prototype.have
@@ -323,11 +323,11 @@ objects the property values. Everything is checked with strict equals
 ```
 
 <a name="Must.prototype.instanceOf" />
-### Must.prototype.instanceOf(expected)
-Alias of [`instanceof`](#Must.prototype.instanceof).
+### Must.prototype.instanceOf(class)
+Alias of [`instanceof`](#Must.prototype.instanceof).  
 
 <a name="Must.prototype.instanceof" />
-### Must.prototype.instanceof(expected)
+### Must.prototype.instanceof(class)
 Assert that object is an instance of something.  
 Uses `obj instanceof expected`.
 
@@ -370,11 +370,11 @@ Assert that an object has a length property equal to `expected`.
 
 <a name="Must.prototype.lt" />
 ### Must.prototype.lt(expected)
-Alias of [`below`](#Must.prototype.below).
+Alias of [`below`](#Must.prototype.below).  
 
 <a name="Must.prototype.lte" />
 ### Must.prototype.lte(expected)
-Alias of [`most`](#Must.prototype.most).
+Alias of [`most`](#Must.prototype.most).  
 
 <a name="Must.prototype.match" />
 ### Must.prototype.match(regexp)
@@ -417,7 +417,7 @@ Object.create({}, {love: {enumerable: 0}}).must.have.nonenumerable("love")
 
 <a name="Must.prototype.nonenumerableProperty" />
 ### Must.prototype.nonenumerableProperty(property)
-Alias of [`nonenumerable`](#Must.prototype.nonenumerable).
+Alias of [`nonenumerable`](#Must.prototype.nonenumerable).  
 
 <a name="Must.prototype.not" />
 ### Must.prototype.not
@@ -469,7 +469,7 @@ Assert object is an.. object.
 
 <a name="Must.prototype.own" />
 ### Must.prototype.own(property, [value])
-Alias of [`ownProperty`](#Must.prototype.ownProperty).
+Alias of [`ownProperty`](#Must.prototype.ownProperty).  
 
 <a name="Must.prototype.ownProperty" />
 ### Must.prototype.ownProperty(property, [value])
