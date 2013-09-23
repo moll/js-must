@@ -13,6 +13,7 @@ Must.js API Documentation
 - [date](#Must.prototype.date)()
 - [empty](#Must.prototype.empty)()
 - [enumerable](#Must.prototype.enumerable)(property)
+- [enumerableProperty](#Must.prototype.enumerableProperty)(property)
 - [eql](#Must.prototype.eql)(expected)
 - [equal](#Must.prototype.equal)(expected)
 - [exist](#Must.prototype.exist)()
@@ -196,6 +197,10 @@ For checking if a property exists *and* is non-enumerable, see
 ```javascript
 ({life: 42, love: 69}).must.have.enumerable("love")
 ```
+
+<a name="Must.prototype.enumerableProperty" />
+### Must.prototype.enumerableProperty(property)
+Alias of [`enumerable`](#Must.prototype.enumerable).
 
 <a name="Must.prototype.eql" />
 ### Must.prototype.eql(expected)

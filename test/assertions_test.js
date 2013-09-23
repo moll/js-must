@@ -2020,6 +2020,13 @@ describe(".prototype.enumerable", function() {
   mustPassEnumerable("enumerable", true)
 })
 
+describe("Must.prototype.enumerableProperty", function() {
+  it("must be an alias of Must.prototype.enumerable", function() {
+    var enumerable = Must.prototype.enumerable
+    assert.strictEqual(Must.prototype.enumerableProperty, enumerable)
+  })
+})
+
 describe(".prototype.nonenumerable", function() {
   mustPassEnumerable("nonenumerable", false)
 })
