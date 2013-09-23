@@ -19,6 +19,7 @@ pack:
 publish:
 	npm publish
 
+# NOTE: Sorry, mocumentation is not yet published.
 doc: doc.json
 	@mkdir -p doc
 	@~/Documents/Mocumentation/bin/mocument \
