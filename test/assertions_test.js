@@ -2031,6 +2031,13 @@ describe(".prototype.nonenumerable", function() {
   mustPassEnumerable("nonenumerable", false)
 })
 
+describe("Must.prototype.nonenumerableProperty", function() {
+  it("must be an alias of Must.prototype.nonenumerable", function() {
+    var nonenumerable = Must.prototype.nonenumerable
+    assert.strictEqual(Must.prototype.nonenumerableProperty, nonenumerable)
+  })
+})
+
 describe(".prototype.frozen", function() {
   it("must pass if object is frozen", function() {
     assert.doesNotThrow(function() { Object.freeze({}).must.be.frozen() })

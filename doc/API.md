@@ -35,6 +35,7 @@ Must.js API Documentation
 - [match](#Must.prototype.match)(regexp)
 - [most](#Must.prototype.most)(expected)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
+- [nonenumerableProperty](#Must.prototype.nonenumerableProperty)(property)
 - [not](#Must.prototype.not)
 - [null](#Must.prototype.null)()
 - [number](#Must.prototype.number)()
@@ -413,6 +414,10 @@ It's the inverse of [`enumerable`](#Must.prototype.enumerable).
 (function() {}).must.have.nonenumerable("call")
 Object.create({}, {love: {enumerable: 0}}).must.have.nonenumerable("love")
 ```
+
+<a name="Must.prototype.nonenumerableProperty" />
+### Must.prototype.nonenumerableProperty(property)
+Alias of [`nonenumerable`](#Must.prototype.nonenumerable).
 
 <a name="Must.prototype.not" />
 ### Must.prototype.not
