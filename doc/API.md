@@ -214,7 +214,11 @@ For most parts it asserts strict equality (`===`), but:
 - `RegExp` objects are compared by their pattern and flags.
 - `Date` objects are compared by their value.
 - `Array` objects are compared recursively.
-- Plain objects (not class instances) are compared recursively.
+- Plain objects (not class instances) are compared recursively.  
+  They're those whose prototype's `constructor` property is `Object`
+  — e.g. literals `{}`, but not `new MyClass`.
+- Instances of the same class with a `valueOf` function are compared by its
+  output.
 
 **Does not coerce types** so **mismatching types fail**.  
 Inherited enumerable properties are also taken into account.
