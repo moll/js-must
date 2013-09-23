@@ -205,9 +205,9 @@ Alias of [`enumerable`](#Must.prototype.enumerable).
 
 <a name="Must.prototype.eql" />
 ### Must.prototype.eql(expected)
-Assert object equality by value and recursively.
+Assert object equality by content and if possible, recursively.
 
-For most parts it checks strict equality (`===`), but:
+For most parts it asserts strict equality (`===`), but:
 - `Boolean` objects are compared to boolean literals.
 - `Number` objects are compared to number literals.
 - `String` objects are compared to string literals.
