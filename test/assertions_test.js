@@ -563,11 +563,7 @@ function mustPassTruthy(name, truthy) {
   })
 
   describe("given Array", function() {
-    it("must "+pass+" given empty literal", function() {
-      doesNotThrow(function() { Must([]).be[name]() })
-    })
-
-    it("must "+pass+" given empty object", function() {
+    it("must "+pass+" given empty array", function() {
       doesNotThrow(function() { Must(new Array).be[name]() })
     })
   })
@@ -579,10 +575,6 @@ function mustPassTruthy(name, truthy) {
   })
 
   describe("given Object", function() {
-    it("must "+pass+" given empty literal", function() {
-      doesNotThrow(function() { Must({}).be[name]() })
-    })
-
     it("must "+pass+" given empty object", function() {
       doesNotThrow(function() { Must(new Object).be[name]() })
     })
@@ -718,7 +710,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe("given Array", function() {
-    it("must pass given array literal", function() {
+    it("must pass given array", function() {
       assertPass(function() { [].must.be.instanceof(Array) })
     })
 
@@ -863,57 +855,57 @@ describe("Must.prototype.equal", function() {
   })
 
   describe("given RegExp", function() {
-    it("must fail given equivalent literals", function() {
+    it("must fail given equivalent regexps", function() {
       assertFail(function() { Must(/a/).be.equal(/a/) })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent regexps", function() {
       assertFail(function() { Must(/a/).be.equal(/b/) })
     })
 
-    it("must pass given identical objects", function() {
+    it("must pass given identical regexps", function() {
       var regexp = new RegExp
       assertPass(function() { Must(regexp).be.equal(regexp) })
     })
 
-    it("must fail given equivalent objects", function() {
+    it("must fail given equivalent regexps", function() {
       assertFail(function() { Must(new RegExp).be.equal(new RegExp) })
     })
   })
 
   describe("given Date", function() {
-    it("must pass given identical objects", function() {
+    it("must pass given identical dates", function() {
       var now = new Date
       assertPass(function() { Must(now).be.equal(now) })
     })
 
-    it("must fail given equivalent objects", function() {
+    it("must fail given equivalent dates", function() {
       assertFail(function() { Must(new Date(42)).be.equal(new Date(42)) })
     })
   })
 
   describe("given Array", function() {
-    it("must fail given equivalent literals", function() {
+    it("must fail given equivalent arrays", function() {
       assertFail(function() { Must([1]).be.equal([1]) })
     })
 
-    it("must pass given identical objects", function() {
+    it("must pass given identical arrays", function() {
       var array = new Array
       assertPass(function() { Must(array).be.equal(array) })
     })
 
-    it("must fail given unidentical objects", function() {
+    it("must fail given unidentical arrays", function() {
       assertFail(function() { Must(new Array).be.equal(new Array) })
     })
   })
 
   describe("given Function", function() {
-    it("must pass given identical objects", function() {
+    it("must pass given identical functions", function() {
       var fn = new Function
       assertPass(function() { Must(fn).be.equal(fn) })
     })
 
-    it("must fail given equivalent objects", function() {
+    it("must fail given equivalent functions", function() {
       assertFail(function() {
         Must(new Function("foo")).be.equal(new Function("foo")) 
       })
@@ -1051,30 +1043,30 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given Date", function() {
-    it("must pass given identical objects", function() {
+    it("must pass given identical dates", function() {
       var now = new Date
       assertPass(function() { Must(now).be.eql(now) })
     })
 
-    it("must pass given equivalent objects", function() {
+    it("must pass given equivalent dates", function() {
       assertPass(function() { Must(new Date(7)).be.eql(new Date(7)) })
     })
 
-    it("must fail given unequivalent objects", function() {
+    it("must fail given unequivalent dates", function() {
       assertFail(function() { Must(new Date(69)).be.eql(new Date(42)) })
     })
   })
 
   describe("given Array", function() {
-    it("must pass empty equivalent literals", function() {
+    it("must pass empty equivalent arrays", function() {
       assertPass(function() { Must([]).be.eql([]) })
     })
 
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent arrays", function() {
       assertPass(function() { Must([1]).be.eql([1]) })
     })
 
-    it("must pass given identical objects", function() {
+    it("must pass given identical arrays", function() {
       var array = new Array
       assertPass(function() { Must(array).be.eql(array) })
     })
@@ -1089,17 +1081,17 @@ describe("Must.prototype.eql", function() {
       assertFail(function() { Must([1, 2]).be.eql([1]) })
     })
 
-    it("must pass given equivalent nested literals", function() {
+    it("must pass given equivalent nested arrays", function() {
       assertPass(function() { Must([1, [2], 3]).be.eql([1, [2], 3]) })
     })
 
-    it("must fail given equivalent nested literals", function() {
+    it("must fail given equivalent nested arrays", function() {
       assertFail(function() { Must([1, [2], 3]).be.eql([1, [42], 3]) })
     })
   })
 
   describe("given Function", function() {
-    it("must pass given identical objects", function() {
+    it("must pass given identical functions", function() {
       var fn = new Function
       assertPass(function() { Must(fn).be.eql(fn) })
     })
