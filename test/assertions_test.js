@@ -1246,34 +1246,48 @@ describe("Must.prototype.eql", function() {
       assertFail(function() { Must(new new Function).eql(new new Function) })
     })
 
-    it("must pass given identical valueOf outputs", function() {
-      function Valuable(value) { this.value = value }
-      Valuable.prototype.valueOf = function() { return this.value }
-      var a = new Valuable(42), b = new Valuable(42)
-      assertPass(function() { Must(a).eql(b) })
-    })
+    describe("given valueOf", function() {
+      it("must pass given identical output", function() {
+        function Valuable(value) { this.value = value }
+        Valuable.prototype.valueOf = function() { return this.value }
+        var a = new Valuable(42), b = new Valuable(42)
+        assertPass(function() { Must(a).eql(b) })
+      })
 
-    it("must fail unequivalent valueOf outputs", function() {
-      function Valuable(value) { this.value = value }
-      Valuable.prototype.valueOf = function() { return this.value }
-      var a = new Valuable(42), b = new Valuable(69)
-      assertFail(function() { Must(a).eql(b) })
-    })
+      it("must fail given unequivalent output", function() {
+        function Valuable(value) { this.value = value }
+        Valuable.prototype.valueOf = function() { return this.value }
+        var a = new Valuable(42), b = new Valuable(69)
+        assertFail(function() { Must(a).eql(b) })
+      })
 
-    it("must fail given differently typed valueOf outputs", function() {
-      function Valuable(value) { this.value = value }
-      Valuable.prototype.valueOf = function() { return this.value }
-      var a = new Valuable(42), b = new Valuable("42")
-      assertFail(function() { Must(a).eql(b) })
-    })
+      it("must fail given differently typed output", function() {
+        function Valuable(value) { this.value = value }
+        Valuable.prototype.valueOf = function() { return this.value }
+        var a = new Valuable(42), b = new Valuable("42")
+        assertFail(function() { Must(a).eql(b) })
+      })
 
-    it("must fail given identical valueOf outputs from different constructors",
-      function() {
-      function A(value) { this.value }
-      A.prototype.valueOf = function() { return this.value }
-      function B(value) { this.value }
-      B.prototype.valueOf = function() { return this.value }
-      assertFail(function() { Must(new A(42)).eql(new B(42)) })
+      it("must fail given identical output from different instances",
+        function() {
+        function A(value) { this.value }
+        A.prototype.valueOf = function() { return this.value }
+        function B(value) { this.value }
+        B.prototype.valueOf = function() { return this.value }
+        assertFail(function() { Must(new A(42)).eql(new B(42)) })
+      })
+
+      it("must fail given identical output from different instances with set constructor property", function() {
+        function A(value) { this.value }
+        A.prototype.valueOf = function() { return this.value }
+        function B(value) { this.value }
+        B.prototype.valueOf = function() { return this.value }
+
+        var a = new A(42)
+        var b = new B(42)
+        a.constructor = b.constructor = function() {}
+        assertFail(function() { Must(a).eql(b) })
+      })
     })
   })
 
