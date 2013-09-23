@@ -172,7 +172,7 @@ new Date().must.be.a.date()
 
 <a name="Must.prototype.empty" />
 ### Must.prototype.empty()
-Assert that object's is empty.  
+Assert that object is empty.  
 Checks either the `length` for arrays and strings or the count of
 enumerable keys. Inherited keys also counted.
 
