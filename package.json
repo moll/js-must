@@ -1,10 +1,10 @@
 {
 	"name": "must",
 	"version": "0.0.0",
-	"description": "RFC2119 assertion library, does BDD/TDD, is less worse than others and is framework agnostic. Awesome.must.be.true()",
+	"description": "Assertion library: Does BDD/TDD, RFC2119-compatible, is less worse than others and is framework agnostic. Awesome.must.be.true()",
 	"keywords": ["assert", "assertion", "bdd", "test", "testing", "rfc2119"],
-	"homepage": "https://github.com/moll/must",
-	"bugs": "https://github.com/moll/must/issues",
+	"homepage": "https://github.com/moll/js-must",
+	"bugs": "https://github.com/moll/js-must/issues",
 
 	"author": {
 		"name": "Andri Möll",
@@ -14,12 +14,12 @@
 
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/moll/must.git"
+		"url": "git://github.com/moll/js-must.git"
 	},
 
 	"licenses" : [{
 		"type" : "LAGPL",
-		"url" : "https://github.com/moll/must/blob/master/LICENSE"
+		"url" : "https://github.com/moll/js-must/blob/master/LICENSE"
 	}],
 
 	"main": "index.js",
