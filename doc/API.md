@@ -1,6 +1,5 @@
 Must.js API Documentation
 =========================
-
 ### [Must](#Must)
 - [a](#Must.prototype.a)(class)
 - [above](#Must.prototype.above)(expected)
@@ -58,6 +57,7 @@ Must.js API Documentation
 - [actual](#assertionError.actual)
 - [expected](#assertionError.expected)
 - [stack](#assertionError.stack)
+
 
 <a name="Must" />
 Must(actual)
