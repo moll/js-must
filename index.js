@@ -77,7 +77,7 @@ Must.protobyte = Object.create(Must.prototype, (function() {
  * @on prototype
  */
 Object.defineProperty(Object.prototype, "must", {
-  get: function() { return new Must(unbox(this)) },
+  get: function() { return Must(unbox(this)) },
 
   set: function(value) {
     Object.defineProperty(this, "must", {
