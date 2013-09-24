@@ -341,7 +341,7 @@ For more convoluted language, see the `LICENSE` file.
 About
 -----
 **[Andri Möll](http://themoll.com)** typed this and the code.  
-[Monday Calendar](http://mondayapp.com) supported the engineering work.
+[Monday Calendar](https://mondayapp.com) supported the engineering work.
 
 If you find Must.js needs improving, please don't hesitate to type to me now at
 [andri@dot.ee][email] or [create an issue online][issues].
