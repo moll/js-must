@@ -2,5 +2,4 @@
 /.travis.yml
 /Makefile
 /tmp/
-/test/
 *.tgz
