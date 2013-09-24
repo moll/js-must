@@ -1,7 +1,9 @@
 Must.js
 =======
 [![NPM version][npm-badge]](http://badge.fury.io/js/must)
+[![Build status][travis-badge]](https://travis-ci.org/moll/js-must)
 [npm-badge]: https://badge.fury.io/js/must.png
+[travis-badge]: https://travis-ci.org/moll/js-must.png?branch=master
 
 **Must.js** is an assertion library for JavaScript and Node.js with a friendly
 **BDD** syntax (`awesome.must.be.true()`). It ships with **many expressive
