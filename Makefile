@@ -28,6 +28,14 @@ doc: doc.json
 		--priority Must,Object \
 		tmp/doc/data.json > doc/API.md
 
+toc: doc.json
+	@~/Documents/Mocumentation/bin/mocument \
+		--type yui \
+		--template toc \
+		--include Must \
+		--var api_url=https://github.com/moll/js-must/blob/master/doc/API.md \
+		tmp/doc/data.json
+
 doc.json:
 	@mkdir -p tmp
 	@yuidoc --exclude test,node_modules --parse-only --outdir tmp/doc .
