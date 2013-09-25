@@ -22,7 +22,7 @@ function mustThrowAssertionError(test, props) {
       catch (ex) {
         var stack = ex.stack.split(/\r?\n/g)
         assert(stack[0].match(/AssertionError/, "must include AssertionError"))
-        assert(stack[1].match(/\\|\/test\\|\//), "must have test at top")
+        assert(stack[1].match(/[\\\/]test[\\\/]/), "must have test at top")
       }
     })
   })
