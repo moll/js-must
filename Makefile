@@ -41,6 +41,6 @@ doc.json:
 	@yuidoc --exclude test,node_modules --parse-only --outdir tmp/doc .
 
 clean:
-	rm -rf tmp
+	rm -rf tmp *.tgz
 
 .PHONY: love test spec autotest pack publish doc doc.json
