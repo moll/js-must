@@ -272,7 +272,12 @@ Must.js and [Chai.js][chai.js] are fairly similar when it comes to matchers.
   (`expect(obj).to`) flavor.
 - Must.js lacks the `include` flag because its matchers are all independent.  
   Convert to `Object.keys(obj).must.include("foo")`.
-- Must.js lacks the `deep` flag because it prefers regular property access.  
+- Must.js lacks the `deep` flag for the `equal` matcher because
+  [`eql`][Must.prototype.eql] already compares recursively and in a type-safe
+  way.  
+  Convert to `obj.must.eql({some: {deep: "object"}})`.
+- Must.js lacks the `deep` flag for the `property` matcher because it prefers
+  regular property access.  
   Convert to `obj.some.nested.property.must.equal(42)`.
 - Must.js lacks the `ok` matcher because unambiguous names are better.  
   Convert to `truthy`.
