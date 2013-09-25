@@ -46,6 +46,17 @@ tool is [Mocha][mocha].
   below why [asserting on property access](#asserting-on-property-access) is
   **dangerous** in other assertion libraries.
 
+- Has an **intelligent and type-safe** recursive [`eql`][Must.prototype.eql]
+  matcher that compares arrays and plain objects by content and supports value
+  objects.  It's fully type-safe, so, for example, instances of *different
+  classes* aren't *eql*, even if their properties are.
+  ```javascript
+  primesBelowTen.must.eql([2, 3, 5, 7])
+  model.attributes.must.eql({title: "New", createdAt: new Date(2000, 1, 1)})
+  ```
+
+[Must.prototype.eql]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql
+
 - **Human readable error messages** let you know if an object wasn't what you
   expected.
 
