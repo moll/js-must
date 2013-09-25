@@ -20,7 +20,7 @@ function mustThrowAssertionError(test, props) {
     it("must have correct stack trace", function() {
       try { test() }
       catch (ex) {
-        var stack = ex.stack.split(/\r?\n/g)
+        var stack = ex.stack.split(/\r?\n/)
         assert(stack[0].match(/AssertionError/, "must include AssertionError"))
         assert(stack[1].match(/[\\\/]test[\\\/]/), "must have test at top")
       }
