@@ -226,6 +226,7 @@ Must.js, please see the [Must.js API Documentation][api].
 - [number](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.number)()
 - [object](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.object)()
 - [own](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.own)(property, [value])
+- [ownKeys](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownKeys)(keys)
 - [ownProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownProperty)(property, [value])
 - [property](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.property)(property, [value])
 - [regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()

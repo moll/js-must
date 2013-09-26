@@ -2108,6 +2108,81 @@ describe("Must.prototype.keys", function() {
   })
 })
 
+describe("Must.prototype.ownKeys", function() {
+  it("must pass given an object with expected ownKeys", function() {
+    assertPass(function() { Must({a: 1, b: 2}).have.ownKeys(["a", "b"]) })
+  })
+
+  it("must pass given an object with zero ownKeys", function() {
+    assertPass(function() { Must({}).have.ownKeys([]) })
+  })
+
+  it("must fail given zero and non-zero number of ownKeys", function() {
+    assertFail(function() { Must({}).have.ownKeys(["a"]) })
+    assertFail(function() { Must({a: 1}).have.ownKeys([]) })
+  })
+
+  it("must fail given a different amount of ownKeys", function() {
+    assertFail(function() { Must({a: 1}).have.ownKeys(["a", "b"]) })
+    assertFail(function() { Must({a: 1, b: 2}).have.ownKeys(["a"]) })
+  })
+
+  describe("given an inherited object", function() {
+    it("must fail given an object with some expected ownKeys inherited",
+      function() {
+      var obj = Object.create({a: 1}, {b: {value: 2, enumerable: true}})
+      assertFail(function() { Must(obj).have.ownKeys(["a", "b"]) })
+    })
+
+    it("must fail given an object with all expected ownKeys inherited",
+      function() {
+      var obj = Object.create({a: 1, b: 2})
+      assertFail(function() { Must(obj).have.ownKeys(["a", "b"]) })
+    })
+
+    it("must pass given an object when expecting zero keys", function() {
+      assertPass(function() { Must(Object.create({a: 1})).have.ownKeys([]) })
+    })
+  })
+
+  it("must fail gracefully if null", function() {
+    assertFail(function() { Must(null).have.ownKeys(["love"]) })
+  })
+
+  it("must fail gracefully if undefined", function() {
+    assertFail(function() { Must(undefined).have.ownKeys(["love"]) })
+  })
+
+  it("must fail gracefully if non-object", function() {
+    assertFail(function() { Must(true).have.ownKeys(["love"]) })
+  })
+
+  it("must be bound", function() {
+    var obj = {a: 1, b: 2}
+    assertPass(function() { obj.must.have.ownKeys.call(null, ["a", "b"]) })
+  })
+
+  mustThrowAssertionError(function() {({a: 1}).must.have.ownKeys(["a", "b"])}, {
+    actual: {a: 1},
+    expected: ["a", "b"],
+    message: "{\"a\":1} must have own keys [\"a\",\"b\"]"
+  })
+
+  describe(".not", function() {
+    function not() { ({a: 1, b: 2}).must.not.have.ownKeys(["a", "b"]) }
+
+    it("must invert the assertion", function() {
+      assertFail(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: {a: 1, b: 2},
+      expected: ["a", "b"],
+      message: "{\"a\":1,\"b\":2} must not have own keys [\"a\",\"b\"]"
+    })
+  })
+})
+
 function mustPassEnumerable(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"

@@ -41,6 +41,7 @@ Must.js API Documentation
 - [number](#Must.prototype.number)()
 - [object](#Must.prototype.object)()
 - [own](#Must.prototype.own)(property, [value])
+- [ownKeys](#Must.prototype.ownKeys)(keys)
 - [ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
@@ -358,11 +359,13 @@ claim(42).is(42)
 Assert that an object has only the expected enumerable `keys`.  
 Pass an array of strings as `keys`.
 
-Takes **inherited properties** into account.
+Takes **inherited properties** into account. To not do so, see
+[`ownKeys`](#Must.prototype.ownKeys).
 
 **Examples**:
 ```javascript
 ({life: 42, love: 69}).must.have.keys(["life", "love"])
+Object.create({life: 42}).must.have.keys(["life"])
 ```
 
 <a name="Must.prototype.least" />
@@ -487,6 +490,19 @@ Assert object is an.. object.
 <a name="Must.prototype.own" />
 ### Must.prototype.own(property, [value])
 Alias of [`ownProperty`](#Must.prototype.ownProperty).  
+
+<a name="Must.prototype.ownKeys" />
+### Must.prototype.ownKeys(keys)
+Assert that an object has only the expected enumerable `keys` of its own.  
+Pass an array of strings as `keys`.
+
+**Does not** take **inherited properties** into account. To do so, see 
+[`keys`](#Must.prototype.keys).
+
+**Examples**:
+```javascript
+({life: 42, love: 69}).must.have.ownKeys(["life", "love"])
+```
 
 <a name="Must.prototype.ownProperty" />
 ### Must.prototype.ownProperty(property, [value])
