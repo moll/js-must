@@ -1,4 +1,4 @@
-## Unreleased
+## 0.2.0 (Sep 26, 2013)
 - Fails gracefully if property matchers ([`property`][],
   [`enumerable`][] etc.) are used on non-objects.
 - Adds the [`keys`][] matcher to test if an object has all
