@@ -209,13 +209,11 @@ function mustPassTrue(name, truthy) {
   })
 
   it("must fail gracefully if null", function() {
-    function test() { Must(null).be[name]() }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(null).be[name]() })
   })
 
   it("must fail gracefully if undefined", function() {
-    function test() { Must(undefined).be[name]() }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(undefined).be[name]() })
   })
 
   it("must fail given zero number literal", function() {
@@ -1988,13 +1986,15 @@ function mustPassProperty(name, inheritable) {
   })
 
   it("must fail gracefully if null", function() {
-    function test() { Must(null).have[name]("love") }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(null).have[name]("love") })
   })
 
   it("must fail gracefully if undefined", function() {
-    function test() { Must(undefined).have[name]("love") }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(undefined).have[name]("love") })
+  })
+
+  it("must fail gracefully if non-object", function() {
+    assertFail(function() { Must(true).have[name]("love") })
   })
 
   it("must be bound", function() {
@@ -2071,13 +2071,15 @@ function mustPassEnumerable(name, truthy) {
   })
 
   it("must fail gracefully if null", function() {
-    function test() { Must(null).have[name]("love") }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(null).have[name]("love") })
   })
 
   it("must fail gracefully if undefined", function() {
-    function test() { Must(undefined).have[name]("love") }
-    assertFail(test, Must.AssertionError)
+    assertFail(function() { Must(undefined).have[name]("love") })
+  })
+
+  it("must fail gracefully if non-object", function() {
+    assertFail(function() { Must(true).have[name]("love") })
   })
 
   it("must be bound", function() {
