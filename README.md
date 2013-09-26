@@ -212,6 +212,7 @@ Must.js, please see the [Must.js API Documentation][api].
 - [instanceOf](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.instanceOf)(class)
 - [instanceof](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.instanceof)(class)
 - [is](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.is)(expected)
+- [keys](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.keys)(keys)
 - [least](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.least)(expected)
 - [length](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.length)(expected)
 - [lt](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.lt)(expected)

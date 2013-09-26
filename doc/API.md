@@ -27,6 +27,7 @@ Must.js API Documentation
 - [instanceOf](#Must.prototype.instanceOf)(class)
 - [instanceof](#Must.prototype.instanceof)(class)
 - [is](#Must.prototype.is)(expected)
+- [keys](#Must.prototype.keys)(keys)
 - [least](#Must.prototype.least)(expected)
 - [length](#Must.prototype.length)(expected)
 - [lt](#Must.prototype.lt)(expected)
@@ -350,6 +351,18 @@ Can also be used as a pass-through property for a fluent chain.
 var claim = require("must")
 claim(true).is.true()
 claim(42).is(42)
+```
+
+<a name="Must.prototype.keys" />
+### Must.prototype.keys(keys)
+Assert that an object has only the expected enumerable `keys`.  
+Pass an array of strings as `keys`.
+
+Takes **inherited properties** into account.
+
+**Examples**:
+```javascript
+({life: 42, love: 69}).must.have.keys(["life", "love"])
 ```
 
 <a name="Must.prototype.least" />
