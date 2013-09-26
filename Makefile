@@ -43,4 +43,6 @@ doc.json:
 clean:
 	rm -rf tmp *.tgz
 
-.PHONY: love test spec autotest pack publish doc doc.json
+.PHONY: love test spec autotest
+.PHONY: pack publish clean
+.PHONY: doc toc doc.json
