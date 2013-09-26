@@ -34,7 +34,10 @@ toc: doc.json
 		--template toc \
 		--include Must \
 		--var api_url=https://github.com/moll/js-must/blob/master/doc/API.md \
-		tmp/doc/data.json
+		tmp/doc/data.json > tmp/TOC.md
+
+	echo "/^### \[Must\]/,/^\$$/{/^#/r tmp/TOC.md\n/^\$$/!d;}" |\
+		sed -i "" -f /dev/stdin README.md
 
 doc.json:
 	@mkdir -p tmp
