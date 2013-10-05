@@ -2050,24 +2050,50 @@ describe("Must.prototype.own", function() {
   })
 })
 
-describe("Must.prototype.keys", function() {
-  it("must pass given an object with expected keys", function() {
-    assertPass(function() { Must({a: 1, b: 2}).have.keys(["a", "b"]) })
+function mustPassKeys(name, inheritable) {
+  var pass = inheritable ? "pass" : "fail"
+  var fail = inheritable ? "fail" : "pass"
+  var throws = inheritable ? assertFail : assertPass
+  var doesNotThrow = inheritable ? assertPass : assertFail
+
+  it("must pass given an object with expected own keys", function() {
+    assertPass(function() { Must({a: 1, b: 2}).have[name](["a", "b"]) })
   })
 
-  it("must pass given an object with zero keys", function() {
-    assertPass(function() { Must({}).have.keys([]) })
+  it("must pass given an object with zero own keys", function() {
+    assertPass(function() { Must({}).have[name]([]) })
   })
 
   it("must fail given zero and non-zero number of keys", function() {
-    assertFail(function() { Must({}).have.keys(["a"]) })
-    assertFail(function() { Must({a: 1}).have.keys([]) })
+    assertFail(function() { Must({}).have[name](["a"]) })
+    assertFail(function() { Must({a: 1}).have[name]([]) })
   })
 
   it("must fail given a different amount of keys", function() {
-    assertFail(function() { Must({a: 1}).have.keys(["a", "b"]) })
-    assertFail(function() { Must({a: 1, b: 2}).have.keys(["a"]) })
+    assertFail(function() { Must({a: 1}).have[name](["a", "b"]) })
+    assertFail(function() { Must({a: 1, b: 2}).have[name](["a"]) })
   })
+
+  it("must fail gracefully if null", function() {
+    assertFail(function() { Must(null).have[name](["love"]) })
+  })
+
+  it("must fail gracefully if undefined", function() {
+    assertFail(function() { Must(undefined).have[name](["love"]) })
+  })
+
+  it("must fail gracefully if non-object", function() {
+    assertFail(function() { Must(true).have[name](["love"]) })
+  })
+
+  it("must be bound", function() {
+    var obj = {a: 1, b: 2}
+    assertPass(function() { obj.must.have[name].call(null, ["a", "b"]) })
+  })
+}
+
+describe("Must.prototype.keys", function() {
+  mustPassKeys("keys", true)
 
   describe("given an inherited object", function() {
     it("must pass given an object with some expected keys inherited",
@@ -2096,23 +2122,6 @@ describe("Must.prototype.keys", function() {
     })
   })
 
-  it("must fail gracefully if null", function() {
-    assertFail(function() { Must(null).have.keys(["love"]) })
-  })
-
-  it("must fail gracefully if undefined", function() {
-    assertFail(function() { Must(undefined).have.keys(["love"]) })
-  })
-
-  it("must fail gracefully if non-object", function() {
-    assertFail(function() { Must(true).have.keys(["love"]) })
-  })
-
-  it("must be bound", function() {
-    var obj = {a: 1, b: 2}
-    assertPass(function() { obj.must.have.keys.call(null, ["a", "b"]) })
-  })
-
   mustThrowAssertionError(function() { ({a: 1}).must.have.keys(["a", "b"]) }, {
     actual: {a: 1},
     expected: ["a", "b"],
@@ -2135,23 +2144,7 @@ describe("Must.prototype.keys", function() {
 })
 
 describe("Must.prototype.ownKeys", function() {
-  it("must pass given an object with expected ownKeys", function() {
-    assertPass(function() { Must({a: 1, b: 2}).have.ownKeys(["a", "b"]) })
-  })
-
-  it("must pass given an object with zero ownKeys", function() {
-    assertPass(function() { Must({}).have.ownKeys([]) })
-  })
-
-  it("must fail given zero and non-zero number of ownKeys", function() {
-    assertFail(function() { Must({}).have.ownKeys(["a"]) })
-    assertFail(function() { Must({a: 1}).have.ownKeys([]) })
-  })
-
-  it("must fail given a different amount of ownKeys", function() {
-    assertFail(function() { Must({a: 1}).have.ownKeys(["a", "b"]) })
-    assertFail(function() { Must({a: 1, b: 2}).have.ownKeys(["a"]) })
-  })
+  mustPassKeys("ownKeys", false)
 
   describe("given an inherited object", function() {
     it("must fail given an object with some expected ownKeys inherited",
@@ -2169,23 +2162,6 @@ describe("Must.prototype.ownKeys", function() {
     it("must pass given an object when expecting zero keys", function() {
       assertPass(function() { Must(Object.create({a: 1})).have.ownKeys([]) })
     })
-  })
-
-  it("must fail gracefully if null", function() {
-    assertFail(function() { Must(null).have.ownKeys(["love"]) })
-  })
-
-  it("must fail gracefully if undefined", function() {
-    assertFail(function() { Must(undefined).have.ownKeys(["love"]) })
-  })
-
-  it("must fail gracefully if non-object", function() {
-    assertFail(function() { Must(true).have.ownKeys(["love"]) })
-  })
-
-  it("must be bound", function() {
-    var obj = {a: 1, b: 2}
-    assertPass(function() { obj.must.have.ownKeys.call(null, ["a", "b"]) })
   })
 
   mustThrowAssertionError(function() {({a: 1}).must.have.ownKeys(["a", "b"])}, {
