@@ -1985,16 +1985,42 @@ function mustPassProperty(name, inheritable) {
     })
   })
 
+  it("must pass if function has property", function() {
+    function fn() {}
+    fn.love = 69
+    assertPass(function() { fn.must.have[name]("love") })
+  })
+
+  it("must "+pass+" if function has inherited property", function() {
+    function fn() {}
+    fn.__proto__ = Object.create(fn.__proto__, {love: {value: 69}})
+    doesNotThrow(function() { fn.must.have[name]("love") })
+  })
+
+  afterEach(function() { delete String.prototype.life })
+
+  it("must "+pass+" if String.prototype has property", function() {
+    Object.defineProperty(String.prototype, "life", {
+      value: 42, enumerable: false, configurable: true
+    })
+    doesNotThrow(function() { "Hello".must.have[name]("life") })
+  })
+
+  afterEach(function() { delete Boolean.prototype.life })
+
+  it("must "+pass+" if false's Boolean.prototype has property", function() {
+    Object.defineProperty(Boolean.prototype, "life", {
+      value: 42, enumerable: false, configurable: true
+    })
+    doesNotThrow(function() { false.must.have[name]("life") })
+  })
+
   it("must fail gracefully if null", function() {
     assertFail(function() { Must(null).have[name]("love") })
   })
 
   it("must fail gracefully if undefined", function() {
     assertFail(function() { Must(undefined).have[name]("love") })
-  })
-
-  it("must fail gracefully if non-object", function() {
-    assertFail(function() { Must(true).have[name]("love") })
   })
 
   it("must be bound", function() {

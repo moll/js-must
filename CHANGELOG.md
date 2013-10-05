@@ -1,8 +1,11 @@
 ## Unreleased
-- Allows asserting [`enumerable`][] and [`nonenumerable`][] properties on
-  all types (such as functions, booleans etc.), not only objects.
+- Allows asserting [`property`][] and [`ownProperty`][] on all types (such as
+  functions, booleans etc.), not only objects.
+- Allows asserting [`enumerable`][] and [`nonenumerable`][] properties on all
+  types (such as functions, booleans etc.), not only objects.
 
 [`nonenumerable`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nonenumerable
+[`ownProperty`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownProperty
 
 ## 0.2.0 (Sep 26, 2013)
 - Fails gracefully if property matchers ([`property`][],
