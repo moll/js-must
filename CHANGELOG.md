@@ -1,4 +1,4 @@
-## Unreleased
+## 0.3.0 (Oct 5, 2013)
 - Allows asserting [`property`][] and [`ownProperty`][] on all types (such as
   functions, booleans etc.), not only objects.
 - Allows asserting [`keys`][] and [`ownKeys`][] on all types (such as functions,
