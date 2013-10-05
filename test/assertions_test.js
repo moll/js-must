@@ -2195,9 +2195,9 @@ function mustPassEnumerable(name, truthy) {
   })
 
   it("must "+pass+" if inherited property is enumerable", function() {
-    function EnumerateThis() {}
-    EnumerateThis.prototype.love = 69
-    doesNotThrow(function() { new EnumerateThis().must.have[name]("love") })
+    function Fn() {}
+    Fn.prototype.love = 69
+    doesNotThrow(function() { new Fn().must.have[name]("love") })
   })
   
   it("must "+fail+" if property is nonenumerable", function() {
@@ -2208,11 +2208,55 @@ function mustPassEnumerable(name, truthy) {
   })
   
   it("must "+fail+" if inherited property is nonenumerable", function() {
-    function EnumerateThis() {}
-    EnumerateThis.prototype = Object.create(Object.prototype, {
+    function Fn() {}
+    Fn.prototype = Object.create(Object.prototype, {
       love: {value: 69, enumerable: false},
     })
-    throws(function() { new EnumerateThis().must.have[name]("love") })
+    throws(function() { new Fn().must.have[name]("love") })
+  })
+
+  it("must "+pass+" if function's property is enumerable", function() {
+    function fn() {}
+    fn.love = 69
+    doesNotThrow(function() { fn.must.have[name]("love") })
+  })
+
+  it("must "+fail+" if function's property is nonenumerable", function() {
+    function fn() {}
+    Object.defineProperty(fn, "love", {value: 69, enumerable: false})
+    throws(function() { fn.must.have[name]("love") })
+  })
+
+  afterEach(function() { delete String.prototype.life })
+
+  it("must "+pass+" if String.prototype's property is enumerable",
+    function() {
+    String.prototype.life = 42
+    doesNotThrow(function() { "Hello".must.have[name]("life") })
+  })
+
+  it("must "+fail+" if String.prototype's property is nonenumerable",
+    function() {
+    Object.defineProperty(String.prototype, "life", {
+      value: 42, enumerable: false, configurable: true
+    })
+    throws(function() { "Hello".must.have[name]("life") })
+  })
+
+  afterEach(function() { delete Boolean.prototype.life })
+
+  it("must "+pass+" if false's Boolean.prototype's property is enumerable",
+    function() {
+    Boolean.prototype.life = 42
+    doesNotThrow(function() { false.must.have[name]("life") })
+  })
+
+  it("must "+fail+" if false's Boolean.prototype's property is nonenumerable",
+    function() {
+    Object.defineProperty(Boolean.prototype, "life", {
+      value: 42, enumerable: false, configurable: true
+    })
+    throws(function() { false.must.have[name]("life") })
   })
 
   it("must fail if property does not exist", function() {
@@ -2235,10 +2279,6 @@ function mustPassEnumerable(name, truthy) {
 
   it("must fail gracefully if undefined", function() {
     assertFail(function() { Must(undefined).have[name]("love") })
-  })
-
-  it("must fail gracefully if non-object", function() {
-    assertFail(function() { Must(true).have[name]("love") })
   })
 
   it("must be bound", function() {
