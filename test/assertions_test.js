@@ -2060,7 +2060,7 @@ function mustPassKeys(name, inheritable) {
     assertPass(function() { Must({a: 1, b: 2}).have[name](["a", "b"]) })
   })
 
-  it("must pass given an object with zero own keys", function() {
+  it("must pass given an object with zero keys", function() {
     assertPass(function() { Must({}).have[name]([]) })
   })
 
@@ -2074,16 +2074,75 @@ function mustPassKeys(name, inheritable) {
     assertFail(function() { Must({a: 1, b: 2}).have[name](["a"]) })
   })
 
+  describe("given an inherited object", function() {
+    it("must "+pass+" given an object with inherited expected keys",
+      function() {
+      var obj = Object.create({a: 1, b: 2})
+      doesNotThrow(function() { Must(obj).have[name](["a", "b"]) })
+    })
+
+    it("must "+pass+" given an object with some expected keys inherited",
+      function() {
+      var obj = Object.create({a: 1}, {b: {value: 2, enumerable: true}})
+      doesNotThrow(function() { Must(obj).have[name](["a", "b"]) })
+    })
+
+    it("must "+fail+" given an object with all expected keys as own",
+      function() {
+      var obj = Object.create({a: 1}, {b: {value: 2, enumerable: true}})
+      throws(function() { Must(obj).have[name](["b"]) })
+    })
+
+    it("must "+fail+" given an object with zero own keys", function() {
+      throws(function() { Must(Object.create({a: 1})).have[name]([]) })
+    })
+
+    it("must fail given a different amount of keys", function() {
+      assertFail(function() {
+        Must(Object.create({a: 1})).have[name](["a", "b"]) 
+      })
+      assertFail(function() {
+        Must(Object.create({a: 1, b: 2})).have[name](["a"]) 
+      })
+    })
+  })
+
+  it("must pass if function has key", function() {
+    function fn() {}
+    fn.love = 69
+    assertPass(function() { fn.must.have[name](["love"]) })
+  })
+
+  it("must "+pass+" if function has inherited key", function() {
+    function fn() {}
+    fn.__proto__ = Object.create(fn.__proto__, {love: {value: 1, enumerable:1}})
+    doesNotThrow(function() { fn.must.have[name](["love"]) })
+  })
+
+  afterEach(function() { delete Number.prototype.life })
+
+  it("must "+pass+" if Number.prototype has inherited key", function() {
+    Object.defineProperty(Number.prototype, "life", {
+      value: 42, enumerable: true, configurable: true
+    })
+    doesNotThrow(function() { (42).must.have[name](["life"]) })
+  })
+
+  afterEach(function() { delete Boolean.prototype.life })
+
+  it("must "+pass+" if false's Boolean.prototype has property", function() {
+    Object.defineProperty(Boolean.prototype, "life", {
+      value: 42, enumerable: true, configurable: true
+    })
+    doesNotThrow(function() { false.must.have[name](["life"]) })
+  })
+
   it("must fail gracefully if null", function() {
     assertFail(function() { Must(null).have[name](["love"]) })
   })
 
   it("must fail gracefully if undefined", function() {
     assertFail(function() { Must(undefined).have[name](["love"]) })
-  })
-
-  it("must fail gracefully if non-object", function() {
-    assertFail(function() { Must(true).have[name](["love"]) })
   })
 
   it("must be bound", function() {
@@ -2094,33 +2153,6 @@ function mustPassKeys(name, inheritable) {
 
 describe("Must.prototype.keys", function() {
   mustPassKeys("keys", true)
-
-  describe("given an inherited object", function() {
-    it("must pass given an object with some expected keys inherited",
-      function() {
-      var obj = Object.create({a: 1}, {b: {value: 2, enumerable: true}})
-      assertPass(function() { Must(obj).have.keys(["a", "b"]) })
-    })
-
-    it("must pass given an object with all expected keys inherited",
-      function() {
-      var obj = Object.create({a: 1, b: 2})
-      assertPass(function() { Must(obj).have.keys(["a", "b"]) })
-    })
-
-    it("must fail given an object when expecting zero keys", function() {
-      assertFail(function() { Must(Object.create({a: 1})).have.keys([]) })
-    })
-
-    it("must fail given a different amount of keys", function() {
-      assertFail(function() {
-        Must(Object.create({a: 1})).have.keys(["a", "b"]) 
-      })
-      assertFail(function() {
-        Must(Object.create({a: 1, b: 2})).have.keys(["a"]) 
-      })
-    })
-  })
 
   mustThrowAssertionError(function() { ({a: 1}).must.have.keys(["a", "b"]) }, {
     actual: {a: 1},
@@ -2145,24 +2177,6 @@ describe("Must.prototype.keys", function() {
 
 describe("Must.prototype.ownKeys", function() {
   mustPassKeys("ownKeys", false)
-
-  describe("given an inherited object", function() {
-    it("must fail given an object with some expected ownKeys inherited",
-      function() {
-      var obj = Object.create({a: 1}, {b: {value: 2, enumerable: true}})
-      assertFail(function() { Must(obj).have.ownKeys(["a", "b"]) })
-    })
-
-    it("must fail given an object with all expected ownKeys inherited",
-      function() {
-      var obj = Object.create({a: 1, b: 2})
-      assertFail(function() { Must(obj).have.ownKeys(["a", "b"]) })
-    })
-
-    it("must pass given an object when expecting zero keys", function() {
-      assertPass(function() { Must(Object.create({a: 1})).have.ownKeys([]) })
-    })
-  })
 
   mustThrowAssertionError(function() {({a: 1}).must.have.ownKeys(["a", "b"])}, {
     actual: {a: 1},
