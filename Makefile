@@ -46,6 +46,10 @@ doc.json:
 clean:
 	rm -rf tmp *.tgz
 
+tag:
+	git tag "v$$(node -e 'console.log(require("./package").version)')"
+
 .PHONY: love test spec autotest
 .PHONY: pack publish clean
 .PHONY: doc toc doc.json
+.PHONY: tag
