@@ -216,14 +216,16 @@ For most parts it asserts strict equality (`===`), but:
 - `RegExp` objects are compared by their pattern and flags.
 - `Date` objects are compared by their value.
 - `Array` objects are compared recursively.
-- Plain objects (not class instances) are compared recursively.  
-  They're those whose prototype's `constructor` property is `Object`
-  — e.g. literals `{}`, but not `new MyClass`.
 - Instances of the same class with a `valueOf` function are compared by its
   output.
+- Plain objects and instances of the same class are compared recursively.
 
 **Does not coerce types** so **mismatching types fail**.  
 Inherited enumerable properties are also taken into account.
+
+**Instances** are objects whose prototype's `constructor` property is set.
+E.g. `new MyClass`.  
+Others, like `{}` or `Object.create({})`, are **plain objects**.
 
 **Examples**:
 ```javascript
@@ -231,6 +233,9 @@ Inherited enumerable properties are also taken into account.
 new Date(1987, 5, 18).must.eql(new Date(1987, 5, 18))
 ["Lisp", 42].must.eql(["Lisp", 42])
 ({life: 42, love: 69}).must.eql({life: 42, love: 69})
+
+function Answer(answer) { this.answer = answer }
+new Answer(42).must.eql(new Answer(42))
 ```
 
 <a name="Must.prototype.equal" />

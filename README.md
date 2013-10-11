@@ -47,7 +47,7 @@ tool is [Mocha][mocha].
   **dangerous** in other assertion libraries.
 
 - Has an **intelligent and type-safe** recursive [`eql`][Must.prototype.eql]
-  matcher that compares arrays and plain objects by content and supports value
+  matcher that compares arrays and objects by content and supports value
   objects.  It's fully type-safe, so, for example, instances of *different
   classes* aren't *eql*, even if their properties are.
   ```javascript

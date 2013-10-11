@@ -1,3 +1,11 @@
+## Unreleased
+- Changes [`eql`][] so it also compares instances of the same class recursively
+  like it does with plain objects.  
+  If the instance has a `valueOf` function, however, its output is used as
+  before.
+
+[`eql`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql
+
 ## 0.3.0 (Oct 5, 2013)
 - Allows asserting [`property`][] and [`ownProperty`][] on all types (such as
   functions, booleans etc.), not only objects.

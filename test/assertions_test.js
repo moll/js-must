@@ -1101,48 +1101,63 @@ describe("Must.prototype.eql", function() {
     })
   })
 
-  describe("given Object", function() {
+  function mustPassObjectEql(create) {
     it("must pass given identical objects", function() {
-      var a = {a: 42, b: 69}
-      var b = {a: 42, b: 69}
-      assertPass(function() { Must(a).be.eql(b) })
+      var obj = create({a: 42, b: 69})
+      assertPass(function() { Must(obj).be.eql(obj) })
     })
 
     it("must pass given empty objects", function() {
-      assertPass(function() { Must({}).be.eql({}) })
+      assertPass(function() { Must(create({})).be.eql(create({})) })
     })
 
     it("must fail given an empty and filled object", function() {
-      assertFail(function() { Must({}).be.eql({a: 42}) })
-      assertFail(function() { Must({a: 42}).be.eql({}) })
+      assertFail(function() { Must({}).be.eql(create({a: 42})) })
+      assertFail(function() { Must(create({a: 42})).be.eql(create({})) })
     })
 
     it("must fail given a smaller and larger object", function() {
-      assertFail(function() { Must({a: 42, b: 69}).be.eql({a: 42}) })
-      assertFail(function() { Must({a: 42}).be.eql({a: 42, b: 69}) })
+      var a = create({a: 42, b: 69})
+      var b = create({a: 42})
+      assertFail(function() { Must(a).be.eql(b) })
+      assertFail(function() { Must(b).be.eql(a) })
     })
 
     it("must pass given equivalent objects", function() {
-      assertPass(function() { Must({a: 42, b: 69}).be.eql({a: 42, b: 69}) })
+      var a = create({a: 42, b: 69})
+      var b = create({a: 42, b: 69})
+      assertPass(function() { Must(a).be.eql(b) })
     })
 
     it("must fail given objects with differently typed properties", function() {
-      assertFail(function() {Must({a: "42", b: 69}).be.eql({a: 42, b: 69})})
+      var a = create({a: "42", b: 69})
+      var b = create({a: 42, b: 69})
+      assertFail(function() { Must(a).be.eql(b) })
     })
 
     it("must pass given an object with set constructor property", function() {
-      var a = {constructor: 1337}
-      var b = {constructor: 1337}
+      var a = create({constructor: 1337})
+      var b = create({constructor: 1337})
       assertPass(function() { Must(a).be.eql(b) })
     })
 
     it("must pass given a deep object", function() {
-      var a = {life: {love: 69}}
-      var b = {life: {love: 69}}
+      var a = create({life: {love: 69}})
+      var b = create({life: {love: 69}})
       assertPass(function() { Must(a).be.eql(b) })
     })
 
-    describe("given inherited objects", function() {
+    it("must fail given an unequivalent deep object", function() {
+      var a = create({life: {love: 69}})
+      var b = create({life: {love: 42}})
+      assertFail(function() { Must(a).be.eql(b) })
+    })
+  }
+
+  describe("given Object", function() {
+    mustPassObjectEql(function(obj) { return obj })
+
+    describe("with inheritance", function() {
       it("must pass given empty inherited objects", function() {
         var a = Object.create({})
         var b = Object.create({})
@@ -1195,25 +1210,27 @@ describe("Must.prototype.eql", function() {
         assertPass(function() { Must(a).be.eql(b) })
       })
 
-      it("must fail given equivalent inherited objects", function() {
+      it("must fail given unequivalent inherited objects", function() {
         var a = Object.create({love: 42})
         var b = Object.create({love: 69})
         assertFail(function() { Must(a).be.eql(b) })
       })
 
-      it("must fail given equivalent ancestored objects", function() {
+      it("must fail given unequivalent ancestored objects", function() {
         var a = Object.create(Object.create({love: 42}))
         var b = Object.create(Object.create({love: 69}))
         assertFail(function() { Must(a).be.eql(b) })
       })
 
-      it("must fail given equivalent objects inherited from null", function() {
+      it("must fail given unequivalent objects inherited from null",
+        function() {
         var a = Object.create(null, {life: {value: 42, enumerable: true}})
         var b = Object.create(null, {life: {value: 69, enumerable: true}})
         assertFail(function() { Must(a).be.eql(b) })
       })
 
-      it("must fail given equivalent objects ancestored from null", function() {
+      it("must fail given unequivalent objects ancestored from null",
+        function() {
         var a = Object.create(Object.create(null, {
           life: {value: 42, enumerable: true}
         }))
@@ -1226,13 +1243,15 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given instance", function() {
-    it("must fail given equivalent instances", function() {
-      function Priceless(value) { this.value }
-      var a = new Priceless(42), b = new Priceless(42)
-      assertFail(function() { Must(a).eql(b) })
+    function Model() {}
+
+    mustPassObjectEql(function(obj) {
+      var model = new Model
+      for (var name in obj) model[name] = obj[name]
+      return model
     })
 
-    it("must fail given different instances", function() {
+    it("must fail given different constructors", function() {
       assertFail(function() { Must(new new Function).eql(new new Function) })
     })
 
@@ -1240,6 +1259,25 @@ describe("Must.prototype.eql", function() {
       it("must pass given identical output", function() {
         function Valuable(value) { this.value = value }
         Valuable.prototype.valueOf = function() { return this.value }
+        var a = new Valuable(42), b = new Valuable(42)
+        assertPass(function() { Must(a).eql(b) })
+      })
+
+      it("must pass given identical output but different objects", function() {
+        function Valuable(value, other) {
+          this.value = value
+          this.other = other 
+        }
+
+        Valuable.prototype.valueOf = function() { return this.value }
+
+        var a = new Valuable(42, 1), b = new Valuable(42, 2)
+        assertPass(function() { Must(a).eql(b) })
+      })
+
+      it("must pass given unidentical valueOf functions with equivalent output",
+        function() {
+        function Valuable(value) { this.valueOf = function() { return value } }
         var a = new Valuable(42), b = new Valuable(42)
         assertPass(function() { Must(a).eql(b) })
       })
@@ -1260,23 +1298,34 @@ describe("Must.prototype.eql", function() {
 
       it("must fail given identical output from different instances",
         function() {
-        function A(value) { this.value }
+        function A(value) { this.value = value }
         A.prototype.valueOf = function() { return this.value }
-        function B(value) { this.value }
+        function B(value) { this.value = value }
         B.prototype.valueOf = function() { return this.value }
         assertFail(function() { Must(new A(42)).eql(new B(42)) })
       })
 
       it("must fail given identical output from different instances with set constructor property", function() {
-        function A(value) { this.value }
+        function A(value) { this.value = value }
         A.prototype.valueOf = function() { return this.value }
-        function B(value) { this.value }
+        function B(value) { this.value = value }
         B.prototype.valueOf = function() { return this.value }
 
         var a = new A(42)
         var b = new B(42)
         a.constructor = b.constructor = function() {}
         assertFail(function() { Must(a).eql(b) })
+      })
+
+      it("must fail given identical output from heir", function() {
+        function Parent(value) { this.value = value }
+        Parent.prototype.valueOf = function() { return this.value }
+
+        function Child(value) { this.value = value }
+        Child.prototype = Object.create(Parent.prototype)
+        Child.prototype.constructor = Child
+
+        assertFail(function() { Must(new Parent(42)).eql(new Child(42)) })
       })
     })
   })
