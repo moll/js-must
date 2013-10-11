@@ -1,4 +1,4 @@
-## Unreleased
+## 0.4.0 (Oct 11, 2013)
 - Changes [`eql`][] so it also compares instances of the same class recursively
   like it does with plain objects.  
   If the instance has a `valueOf` function, however, its output is used as
