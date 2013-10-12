@@ -1255,6 +1255,12 @@ describe("Must.prototype.eql", function() {
       assertFail(function() { Must(new new Function).eql(new new Function) })
     })
 
+    it("must fail given instance and plain object", function() {
+      var a = new new Function, b = {}
+      assertFail(function() { Must(a).eql(b) })
+      assertFail(function() { Must(b).eql(a) })
+    })
+
     describe("given valueOf", function() {
       it("must pass given identical output", function() {
         function Valuable(value) { this.value = value }
