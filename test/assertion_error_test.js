@@ -31,6 +31,28 @@ describe("AssertionError", function() {
       assert(error instanceof Error)
     })
 
+    it("must set actual if given", function() {
+      var actual = {}
+      var error = new AssertionError("", {actual: actual})
+      assert.strictEqual(error.actual, actual)
+    })
+
+    it("must not set actual if not given", function() {
+      var error = new AssertionError("")
+      assert(!("actual" in error))
+    })
+
+    it("must set expected if given", function() {
+      var expected = {}
+      var error = new AssertionError("", {expected: expected})
+      assert.strictEqual(error.expected, expected)
+    })
+
+    it("must not set expected if not given", function() {
+      var error = new AssertionError("")
+      assert(!("expected" in error))
+    })
+
     it("must set diffable if given", function() {
       var error = new AssertionError("", {diffable: true})
       assert.strictEqual(error.diffable, true)
