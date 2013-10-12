@@ -1,3 +1,10 @@
+## Unreleased
+- Sets the [`eql`][] matcher's [`AssertionError`][] diffable so some test
+  runners would print out a property-by-property diff for mismatches. This helps
+  visual comparison.
+
+[`AssertionError`]: https://github.com/moll/js-must/blob/master/doc/API.md#AssertionError
+
 ## 0.4.0 (Oct 11, 2013)
 - Changes [`eql`][] so it also compares instances of the same class recursively
   like it does with plain objects.  

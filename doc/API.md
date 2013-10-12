@@ -57,7 +57,9 @@ Must.js API Documentation
 
 ### [AssertionError](#AssertionError)
 - [actual](#assertionError.actual)
+- [diffable](#assertionError.diffable)
 - [expected](#assertionError.expected)
+- [showDiff](#assertionError.showDiff)
 - [stack](#assertionError.stack)
 
 
@@ -664,10 +666,27 @@ Error object thrown when an assertion fails.
 ### assertionError.actual
 The asserted object.
 
+<a name="assertionError.diffable" />
+### assertionError.diffable
+Whether it makes sense to compare objects granularly or even show a diff
+view of the objects involved.  
+
+Most matchers (e.g. [`empty`](#Must.prototype.empty) and
+[`string`](#Must.prototype.string)) are concrete, strict and atomic and
+don't lend themselves to be compared property by property.  Others however,
+like [`eql`](#Must.prototype.eql), are more granular and comparing them
+line by line helps understand how they differ.
+
 <a name="assertionError.expected" />
 ### assertionError.expected
 If the matcher took an argument or asserted against something (like
 `foo.must.be.true()`), then this is the expected value.
+
+<a name="assertionError.showDiff" />
+### assertionError.showDiff
+Alias of [`diffable`](#assertionError.diffable).  
+Some test runners (like [Mocha](http://visionmedia.github.io/mocha/)) expect
+this property instead.
 
 <a name="assertionError.stack" />
 ### assertionError.stack

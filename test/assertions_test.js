@@ -1343,6 +1343,7 @@ describe("Must.prototype.eql", function() {
   mustThrowAssertionError(function() { "secret".must.eql(42) }, {
     actual: "secret",
     expected: 42,
+    diffable: true,
     message: "\"secret\" must be equivalent to 42"
   })
 
@@ -1356,6 +1357,7 @@ describe("Must.prototype.eql", function() {
     mustThrowAssertionError(not, {
       actual: "secret",
       expected: "secret",
+      diffable: true,
       message: "\"secret\" must not be equivalent to \"secret\""
     })
   })
