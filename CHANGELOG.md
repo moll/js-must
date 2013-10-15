@@ -1,4 +1,4 @@
-## Unreleased
+## 0.6.0 (Oct 15, 2013)
 - Allows asserting both the exception constructor and its message together in
   the [`throw`][] matcher:
 
