@@ -1,3 +1,13 @@
+## Unreleased
+- Allows asserting both the exception constructor and its message together in
+  the [`throw`][] matcher:
+
+  ```javascript
+  someFunction.must.throw(RangeError, /out of bounds/)
+  ```
+
+[`throw`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.throw
+
 ## 0.5.0 (Oct 13, 2013)
 - Sets the [`eql`][] matcher's [`AssertionError`][] diffable so some test
   runners would print out a property-by-property diff for mismatches. This helps

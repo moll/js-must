@@ -46,7 +46,7 @@ Must.js API Documentation
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
 - [string](#Must.prototype.string)()
-- [throw](#Must.prototype.throw)([expected])
+- [throw](#Must.prototype.throw)([constructor], [expected])
 - [to](#Must.prototype.to)
 - [true](#Must.prototype.true)()
 - [truthy](#Must.prototype.truthy)()
@@ -558,9 +558,9 @@ Considers boxed string objects (`new String`) also strings.
 ```
 
 <a name="Must.prototype.throw" />
-### Must.prototype.throw([expected])
+### Must.prototype.throw([constructor], [expected])
 Assert that a function throws.  
-Optionally assert it throws `expected`.
+Optionally assert it throws `expected` (of possibly instance `constructor`).
 
 Given `expected`, the error is asserted as follows:
 - A **string** is compared with the exception's `message` property.
@@ -577,6 +577,8 @@ omg.must.throw()
 omg.must.throw("Everything's amazing and nobody's happy")
 omg.must.throw(/amazing/)
 omg.must.throw(Error)
+omg.must.throw(Error, "Everything's amazing and nobody's happy")
+omg.must.throw(Error, /amazing/)
 ```
 
 <a name="Must.prototype.to" />
