@@ -145,8 +145,8 @@ fail. If, however, you do need to assert its nullness, aliasing Must to `expect`
 or `demand` and wrapping it manually works well:
 ```javascript
 var demand = require("must")
-demand(something).must.be.null()
-demand(undefined).must.be.undefined()
+demand(something).be.null()
+demand(undefined).be.undefined()
 ```
 
 ### Autoloading
