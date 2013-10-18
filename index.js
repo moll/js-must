@@ -36,8 +36,8 @@ Must.prototype = Object.create(Assertions, {
 
 Must.AssertionError = AssertionError
 
-// Bind assertion functions to `this` automatically so they could be used
-// passed to callbacks.
+// Bind assertion functions to `this` automatically so they could be passed to
+// callbacks.
 Must.protobyte = Object.create(Must.prototype, (function() {
   var props = {}
 

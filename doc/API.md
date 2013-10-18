@@ -513,7 +513,7 @@ Pass an array of strings as `keys`.
 
 <a name="Must.prototype.ownProperty" />
 ### Must.prototype.ownProperty(property, [value])
-Assert that an object has own property `property`.
+Assert that an object has own property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
 
 **Does not** take **inherited properties** into account. To do so, see 
