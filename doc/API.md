@@ -9,6 +9,7 @@ Must.js API Documentation
 - [be](#Must.prototype.be)(expected)
 - [below](#Must.prototype.below)(expected)
 - [boolean](#Must.prototype.boolean)()
+- [contain](#Must.prototype.contain)(expected)
 - [date](#Must.prototype.date)()
 - [empty](#Must.prototype.empty)()
 - [enumerable](#Must.prototype.enumerable)(property)
@@ -164,6 +165,10 @@ Considers boxed boolean objects (`new Boolean`) also booleans.
 ```javascript
 true.must.be.a.boolean()
 ```
+
+<a name="Must.prototype.contain" />
+### Must.prototype.contain(expected)
+Alias of [`include`](#Must.prototype.include).  
 
 <a name="Must.prototype.date" />
 ### Must.prototype.date()

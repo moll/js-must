@@ -1620,6 +1620,12 @@ describe("Must.prototype.include", function() {
   })
 })
 
+describe("Must.prototype.contain", function() {
+  it("must be an alias of Must.prototype.include", function() {
+    assert.strictEqual(Must.prototype.contain, Must.prototype.include)
+  })
+})
+
 describe("Must.prototype.match", function() {
   describe("given String and RegExp", function() {
     var literal = "Year 2014 might be like 1984."

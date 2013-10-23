@@ -1,3 +1,9 @@
+## Unreleased
+- Adds [`contain`][] as an alias of [`include`].
+
+[`contain`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.contain
+[`include`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.include
+
 ## 0.6.0 (Oct 15, 2013)
 - Allows asserting both the exception constructor and its message together in
   the [`throw`][] matcher:
