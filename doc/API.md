@@ -283,6 +283,11 @@ new Answer(42).must.eql(new Answer(42))
 ### Must.prototype.equal(expected)
 Assert object strict equality or identity (`===`).
 
+To compare value objects (like `Date` or `RegExp`) by their value rather
+than identity, use [`eql`](#Must.prototype.eql).  
+To compare arrays and objects by content, also use
+[`eql`](#Must.prototype.eql).
+
 **Examples**:
 ```javascript
 (42).must.equal(42)
