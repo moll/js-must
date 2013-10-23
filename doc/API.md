@@ -7,6 +7,7 @@ Must.js API Documentation
 - [array](#Must.prototype.array)()
 - [at](#Must.prototype.at)
 - [be](#Must.prototype.be)(expected)
+- [before](#Must.prototype.before)(expected)
 - [below](#Must.prototype.below)(expected)
 - [boolean](#Must.prototype.boolean)()
 - [contain](#Must.prototype.contain)(expected)
@@ -145,6 +146,22 @@ Can also be used as a pass-through property for a fluent chain.
 ```javascript
 true.must.be.true()
 (42).must.be(42)
+```
+
+<a name="Must.prototype.before" />
+### Must.prototype.before(expected)
+Alias of [`below`](#Must.prototype.below).  
+Works well with dates where saying *before* is more natural than *below* or
+*less than*.
+
+To assert that a date is equivalent to another date, use
+[`eql`](#Must.prototype.eql). For regular numbers, 
+[`equal`](#Must.prototype.equal) is fine.
+
+**Examples**:
+```javascript
+(42).must.be.before(1337)
+new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
 ```
 
 <a name="Must.prototype.below" />

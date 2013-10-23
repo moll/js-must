@@ -1,8 +1,17 @@
 ## Unreleased
 - Adds [`contain`][] as an alias of [`include`].
 
+- Adds [`before`][] as an alias of [`below`] to make comparing dates read more
+  natural:
+
+  ```javascript
+  new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
+  ```
+
 [`contain`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.contain
 [`include`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.include
+[`below`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.below
+[`before`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.before
 
 ## 0.6.0 (Oct 15, 2013)
 - Allows asserting both the exception constructor and its message together in
