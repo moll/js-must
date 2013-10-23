@@ -1,4 +1,4 @@
-## Unreleased
+## 0.7.0 (Oct 23, 2013)
 - Adds [`contain`] as an alias of [`include`].
 
 - Adds [`before`] as an alias of [`below`] to make comparing dates read more
