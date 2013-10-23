@@ -43,10 +43,6 @@ function mustPassA(name) {
     assertFail(function() { /a/.must.be[name](Array) })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { [].must.be[name].call(null, Array) })
-  })
-
   mustThrowAssertionError(function() { "".must.be[name](Array) }, {
     actual: "",
     expected: Array,
@@ -108,10 +104,6 @@ function mustPassThroughToEqual(name) {
 
     assertPass(function() { var obj = {}; obj.must[name](obj) })
     assertFail(function() { ({}).must[name]({}) })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { (42).must[name].call(null, 42) })
   })
 
   mustThrowAssertionError(function() { true.must[name](42) }, {
@@ -228,10 +220,6 @@ function mustPassTrue(name, truthy) {
     assertPass(function() { Must(!truthy).be[name] })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { Must(truthy).be[name].call() })
-  })
-
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
     actual: !truthy,
     expected: truthy,
@@ -286,10 +274,6 @@ describe("Must.prototype.null", function() {
     assertPass(function() { Must(null).be.null })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { Must(null).be.null.call() })
-  })
-
   mustThrowAssertionError(function() { true.must.be.null() }, {
     actual: true,
     expected: null,
@@ -334,13 +318,6 @@ describe("Must.prototype.undefined", function() {
 
   it("must not do anything when not called as a function", function() {
     assertPass(function() { Must(undefined).be.undefined })
-  })
-
-  it("must be bound", function() {
-    // When unbound, the value of actual is most likely to be undefined, so
-    // test with a "not" in this case too.
-    assertPass(function() { Must(undefined).be.undefined.call() })
-    assertFail(function() { Must(null).be.undefined.call() })
   })
 
   mustThrowAssertionError(function() { true.must.be.undefined() }, {
@@ -397,10 +374,6 @@ function mustPassType(name, msg, values, inspect) {
 
   if (name != "string") it("must fail given string literal", function() {
     assertFail(function() { Must("").be[name]() })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { Must(valid).be[name].call() })
   })
 
   mustThrowAssertionError(function() { Must(null).be[name]() }, {
@@ -582,10 +555,6 @@ function mustPassTruthy(name, truthy) {
     assertPass(function() { Must(!truthy).be[name] })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { Must(truthy).be[name].call() })
-  })
-
   mustThrowAssertionError(function() { (!truthy).must.be[name]() }, {
     actual: !truthy,
     message: !truthy + " must be " + name
@@ -632,10 +601,6 @@ describe("Must.prototype.exist", function() {
 
   it("must pass if an object", function() {
     assertPass(function() { Must({}).exist() })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { true.must.exist.call() })
   })
 
   mustThrowAssertionError(function() { Must(null).exist() }, {
@@ -744,10 +709,6 @@ describe("Must.prototype.instanceof", function() {
     it("must fail given an instance of another", function() {
       assertFail(function() { new Bar().must.be.instanceof(Foo) })
     })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { [].must.be.instanceof.call(null, Array) })
   })
 
   mustThrowAssertionError(function() { [].must.be.instanceof(String) }, {
@@ -908,10 +869,6 @@ describe("Must.prototype.equal", function() {
         Must(new Function("foo")).be.equal(new Function("foo")) 
       })
     })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { true.must.equal.call(null, true) })
   })
 
   mustThrowAssertionError(function() { "secret".must.equal(42) }, {
@@ -1336,10 +1293,6 @@ describe("Must.prototype.eql", function() {
     })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { [].must.eql.call(null, []) })
-  })
-
   mustThrowAssertionError(function() { "secret".must.eql(42) }, {
     actual: "secret",
     expected: 42,
@@ -1499,10 +1452,6 @@ describe("Must.prototype.empty", function() {
     })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { [].must.be.empty.call() })
-  })
-
   mustThrowAssertionError(function() { [1].must.be.empty() }, {
     actual: [1],
     message: "[1] must be empty"
@@ -1595,10 +1544,6 @@ describe("Must.prototype.include", function() {
     })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { [1, 2, 3].must.include.call(null, 2) })
-  })
-
   mustThrowAssertionError(function() { [1, 2, 3].must.include(42) }, {
     actual: [1, 2, 3],
     expected: 42,
@@ -1675,10 +1620,6 @@ describe("Must.prototype.match", function() {
       expected: /^2014$/,
       message: "\"1984\" must match /^2014$/"
     })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { "abcd".must.match.call(null, /b/) })
   })
 
   mustThrowAssertionError(function() { "1984".must.match(/^2014$/) }, {
@@ -1881,12 +1822,6 @@ describe("Must.prototype.throw", function() {
     assert.strictEqual(context, global)
   })
 
-  it("must be bound", function() {
-    assertPass(function() {
-      !function() { throw 42 }.must.throw.call() 
-    })
-  })
-
   var noThrower = function() { 42 }
   mustThrowAssertionError(function() { noThrower.must.throw() }, {
     actual: noThrower,
@@ -1936,10 +1871,6 @@ describe("Must.prototype.length", function() {
     it("must fail if length not equal", function() {
       assertFail(function() { [1, 2, 3, 4].must.have.length(42) })
     })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { "hello".must.have.length.call(null, 5) })
   })
 
   mustThrowAssertionError(function() { "hello".must.have.length(42) }, {
@@ -2106,12 +2037,6 @@ function mustPassProperty(name, inheritable) {
   it("must fail gracefully if undefined", function() {
     assertFail(function() { Must(undefined).have[name]("love") })
   })
-
-  it("must be bound", function() {
-    assertPass(function() {
-      ({love: 69}).must.have[name].call(null, "love") 
-    })
-  })
 }
 
 describe("Must.prototype.property", function() {
@@ -2227,11 +2152,6 @@ function mustPassKeys(name, inheritable) {
 
   it("must fail gracefully if undefined", function() {
     assertFail(function() { Must(undefined).have[name](["love"]) })
-  })
-
-  it("must be bound", function() {
-    var obj = {a: 1, b: 2}
-    assertPass(function() { obj.must.have[name].call(null, ["a", "b"]) })
   })
 }
 
@@ -2381,13 +2301,6 @@ function mustPassEnumerable(name, truthy) {
     assertFail(function() { Must(undefined).have[name]("love") })
   })
 
-  it("must be bound", function() {
-    var obj = Object.create(Object.prototype, {
-      love: {value: false, enumerable: truthy}
-    })
-    assertPass(function() { obj.must.have[name].call(null, "love") })
-  })
-
   var errObj = Object.create(Object.prototype, {
     life: {value: 42, enumerable: true},
     love: {value: 69, enumerable: false},
@@ -2445,11 +2358,6 @@ describe(".prototype.frozen", function() {
     assertFail(function() { ({}).must.be.frozen() })
   })
 
-  it("must be bound", function() {
-    var frozen = Object.freeze({})
-    assertPass(function() { frozen.must.be.frozen.call() })
-  })
-
   mustThrowAssertionError(function() { ({}).must.be.frozen() }, {
     actual: {},
     message: "{} must be frozen"
@@ -2480,10 +2388,6 @@ describe(".prototype.below", function() {
 
   it("must fail if above", function() {
     assertFail(function() { (1337).must.be.below(69) })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { (42).must.be.below.call(null, 69) })
   })
 
   mustThrowAssertionError(function() { (69).must.be.below(42) }, {
@@ -2526,10 +2430,6 @@ describe(".prototype.most", function() {
     assertFail(function() { (1337).must.be.at.most(69) })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { (42).must.be.at.most.call(null, 69) })
-  })
-
   mustThrowAssertionError(function() { (69).must.be.at.most(42) }, {
     actual: 69,
     expected: 42,
@@ -2570,10 +2470,6 @@ describe(".prototype.above", function() {
     assertFail(function() { (69).must.be.above(1337) })
   })
 
-  it("must be bound", function() {
-    assertPass(function() { (69).must.be.above.call(null, 42) })
-  })
-
   mustThrowAssertionError(function() { (42).must.be.above(69) }, {
     actual: 42,
     expected: 69,
@@ -2612,10 +2508,6 @@ describe(".prototype.least", function() {
 
   it("must fail if below", function() {
     assertFail(function() { (69).must.be.at.least(1337) })
-  })
-
-  it("must be bound", function() {
-    assertPass(function() { (69).must.be.at.least.call(null, 42) })
   })
 
   mustThrowAssertionError(function() { (42).must.be.at.least(69) }, {

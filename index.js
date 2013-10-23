@@ -25,9 +25,8 @@ module.exports = Must
  * @param actual
  */
 function Must(actual) {
-  var self = Object.create(Must.protobyte)
-  self.actual = actual
-  return self
+  if (!(this instanceof Must)) return new Must(actual)
+  this.actual = actual
 }
 
 Must.prototype = Object.create(Assertions, {
@@ -35,26 +34,6 @@ Must.prototype = Object.create(Assertions, {
 })
 
 Must.AssertionError = AssertionError
-
-// Bind assertion functions to `this` automatically so they could be passed to
-// callbacks.
-Must.protobyte = Object.create(Must.prototype, (function() {
-  var props = {}
-
-  Object.getOwnPropertyNames(Assertions).forEach(function(name) {
-    var desc = Object.getOwnPropertyDescriptor(Assertions, name)
-    if (desc.get || typeof desc.value != "function") return
-    var fn = desc.value
-
-    props[name] = {
-      get: function() { return fn.bind(this) },
-      configurable: true,
-      enumrable: true
-    }
-  })
-
-  return props
-})())
 
 /**
  * Creates an instance of [`Must`](#Must) with the current object for asserting
@@ -77,7 +56,7 @@ Must.protobyte = Object.create(Must.prototype, (function() {
  * @on prototype
  */
 Object.defineProperty(Object.prototype, "must", {
-  get: function() { return Must(unbox(this)) },
+  get: function() { return new Must(unbox(this)) },
 
   set: function(value) {
     Object.defineProperty(this, "must", {
