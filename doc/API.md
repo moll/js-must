@@ -3,6 +3,7 @@ Must.js API Documentation
 ### [Must](#Must)
 - [a](#Must.prototype.a)(class)
 - [above](#Must.prototype.above)(expected)
+- [after](#Must.prototype.after)(expected)
 - [an](#Must.prototype.an)(class)
 - [array](#Must.prototype.array)()
 - [at](#Must.prototype.at)
@@ -105,6 +106,22 @@ Assert than object is above and greater than (`>`) `expected`.
 **Examples**:
 ```javascript
 (69).must.be.above(42)
+```
+
+<a name="Must.prototype.after" />
+### Must.prototype.after(expected)
+Alias of [`above`](#Must.prototype.above).  
+Works well with dates where saying *after* is more natural than *above* or
+*greater than*.
+
+To assert that a date is equivalent to another date, use
+[`eql`](#Must.prototype.eql). For regular numbers,
+[`equal`](#Must.prototype.equal) is fine.
+
+**Examples**:
+```javascript
+(1337).must.be.after(42)
+new Date(2030, 5, 18).must.be.after(new Date(2013, 9, 23))
 ```
 
 <a name="Must.prototype.an" />

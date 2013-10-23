@@ -188,6 +188,7 @@ Must.js, please see the [Must.js API Documentation][api].
 ### [Must](https://github.com/moll/js-must/blob/master/doc/API.md#Must)
 - [a](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.a)(class)
 - [above](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.above)(expected)
+- [after](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.after)(expected)
 - [an](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.an)(class)
 - [array](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.array)()
 - [at](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.at)

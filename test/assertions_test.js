@@ -2503,6 +2503,12 @@ describe("Must.prototype.gt", function() {
   })
 })
 
+describe("Must.prototype.after", function() {
+  it("must be an alias of Must.prototype.above", function() {
+    assert.strictEqual(Must.prototype.after, Must.prototype.above)
+  })
+})
+
 describe(".prototype.least", function() {
   it("must pass if above", function() {
     assertPass(function() { (69).must.be.at.least(42) })

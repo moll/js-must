@@ -8,10 +8,19 @@
   new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
   ```
 
+- Adds [`after`][] as an alias of [`above`] to make comparing dates read more
+  natural:
+
+  ```javascript
+  new Date(2030, 5, 18).must.be.after(new Date(2013, 9, 23))
+  ```
+
 [`contain`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.contain
 [`include`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.include
 [`below`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.below
 [`before`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.before
+[`above`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.above
+[`after`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.after
 
 ## 0.6.0 (Oct 15, 2013)
 - Allows asserting both the exception constructor and its message together in
