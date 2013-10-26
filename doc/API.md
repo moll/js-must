@@ -248,7 +248,8 @@ Alias of [`enumerable`](#Must.prototype.enumerable).
 
 <a name="Must.prototype.eql" />
 ### Must.prototype.eql(expected)
-Assert object equality by content and if possible, recursively.
+Assert object equality by content and if possible, recursively.  
+Also handles circular and self-referential objects.
 
 For most parts it asserts strict equality (`===`), but:
 - `Boolean` objects are compared to boolean literals.

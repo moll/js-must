@@ -1,4 +1,7 @@
 ## Unreleased
+- Allows asserting and comparing circular and self-referential objects with
+  [`eql`]. Objects that are self-referential in the exact same way are
+  considered *eql*.
 - Displays circular and self-referential objects and arrays in assertion error
   messages properly.
 - Displays object's inherited properties in assertion error messages.

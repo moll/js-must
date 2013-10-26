@@ -48,8 +48,9 @@ tool is [Mocha][mocha].
 
 - Has an **intelligent and type-safe** recursive [`eql`][Must.prototype.eql]
   matcher that compares arrays and objects by content and supports value
-  objects.  It's fully type-safe, so, for example, instances of *different
-  classes* aren't *eql*, even if their properties are.
+  objects.  It's fully type-safe, so instances of *different classes* aren't
+  *eql*, even if their properties are. It also supports **circular and
+  self-referential** objects.
   ```javascript
   primesBelowTen.must.eql([2, 3, 5, 7])
   model.attributes.must.eql({title: "New", createdAt: new Date(2000, 1, 1)})

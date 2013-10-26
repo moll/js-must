@@ -1043,6 +1043,44 @@ describe("Must.prototype.eql", function() {
     it("must fail given equivalent nested arrays", function() {
       assertFail(function() { Must([1, [2], 3]).be.eql([1, [42], 3]) })
     })
+
+    describe("given circular Array", function() {
+      it("must pass if equal", function() {
+        var a = [1, 2, 3]
+        a.push(a)
+        a.push(5)
+        var b = [1, 2, 3]
+        b.push(b)
+        b.push(5)
+
+        assertPass(function() { Must(a).be.eql(b) })
+      })
+
+      it("must fail if only one circular", function() {
+        var a = [1, 2, 3]
+        a.push(a)
+        a.push(5)
+        var b = [1, 2, 3]
+        b.push([1, 2, 3, 4, 5])
+        b.push(5)
+
+        assertFail(function() { Must(a).be.eql(b) })
+        assertFail(function() { Must(b).be.eql(a) })
+      })
+
+      it("must fail if circular to different levels", function() {
+        var a = [1, 2, 3]
+        a.push(a)
+
+        var b = [1, 2, 3]
+        var bInside = [1, 2, 3]
+        bInside.push(bInside)
+        b.push(bInside)
+
+        assertFail(function() { Must(a).be.eql(b) })
+        assertFail(function() { Must(b).be.eql(a) })
+      })
+    })
   })
 
   describe("given Function", function() {
@@ -1108,6 +1146,39 @@ describe("Must.prototype.eql", function() {
       var a = create({life: {love: 69}})
       var b = create({life: {love: 42}})
       assertFail(function() { Must(a).be.eql(b) })
+    })
+
+    describe("given circular object", function() {
+      it("must pass if equal", function() {
+        var a = create({life: {love: 69}})
+        a.self = a
+        var b = create({life: {love: 69}})
+        b.self = b
+
+        assertPass(function() { Must(a).be.eql(b) })
+      })
+
+      it("must fail if only one circular", function() {
+        var a = create({life: {love: 69}})
+        a.self = a
+        var b = create({life: {love: 69}})
+        b.self = {life: {love: 69}, self: {}}
+
+        assertFail(function() { Must(a).be.eql(b) })
+        assertFail(function() { Must(b).be.eql(a) })
+      })
+
+      it("must fail if circular to different levels", function() {
+        var a = create({life: {love: 69}})
+        a.self = a
+        var b = create({life: {love: 69}})
+        var bInside = create({life: {love: 69}})
+        bInside.self = bInside
+        b.self = bInside
+
+        assertFail(function() { Must(a).be.eql(b) })
+        assertFail(function() { Must(b).be.eql(a) })
+      })
     })
   }
 
