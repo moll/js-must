@@ -1,3 +1,7 @@
+## Unreleased
+- Displays circular and self-referential objects and arrays in assertion error
+  messages properly.
+
 ## 0.7.0 (Oct 23, 2013)
 - Adds [`contain`] as an alias of [`include`].
 
