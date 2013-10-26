@@ -37,10 +37,22 @@ describe("inspect", function() {
       assert.strictEqual(inspect(obj), '{"a":{"cool":42}}')
     })
 
+    it("must show inherited properties", function() {
+      var obj = Object.create({a: 42})
+      assert.strictEqual(inspect(obj), '{"a":42}')
+    })
+
     it("must show circular objects as [Circular]", function() {
       var obj = {name: "John", likes: {sex: true}}
       obj.self = obj
       var str = '{"name":"John","likes":{"sex":true},"self":"[Circular]"}'
+      assert.strictEqual(inspect(obj), str)
+    })
+
+    it("must show nested circular objects as [Circular]", function() {
+      var obj = {name: "John", likes: {}}
+      obj.likes.likes = obj.likes
+      var str = '{"name":"John","likes":{"likes":"[Circular]"}}'
       assert.strictEqual(inspect(obj), str)
     })
 
@@ -49,6 +61,13 @@ describe("inspect", function() {
       obj.push(obj)
       obj.push(5)
       assert.strictEqual(inspect(obj), '[1,2,3,"[Circular]",5]')
+    })
+
+    it("must show circular inherited objects as [Circular]", function() {
+      var obj = Object.create({name: "John"})
+      obj.self = obj
+      var str = '{"self":"[Circular]","name":"John"}'
+      assert.strictEqual(inspect(obj), str)
     })
 
     it("must include undefined values", function() {
