@@ -102,7 +102,7 @@ new Date().must.be.a(Date)
 
 <a name="Must.prototype.above" />
 ### Must.prototype.above(expected)
-Assert that object is above and greater than (`>`) `expected`.  
+Assert that an object is above and greater than (`>`) `expected`.  
 Uses `>` for comparison, so it'll also work with value objects (those
 implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
@@ -186,7 +186,7 @@ new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
 
 <a name="Must.prototype.below" />
 ### Must.prototype.below(expected)
-Assert that object is below and less than (`<`) `expected`.  
+Assert that an object is below and less than (`<`) `expected`.  
 Uses `<` for comparison, so it'll also work with value objects (those
 implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
@@ -233,7 +233,7 @@ new Date().must.be.a.date()
 
 <a name="Must.prototype.empty" />
 ### Must.prototype.empty()
-Assert that object is empty.  
+Assert that an object is empty.  
 Checks either the `length` for arrays and strings or the count of
 enumerable keys. Inherited keys also counted.
 
@@ -404,7 +404,7 @@ Alias of [`instanceof`](#Must.prototype.instanceof).
 
 <a name="Must.prototype.instanceof" />
 ### Must.prototype.instanceof(class)
-Assert that object is an instance of something.  
+Assert that an object is an instance of something.  
 Uses `obj instanceof expected`.
 
 **Examples**:
@@ -440,7 +440,7 @@ Object.create({life: 42}).must.have.keys(["life"])
 
 <a name="Must.prototype.least" />
 ### Must.prototype.least(expected)
-Assert that object is at least, greater than or equal to (`>=`),
+Assert that an object is at least, greater than or equal to (`>=`),
 `expected`.  
 Uses `>=` for comparison, so it'll also work with value objects (those
 implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
@@ -484,7 +484,7 @@ via `new RegExp(regexp)`.
 
 <a name="Must.prototype.most" />
 ### Must.prototype.most(expected)
-Assert that object is at most, less than or equal to (`<=`), `expected`.  
+Assert that an object is at most, less than or equal to (`<=`), `expected`.  
 Uses `<=` for comparison, so it'll also work with value objects (those
 implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
