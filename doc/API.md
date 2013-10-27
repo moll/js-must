@@ -10,6 +10,7 @@ Must.js API Documentation
 - [be](#Must.prototype.be)(expected)
 - [before](#Must.prototype.before)(expected)
 - [below](#Must.prototype.below)(expected)
+- [between](#Must.prototype.between)(begin, end)
 - [boolean](#Must.prototype.boolean)()
 - [contain](#Must.prototype.contain)(expected)
 - [date](#Must.prototype.date)()
@@ -188,6 +189,19 @@ Assert than object is below and less than (`<`) `expected`.
 **Examples**:
 ```javascript
 (42).must.be.below(69)
+```
+
+<a name="Must.prototype.between" />
+### Must.prototype.between(begin, end)
+Assert that an object is between `begin` and `end` (inclusive).  
+Uses `<` for comparison, so it'll also work with value objects (those
+implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
+
+**Examples**:
+```javascript
+(13).must.be.between(13, 69)
+(42).must.be.between(13, 69)
+(69).must.be.between(13, 69)
 ```
 
 <a name="Must.prototype.boolean" />

@@ -2619,3 +2619,43 @@ describe("Must.prototype.gte", function() {
     assert.strictEqual(Must.prototype.gte, Must.prototype.least)
   })
 })
+
+describe("Must.prototype.between", function() {
+  it("must fail if below", function() {
+    assertFail(function() { (41).must.be.between(42, 69) })
+  })
+
+  it("must pass if on lower bound", function() {
+    assertPass(function() { (42).must.be.between(42, 69) })
+  })
+
+  it("must pass if between", function() {
+    assertPass(function() { (50).must.be.between(42, 69) })
+  })
+
+  it("must pass if on higher bound", function() {
+    assertPass(function() { (69).must.be.between(42, 69) })
+  })
+
+  it("must fail if above", function() {
+    assertFail(function() { (70).must.be.between(42, 69) })
+  })
+
+  mustThrowAssertionError(function() { (13).must.be.between(42, 69) }, {
+    actual: 13,
+    message: "13 must be between 42 and 69"
+  })
+
+  describe(".not", function() {
+    function not() { (50).must.not.be.between(42, 69) }
+
+    it("must invert the assertion", function() {
+      assertFail(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: 50,
+      message: "50 must not be between 42 and 69"
+    })
+  })
+})

@@ -1,3 +1,8 @@
+## Unreleased
+- Adds [`between`] to assert that a value is between a range.
+
+[`between`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.between
+
 ## 0.8.0 (Oct 27, 2013)
 - Allows asserting and comparing circular and self-referential objects with
   [`eql`]. Objects that are self-referential in the exact same way are

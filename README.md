@@ -196,6 +196,7 @@ Must.js, please see the [Must.js API Documentation][api].
 - [be](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.be)(expected)
 - [before](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.before)(expected)
 - [below](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.below)(expected)
+- [between](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.between)(begin, end)
 - [boolean](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.boolean)()
 - [contain](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.contain)(expected)
 - [date](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.date)()
