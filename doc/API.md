@@ -102,7 +102,9 @@ new Date().must.be.a(Date)
 
 <a name="Must.prototype.above" />
 ### Must.prototype.above(expected)
-Assert than object is above and greater than (`>`) `expected`.
+Assert that object is above and greater than (`>`) `expected`.  
+Uses `>` for comparison, so it'll also work with value objects (those
+implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
 **Examples**:
 ```javascript
@@ -184,7 +186,9 @@ new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
 
 <a name="Must.prototype.below" />
 ### Must.prototype.below(expected)
-Assert than object is below and less than (`<`) `expected`.
+Assert that object is below and less than (`<`) `expected`.  
+Uses `<` for comparison, so it'll also work with value objects (those
+implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
 **Examples**:
 ```javascript
@@ -436,7 +440,10 @@ Object.create({life: 42}).must.have.keys(["life"])
 
 <a name="Must.prototype.least" />
 ### Must.prototype.least(expected)
-Assert than object is at least, greater than or equal to (`>=`), `expected`.
+Assert that object is at least, greater than or equal to (`>=`),
+`expected`.  
+Uses `>=` for comparison, so it'll also work with value objects (those
+implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
 **Examples**:
 ```javascript
@@ -477,7 +484,9 @@ via `new RegExp(regexp)`.
 
 <a name="Must.prototype.most" />
 ### Must.prototype.most(expected)
-Assert than object is at most, less than or equal to (`<=`), `expected`.
+Assert that object is at most, less than or equal to (`<=`), `expected`.  
+Uses `<=` for comparison, so it'll also work with value objects (those
+implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)) like `Date`.
 
 **Examples**:
 ```javascript
