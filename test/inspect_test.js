@@ -12,8 +12,8 @@ describe("inspect", function() {
 
   describe("given Date", function() {
     it("must show ISO string representation", function() {
-      var date = new Date(1987, 5, 18, 2)
-      assert.strictEqual(inspect(date), "1987-06-17T23:00:00.000Z")
+      var date = new Date(Date.UTC(1987, 5, 18, 2))
+      assert.strictEqual(inspect(date), "1987-06-18T02:00:00.000Z")
     })
   })
 
