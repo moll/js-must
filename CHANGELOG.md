@@ -1,4 +1,4 @@
-## Unreleased
+## 0.8.0 (Oct 27, 2013)
 - Allows asserting and comparing circular and self-referential objects with
   [`eql`]. Objects that are self-referential in the exact same way are
   considered *eql*.
