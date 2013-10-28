@@ -1,4 +1,4 @@
-## Unreleased
+## 0.9.0 (Oct 28, 2013)
 - Adds [`between`] to assert that a value is between a range.
 
 [`between`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.between
