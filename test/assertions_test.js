@@ -1008,20 +1008,12 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given RegExp", function() {
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent regexps", function() {
       assertPass(function() { Must(/a/).be.eql(/a/) })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent regexps", function() {
       assertFail(function() { Must(/a/).be.eql(/b/) })
-    })
-
-    it("must pass given equivalent objects", function() {
-      assertPass(function() { Must(new RegExp).be.eql(new RegExp) })
-    })
-
-    it("must fail given unequivalent objects", function() {
-      assertFail(function() {Must(new RegExp("a")).be.eql(new RegExp("b"))})
     })
   })
 
