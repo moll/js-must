@@ -5,10 +5,10 @@ Must.js
 [npm-badge]: https://badge.fury.io/js/must.png
 [travis-badge]: https://travis-ci.org/moll/js-must.png?branch=master
 
-Must.js is an assertion library for JavaScript and Node.js with a friendly
-**BDD** syntax (`awesome.must.be.true()`). It ships with **many expressive
-matchers** and is **test runner and framework agnostic**. Follows [RFC
-2119][rfc2119] with its use of **MUST**. Good stuff and well tested.
+Must.js is a testing and assertion library for JavaScript and Node.js with
+a friendly **BDD** syntax (`awesome.must.be.true()`). It ships with **many
+expressive matchers** and is **test runner and framework agnostic**. Follows
+[RFC 2119][rfc2119] with its use of **MUST**. Good and well testsed stuff.
 
 For those new to testing JavaScript on Node.js, you'll also need a test
 framework (also called a test-runner or a harness) to run your tests. One such
