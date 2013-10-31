@@ -1,4 +1,4 @@
-## Unreleased
+## 0.10.0 (Oct 31, 2013)
 - Allows asserting `NaN`s with [`eql`] — `NaN.must.eql(NaN)`.
 
 ## 0.9.1 (Oct 31, 2013)
