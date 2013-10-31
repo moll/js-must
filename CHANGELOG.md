@@ -1,3 +1,9 @@
+## Unreleased
+- Fixes [`eql`] to consider two equivalent boxed `Boolean`, `Number` or `String`
+  values *eql*.  
+  Previously it only did so if both were primitive (`42`) or only one was boxed
+  (`new Number(42)`).
+
 ## 0.9.0 (Oct 28, 2013)
 - Adds [`between`] to assert that a value is between a range.
 

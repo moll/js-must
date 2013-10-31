@@ -178,7 +178,7 @@ describe("Must.prototype.to", function() {
   })
 })
 
-function mustPassTrue(name, truthy) {
+function mustPassBoolean(name, truthy) {
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
   var throws = truthy ? assertFail : assertPass
@@ -242,11 +242,11 @@ function mustPassTrue(name, truthy) {
 }
 
 describe("Must.prototype.true", function() {
-  mustPassTrue("true", true)
+  mustPassBoolean("true", true)
 })
 
 describe("Must.prototype.false", function() {
-  mustPassTrue("false", false)
+  mustPassBoolean("false", false)
 })
 
 describe("Must.prototype.null", function() {
@@ -914,7 +914,7 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given Boolean", function() {
-    function mustPassTrueEql(bool) {
+    function mustPassBooleanEql(bool) {
       it("must pass given "+bool+" literals", function() {
         assertPass(function() { Must(bool).be.eql(bool) })
       })
@@ -924,13 +924,25 @@ describe("Must.prototype.eql", function() {
         assertPass(function() { Must(new Boolean(bool)).be.eql(bool) })
       })
 
-      it("must fail given "+bool+" literal with "+!bool, function() {
+      it("must pass given "+bool+" objects", function() {
+        assertPass(function() {
+          Must(new Boolean(bool)).be.eql(new Boolean(bool)) 
+        })
+      })
+
+      it("must fail given "+bool+" and "+!bool+" literals ", function() {
         assertFail(function() { Must(bool).be.eql(!bool) })
+      })
+
+      it("must fail given "+bool+" and "+!bool+" objects", function() {
+        assertFail(function() {
+          Must(new Boolean(bool)).be.eql(new Boolean(!bool)) 
+        })
       })
     }
 
-    mustPassTrueEql(true)
-    mustPassTrueEql(false)
+    mustPassBooleanEql(true)
+    mustPassBooleanEql(false)
   })
 
   describe("given Number", function() {
@@ -943,8 +955,16 @@ describe("Must.prototype.eql", function() {
       assertPass(function() { Must(new Number(42)).be.eql(42) })
     })
 
+    it("must pass given equivalent objects", function() {
+      assertPass(function() { Must(new Number(42)).be.eql(new Number(42)) })
+    })
+
     it("must fail given unequivalent literals", function() {
       assertFail(function() { Must(42).be.eql(1337) })
+    })
+
+    it("must fail given unequivalent objects", function() {
+      assertFail(function() { Must(new Number(42)).be.eql(new Number(69)) })
     })
 
     it("must fail given string", function() {
@@ -962,8 +982,16 @@ describe("Must.prototype.eql", function() {
       assertPass(function() { Must(new String("ok")).be.eql("ok") })
     })
 
+    it("must pass given equivalent objects", function() {
+      assertPass(function() { Must(new String("ok")).be.eql(new String("ok")) })
+    })
+
     it("must fail given unequivalent literals", function() {
       assertFail(function() { Must("ok").be.eql("nok") })
+    })
+
+    it("must fail given unequivalent objects", function() {
+      assertFail(function() { Must(new String("ok")).be.eql(new String("no")) })
     })
 
     it("must fail given equivalent number literal", function() {
