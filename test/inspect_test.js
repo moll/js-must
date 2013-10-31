@@ -10,6 +10,24 @@ describe("inspect", function() {
     assert.strictEqual(inspect(null), "null")
   })
 
+  describe("given Number", function() {
+    it("must show 42 as 42", function() {
+      assert.strictEqual(inspect(42), "42")
+    })
+
+    it("must show Infinity as Infinity", function() {
+      assert.strictEqual(inspect(Infinity), "Infinity")
+    })
+
+    it("must show -Infinity as -Infinity", function() {
+      assert.strictEqual(inspect(-Infinity), "-Infinity")
+    })
+
+    it("must show NaN as NaN", function() {
+      assert.strictEqual(inspect(NaN), "NaN")
+    })
+  })
+
   describe("given Date", function() {
     it("must show ISO string representation", function() {
       var date = new Date(Date.UTC(1987, 5, 18, 2))

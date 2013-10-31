@@ -970,6 +970,28 @@ describe("Must.prototype.eql", function() {
     it("must fail given string", function() {
       assertFail(function() { Must(42).eql("42") })
     })
+    
+    it("must pass given Infinities", function() {
+      assertPass(function() { Must(Infinity).eql(Infinity) })
+    })
+
+    it("must pass given -Infinities", function() {
+      assertPass(function() { Must(-Infinity).eql(-Infinity) })
+    })
+
+    it("must fail given Infinity and -Infinity", function() {
+      assertFail(function() { Must(Infinity).eql(-Infinity) })
+      assertFail(function() { Must(-Infinity).eql(Infinity) })
+    })
+
+    it("must pass given NaNs", function() {
+      assertPass(function() { Must(NaN).eql(NaN) })
+    })
+
+    it("must fail given number and NaN", function() {
+      assertFail(function() { Must(42).eql(NaN) })
+      assertFail(function() { Must(NaN).eql(42) })
+    })
   })
 
   describe("given String", function() {
@@ -1109,7 +1131,7 @@ describe("Must.prototype.eql", function() {
       assertPass(function() { Must(fn).be.eql(fn) })
     })
 
-    it("must fail given equivalent objects", function() {
+    it("must fail given equivalent functions", function() {
       assertFail(function() {
         Must(new Function("foo")).be.eql(new Function("foo")) 
       })

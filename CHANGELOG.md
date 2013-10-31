@@ -1,3 +1,6 @@
+## Unreleased
+- Allows asserting `NaN`s with [`eql`] — `NaN.must.eql(NaN)`.
+
 ## 0.9.1 (Oct 31, 2013)
 - Fixes [`eql`] to consider two equivalent boxed `Boolean`, `Number` or `String`
   values *eql*.  

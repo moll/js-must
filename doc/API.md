@@ -276,6 +276,7 @@ For most parts it asserts strict equality (`===`), but:
 - `RegExp` objects are compared by their pattern and flags.
 - `Date` objects are compared by their value.
 - `Array` objects are compared recursively.
+- `NaN`s are considered equivalent.
 - Instances of the same class with a `valueOf` function are compared by its
   output.
 - Plain objects and instances of the same class are compared recursively.
@@ -293,6 +294,7 @@ Others, like `{}` or `Object.create({})`, are **plain objects**.
 new Date(1987, 5, 18).must.eql(new Date(1987, 5, 18))
 ["Lisp", 42].must.eql(["Lisp", 42])
 ({life: 42, love: 69}).must.eql({life: 42, love: 69})
+NaN.must.eql(NaN)
 
 function Answer(answer) { this.answer = answer }
 new Answer(42).must.eql(new Answer(42))
