@@ -1,4 +1,4 @@
-## Unreleased
+## 0.9.1 (Oct 31, 2013)
 - Fixes [`eql`] to consider two equivalent boxed `Boolean`, `Number` or `String`
   values *eql*.  
   Previously it only did so if both were primitive (`42`) or only one was boxed
