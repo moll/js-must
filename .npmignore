@@ -1,4 +1,3 @@
-/.npmignore
 /.travis.yml
 *.tgz
 /tmp/
