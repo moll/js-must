@@ -640,6 +640,10 @@ Given `expected`, the error is asserted as follows:
   is an `instanceof` that constructor.
 - All other cases of `expected` are left unspecified for now.
 
+Because of how JavaScript works, the function will be called in `null`
+context (`this`). If you want to test an instance method, bind it:
+`obj.method.bind(obj).must.throw()`.
+
 **Examples**:
 ```javascript
 function omg() { throw new Error("Everything's amazing and nobody's happy") }
