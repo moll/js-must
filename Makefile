@@ -11,6 +11,9 @@ spec:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R spec $(TEST_OPTS)
 
 autotest:
+	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R dot --watch $(TEST_OPTS)
+
+autospec:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R spec --watch $(TEST_OPTS)
 
 pack:
@@ -49,7 +52,8 @@ clean:
 tag:
 	git tag "v$$(node -e 'console.log(require("./package").version)')"
 
-.PHONY: love test spec autotest
+.PHONY: love
+.PHONY: test spec autotest autospec
 .PHONY: pack publish clean
 .PHONY: doc toc doc.json
 .PHONY: tag
