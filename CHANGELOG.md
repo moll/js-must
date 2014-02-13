@@ -1,3 +1,9 @@
+## Unreleased
+- Works on other JavaScript engines besides V8 by not assuming
+  `Error.captureStackTrace`. Thanks, [Dmitry Starostin][@incrop]!
+
+[@incrop]: https://github.com/incrop
+
 ## 0.10.0 (Oct 31, 2013)
 - Allows asserting `NaN`s with [`eql`] — `NaN.must.eql(NaN)`.
 
