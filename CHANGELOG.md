@@ -1,4 +1,4 @@
-## Unreleased
+## 0.11.0 (Feb 13, 2014)
 - Works on other JavaScript engines besides V8 by not assuming
   `Error.captureStackTrace`. Thanks, [Dmitry Starostin][@incrop]!
 
