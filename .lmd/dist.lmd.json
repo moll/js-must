@@ -4,9 +4,17 @@
     "modules": {
         "index": "index.js",
         "kindof": "node_modules/kindof/kindof.js",
-        "./lib/<%= file %>": "./lib/*.js",
-        "./<%= file %>": "./lib/*.js"
+
+        "./lib/assertion_error": "./lib/assertion_error.js",
+        "./assertion_error": "@./lib/assertion_error",
+
+        "./lib/assertions": "./lib/assertions.js",
+        "./assertions": "@./lib/assertions",
+
+        "./lib/inspect": "./lib/inspect.js",
+        "./inspect": "@./lib/inspect"
     },
     "main": "index",
-    "output": "dist/js-must.js"
+    "output": "dist/js-must.js",
+    "shortcuts": true
 }

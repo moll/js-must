@@ -7,7 +7,7 @@ love:
 test:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R dot $(TEST_OPTS)
 
-spec: 
+spec:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R spec $(TEST_OPTS)
 
 autotest:
@@ -20,7 +20,7 @@ pack:
 	npm pack
 
 dist:
-	@mkdir dist	
+	@mkdir dist
 	@node ./node_modules/.bin/lmd build dist
 
 publish:
@@ -60,5 +60,6 @@ tag:
 .PHONY: love
 .PHONY: test spec autotest autospec
 .PHONY: pack publish clean
+.PHONY: dist
 .PHONY: doc toc doc.json
 .PHONY: tag
