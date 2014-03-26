@@ -19,6 +19,10 @@ autospec:
 pack:
 	npm pack
 
+dist:
+	@mkdir dist	
+	@node ./node_modules/.bin/lmd build dist
+
 publish:
 	npm publish
 
@@ -47,6 +51,7 @@ doc.json:
 	@yuidoc --exclude test,node_modules --parse-only --outdir tmp/doc .
 
 clean:
+	rm -rf dist
 	rm -rf tmp *.tgz
 
 tag:
