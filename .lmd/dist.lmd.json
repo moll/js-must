@@ -3,7 +3,9 @@
     "name": "js-must dist for browser",
     "modules": {
         "index": "index.js",
-        "./lib/<%= file %>": "./lib/*.js"
+        "kindof": "node_modules/kindof/kindof.js",
+        "./lib/<%= file %>": "./lib/*.js",
+        "./<%= file %>": "./lib/*.js"
     },
     "main": "index",
     "output": "dist/js-must.js"
