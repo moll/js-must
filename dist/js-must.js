@@ -309,6 +309,10 @@ sb.on('stats:before-require-count', function (moduleName, module) {
     main(lmd_trigger('lmd-register:decorate-require', 'main', lmd_require)[1], output.exports, output);
 })/*DO NOT ADD ; !*/
 (this,(function (require, exports, module) { /* wrapped by builder */
+window.Must = require('../index');
+
+}),{
+"index": (function (require, exports, module) { /* wrapped by builder */
 var Assertions = require("./lib/assertions")
 var AssertionError = require("./lib/assertion_error")
 module.exports = Must
@@ -392,7 +396,8 @@ function unbox(obj) {
          obj instanceof Number ? obj.valueOf() : obj
 }
 
-}),{
+}),
+"../index": "@index",
 "kindof": (function (require, exports, module) { /* wrapped by builder */
 if (typeof module != "undefined") module.exports = kindof
 

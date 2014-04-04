@@ -2,7 +2,11 @@
     "root": "../",
     "name": "js-must dist for browser",
     "modules": {
+        "exporter": "./lib/exporter.js",
+
         "index": "index.js",
+        "../index": "@index",
+
         "kindof": "node_modules/kindof/kindof.js",
 
         "./lib/assertion_error": "./lib/assertion_error.js",
@@ -14,7 +18,7 @@
         "./lib/inspect": "./lib/inspect.js",
         "./inspect": "@./lib/inspect"
     },
-    "main": "index",
+    "main": "exporter",
     "output": "dist/js-must.js",
     "shortcuts": true
 }
