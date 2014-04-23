@@ -22,6 +22,9 @@ pack:
 publish:
 	npm publish
 
+browser-dist:
+	node node_modules/browserify/bin/cmd.js --standalone Must index.js -o must-browser.js
+
 # NOTE: Sorry, mocumentation is not yet published.
 doc: doc.json
 	@mkdir -p doc
