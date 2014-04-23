@@ -308,6 +308,20 @@ Migrate those to `it("must do good")` with this `sed` script:
 sed -i.should -E -e 's/it\("should/it("must/g' test/**/*.js
 ```
 
+### Script-Tag version
+The script-tag version is built with browserify, and one version is included for your
+convenience here. To use with Mocha, just do like so:
+
+```        
+<script src="/path/to/must-browser/must-browser.js"></script>
+
+<script>
+    mocha.ui('bdd');
+    mocha.reporter('html');
+    var expect = Must;
+</script>
+```
+
 <a name="asserting-on-property-access" />
 ### Beware of libraries that assert on property access
 Among other things, one reason why [Should.js][should.js] and
