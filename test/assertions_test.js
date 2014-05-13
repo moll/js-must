@@ -1684,6 +1684,50 @@ describe("Must.prototype.contain", function() {
   })
 })
 
+describe("Must.prototype.permutationOf", function() {
+  it("must pass if given array have same members", function() {
+    assertPass(function() { [1, 2, 3].must.be.a.permutationOf([3, 2, 1]) })
+  })
+
+  it("must fail if given array does not have same members", function() {
+    assertFail(function() { [1, 2, 3].must.be.a.permutationOf([1]) })
+  })
+
+  it("must fail if given array is missing duplicated members", function() {
+    assertFail(function() { [1, 2].must.be.a.permutationOf([2, 1, 1]) })
+  })
+
+  it("must fail if given array have extra duplicated members", function() {
+    assertFail(function() { [1, 1, 2].must.be.a.permutationOf([2, 1]) })
+  })
+
+  it("must pass if given array have same duplicated members", function() {
+    assertPass(function() { [1, 1, 2].must.be.a.permutationOf([2, 1, 1]) })
+  })
+
+  mustThrowAssertionError(function() { [1, 2, 3].must.be.a.permutationOf([1, 2]) }, {
+    actual: [1, 2, 3],
+    expected: [1, 2],
+    diffable: true,
+    message: "[1,2,3] must be a permutation of [1,2]"
+  })
+
+  describe(".not", function() {
+    function not() { [1, 2, 3].must.not.be.a.permutationOf([1, 2, 3]) }
+
+    it("must invert the assertion", function() {
+      assertFail(not)
+    })
+
+    mustThrowAssertionError(not, {
+      actual: [1, 2, 3],
+      expected: [1, 2, 3],
+      diffable: true,
+      message: "[1,2,3] must not be a permutation of [1,2,3]"
+    })
+  })
+})
+
 describe("Must.prototype.match", function() {
   describe("given String and RegExp", function() {
     var literal = "Year 2014 might be like 1984."
