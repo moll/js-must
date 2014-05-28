@@ -1685,7 +1685,7 @@ describe("Must.prototype.contain", function() {
 })
 
 describe("Must.prototype.permutationOf", function() {
-  it("must pass if given array have same members", function() {
+  it("must pass if given array has same members", function() {
     assertPass(function() { [1, 2, 3].must.be.a.permutationOf([3, 2, 1]) })
   })
 
@@ -1697,15 +1697,25 @@ describe("Must.prototype.permutationOf", function() {
     assertFail(function() { [1, 2].must.be.a.permutationOf([2, 1, 1]) })
   })
 
-  it("must fail if given array have extra duplicated members", function() {
+  it("must fail if given array has extra duplicated members", function() {
     assertFail(function() { [1, 1, 2].must.be.a.permutationOf([2, 1]) })
   })
 
-  it("must pass if given array have same duplicated members", function() {
+  it("must pass if given array has same duplicated members", function() {
     assertPass(function() { [1, 1, 2].must.be.a.permutationOf([2, 1, 1]) })
   })
 
-  mustThrowAssertionError(function() { [1, 2, 3].must.be.a.permutationOf([1, 2]) }, {
+  it("must pass if both arrays empty", function() {
+    assertPass(function() { [].must.be.a.permutationOf([]) })
+  })
+
+  it("must fail if given array has member of different type", function() {
+    assertFail(function() { [1].must.be.a.permutationOf(["1"]) })
+  })
+
+  mustThrowAssertionError(function() {
+    [1, 2, 3].must.be.a.permutationOf([1, 2])
+  }, {
     actual: [1, 2, 3],
     expected: [1, 2],
     diffable: true,
