@@ -1,4 +1,4 @@
-## Unreleased
+## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.
   Thanks, [Miroslav Bajtoš][@bajtos]!
 
