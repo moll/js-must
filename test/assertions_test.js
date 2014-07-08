@@ -2150,7 +2150,7 @@ function mustPassProperty(name, inheritable) {
 
     mustThrowAssertionError(function() { Must({}).have[name]("love", 69) }, {
       actual: {},
-      message: "{} must have "+errName+" \"love\" equal to 69"
+      message: "{} must have "+errName+" \"love\" equal to 69, but is undefined"
     })
 
     describe(".not", function() {
@@ -2162,7 +2162,7 @@ function mustPassProperty(name, inheritable) {
 
       mustThrowAssertionError(not, {
         actual: {love: 69},
-        message: "{\"love\":69} must not have "+errName+" \"love\" equal to 69"
+        message: "{\"love\":69} must not have "+errName+" \"love\" equal to 69, but is 69"
       })
     })
   })
