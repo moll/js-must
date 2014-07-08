@@ -44,11 +44,11 @@ Must.js API Documentation
 - [null](#Must.prototype.null)()
 - [number](#Must.prototype.number)()
 - [object](#Must.prototype.object)()
-- [own](#Must.prototype.own)(property, [value])
+- [own](#Must.prototype.own)(property, [value, strict])
 - [ownKeys](#Must.prototype.ownKeys)(keys)
-- [ownProperty](#Must.prototype.ownProperty)(property, [value])
+- [ownProperty](#Must.prototype.ownProperty)(property, [value, strict])
 - [permutationOf](#Must.prototype.permutationOf)(expected)
-- [property](#Must.prototype.property)(property, [value])
+- [property](#Must.prototype.property)(property, [value, strict])
 - [regexp](#Must.prototype.regexp)()
 - [string](#Must.prototype.string)()
 - [throw](#Must.prototype.throw)([constructor], [expected])
@@ -566,7 +566,7 @@ Assert object is an.. object.
 ```
 
 <a name="Must.prototype.own" />
-### Must.prototype.own(property, [value])
+### Must.prototype.own(property, [value, strict])
 Alias of [`ownProperty`](#Must.prototype.ownProperty).  
 
 <a name="Must.prototype.ownKeys" />
@@ -583,9 +583,10 @@ Pass an array of strings as `keys`.
 ```
 
 <a name="Must.prototype.ownProperty" />
-### Must.prototype.ownProperty(property, [value])
+### Must.prototype.ownProperty(property, [value, strict])
 Assert that an object has own property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
+Third parameter `false` makes the equality check non-strict.
 
 **Does not** take **inherited properties** into account. To do so, see 
 [`property`](#Must.prototype.property).
@@ -610,9 +611,10 @@ Elements are checked with strict equals (`===`).
 ```
 
 <a name="Must.prototype.property" />
-### Must.prototype.property(property, [value])
+### Must.prototype.property(property, [value, strict])
 Assert that an object has property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
+Third parameter `false` makes the equality check non-strict.
 
 Takes **inherited properties** into account. To not do so, see
 [`ownProperty`](#Must.prototype.ownProperty).
