@@ -47,6 +47,7 @@ Must.js API Documentation
 - [own](#Must.prototype.own)(property, [value])
 - [ownKeys](#Must.prototype.ownKeys)(keys)
 - [ownProperty](#Must.prototype.ownProperty)(property, [value])
+- [permutationOf](#Must.prototype.permutationOf)(expected)
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
 - [string](#Must.prototype.string)()
@@ -592,6 +593,20 @@ Optionally assert it *equals* (`===`) to `value`.
 **Examples**:
 ```javascript
 ({life: 42, love: 69}).must.have.ownProperty("love", 69)
+```
+
+<a name="Must.prototype.permutationOf" />
+### Must.prototype.permutationOf(expected)
+Assert that an array is a permutation of the given array.
+
+An array is a permutation of another if they both have the same elements
+(including the same number of duplicates) regardless of their order.
+Elements are checked with strict equals (`===`).
+
+**Examples**:
+```javascript
+[1, 1, 2, 3].must.be.a.permutationOf([3, 2, 1, 1])
+[7, 8, 8, 9].must.not.be.a.permutationOf([9, 8, 7])
 ```
 
 <a name="Must.prototype.property" />

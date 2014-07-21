@@ -1,3 +1,10 @@
+## 0.12.0 (May 28, 2014)
+- Adds [`permutationOf`] to assert that two arrays contain the same elements.
+  Thanks, [Miroslav Bajtoš][@bajtos]!
+
+[`permutationOf`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.permutationOf
+[@bajtos]: http://about.me/bajtos
+
 ## 0.11.0 (Feb 13, 2014)
 - Works on other JavaScript engines besides V8 by not assuming
   `Error.captureStackTrace`. Thanks, [Dmitry Starostin][@incrop]!

@@ -1,6 +1,6 @@
 {
 	"name": "must",
-	"version": "0.11.0",
+	"version": "0.12.0",
 	"description": "Testing and assertion library with friendly BDD syntax — awesome.must.be.true(). Many expressive matchers and is test runner and framework agnostic. Follows RFC 2119 with its use of MUST. Good and well tested stuff.",
 	"keywords": ["assert", "assertion", "bdd", "test", "testing", "rfc2119"],
 	"homepage": "https://github.com/moll/js-must",
