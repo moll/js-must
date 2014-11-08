@@ -1825,6 +1825,21 @@ describe("Must.prototype.throw", function() {
     })
   })
 
+  describe("given Error instance", function() {
+    var instance = new Error("Sad face! :o(")
+
+    function thrower() { throw instance }
+    function otherThrower() { throw new Error("Sad face! :o(") }
+
+    it("must pass if function throws with identical error instance", function() {
+      assertPass(function() { thrower.must.throw(instance) })
+    })
+
+    it("must fail if function throws with a different error instance", function() {
+      assertFail(function() { otherThrower.must.throw(instance) })
+    })
+  })
+
   describe("given String", function() {
     function thrower() { throw new Error("Oh no!") }
     function stringThrower() { throw new Error("Oh no!") }
@@ -1936,7 +1951,7 @@ describe("Must.prototype.throw", function() {
         assertPass(function() { thrower.must.throw(TypeError, /no!/) })
       })
 
-      it("must fail if function throws other instsance", function() {
+      it("must fail if function throws other instance", function() {
         assertFail(function() { thrower.must.throw(RangeError, /no!/) })
       })
 
