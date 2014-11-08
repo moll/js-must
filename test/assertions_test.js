@@ -1936,7 +1936,7 @@ describe("Must.prototype.throw", function() {
         assertPass(function() { thrower.must.throw(TypeError, /no!/) })
       })
 
-      it("must fail if function throws other instsance", function() {
+      it("must fail if function throws other instance", function() {
         assertFail(function() { thrower.must.throw(RangeError, /no!/) })
       })
 
