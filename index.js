@@ -4,7 +4,7 @@ module.exports = Must
 
 /**
  * The main class that wraps the asserted object and that you call matchers on.
- * 
+ *
  * Most of the time you'll be using
  * [`Object.prototype.must`](#Object.prototype.must) to create this wrapper, but
  * occasionally you might want to assert `null`s or `undefined`s and in those
@@ -50,7 +50,7 @@ Must.AssertionError = AssertionError
  * @example
  * true.must.be.true()
  * [].must.be.empty()
- * 
+ *
  * @property must
  * @for Object
  * @on prototype
