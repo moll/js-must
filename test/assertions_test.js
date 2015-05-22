@@ -1435,6 +1435,12 @@ describe("Must.prototype.eql", function() {
   })
 })
 
+describe("Must.prototype.deepEqual", function() {
+  it("must be an alias of Must.prototype.eql", function() {
+    assert.strictEqual(Must.prototype.deepEqual, Must.prototype.eql)
+  })
+})
+
 describe("Must.prototype.empty", function() {
   describe("given Boolean", function() {
     it("must fail given a true literal", function() {
