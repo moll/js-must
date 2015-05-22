@@ -50,6 +50,7 @@ Must.js API Documentation
 - [permutationOf](#Must.prototype.permutationOf)(expected)
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
+- [strictEqual](#Must.prototype.strictEqual)(expected)
 - [string](#Must.prototype.string)()
 - [throw](#Must.prototype.throw)([constructor], [expected])
 - [to](#Must.prototype.to)
@@ -631,6 +632,10 @@ Assert object is a regular expression.
 ```javascript
 /[a-z]/.must.be.a.regexp()
 ```
+
+<a name="Must.prototype.strictEqual" />
+### Must.prototype.strictEqual(expected)
+Alias of [`eql`](#Must.prototype.eql).
 
 <a name="Must.prototype.string" />
 ### Must.prototype.string()

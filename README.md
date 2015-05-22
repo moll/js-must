@@ -236,6 +236,7 @@ Must.js, please see the [Must.js API Documentation][api].
 - [permutationOf](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.permutationOf)(expected)
 - [property](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.property)(property, [value])
 - [regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()
+- [strictEqual](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.strictEqual)(expected)
 - [string](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string)()
 - [throw](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.throw)([constructor], [expected])
 - [to](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.to)
