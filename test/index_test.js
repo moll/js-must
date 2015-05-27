@@ -105,6 +105,8 @@ describe("Object.prototype.must", function() {
 })
 
 describe("Global.must", function() {
+  /* global must */
+
   it("must be an instance of Must by default", function() {
     assert(must instanceof Must)
   })
