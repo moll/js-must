@@ -53,16 +53,34 @@ describe("Object.prototype.must", function() {
   })
 
   describe("when called on", function() {
-    it("must unbox boolean", function() {
+    // Allow using Boolean, Number, String as constructor in tests:
+    /* jshint -W053 */
+
+    it("must not box boolean", function() {
       assert.strictEqual(true.must.actual, true)
     })
 
-    it("must unbox number", function() {
+    it("must not box number", function() {
       assert.strictEqual((42).must.actual, 42)
     })
 
-    it("must unbox string", function() {
+    it("must not box string", function() {
       assert.strictEqual("foo".must.actual, "foo")
+    })
+
+    it("must leave boxed boolean as-is", function() {
+      var boolean = new Boolean(true)
+      assert.strictEqual(boolean.must.actual, boolean)
+    })
+
+    it("must leave boxed number as-is", function() {
+      var number = new Number(42)
+      assert.strictEqual(number.must.actual, number)
+    })
+
+    it("must leave boxed string as-is", function() {
+      var string = new String("hello")
+      assert.strictEqual(string.must.actual, string)
     })
 
     it("must not unbox date", function() {
