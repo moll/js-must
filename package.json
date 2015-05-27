@@ -1,5 +1,5 @@
 {
-	"name": "must",
+	"name": "must-dist",
 	"version": "0.12.0",
 	"description": "Testing and assertion library with friendly BDD syntax — awesome.must.be.true(). Many expressive matchers and is test runner and framework agnostic. Follows RFC 2119 with its use of MUST. Good and well tested stuff.",
 	"keywords": ["assert", "assertion", "bdd", "test", "testing", "rfc2119"],
@@ -30,6 +30,7 @@
 	},
 
 	"devDependencies": {
-		"mocha": ">= 1.12.0 < 2"
+		"mocha": ">= 1.12.0 < 2",
+		"lmd": "~1.11.x"
 	}
 }

@@ -7,7 +7,7 @@ love:
 test:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R dot $(TEST_OPTS)
 
-spec: 
+spec:
 	@node $(NODE_OPTS) ./node_modules/.bin/mocha -R spec $(TEST_OPTS)
 
 autotest:
@@ -18,6 +18,10 @@ autospec:
 
 pack:
 	npm pack
+
+dist:
+	@mkdir dist
+	@node ./node_modules/.bin/lmd build dist
 
 publish:
 	npm publish
@@ -47,6 +51,7 @@ doc.json:
 	@yuidoc --exclude test,node_modules --parse-only --outdir tmp/doc .
 
 clean:
+	rm -rf dist
 	rm -rf tmp *.tgz
 
 tag:
@@ -55,5 +60,6 @@ tag:
 .PHONY: love
 .PHONY: test spec autotest autospec
 .PHONY: pack publish clean
+.PHONY: dist
 .PHONY: doc toc doc.json
 .PHONY: tag

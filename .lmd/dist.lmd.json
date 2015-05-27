@@ -1,0 +1,24 @@
+{
+    "root": "../",
+    "name": "js-must dist for browser",
+    "modules": {
+        "exporter": "./lib/exporter.js",
+
+        "index": "index.js",
+        "../index": "@index",
+
+        "kindof": "node_modules/kindof/kindof.js",
+
+        "./lib/assertion_error": "./lib/assertion_error.js",
+        "./assertion_error": "@./lib/assertion_error",
+
+        "./lib/assertions": "./lib/assertions.js",
+        "./assertions": "@./lib/assertions",
+
+        "./lib/inspect": "./lib/inspect.js",
+        "./inspect": "@./lib/inspect"
+    },
+    "main": "exporter",
+    "output": "dist/js-must.js",
+    "shortcuts": true
+}
