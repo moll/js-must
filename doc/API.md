@@ -14,6 +14,7 @@ Must.js API Documentation
 - [boolean](#Must.prototype.boolean)()
 - [contain](#Must.prototype.contain)(expected)
 - [date](#Must.prototype.date)()
+- [deepEqual](#Must.prototype.deepEqual)(expected)
 - [empty](#Must.prototype.empty)()
 - [enumerable](#Must.prototype.enumerable)(property)
 - [enumerableProperty](#Must.prototype.enumerableProperty)(property)
@@ -50,6 +51,7 @@ Must.js API Documentation
 - [permutationOf](#Must.prototype.permutationOf)(expected)
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
+- [strictEqual](#Must.prototype.strictEqual)(expected)
 - [string](#Must.prototype.string)()
 - [throw](#Must.prototype.throw)([constructor], [expected])
 - [to](#Must.prototype.to)
@@ -231,6 +233,10 @@ Assert object is a date.
 ```javascript
 new Date().must.be.a.date()
 ```
+
+<a name="Must.prototype.deepEqual" />
+### Must.prototype.deepEqual(expected)
+Alias of [`equal`](#Must.prototype.equal).
 
 <a name="Must.prototype.empty" />
 ### Must.prototype.empty()
@@ -631,6 +637,10 @@ Assert object is a regular expression.
 ```javascript
 /[a-z]/.must.be.a.regexp()
 ```
+
+<a name="Must.prototype.strictEqual" />
+### Must.prototype.strictEqual(expected)
+Alias of [`eql`](#Must.prototype.eql).
 
 <a name="Must.prototype.string" />
 ### Must.prototype.string()

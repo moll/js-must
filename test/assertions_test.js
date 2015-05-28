@@ -892,6 +892,12 @@ describe("Must.prototype.equal", function() {
   })
 })
 
+describe("Must.prototype.strictEqual", function() {
+  it("must be an alias of Must.prototype.equal", function() {
+    assert.strictEqual(Must.prototype.strictEqual, Must.prototype.equal)
+  })
+})
+
 describe("Must.prototype.eql", function() {
   it("must pass given nulls", function() {
     assertPass(function() { Must(null).be.eql(null) })
@@ -1426,6 +1432,12 @@ describe("Must.prototype.eql", function() {
       diffable: true,
       message: "\"secret\" must not be equivalent to \"secret\""
     })
+  })
+})
+
+describe("Must.prototype.deepEqual", function() {
+  it("must be an alias of Must.prototype.eql", function() {
+    assert.strictEqual(Must.prototype.deepEqual, Must.prototype.eql)
   })
 })
 
