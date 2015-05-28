@@ -2013,7 +2013,6 @@ describe("Must.prototype.throw", function() {
     var thrower = function() { throw "Nope!" }
     mustThrowAssertionError(function() { thrower.must.throw("Oh no!") }, {
       actual: thrower,
-      expected: "Oh no!",
       message: "function () { throw \"Nope!\" } must throw \"Oh no!\""
     })
   })
