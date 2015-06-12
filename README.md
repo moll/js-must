@@ -67,7 +67,7 @@ tool is [Mocha][mocha].
 
 - Works with any test runner and framework.  
 - Avoids type coercions and mismatches.
-- Well tested — over 750 cases in over 2500 lines of tests. That makes a test to
+- Well tested — over 700 cases in over 2500 lines of tests. That makes a test to
   code ratio of 5:1.
 
 ### Using Should.js or Chai.js? Switch for safety!
