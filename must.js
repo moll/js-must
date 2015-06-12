@@ -1,6 +1,7 @@
 var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
-var inspect = require("./lib/inspect")
+var defineGetter = require("./lib").defineGetter
+var inspect = require("./lib").inspect
 exports = module.exports = Must
 exports.AssertionError = AssertionError
 
@@ -1048,10 +1049,4 @@ function enumerableKeys(obj) {
   var keys = []
   for (var key in obj) keys.push(key)
   return keys
-}
-
-function defineGetter(obj, name, get) {
-  Object.defineProperty(obj, name, {
-    get: get, configurable: true, enumerable: true
-  })
 }

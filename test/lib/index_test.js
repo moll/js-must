@@ -1,4 +1,4 @@
-var inspect = require("../lib/inspect")
+var inspect = require("../../lib").inspect
 var assert = require("assert")
 
 describe("inspect", function() {
