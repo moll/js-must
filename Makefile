@@ -1,5 +1,7 @@
-NODE_OPTS :=
-TEST_OPTS :=
+NODE_OPTS =
+TEST_OPTS =
+MOCUMENT = ~/Documents/Mocumentation/bin/mocument
+MOCUMENT_OPTS = --type yui --title Must.js
 
 love:
 	@echo "Feel like makin' love."
@@ -25,21 +27,18 @@ publish:
 # NOTE: Sorry, mocumentation is not yet published.
 doc: doc.json
 	@mkdir -p doc
-	@~/Documents/Mocumentation/bin/mocument \
-		--type yui \
-		--title Must.js \
+	@$(MOCUMENT) $(MOCUMENT_OPTS) \
 		--priority Must,Object \
 		tmp/doc/data.json > doc/API.md
 
 toc: doc.json
-	@~/Documents/Mocumentation/bin/mocument \
-		--type yui \
+	@$(MOCUMENT) $(MOCUMENT_OPTS) \
 		--template toc \
 		--include Must \
 		--var api_url=https://github.com/moll/js-must/blob/master/doc/API.md \
 		tmp/doc/data.json > tmp/TOC.md
 
-	echo "/^### \[Must\]/,/^\$$/{/^#/r tmp/TOC.md\n/^\$$/!d;}" |\
+	@echo '/^API$$/,/^Migrating/{/^API$$/{r tmp/TOC.md\na\\\n\\\n\\\n\n};/^Migrating/!d;}' |\
 		sed -i "" -f /dev/stdin README.md
 
 doc.json:
