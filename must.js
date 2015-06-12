@@ -1,6 +1,7 @@
 var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
 var defineGetter = require("./lib").defineGetter
+var lookupGetter = require("./lib").lookupGetter
 var inspect = require("./lib").inspect
 var chain = require("./lib").chain
 exports = module.exports = Must
@@ -355,7 +356,7 @@ defineGetter(Must.prototype, "a", chain(Must.prototype.instanceof))
   * @method an
   * @alias instanceof
   */
-defineGetter(Must.prototype, "an", chain(Must.prototype.instanceof))
+defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
 
 /**
  * Assert that an object is empty.  
