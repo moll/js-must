@@ -1,3 +1,10 @@
+var Must = require("../..")
+var assert = require("./assert")
+
 describe("Must.prototype.is", function() {
-  require("./_pass_through_equal_test")("is")
+  it("must be an alias of Must.prototype.be", function() {
+    var be = Object.getOwnPropertyDescriptor(Must.prototype, "be").get
+    var is = Object.getOwnPropertyDescriptor(Must.prototype, "is").get
+    assert.strictEqual(is, be)
+  })
 })

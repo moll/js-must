@@ -426,7 +426,7 @@ defineGetter(Must.prototype, "be", chain(Must.prototype.equal))
   * @method is
   * @alias equal
   */
-defineGetter(Must.prototype, "is", chain(Must.prototype.equal))
+defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
 
 /**
  * Assert object equality by content and if possible, recursively.  
