@@ -103,24 +103,21 @@ module.exports = function(name, truthy) {
     life: {value: 42, enumerable: true},
     love: {value: 69, enumerable: false},
   })
+
   var errProp = truthy ? "love" : "life"
 
-  require("./_assertion_error_test")(function() { Must(errObj).have[name](errProp) }, {
+  require("./_assertion_error_test")(function() {
+    Must(errObj).have[name](errProp)
+  }, {
     actual: {life: 42},
     message: "{\"life\":42} must have "+name+" property \""+errProp+"\""
   })
 
   describe(".not", function() {
     var errProp = truthy ? "life" : "love"
-    function not() { Must(errObj).not.have[name](errProp) }
 
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: {life: 42},
-      message: "{\"life\":42} must not have "+name+" property \""+errProp+"\""
+      assert.fail(function() { Must(errObj).not.have[name](errProp) })
     })
   })
 }

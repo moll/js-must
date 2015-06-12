@@ -23,20 +23,12 @@ module.exports = function(name) {
   })
 
   describe(".not", function() {
-    function not() { Must([]).not.be[name](Array) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
+      assert.fail(function() { Must([]).not.be[name](Array) })
     })
 
     it("must carry over the current state", function() {
       assert.fail(function() { Must(true).not.be[name].truthy() })
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: [],
-      expected: Array,
-      message: "[] must not be an instance of Array"
     })
   })
 }

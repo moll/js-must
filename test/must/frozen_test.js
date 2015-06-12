@@ -16,15 +16,8 @@ describe(".prototype.frozen", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(Object.freeze({})).not.be.frozen() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: {},
-      message: "{} must not be frozen"
+      assert.fail(function() { Must(Object.freeze({})).not.be.frozen() })
     })
   })
 })

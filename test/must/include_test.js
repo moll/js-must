@@ -86,16 +86,8 @@ describe("Must.prototype.include", function() {
   })
 
   describe(".not", function() {
-    function not() { Must([1, 42, 3]).not.include(42) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: [1, 42, 3],
-      expected: 42,
-      message: "[1,42,3] must not include 42"
+      assert.fail(function() { Must([1, 42, 3]).not.include(42) })
     })
   })
 })

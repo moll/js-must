@@ -144,16 +144,8 @@ describe("Must.prototype.equal", function() {
   })
 
   describe(".not", function() {
-    function not() { Must("secret").not.equal("secret") }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: "secret",
-      expected: "secret",
-      message: "\"secret\" must not equal \"secret\""
+      assert.fail(function() { Must("secret").not.equal("secret") })
     })
   })
 })

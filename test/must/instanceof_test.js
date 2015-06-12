@@ -102,16 +102,8 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe(".not", function() {
-    function not() { Must([]).not.be.instanceof(Array) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: [],
-      expected: Array,
-      message: "[] must not be an instance of Array"
+      assert.fail(function() { Must([]).not.be.instanceof(Array) })
     })
   })
 })

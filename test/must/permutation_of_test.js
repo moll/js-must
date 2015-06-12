@@ -40,17 +40,10 @@ describe("Must.prototype.permutationOf", function() {
   })
 
   describe(".not", function() {
-    function not() { Must([1, 2, 3]).not.be.a.permutationOf([1, 2, 3]) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: [1, 2, 3],
-      expected: [1, 2, 3],
-      diffable: true,
-      message: "[1,2,3] must not be a permutation of [1,2,3]"
+      assert.fail(function() {
+        Must([1, 2, 3]).not.be.a.permutationOf([1, 2, 3])
+      })
     })
   })
 })

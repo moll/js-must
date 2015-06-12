@@ -40,15 +40,8 @@ module.exports = function(name, inheritable) {
     })
 
     describe(".not", function() {
-      function not() { Must({love: 69}).not.have[name]("love") }
-
       it("must invert the assertion", function() {
-        assert.fail(not)
-      })
-
-      require("./_assertion_error_test")(not, {
-        actual: {love: 69},
-        message: "{\"love\":69} must not have "+errName+" \"love\""
+        assert.fail(function() { Must({love: 69}).not.have[name]("love") })
       })
     })
   })
@@ -94,15 +87,8 @@ module.exports = function(name, inheritable) {
     })
 
     describe(".not", function() {
-      function not() { Must({love: 69}).not.have[name]("love", 69) }
-
       it("must invert the assertion", function() {
-        assert.fail(not)
-      })
-
-      require("./_assertion_error_test")(not, {
-        actual: {love: 69},
-        message: "{\"love\":69} must not have "+errName+" \"love\" equal to 69"
+        assert.fail(function() { Must({love: 69}).not.have[name]("love", 69) })
       })
     })
   })

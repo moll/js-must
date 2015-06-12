@@ -21,16 +21,8 @@ describe(".prototype.most", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(42).not.be.at.most(69) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: 42,
-      expected: 69,
-      message: "42 must not be at most 69"
+      assert.fail(function() { Must(42).not.be.at.most(69) })
     })
   })
 })

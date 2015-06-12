@@ -21,16 +21,8 @@ describe(".prototype.above", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(69).not.be.above(42) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: 69,
-      expected: 42,
-      message: "69 must not be above 42"
+      assert.fail(function() { Must(69).not.be.above(42) })
     })
   })
 })

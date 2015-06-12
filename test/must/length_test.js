@@ -29,16 +29,8 @@ describe("Must.prototype.length", function() {
   })
 
   describe(".not", function() {
-    function not() { Must("hello").not.have.length(5) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: "hello",
-      expected: 5,
-      message: "\"hello\" must not have length of 5"
+      assert.fail(function() { Must("hello").not.have.length(5) })
     })
   })
 })

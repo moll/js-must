@@ -188,15 +188,9 @@ describe("Must.prototype.throw", function() {
 
   describe(".not", function() {
     function thrower() { throw 42 }
-    function not() { Must(thrower).not.throw() }
 
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: thrower,
-      message: "function thrower() { throw 42 } must not throw"
+      assert.fail(function() { Must(thrower).not.throw() })
     })
   })
 

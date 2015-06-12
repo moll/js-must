@@ -33,16 +33,8 @@ describe("Must.prototype.undefined", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(undefined).not.be.undefined() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: undefined,
-      expected: undefined,
-      message: "undefined must not be undefined"
+      assert.fail(function() { Must(undefined).not.be.undefined() })
     })
   })
 })

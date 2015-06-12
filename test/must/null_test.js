@@ -33,16 +33,8 @@ describe("Must.prototype.null", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(null).not.be.null() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: null,
-      expected: null,
-      message: "null must not be null"
+      assert.fail(function() { Must(null).not.be.null() })
     })
   })
 })

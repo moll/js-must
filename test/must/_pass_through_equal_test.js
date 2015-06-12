@@ -28,20 +28,12 @@ module.exports = function(name) {
   })
 
   describe(".not", function() {
-    function not() { Must(true).not[name](true) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
+      assert.fail(function() { Must(true).not[name](true) })
     })
 
     it("must carry over the current state", function() {
       assert.fail(function() { Must(true).not[name].true() })
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: true,
-      expected: true,
-      message: "true must not equal true"
     })
   })
 }

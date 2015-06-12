@@ -28,15 +28,8 @@ describe("Must.prototype.exist", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(true).not.exist() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: true,
-      message: "true must not exist"
+      assert.fail(function() { Must(true).not.exist() })
     })
   })
 })

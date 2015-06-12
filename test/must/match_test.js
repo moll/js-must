@@ -66,16 +66,8 @@ describe("Must.prototype.match", function() {
   })
 
   describe(".not", function() {
-    function not() { Must("1984").not.match(/^1984$/) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: "1984",
-      expected: /^1984$/,
-      message: "\"1984\" must not match /^1984$/"
+      assert.fail(function() { Must("1984").not.match(/^1984$/) })
     })
   })
 })

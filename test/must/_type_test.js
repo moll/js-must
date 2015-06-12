@@ -43,15 +43,8 @@ module.exports = function(name, msg, values, inspect) {
   })
 
   describe(".not", function() {
-    function not() { Must(valid).not.be[name]() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: valid,
-      message: inspect + " must not " + msg
+      assert.fail(function() { Must(valid).not.be[name]() })
     })
   })
 }

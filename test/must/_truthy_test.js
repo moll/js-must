@@ -119,15 +119,8 @@ module.exports = function(name, truthy) {
   })
 
   describe(".not", function() {
-    function not() { Must(truthy).not.be[name]() }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: truthy,
-      message: truthy + " must not be " + name
+      assert.fail(function() { Must(truthy).not.be[name]() })
     })
   })
 }

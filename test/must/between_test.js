@@ -30,15 +30,8 @@ describe("Must.prototype.between", function() {
   })
 
   describe(".not", function() {
-    function not() { Must(50).not.be.between(42, 69) }
-
     it("must invert the assertion", function() {
-      assert.fail(not)
-    })
-
-    require("./_assertion_error_test")(not, {
-      actual: 50,
-      message: "50 must not be between 42 and 69"
+      assert.fail(function() { Must(50).not.be.between(42, 69) })
     })
   })
 })
