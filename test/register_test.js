@@ -1,34 +1,16 @@
-// Bootstrapping with Assert ^_^:
-var assert = require("assert")
-var Must = require("..")
 var Path = require("path")
+var Must
+var assert = require("assert")
 
-describe("Must", function() {
-  it("must return an instance of itself when called as a function", function() {
-    assert(Must() instanceof Must)
-  })
-
-  it("must have a constructor property", function() {
-    assert.strictEqual(new Must().constructor, Must)
-  })
-
-  it("must have constructor as a non-enumerable property", function() {
-    var must = new Must
-    for (var key in must) assert.notEqual(key, "constructor")
-  })
-
-  it("must have name", function() {
-    assert.strictEqual(Must.name, "Must")
-  })
-
-  describe("new", function() {
-    it("must return an instance of Must", function() {
-      assert(new Must instanceof Must)
-    })
-  })
-})
+function reload() {
+  // Reload to reset the fiddling we did here.
+  delete require.cache[Path.resolve(__dirname, "../register.js")]
+  Must = require("../register")
+}
 
 describe("Object.prototype.must", function() {
+  beforeEach(reload)
+
   it("must exist", function() {
     assert(true.must)
   })
@@ -114,16 +96,11 @@ describe("Object.prototype.must", function() {
       assert.strictEqual(foo.must.actual, foo)
     })
   })
-
-  afterEach(function() {
-    // Reload to reset the fiddling we did here.
-    delete require.cache[Path.resolve(__dirname, "../index.js")]
-    Must = require("..")
-  })
 })
 
 describe("Global.must", function() {
   /* global must */
+  beforeEach(reload)
 
   it("must be an instance of Must by default", function() {
     assert(must instanceof Must)

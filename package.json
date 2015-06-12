@@ -22,7 +22,7 @@
 		"url" : "https://github.com/moll/js-must/blob/master/LICENSE"
 	}],
 
-	"main": "index.js",
+	"main": "register.js",
 	"scripts": {"test": "make test"},
 
 	"dependencies": {
