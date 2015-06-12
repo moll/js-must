@@ -1,9 +1,7 @@
 Must.js
 =======
-[![NPM version][npm-badge]](http://badge.fury.io/js/must)
+[![NPM version][npm-badge]](https://www.npmjs.com/package/must)
 [![Build status][travis-badge]](https://travis-ci.org/moll/js-must)
-[npm-badge]: https://badge.fury.io/js/must.png
-[travis-badge]: https://travis-ci.org/moll/js-must.png?branch=master
 
 Must.js is a testing and assertion library for JavaScript and Node.js with
 a friendly **BDD** syntax (`awesome.must.be.true()`). It ships with **many
@@ -14,6 +12,8 @@ For those new to testing JavaScript on Node.js, you'll also need a test
 framework (also called a test-runner or a harness) to run your tests. One such
 tool is [Mocha][mocha].
 
+[npm-badge]: https://img.shields.io/npm/v/must.svg
+[travis-badge]: https://travis-ci.org/moll/js-must.png?branch=master
 [rfc2119]: https://www.ietf.org/rfc/rfc2119.txt
 [mocha]: http://visionmedia.github.io/mocha
 
