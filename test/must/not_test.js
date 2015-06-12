@@ -6,17 +6,17 @@ describe("Must.prototype.not", function() {
     assert(Must(true).not instanceof Must)
   })
 
-  it("must carry over the current state", function() {
+  it("must invert condition", function() {
     assert.pass(function() { Must(false).not.equal(true) })
   })
 
-  it("must invert condition each time", function() {
+  it("must invert condition multiple times", function() {
     assert.pass(function() { Must(true).not.not.equal(true) })
   })
 
-  // TODO: Check that the previous must instance is not modified.
   it("must return a new instance of Must", function() {
     var must = Must(true)
-    assert.notStrictEqual(must.not, must)
+    assert.fail(function() { must.not.equal(true) })
+    assert.pass(function() { must.equal(true) })
   })
 })
