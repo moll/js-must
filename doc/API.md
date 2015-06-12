@@ -176,7 +176,7 @@ Works well with dates where saying *before* is more natural than *below* or
 *less than*.
 
 To assert that a date is equivalent to another date, use
-[`eql`](#Must.prototype.eql). For regular numbers, 
+[`eql`](#Must.prototype.eql). For regular numbers,
 [`equal`](#Must.prototype.equal) is fine.
 
 **Examples**:
@@ -574,7 +574,7 @@ Alias of [`ownProperty`](#Must.prototype.ownProperty).
 Assert that an object has only the expected enumerable `keys` of its own.  
 Pass an array of strings as `keys`.
 
-**Does not** take **inherited properties** into account. To do so, see 
+**Does not** take **inherited properties** into account. To do so, see
 [`keys`](#Must.prototype.keys).
 
 **Examples**:
@@ -587,7 +587,7 @@ Pass an array of strings as `keys`.
 Assert that an object has own property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
 
-**Does not** take **inherited properties** into account. To do so, see 
+**Does not** take **inherited properties** into account. To do so, see
 [`property`](#Must.prototype.property).
 
 **Examples**:
