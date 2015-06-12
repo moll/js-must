@@ -38,6 +38,7 @@ Must.js API Documentation
 - [lte](#Must.prototype.lte)(expected)
 - [match](#Must.prototype.match)(regexp)
 - [most](#Must.prototype.most)(expected)
+- [must](#Must.prototype.must)
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
 - [nonenumerableProperty](#Must.prototype.nonenumerableProperty)(property)
 - [not](#Must.prototype.not)
@@ -495,6 +496,15 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```javascript
 (42).must.be.at.most(69)
 (42).must.be.at.most(42)
+```
+
+<a name="Must.prototype.must" />
+### Must.prototype.must
+Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+(42).must.must.must.must.equal(42)
 ```
 
 <a name="Must.prototype.nonenumerable" />

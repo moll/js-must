@@ -1,3 +1,12 @@
+## Unreleased
+- Adds [`must`] that returns self for those of us who sometimes write it twice:
+
+  ```javascript
+  demand(undefined).must.be.undefined().
+  ```
+
+[`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
+
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.
   Thanks, [Miroslav Bajtoš][@bajtos]!

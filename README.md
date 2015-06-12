@@ -122,7 +122,6 @@ demand(null).be.null()
 ```
 
 For a list of all matchers, please see the [Must.js API Documentation][api].
-[api]: https://github.com/moll/js-must/blob/master/doc/API.md
 
 ### Negative asserting or matching the opposite
 To assert the opposite, just add `not` between the chain:
@@ -183,8 +182,10 @@ describe("MySong", function() {
 
 API
 ---
-For extended documentation on all matchers and other objects that come with
-Must.js, please see the [Must.js API Documentation][api].
+For extended documentation on all functions, please see the
+[Must.js API Documentation][api].
+
+[api]: https://github.com/moll/js-must/blob/master/doc/API.md
 
 ### [Must](https://github.com/moll/js-must/blob/master/doc/API.md#Must)
 - [a](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.a)(class)
@@ -224,6 +225,7 @@ Must.js, please see the [Must.js API Documentation][api].
 - [lte](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.lte)(expected)
 - [match](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.match)(regexp)
 - [most](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.most)(expected)
+- [must](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must)
 - [nonenumerable](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nonenumerable)(property)
 - [nonenumerableProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nonenumerableProperty)(property)
 - [not](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.not)

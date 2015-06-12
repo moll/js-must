@@ -630,6 +630,19 @@ Must.prototype.match = function(expected) {
 }
 
 /**
+  * Pass-through property for a fluent chain.
+  *
+  * @example
+  * (42).must.must.must.must.equal(42)
+  *
+  * @property must
+  * @on prototype
+  */
+defineGetter(Must.prototype, "must", function() {
+  return this
+})
+
+/**
  * Assert that a function throws.  
  * Optionally assert it throws `expected` (of possibly instance `constructor`).
  *
