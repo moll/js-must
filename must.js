@@ -2,6 +2,7 @@ var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
 var defineGetter = require("./lib").defineGetter
 var inspect = require("./lib").inspect
+var chain = require("./lib").chain
 exports = module.exports = Must
 exports.AssertionError = AssertionError
 
@@ -33,34 +34,6 @@ function Must(actual) {
 }
 
 /**
-  * Can also be used a pass-through property for a fluent chain.
-  *
-  * @example
-  * "Hello".must.be.a.string()
-  * new Date().must.be.a(Date)
-  *
-  * @method a
-  * @alias instanceof
-  */
-defineGetter(Must.prototype, "a", function() {
-  return chain.call(this, this.instanceof)
-})
-
-/**
-  * Can also be used a pass-through property for a fluent chain.
-  *
-  * @example
-  * [1, 2].must.be.an.array()
-  * new AwesomeClass().must.be.an(AwesomeClass)
-  *
-  * @method an
-  * @alias instanceof
-  */
-defineGetter(Must.prototype, "an", function() {
-  return chain.call(this, this.instanceof)
-})
-
-/**
   * Pass-through property for a fluent chain.
   *
   * @example
@@ -75,20 +48,6 @@ defineGetter(Must.prototype, "at", function() {
 })
 
 /**
-  * Can also be used as a pass-through property for a fluent chain.
-  *
-  * @example
-  * true.must.be.true()
-  * (42).must.be(42)
-  *
-  * @method be
-  * @alias equal
-  */
-defineGetter(Must.prototype, "be", function() {
-  return chain.call(this, this.equal)
-})
-
-/**
   * Pass-through property for a fluent chain.
   *
   * @example
@@ -99,21 +58,6 @@ defineGetter(Must.prototype, "be", function() {
   */
 defineGetter(Must.prototype, "have", function() {
   return this
-})
-
-/**
-  * Can also be used as a pass-through property for a fluent chain.
-  *
-  * @example
-  * var claim = require("must")
-  * claim(true).is.true()
-  * claim(42).is(42)
-  *
-  * @method is
-  * @alias equal
-  */
-defineGetter(Must.prototype, "is", function() {
-  return chain.call(this, this.equal)
 })
 
 /**
@@ -390,6 +334,30 @@ function instanceofMessage(expected) {
 Must.prototype.instanceOf = Must.prototype.instanceof
 
 /**
+  * Can also be used a pass-through property for a fluent chain.
+  *
+  * @example
+  * "Hello".must.be.a.string()
+  * new Date().must.be.a(Date)
+  *
+  * @method a
+  * @alias instanceof
+  */
+defineGetter(Must.prototype, "a", chain(Must.prototype.instanceof))
+
+/**
+  * Can also be used a pass-through property for a fluent chain.
+  *
+  * @example
+  * [1, 2].must.be.an.array()
+  * new AwesomeClass().must.be.an(AwesomeClass)
+  *
+  * @method an
+  * @alias instanceof
+  */
+defineGetter(Must.prototype, "an", chain(Must.prototype.instanceof))
+
+/**
  * Assert that an object is empty.  
  * Checks either the `length` for arrays and strings or the count of
  * enumerable keys. Inherited keys also counted.
@@ -433,6 +401,31 @@ Must.prototype.empty = function() {
 Must.prototype.equal = function(expected) {
   insist.call(this, this.actual === expected, "equal", expected)
 }
+
+/**
+  * Can also be used as a pass-through property for a fluent chain.
+  *
+  * @example
+  * true.must.be.true()
+  * (42).must.be(42)
+  *
+  * @method be
+  * @alias equal
+  */
+defineGetter(Must.prototype, "be", chain(Must.prototype.equal))
+
+/**
+  * Can also be used as a pass-through property for a fluent chain.
+  *
+  * @example
+  * var claim = require("must")
+  * claim(true).is.true()
+  * claim(42).is(42)
+  *
+  * @method is
+  * @alias equal
+  */
+defineGetter(Must.prototype, "is", chain(Must.prototype.equal))
 
 /**
  * Assert object equality by content and if possible, recursively.  
@@ -1033,16 +1026,6 @@ function insist(ok, message, expected, opts) {
   opts.caller = arguments.callee.caller
   if (arguments.length >= 3) opts.expected = expected
   throw new AssertionError(msg, opts)
-}
-
-function chain(fn) {
-  fn.apply = fn.apply
-  fn.bind = fn.bind
-  fn.call = fn.call
-  fn.name = fn.name
-  fn.toString = fn.toString
-  fn.__proto__ = this
-  return fn
 }
 
 function enumerableKeys(obj) {
