@@ -183,7 +183,7 @@ function mustPassBoolean(name, truthy) {
   var fail = truthy ? "fail" : "pass"
   var throws = truthy ? assertFail : assertPass
   var doesNotThrow = truthy ? assertPass : assertFail
-  
+
   it("must "+pass+" given true literal", function() {
     doesNotThrow(function() { Must(true).be[name]() })
   })
@@ -685,7 +685,7 @@ describe("Must.prototype.instanceof", function() {
   describe("given Function", function() {
     it("must pass given function object", function() {
       assertPass(function() {
-        Must(new Function).be.instanceof(Function) 
+        Must(new Function).be.instanceof(Function)
       })
     })
 
@@ -866,7 +866,7 @@ describe("Must.prototype.equal", function() {
 
     it("must fail given equivalent functions", function() {
       assertFail(function() {
-        Must(new Function("foo")).be.equal(new Function("foo")) 
+        Must(new Function("foo")).be.equal(new Function("foo"))
       })
     })
   })
@@ -926,7 +926,7 @@ describe("Must.prototype.eql", function() {
 
       it("must pass given "+bool+" objects", function() {
         assertPass(function() {
-          Must(new Boolean(bool)).be.eql(new Boolean(bool)) 
+          Must(new Boolean(bool)).be.eql(new Boolean(bool))
         })
       })
 
@@ -936,7 +936,7 @@ describe("Must.prototype.eql", function() {
 
       it("must fail given "+bool+" and "+!bool+" objects", function() {
         assertFail(function() {
-          Must(new Boolean(bool)).be.eql(new Boolean(!bool)) 
+          Must(new Boolean(bool)).be.eql(new Boolean(!bool))
         })
       })
     }
@@ -970,7 +970,7 @@ describe("Must.prototype.eql", function() {
     it("must fail given string", function() {
       assertFail(function() { Must(42).eql("42") })
     })
-    
+
     it("must pass given Infinities", function() {
       assertPass(function() { Must(Infinity).eql(Infinity) })
     })
@@ -1127,13 +1127,13 @@ describe("Must.prototype.eql", function() {
 
   describe("given Function", function() {
     it("must pass given identical functions", function() {
-      var fn = new Function
+      function fn() {}
       assertPass(function() { Must(fn).be.eql(fn) })
     })
 
     it("must fail given equivalent functions", function() {
       assertFail(function() {
-        Must(new Function("foo")).be.eql(new Function("foo")) 
+        Must(function() {}).be.eql(function() {})
       })
     })
   })
@@ -1342,7 +1342,7 @@ describe("Must.prototype.eql", function() {
       it("must pass given identical output but different objects", function() {
         function Valuable(value, other) {
           this.value = value
-          this.other = other 
+          this.other = other
         }
 
         Valuable.prototype.valueOf = function() { return this.value }
@@ -1600,7 +1600,7 @@ describe("Must.prototype.include", function() {
 
     it("must pass if given string literal includes string object", function() {
       assertPass(function() {
-        Must(literal).include(new String("How")) 
+        Must(literal).include(new String("How"))
       })
     })
 
@@ -1894,13 +1894,13 @@ describe("Must.prototype.throw", function() {
 
     it("must pass if function throws instance of function", function() {
       assertPass(function() {
-        !function() { throw new MyError }.must.throw(MyError) 
+        !function() { throw new MyError }.must.throw(MyError)
       })
     })
 
     it("must fail if function throws instance of other function", function() {
       assertFail(function() {
-        !function() { throw new Error }.must.throw(MyError) 
+        !function() { throw new Error }.must.throw(MyError)
       })
     })
 
@@ -1931,7 +1931,7 @@ describe("Must.prototype.throw", function() {
 
     describe("with RegExp", function() {
       function thrower() { throw new TypeError("Oh no!") }
-      
+
       it("must pass if function throws with matching message", function() {
         assertPass(function() { thrower.must.throw(TypeError, /no!/) })
       })
@@ -1949,13 +1949,13 @@ describe("Must.prototype.throw", function() {
   describe("given null", function() {
     it("must pass if function throws null", function() {
       assertPass(function() {
-        !function() { throw null }.must.throw(null) 
+        !function() { throw null }.must.throw(null)
       })
     })
 
     it("must fail if function throws undefined", function() {
       assertFail(function() {
-        !function() { throw undefined }.must.throw(null) 
+        !function() { throw undefined }.must.throw(null)
       })
     })
 
@@ -1967,13 +1967,13 @@ describe("Must.prototype.throw", function() {
   describe("given undefined", function() {
     it("must pass if function throws undefined", function() {
       assertPass(function() {
-        !function() { throw undefined }.must.throw(undefined) 
+        !function() { throw undefined }.must.throw(undefined)
       })
     })
 
     it("must fail if function throws null", function() {
       assertFail(function() {
-        !function() { throw null }.must.throw(undefined) 
+        !function() { throw null }.must.throw(undefined)
       })
     })
 
@@ -2084,7 +2084,7 @@ function mustPassProperty(name, inheritable) {
 
     it("must pass if object has property as undefined", function() {
       assertPass(function() {
-        ({love: undefined}).must.have[name]("love") 
+        ({love: undefined}).must.have[name]("love")
       })
     })
 
@@ -2116,7 +2116,7 @@ function mustPassProperty(name, inheritable) {
   describe("given name and value", function() {
     it("must pass if object has property with identical value", function() {
       assertPass(function() {
-        ({love: 69}).must.have[name]("love", 69) 
+        ({love: 69}).must.have[name]("love", 69)
       })
     })
 
@@ -2132,13 +2132,13 @@ function mustPassProperty(name, inheritable) {
 
     it("must fail if object has property with equivalent value", function() {
       assertFail(function() {
-        ({love: 69}).must.have[name]("love", new Number(69)) 
+        ({love: 69}).must.have[name]("love", new Number(69))
       })
     })
 
     it("must pass if object has property asserted undefined", function() {
       assertPass(function() {
-        ({love: undefined}).must.have[name]("love", undefined) 
+        ({love: undefined}).must.have[name]("love", undefined)
       })
     })
 
@@ -2215,7 +2215,7 @@ describe(".prototype.ownProperty", function() {
 
   it("must pass if object has property named hasOwnProperty", function() {
     assertPass(function() {
-      ({hasOwnProperty: false}).must.have.ownProperty("hasOwnProperty") 
+      ({hasOwnProperty: false}).must.have.ownProperty("hasOwnProperty")
     })
   })
 })
@@ -2275,10 +2275,10 @@ function mustPassKeys(name, inheritable) {
 
     it("must fail given a different amount of keys", function() {
       assertFail(function() {
-        Must(Object.create({a: 1})).have[name](["a", "b"]) 
+        Must(Object.create({a: 1})).have[name](["a", "b"])
       })
       assertFail(function() {
-        Must(Object.create({a: 1, b: 2})).have[name](["a"]) 
+        Must(Object.create({a: 1, b: 2})).have[name](["a"])
       })
     })
   })
@@ -2386,14 +2386,14 @@ function mustPassEnumerable(name, truthy) {
     Fn.prototype.love = 69
     doesNotThrow(function() { new Fn().must.have[name]("love") })
   })
-  
+
   it("must "+fail+" if property is nonenumerable", function() {
     var obj = Object.create(Object.prototype, {
       love: {value: 69, enumerable: false},
     })
     throws(function() { obj.must.have[name]("love") })
   })
-  
+
   it("must "+fail+" if inherited property is nonenumerable", function() {
     function Fn() {}
     Fn.prototype = Object.create(Object.prototype, {
@@ -2456,7 +2456,7 @@ function mustPassEnumerable(name, truthy) {
       propertyIsEnumerable: {value: false, enumerable: truthy}
     })
     assertPass(function() {
-      obj.must.have[name]("propertyIsEnumerable") 
+      obj.must.have[name]("propertyIsEnumerable")
     })
   })
 
