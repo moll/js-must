@@ -20,7 +20,7 @@ exports.AssertionError = AssertionError
  * [].must.be.empty()
  *
  * var expect = require("must")
- * expect(null).be.null()
+ * expect(null).to.be.null()
  *
  * var demand = require("must")
  * demand(undefined).be.undefined()
