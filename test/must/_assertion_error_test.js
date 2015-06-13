@@ -8,10 +8,7 @@ module.exports = function(test, props) {
     })
 
     it("must have all properties", function() {
-      try { test() }
-      catch (ex) {
-        assert.deepEqual(ex, props)
-      }
+      try { test() } catch (ex) { assert.deepEqual(ex, props) }
     })
 
     it("must have correct stack trace", function() {
