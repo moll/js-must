@@ -10,6 +10,7 @@ function reload() {
 
 describe("Object.prototype.must", function() {
   beforeEach(reload)
+  afterEach(function() { delete global.must })
 
   it("must exist", function() {
     assert(true.must)
@@ -101,6 +102,7 @@ describe("Object.prototype.must", function() {
 describe("Global.must", function() {
   /* global must */
   beforeEach(reload)
+  afterEach(function() { delete global.must })
 
   it("must be an instance of Must by default", function() {
     assert(must instanceof Must)
@@ -114,9 +116,5 @@ describe("Global.must", function() {
   it("must be writable to Must", function() {
     global.must = Must
     assert.strictEqual(must, Must)
-  })
-
-  afterEach(function() {
-    delete global.must
   })
 })
