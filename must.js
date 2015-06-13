@@ -794,8 +794,7 @@ Must.prototype.own = Must.prototype.ownProperty
  */
 Must.prototype.keys = function(expected) {
   var ok = this.actual != null
-  var keys = ok && enumerableKeys(Object(this.actual))
-  ok = ok && eql(keys.sort(), expected.sort())
+  ok = ok && isPermutationOf(enumerableKeys(Object(this.actual)), expected)
   insist.call(this, ok, "have keys", expected)
 }
 
@@ -814,8 +813,7 @@ Must.prototype.keys = function(expected) {
  */
 Must.prototype.ownKeys = function(expected) {
   var ok = this.actual != null
-  var keys = ok && Object.keys(Object(this.actual))
-  ok = ok && eql(keys.sort(), expected.sort())
+  ok = ok && isPermutationOf(Object.keys(Object(this.actual)), expected)
   insist.call(this, ok, "have own keys", expected)
 }
 

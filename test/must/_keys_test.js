@@ -25,6 +25,12 @@ module.exports = function(name, inheritable) {
     assert.fail(function() { Must({a: 1, b: 2}).have[name](["a"]) })
   })
 
+  it("must not modify given array", function() {
+    var keys = ["name", "age"]
+    Must({name: "John", age: 13}).have[name](keys)
+    assert.deepEqual(keys, ["name", "age"])
+  })
+
   describe("given an inherited object", function() {
     it("must "+pass+" given an object with inherited expected keys",
       function() {
