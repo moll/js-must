@@ -106,8 +106,8 @@ defineGetter(Must.prototype, "to", function() {
  * @method true
  */
 Must.prototype.true = function() {
-  var kind = kindof(this.actual)
-  insist.call(this, kind == "boolean" && this.actual == true, "be", true)
+  var ok = kindof(this.actual) == "boolean" && this.actual == true
+  this.assert(ok, "be", {expected: true})
 }
 
 /**
@@ -119,8 +119,8 @@ Must.prototype.true = function() {
  *
  */
 Must.prototype.false = function() {
-  var kind = kindof(this.actual)
-  insist.call(this, kind == "boolean" && this.actual == false, "be", false)
+  var ok = kindof(this.actual) == "boolean" && this.actual == false
+  this.assert(ok, "be", {expected: false})
 }
 
 /**
@@ -140,7 +140,7 @@ Must.prototype.false = function() {
  * @method null
  */
 Must.prototype.null = function() {
-  insist.call(this, this.actual === null, "be", null)
+  this.assert(this.actual === null, "be", {expected: null})
 }
 
 /**
@@ -160,7 +160,7 @@ Must.prototype.null = function() {
  * @method undefined
  */
 Must.prototype.undefined = function() {
-  insist.call(this, this.actual === undefined, "be", undefined)
+  this.assert(this.actual === undefined, "be", {expected: undefined})
 }
 
 /**
@@ -173,7 +173,7 @@ Must.prototype.undefined = function() {
  * @method boolean
  */
 Must.prototype.boolean = function() {
-  insist.call(this, kindof(this.actual) == "boolean", "be a boolean")
+  this.assert(kindof(this.actual) == "boolean", "be a boolean")
 }
 
 /**
@@ -186,7 +186,7 @@ Must.prototype.boolean = function() {
  * @method number
  */
 Must.prototype.number = function() {
-  insist.call(this, kindof(this.actual) == "number", "be a number")
+  this.assert(kindof(this.actual) == "number", "be a number")
 }
 
 /**
@@ -199,7 +199,7 @@ Must.prototype.number = function() {
  * @method string
  */
 Must.prototype.string = function() {
-  insist.call(this, kindof(this.actual) == "string", "be a string")
+  this.assert(kindof(this.actual) == "string", "be a string")
 }
 
 /**
@@ -211,7 +211,7 @@ Must.prototype.string = function() {
  * @method date
  */
 Must.prototype.date = function() {
-  insist.call(this, kindof(this.actual) == "date", "be a date")
+  this.assert(kindof(this.actual) == "date", "be a date")
 }
 
 /**
@@ -223,7 +223,7 @@ Must.prototype.date = function() {
  * @method regexp
  */
 Must.prototype.regexp = function() {
-  insist.call(this, kindof(this.actual) == "regexp", "be a regular expression")
+  this.assert(kindof(this.actual) == "regexp", "be a regular expression")
 }
 
 /**
@@ -235,7 +235,7 @@ Must.prototype.regexp = function() {
  * @method array
  */
 Must.prototype.array = function() {
-  insist.call(this, Array.isArray(this.actual), "be an array")
+  this.assert(Array.isArray(this.actual), "be an array")
 }
 
 /**
@@ -247,7 +247,7 @@ Must.prototype.array = function() {
  * @method function
  */
 Must.prototype.function = function() {
-  insist.call(this, typeof this.actual == "function", "be a function")
+  this.assert(typeof this.actual == "function", "be a function")
 }
 
 /**
@@ -260,7 +260,7 @@ Must.prototype.function = function() {
  */
 Must.prototype.object = function() {
   var ok = this.actual && typeof this.actual == "object"
-  insist.call(this, ok, "be an object")
+  this.assert(ok, "be an object")
 }
 
 /**
@@ -276,7 +276,7 @@ Must.prototype.object = function() {
  * @method truthy
  */
 Must.prototype.truthy = function() {
-  insist.call(this, this.actual, "be truthy")
+  this.assert(this.actual, "be truthy")
 }
 
 /**
@@ -292,7 +292,7 @@ Must.prototype.truthy = function() {
  * @method falsy
  */
 Must.prototype.falsy = function() {
-  insist.call(this, !this.actual, "be falsy")
+  this.assert(!this.actual, "be falsy")
 }
 
 /**
@@ -306,7 +306,7 @@ Must.prototype.falsy = function() {
  * @method exist
  */
 Must.prototype.exist = function() {
-  insist.call(this, this.actual != null, "exist")
+  this.assert(this.actual != null, "exist")
 }
 
 /**
@@ -321,7 +321,7 @@ Must.prototype.exist = function() {
  */
 Must.prototype.instanceof = function(expected) {
   var ok = this.actual instanceof expected
-  insist.call(this, ok, instanceofMessage, expected)
+  this.assert(ok, instanceofMessage.bind(this, expected), {expected: expected})
 }
 
 function instanceofMessage(expected) {
@@ -380,7 +380,7 @@ Must.prototype.empty = function() {
   else
     length = 1
 
-  insist.call(this, length === 0, "be empty")
+  this.assert(length === 0, "be empty")
 }
 
 /**
@@ -401,7 +401,7 @@ Must.prototype.empty = function() {
  * @param expected
  */
 Must.prototype.equal = function(expected) {
-  insist.call(this, this.actual === expected, "equal", expected)
+  this.assert(this.actual === expected, "equal", {expected: expected})
 }
 
 /**
@@ -467,7 +467,7 @@ defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
  */
 Must.prototype.eql = function(expected) {
   var ok = eql(this.actual, expected)
-  insist.call(this, ok, "be equivalent to", expected, {diffable: true})
+  this.assert(ok, "be equivalent to", {expected: expected, diffable: true})
 }
 
 function eql(a, b, aStack, bStack) {
@@ -575,7 +575,7 @@ Must.prototype.include = function(expected) {
     for (var key in this.actual)
       if (this.actual[key] === expected) { found = true; break }
 
-  insist.call(this, found, "include", expected)
+  this.assert(found, "include", {expected: expected})
 }
 
 /**
@@ -599,8 +599,8 @@ Must.prototype.contain = Must.prototype.include
  * @param expected
  */
 Must.prototype.permutationOf = function(expected) {
-  var result = isPermutationOf(this.actual, expected)
-  insist.call(this, result, "be a permutation of", expected, {diffable: true})
+  var ok = isPermutationOf(this.actual, expected)
+  this.assert(ok, "be a permutation of", {expected: expected, diffable: true})
 }
 
 function isPermutationOf(actual, expected) {
@@ -631,7 +631,7 @@ function isPermutationOf(actual, expected) {
  */
 Must.prototype.match = function(expected) {
   var regexp = expected instanceof RegExp ? expected : new RegExp(expected)
-  insist.call(this, regexp.exec(this.actual), "match", regexp)
+  this.assert(regexp.exec(this.actual), "match", {expected: regexp})
 }
 
 /**
@@ -684,9 +684,7 @@ Must.prototype.throw = function(constructor, expected) {
   if (ok && constructor) ok = exception instanceof constructor
   if (ok && arguments.length) ok = exceptionEql(exception, expected)
 
-  var demands = [ok, "throw"]
-  if (arguments.length) demands.push(expected)
-  insist.apply(this, demands)
+  this.assert(ok, "throw", arguments.length > 0 ? {expected: expected} : null)
 }
 
 function exceptionEql(actual, expected) {
@@ -713,7 +711,8 @@ function exceptionEql(actual, expected) {
  * @param expected
  */
 Must.prototype.length = function(expected) {
-  insist.call(this, this.actual.length == expected, "have length of", expected)
+  var ok = this.actual.length == expected
+  this.assert(ok, "have length of", {expected: expected})
 }
 
 /**
@@ -725,7 +724,7 @@ Must.prototype.length = function(expected) {
  * @method frozen
  */
 Must.prototype.frozen = function() {
-  insist.call(this, Object.isFrozen(this.actual), "be frozen")
+  this.assert(Object.isFrozen(this.actual), "be frozen")
 }
 
 /**
@@ -744,13 +743,12 @@ Must.prototype.frozen = function() {
  * @param [value]
  */
 Must.prototype.property = function(property, expected) {
-  var ok = this.actual != null
-  ok = ok && property in Object(this.actual)
+  var ok = this.actual != null && property in Object(this.actual)
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
-  var msg = "have property \"" + property + "\""
-  if (arguments.length > 1) msg += " equal to " + stringify(expected)
-  insist.call(this, ok, msg)
+  var msg = "have property \"" + property + "\"", opts
+  if (arguments.length > 1) msg += " equal to", opts = {expected: expected}
+  this.assert(ok, msg, opts)
 }
 
 /**
@@ -772,9 +770,9 @@ Must.prototype.ownProperty = function(property, expected) {
   ok = ok && Object.prototype.hasOwnProperty.call(this.actual, property)
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
-  var msg = "have own property \"" + property + "\""
-  if (arguments.length > 1) msg += " equal to " + stringify(expected)
-  insist.call(this, ok, msg)
+  var msg = "have own property \"" + property + "\"", opts
+  if (arguments.length > 1) msg += " equal to", opts = {expected: expected}
+  this.assert(ok, msg, opts)
 }
 
 /**
@@ -800,7 +798,7 @@ Must.prototype.own = Must.prototype.ownProperty
 Must.prototype.keys = function(expected) {
   var ok = this.actual != null
   ok = ok && isPermutationOf(enumerableKeys(Object(this.actual)), expected)
-  insist.call(this, ok, "have keys", expected)
+  this.assert(ok, "have keys", {expected: expected})
 }
 
 /**
@@ -819,7 +817,7 @@ Must.prototype.keys = function(expected) {
 Must.prototype.ownKeys = function(expected) {
   var ok = this.actual != null
   ok = ok && isPermutationOf(Object.keys(Object(this.actual)), expected)
-  insist.call(this, ok, "have own keys", expected)
+  this.assert(ok, "have own keys", {expected: expected})
 }
 
 /**
@@ -841,8 +839,7 @@ Must.prototype.ownKeys = function(expected) {
 Must.prototype.enumerable = function(property) {
   var ok = this.actual != null
   ok = ok && isEnumerable(Object(this.actual), property)
-  var msg = "have enumerable property \"" + property + "\""
-  insist.call(this, ok, msg)
+  this.assert(ok, "have enumerable property \"" + property + "\"")
 }
 
 /**
@@ -871,8 +868,7 @@ Must.prototype.nonenumerable = function(property) {
   var ok = this.actual != null
   ok = ok && property in Object(this.actual)
   ok = ok && !isEnumerable(Object(this.actual), property)
-  var msg = "have nonenumerable property \"" + property + "\""
-  insist.call(this, ok, msg)
+  this.assert(ok, "have nonenumerable property \"" + property + "\"")
 }
 
 function isEnumerable(obj, name) {
@@ -900,7 +896,7 @@ Must.prototype.nonenumerableProperty = Must.prototype.nonenumerable
  * @param expected
  */
 Must.prototype.below = function(expected) {
-  insist.call(this, this.actual < expected, "be below", expected)
+  this.assert(this.actual < expected, "be below", {expected: expected})
 }
 
 /**
@@ -939,7 +935,7 @@ Must.prototype.before = Must.prototype.below
  * @param expected
  */
 Must.prototype.most = function(expected) {
-  insist.call(this, this.actual <= expected, "be at most", expected)
+  this.assert(this.actual <= expected, "be at most", {expected: expected})
 }
 
 /**
@@ -960,7 +956,7 @@ Must.prototype.lte = Must.prototype.most
  * @param expected
  */
 Must.prototype.above = function(expected) {
-  insist.call(this, this.actual > expected, "be above", expected)
+  this.assert(this.actual > expected, "be above", {expected: expected})
 }
 
 /**
@@ -1000,7 +996,7 @@ Must.prototype.after = Must.prototype.above
  * @param expected
  */
 Must.prototype.least = function(expected) {
-  insist.call(this, this.actual >= expected, "be at least", expected)
+  this.assert(this.actual >= expected, "be at least", {expected: expected})
 }
 
 /**
@@ -1024,24 +1020,22 @@ Must.prototype.gte = Must.prototype.least
  * @param end
  */
 Must.prototype.between = function(begin, end) {
-  insist.call(this, begin <= this.actual && this.actual <= end, function() {
+  this.assert(begin <= this.actual && this.actual <= end, function() {
     return "be between " + stringify(begin) + " and " + stringify(end)
   })
 }
 
-function insist(ok, message, expected, opts) {
+Must.prototype.assert = function assert(ok, message, opts) {
   if (!this.negative ? ok : !ok) return
 
-  var not = this.negative ? "not " : ""
-  var msg = stringify(this.actual) + " must " + not
-  msg += typeof message == "function" ? message(expected) : message
-  if (typeof message != "function" && arguments.length >= 3)
-    msg += " " + stringify(expected)
-
   opts = opts ? Object.create(opts) : {}
-  opts.actual = this.actual
-  opts.caller = arguments.callee.caller
-  if (arguments.length >= 3) opts.expected = expected
+  if (!("actual" in opts)) opts.actual = this.actual
+  if (!("caller" in opts)) opts.caller = assert.caller
+
+  var msg = stringify(this.actual) + " must " + (this.negative ? "not " : "")
+  if (typeof message == "function") msg += message.call(this)
+  else msg += message + ("expected" in opts ? " "+stringify(opts.expected) : "")
+
   throw new AssertionError(msg, opts)
 }
 

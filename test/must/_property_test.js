@@ -34,14 +34,16 @@ module.exports = function(name, inheritable) {
       doesNotThrow(function() { Must(obj).have[name]("love") })
     })
 
-    require("./_assertion_error_test")(function() { Must({}).have[name]("love") }, {
-      actual: {},
-      message: "{} must have "+errName+" \"love\""
+    require("./_assertion_error_test")(function() {
+      Must({name: "John"}).have[name]("age")
+    }, {
+      actual: {name: "John"},
+      message: "{\"name\":\"John\"} must have "+errName+" \"age\""
     })
 
     describe(".not", function() {
       it("must invert the assertion", function() {
-        assert.fail(function() { Must({love: 69}).not.have[name]("love") })
+        assert.fail(function() { Must({name: "John"}).not.have[name]("name") })
       })
     })
   })
@@ -81,14 +83,17 @@ module.exports = function(name, inheritable) {
       doesNotThrow(function() { Must(obj).have[name]("love", undefined) })
     })
 
-    require("./_assertion_error_test")(function() { Must({}).have[name]("love", 69) }, {
-      actual: {},
-      message: "{} must have "+errName+" \"love\" equal to 69"
+    require("./_assertion_error_test")(function() {
+      Must({age: 13}).have[name]("age", 42)
+    }, {
+      actual: {age: 13},
+      expected: 42,
+      message: "{\"age\":13} must have "+errName+" \"age\" equal to 42"
     })
 
     describe(".not", function() {
       it("must invert the assertion", function() {
-        assert.fail(function() { Must({love: 69}).not.have[name]("love", 69) })
+        assert.fail(function() { Must({age: 42}).not.have[name]("age", 42) })
       })
     })
   })
