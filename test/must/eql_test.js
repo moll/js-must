@@ -1,3 +1,4 @@
+var $ = require("oolong")
 var Must = require("../..")
 var assert = require("./assert")
 
@@ -428,11 +429,7 @@ describe("Must.prototype.eql", function() {
   describe("given instance", function() {
     function Model() {}
 
-    mustPassObjectEql(function(obj) {
-      var model = new Model
-      for (var name in obj) model[name] = obj[name]
-      return model
-    })
+    mustPassObjectEql(function(obj) { return $.assign(new Model, obj) })
 
     it("must fail given different constructors", function() {
       function A() {}
