@@ -7,6 +7,7 @@ var chain = require("./lib").chain
 exports = module.exports = Must
 exports.AssertionError = AssertionError
 exports.stringify = stringify
+exports.chain = chain
 
 /**
  * The main class that wraps the asserted object and that you call matchers on.
