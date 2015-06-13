@@ -23,6 +23,7 @@ describe("Must.prototype.eql", function() {
     // {} equivalent to []. Oh yeah, I can! For fucks sake, this is reason #42
     // why Must.js is better!
     assert.fail(function() { Must({}).be.eql([]) })
+    assert.fail(function() { Must([]).be.eql({}) })
   })
 
   describe("given Boolean", function() {
