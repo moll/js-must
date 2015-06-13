@@ -200,7 +200,7 @@ describe("Must.prototype.eql", function() {
       assert.fail(function() { Must([1, [2], 3]).be.eql([1, [42], 3]) })
     })
 
-    describe("given circular Array", function() {
+    describe("with circular references", function() {
       it("must pass if equal", function() {
         var a = [1, 2, 3]
         a.push(a)
@@ -304,7 +304,7 @@ describe("Must.prototype.eql", function() {
       assert.fail(function() { Must(a).be.eql(b) })
     })
 
-    describe("given circular object", function() {
+    describe("with circular references", function() {
       it("must pass if equal", function() {
         var a = create({life: {love: 69}})
         a.self = a
