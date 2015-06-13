@@ -5,6 +5,9 @@
   demand(undefined).must.be.undefined().
   ```
 
+- Fixes a false positive in [`eql`][] when an object had some keys set to
+  `undefined`.
+
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 
 ## 0.12.0 (May 28, 2014)

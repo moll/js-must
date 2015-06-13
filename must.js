@@ -520,6 +520,10 @@ function eql(a, b, aStack, bStack) {
       if (aKeys.length != bKeys.length) return false
       if (aKeys.length == 0) return true
 
+      aKeys.sort()
+      bKeys.sort()
+      for (i = 0; i < aKeys.length; ++i) if (aKeys[i] !== bKeys[i]) return false
+
       for (var key in a) if (!eql(a[key], b[key], aStack, bStack)) return false
       return true
   }

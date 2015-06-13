@@ -304,6 +304,15 @@ describe("Must.prototype.eql", function() {
       assert.fail(function() { Must(a).be.eql(b) })
     })
 
+    // This was a bug I discovered on Jun 12, 2015 related to not comparing
+    // keys equivalence before comparing their values.
+    it("must return false given equal amount of keys undefined keys",
+      function() {
+      var obj = {name: undefined}
+      assert.fail(function() { Must(obj).be.eql({age: undefined}) })
+      assert.fail(function() { Must(obj).be.eql({age: 13}) })
+    })
+
     describe("with circular references", function() {
       it("must pass if equal", function() {
         var a = create({life: {love: 69}})
