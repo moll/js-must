@@ -2,10 +2,11 @@ var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
 var defineGetter = require("./lib").defineGetter
 var lookupGetter = require("./lib").lookupGetter
-var inspect = require("./lib").inspect
+var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 exports = module.exports = Must
 exports.AssertionError = AssertionError
+exports.stringify = stringify
 
 /**
  * The main class that wraps the asserted object and that you call matchers on.
@@ -324,7 +325,7 @@ Must.prototype.instanceof = function(expected) {
 }
 
 function instanceofMessage(expected) {
-  var type = expected.displayName || expected.name || inspect(expected)
+  var type = expected.displayName || expected.name || stringify(expected)
   return "be an instance of " + type
 }
 
@@ -748,7 +749,7 @@ Must.prototype.property = function(property, expected) {
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
   var msg = "have property \"" + property + "\""
-  if (arguments.length > 1) msg += " equal to " + inspect(expected)
+  if (arguments.length > 1) msg += " equal to " + stringify(expected)
   insist.call(this, ok, msg)
 }
 
@@ -772,7 +773,7 @@ Must.prototype.ownProperty = function(property, expected) {
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
   var msg = "have own property \"" + property + "\""
-  if (arguments.length > 1) msg += " equal to " + inspect(expected)
+  if (arguments.length > 1) msg += " equal to " + stringify(expected)
   insist.call(this, ok, msg)
 }
 
@@ -1024,7 +1025,7 @@ Must.prototype.gte = Must.prototype.least
  */
 Must.prototype.between = function(begin, end) {
   insist.call(this, begin <= this.actual && this.actual <= end, function() {
-    return "be between " + inspect(begin) + " and " + inspect(end)
+    return "be between " + stringify(begin) + " and " + stringify(end)
   })
 }
 
@@ -1032,10 +1033,10 @@ function insist(ok, message, expected, opts) {
   if (!this.negative ? ok : !ok) return
 
   var not = this.negative ? "not " : ""
-  var msg = inspect(this.actual) + " must " + not
+  var msg = stringify(this.actual) + " must " + not
   msg += typeof message == "function" ? message(expected) : message
   if (typeof message != "function" && arguments.length >= 3)
-    msg += " " + inspect(expected)
+    msg += " " + stringify(expected)
 
   opts = opts ? Object.create(opts) : {}
   opts.actual = this.actual
