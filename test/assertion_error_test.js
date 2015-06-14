@@ -1,5 +1,6 @@
+var $ = require("oolong")
 var assert = require("assert")
-var AssertionError = require("../lib/assertion_error")
+var AssertionError = require("..").AssertionError
 
 describe("AssertionError", function() {
   it("must be named \"AssertionError\"", function() {
@@ -71,6 +72,29 @@ describe("AssertionError", function() {
 
       var undiffable = new AssertionError("", {diffable: false})
       assert.strictEqual(undiffable.showDiff, false)
+    })
+  })
+
+  describe(".prototype.stack", function() {
+    it("must be unenumerable", function() {
+      assert($.keys(new AssertionError("Misery")).indexOf("assert") == -1)
+    })
+
+    it("must be unenumerable if given", function() {
+      var err = new AssertionError("Misery", {stack: "Problem at line 42"})
+      assert($.keys(err).indexOf("assert") == -1)
+    })
+
+    it("must use given stack and replace first line", function() {
+      var a = new Error
+      var b = new AssertionError("Misery", {stack: a.stack})
+
+      var aStackLines = a.stack.split(/\r?\n/)
+      var bStackLines = b.stack.split(/\r?\n/)
+
+      aStackLines.shift()
+      bStackLines.shift().must.include("AssertionError: Misery")
+      assert.deepEqual(aStackLines, bStackLines)
     })
   })
 })
