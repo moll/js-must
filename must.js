@@ -1,7 +1,6 @@
+var $ = require("oolong")
 var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
-var defineGetter = require("./lib").defineGetter
-var lookupGetter = require("./lib").lookupGetter
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 exports = module.exports = Must
@@ -46,7 +45,7 @@ function Must(actual) {
   * @method a
   * @alias instanceof
   */
-defineGetter(Must.prototype, "a", function() {
+$.defineGetter(Must.prototype, "a", function() {
   return chain(this, this.instanceof)
 })
 
@@ -60,7 +59,7 @@ defineGetter(Must.prototype, "a", function() {
   * @method an
   * @alias instanceof
   */
-defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
+$.defineGetter(Must.prototype, "an", $.lookupGetter(Must.prototype, "a"))
 
 /**
   * Pass-through property for a fluent chain.
@@ -72,7 +71,7 @@ defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
   * @property at
   * @on prototype
   */
-defineGetter(Must.prototype, "at", function() {
+$.defineGetter(Must.prototype, "at", function() {
   return this
 })
 
@@ -86,7 +85,7 @@ defineGetter(Must.prototype, "at", function() {
   * @method be
   * @alias equal
   */
-defineGetter(Must.prototype, "be", function() {
+$.defineGetter(Must.prototype, "be", function() {
   return chain(this, this.equal)
 })
 
@@ -99,7 +98,7 @@ defineGetter(Must.prototype, "be", function() {
   * @property have
   * @on prototype
   */
-defineGetter(Must.prototype, "have", function() {
+$.defineGetter(Must.prototype, "have", function() {
   return this
 })
 
@@ -115,7 +114,7 @@ defineGetter(Must.prototype, "have", function() {
   * @property not
   * @on prototype
   */
-defineGetter(Must.prototype, "not", function() {
+$.defineGetter(Must.prototype, "not", function() {
   var self = Object.create(this)
   self.negative = !self.negative
   return self
@@ -134,7 +133,7 @@ defineGetter(Must.prototype, "not", function() {
   * @property to
   * @on prototype
   */
-defineGetter(Must.prototype, "to", function() {
+$.defineGetter(Must.prototype, "to", function() {
   return this
 })
 
@@ -391,7 +390,7 @@ Must.prototype.empty = function() {
   if (Array.isArray(this.actual) || kindof(this.actual) == "string")
     ok = this.actual.length === 0
   else if (typeof this.actual == "object" || typeof this.actual == "function")
-    ok = enumerableKeys(this.actual).length === 0
+    ok = $.isEmpty(this.actual)
 
   this.assert(ok, "be empty")
 }
@@ -428,7 +427,7 @@ Must.prototype.equal = function(expected) {
   * @method is
   * @alias equal
   */
-defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
+$.defineGetter(Must.prototype, "is", $.lookupGetter(Must.prototype, "be"))
 
 /**
  * Assert object equality by content and if possible, recursively.  
@@ -474,8 +473,8 @@ Must.prototype.eql = function(expected) {
 function eql(a, b, aStack, bStack) {
   if (a === b) return true
 
-  var aType = isPlainObject(a) ? "plain" : kindof(a)
-  var bType = isPlainObject(b) ? "plain" : kindof(b)
+  var aType = $.isPlainObject(a) ? "plain" : kindof(a)
+  var bType = $.isPlainObject(b) ? "plain" : kindof(b)
   if (aType != bType) return false
 
   if (aType == "object" || aType == "plain" || aType == "array") {
@@ -517,8 +516,8 @@ function eql(a, b, aStack, bStack) {
       // Fall through.
 
     case "plain":
-      var aKeys = enumerableKeys(a)
-      var bKeys = enumerableKeys(b)
+      var aKeys = $.keys(a)
+      var bKeys = $.keys(b)
       if (aKeys.length != bKeys.length) return false
       if (aKeys.length == 0) return true
 
@@ -531,16 +530,6 @@ function eql(a, b, aStack, bStack) {
   }
 
   return false
-}
-
-function isPlainObject(obj) {
-  if (obj == null) return false
-  if (typeof obj != "object") return false
-
-  var prototype = Object.getPrototypeOf(obj)
-  if (prototype === null) return true
-  if (!("constructor" in prototype)) return true
-  return prototype.constructor === Object
 }
 
 function getConstructorOf(obj) {
@@ -644,7 +633,7 @@ Must.prototype.match = function(expected) {
   * @property must
   * @on prototype
   */
-defineGetter(Must.prototype, "must", function() {
+$.defineGetter(Must.prototype, "must", function() {
   return this
 })
 
@@ -657,7 +646,7 @@ defineGetter(Must.prototype, "must", function() {
   * @property the
   * @on prototype
   */
-defineGetter(Must.prototype, "the", function() {
+$.defineGetter(Must.prototype, "the", function() {
   return this
 })
 
@@ -811,7 +800,7 @@ Must.prototype.own = Must.prototype.ownProperty
  */
 Must.prototype.keys = function(expected) {
   var ok = this.actual != null
-  ok = ok && isPermutationOf(enumerableKeys(Object(this.actual)), expected)
+  ok = ok && isPermutationOf($.keys(Object(this.actual)), expected)
   this.assert(ok, "have keys", {expected: expected})
 }
 
@@ -1051,10 +1040,4 @@ Must.prototype.assert = function assert(ok, message, opts) {
   else msg += message + ("expected" in opts ? " "+stringify(opts.expected) : "")
 
   throw new AssertionError(msg, opts)
-}
-
-function enumerableKeys(obj) {
-  var keys = []
-  for (var key in obj) keys.push(key)
-  return keys
 }
