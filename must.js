@@ -3,6 +3,8 @@ var AssertionError = require("./lib/assertion_error")
 var kindof = require("kindof")
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
+var defineGetter = $.defineGetter
+var lookupGetter = $.lookupGetter
 exports = module.exports = Must
 exports.AssertionError = AssertionError
 exports.stringify = stringify
@@ -45,7 +47,7 @@ function Must(actual) {
   * @method a
   * @alias instanceof
   */
-$.defineGetter(Must.prototype, "a", function() {
+defineGetter(Must.prototype, "a", function() {
   return chain(this, this.instanceof)
 })
 
@@ -59,7 +61,7 @@ $.defineGetter(Must.prototype, "a", function() {
   * @method an
   * @alias instanceof
   */
-$.defineGetter(Must.prototype, "an", $.lookupGetter(Must.prototype, "a"))
+defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
 
 /**
   * Pass-through property for a fluent chain.
@@ -71,7 +73,7 @@ $.defineGetter(Must.prototype, "an", $.lookupGetter(Must.prototype, "a"))
   * @property at
   * @on prototype
   */
-$.defineGetter(Must.prototype, "at", function() {
+defineGetter(Must.prototype, "at", function() {
   return this
 })
 
@@ -85,7 +87,7 @@ $.defineGetter(Must.prototype, "at", function() {
   * @method be
   * @alias equal
   */
-$.defineGetter(Must.prototype, "be", function() {
+defineGetter(Must.prototype, "be", function() {
   return chain(this, this.equal)
 })
 
@@ -98,7 +100,7 @@ $.defineGetter(Must.prototype, "be", function() {
   * @property have
   * @on prototype
   */
-$.defineGetter(Must.prototype, "have", function() {
+defineGetter(Must.prototype, "have", function() {
   return this
 })
 
@@ -114,7 +116,7 @@ $.defineGetter(Must.prototype, "have", function() {
   * @property not
   * @on prototype
   */
-$.defineGetter(Must.prototype, "not", function() {
+defineGetter(Must.prototype, "not", function() {
   var self = Object.create(this)
   self.negative = !self.negative
   return self
@@ -133,7 +135,7 @@ $.defineGetter(Must.prototype, "not", function() {
   * @property to
   * @on prototype
   */
-$.defineGetter(Must.prototype, "to", function() {
+defineGetter(Must.prototype, "to", function() {
   return this
 })
 
@@ -427,7 +429,7 @@ Must.prototype.equal = function(expected) {
   * @method is
   * @alias equal
   */
-$.defineGetter(Must.prototype, "is", $.lookupGetter(Must.prototype, "be"))
+defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
 
 /**
  * Assert object equality by content and if possible, recursively.  
@@ -633,7 +635,7 @@ Must.prototype.match = function(expected) {
   * @property must
   * @on prototype
   */
-$.defineGetter(Must.prototype, "must", function() {
+defineGetter(Must.prototype, "must", function() {
   return this
 })
 
@@ -646,7 +648,7 @@ $.defineGetter(Must.prototype, "must", function() {
   * @property the
   * @on prototype
   */
-$.defineGetter(Must.prototype, "the", function() {
+defineGetter(Must.prototype, "the", function() {
   return this
 })
 
