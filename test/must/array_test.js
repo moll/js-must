@@ -1,6 +1,44 @@
+var Must = require("../..")
+var assert = require("./assert")
+
 describe("Must.prototype.array", function() {
-  require("./_type_test")("array", "be an array", {
-    literal: [],
-    object: new Array
-  }, "[]")
+  it("must pass given array", function() {
+    assert.pass(function() { Must([]).be.array() })
+  })
+
+  it("must fail given null", function() {
+    assert.fail(function() { Must(null).be.array() })
+  })
+
+  it("must fail given undefined", function() {
+    assert.fail(function() { Must(undefined).be.array() })
+  })
+
+  it("must fail given boolean literal", function() {
+    assert.fail(function() { Must(true).be.array() })
+    assert.fail(function() { Must(false).be.array() })
+  })
+
+  it("must fail given number literal", function() {
+    assert.fail(function() { Must(0).be.array() })
+  })
+
+  it("must fail given string literal", function() {
+    assert.fail(function() { Must("").be.array() })
+  })
+
+  it("must fail given object", function() {
+    assert.fail(function() { Must({}).be.array() })
+  })
+
+  require("./_assertion_error_test")(function() { Must(42).be.array() }, {
+    actual: 42,
+    message: "42 must be an array"
+  })
+
+  describe(".not", function() {
+    it("must invert the assertion", function() {
+      assert.fail(function() { Must([]).not.be.array() })
+    })
+  })
 })

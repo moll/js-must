@@ -1,5 +1,48 @@
+var Must = require("../..")
+var assert = require("./assert")
+
 describe("Must.prototype.date", function() {
-  require("./_type_test")("date", "be a date", {
-    object: new Date(0)
-  }, "1970-01-01T00:00:00.000Z")
+  it("must fail given null", function() {
+    assert.fail(function() { Must(null).be.date() })
+  })
+
+  it("must fail given undefined", function() {
+    assert.fail(function() { Must(undefined).be.date() })
+  })
+
+  it("must fail given boolean literal", function() {
+    assert.fail(function() { Must(true).be.date() })
+    assert.fail(function() { Must(false).be.date() })
+  })
+
+  it("must fail given number literal", function() {
+    assert.fail(function() { Must(0).be.date() })
+  })
+
+  it("must fail given string literal", function() {
+    assert.fail(function() { Must("").be.date() })
+  })
+
+  it("must fail given array", function() {
+    assert.fail(function() { Must([]).be.date() })
+  })
+
+  it("must fail given object", function() {
+    assert.fail(function() { Must({}).be.date() })
+  })
+
+  it("must pass given a date", function() {
+    assert.pass(function() { Must(new Date).be.date() })
+  })
+
+  require("./_assertion_error_test")(function() { Must(42).be.date() }, {
+    actual: 42,
+    message: "42 must be a date"
+  })
+
+  describe(".not", function() {
+    it("must invert the assertion", function() {
+      assert.fail(function() { Must(new Date).not.be.date() })
+    })
+  })
 })
