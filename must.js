@@ -219,7 +219,7 @@ Must.prototype.boolean = function() {
 
 /**
  * Assert object is a number.  
- * Considers boxed number objects (`new Number`) also numbers.
+ * Boxed number objects (`new Number`) are _not_ considered numbers.
  *
  * @example
  * (42).must.be.a.number()
@@ -227,7 +227,7 @@ Must.prototype.boolean = function() {
  * @method number
  */
 Must.prototype.number = function() {
-  this.assert(kindof(this.actual) == "number", "be a number")
+  this.assert(typeof this.actual == "number", "be a number")
 }
 
 /**

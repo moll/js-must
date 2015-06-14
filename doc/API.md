@@ -560,7 +560,7 @@ demand(null).be.null()
 <a name="Must.prototype.number" />
 ### Must.prototype.number()
 Assert object is a number.  
-Considers boxed number objects (`new Number`) also numbers.
+Boxed number objects (`new Number`) are _not_ considered numbers.
 
 **Examples**:
 ```javascript

@@ -22,8 +22,8 @@ describe("Must.prototype.number", function() {
     assert.pass(function() { Must(42).be.number() })
   })
 
-  it("must pass given number object", function() {
-    assert.pass(function() { Must(new Number(42)).be.number() })
+  it("must fail given number object", function() {
+    assert.fail(function() { Must(new Number(42)).be.number() })
   })
 
   it("must fail given string literal", function() {
