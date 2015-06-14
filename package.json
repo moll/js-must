@@ -30,7 +30,7 @@
 	},
 
 	"devDependencies": {
-		"mocha": ">= 1.12.0 < 2",
+		"mocha": ">= 2 < 3",
 		"oolong": ">= 1.10.0 < 2"
 	}
 }
