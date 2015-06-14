@@ -389,15 +389,13 @@ Must.prototype.instanceOf = Must.prototype.instanceof
  * @method empty
  */
 Must.prototype.empty = function() {
-  var length
+  var ok = false
   if (Array.isArray(this.actual) || kindof(this.actual) == "string")
-    length = this.actual.length
+    ok = this.actual.length === 0
   else if (typeof this.actual == "object" || typeof this.actual == "function")
-    length = enumerableKeys(this.actual).length
-  else
-    length = 1
+    ok = enumerableKeys(this.actual).length === 0
 
-  this.assert(length === 0, "be empty")
+  this.assert(ok, "be empty")
 }
 
 /**
