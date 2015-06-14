@@ -214,7 +214,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 <a name="Must.prototype.boolean" />
 ### Must.prototype.boolean()
 Assert object is a boolean (`true` or `false`).  
-Considers boxed boolean objects (`new Boolean`) also booleans.
+Boxed boolean objects (`new Boolean`) are _not_ considered booleans.
 
 **Examples**:
 ```javascript

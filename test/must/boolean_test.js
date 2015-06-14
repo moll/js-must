@@ -18,9 +18,9 @@ describe("Must.prototype.boolean", function() {
     assert.pass(function() { Must(false).be.boolean() })
   })
 
-  it("must pass given boolean object", function() {
-    assert.pass(function() { Must(new Boolean(true)).be.boolean() })
-    assert.pass(function() { Must(new Boolean(false)).be.boolean() })
+  it("must fail given boolean object", function() {
+    assert.fail(function() { Must(new Boolean(true)).be.boolean() })
+    assert.fail(function() { Must(new Boolean(false)).be.boolean() })
   })
 
   it("must fail given number literal", function() {

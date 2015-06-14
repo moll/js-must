@@ -206,7 +206,7 @@ Must.prototype.undefined = function() {
 
 /**
  * Assert object is a boolean (`true` or `false`).  
- * Considers boxed boolean objects (`new Boolean`) also booleans.
+ * Boxed boolean objects (`new Boolean`) are _not_ considered booleans.
  *
  * @example
  * true.must.be.a.boolean()
@@ -214,7 +214,7 @@ Must.prototype.undefined = function() {
  * @method boolean
  */
 Must.prototype.boolean = function() {
-  this.assert(kindof(this.actual) == "boolean", "be a boolean")
+  this.assert(typeof this.actual == "boolean", "be a boolean")
 }
 
 /**
