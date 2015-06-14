@@ -13,16 +13,16 @@ module.exports = function(name, truthy) {
     doesNotThrow(function() { Must(true).be[name]() })
   })
 
-  it("must "+pass+" given true object", function() {
-    doesNotThrow(function() { Must(new Boolean(true)).be[name]() })
+  it("must fail given true object", function() {
+    assert.fail(function() { Must(new Boolean(true)).be[name]() })
   })
 
   it("must "+fail+" given false literal", function() {
     throws(function() { Must(false).be[name]() })
   })
 
-  it("must "+fail+" given false object", function() {
-    throws(function() { Must(new Boolean(false)).be[name]() })
+  it("must fail given false object", function() {
+    assert.fail(function() { Must(new Boolean(false)).be[name]() })
   })
 
   it("must fail gracefully if null", function() {

@@ -147,8 +147,7 @@ defineGetter(Must.prototype, "to", function() {
  * @method true
  */
 Must.prototype.true = function() {
-  var ok = kindof(this.actual) == "boolean" && this.actual == true
-  this.assert(ok, "be", {expected: true})
+  this.assert(this.actual === true, "be", {expected: true})
 }
 
 /**
@@ -160,8 +159,7 @@ Must.prototype.true = function() {
  *
  */
 Must.prototype.false = function() {
-  var ok = kindof(this.actual) == "boolean" && this.actual == false
-  this.assert(ok, "be", {expected: false})
+  this.assert(this.actual === false, "be", {expected: false})
 }
 
 /**
