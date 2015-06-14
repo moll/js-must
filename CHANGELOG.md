@@ -10,11 +10,13 @@
 - Adds [`the`] for a fluent chain.
 - Changes [`boolean`] to not consider boxed boolean objects as booleans.
 - Changes [`number`] to not consider boxed number objects as numbers.
+- Changes [`string`] to not consider boxed string objects as strings.
 
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 [`the`]: https://github.com/moll/js-the/blob/master/doc/API.md#the.prototype.the
 [`boolean`]: https://github.com/moll/js-boolean/blob/master/doc/API.md#boolean.prototype.boolean
 [`number`]: https://github.com/moll/js-number/blob/master/doc/API.md#number.prototype.number
+[`string`]: https://github.com/moll/js-string/blob/master/doc/API.md#string.prototype.string
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.

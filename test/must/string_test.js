@@ -26,8 +26,8 @@ describe("Must.prototype.string", function() {
     assert.pass(function() { Must("").be.string() })
   })
 
-  it("must pass given string object", function() {
-    assert.pass(function() { Must(new String("")).be.string() })
+  it("must fail given string object", function() {
+    assert.fail(function() { Must(new String("")).be.string() })
   })
 
   it("must fail given array", function() {

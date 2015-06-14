@@ -232,7 +232,7 @@ Must.prototype.number = function() {
 
 /**
  * Assert object is a string.  
- * Considers boxed string objects (`new String`) also strings.
+ * Boxed string objects (`new String`) are _not_ considered strings.
  *
  * @example
  * "Hello".must.be.a.string()
@@ -240,7 +240,7 @@ Must.prototype.number = function() {
  * @method string
  */
 Must.prototype.string = function() {
-  this.assert(kindof(this.actual) == "string", "be a string")
+  this.assert(typeof this.actual == "string", "be a string")
 }
 
 /**

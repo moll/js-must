@@ -646,7 +646,7 @@ Assert object is a regular expression.
 <a name="Must.prototype.string" />
 ### Must.prototype.string()
 Assert object is a string.  
-Considers boxed string objects (`new String`) also strings.
+Boxed string objects (`new String`) are _not_ considered strings.
 
 **Examples**:
 ```javascript
