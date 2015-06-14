@@ -1041,3 +1041,5 @@ Must.prototype.assert = function assert(ok, message, opts) {
 
   throw new AssertionError(msg, opts)
 }
+
+Object.defineProperty(Must.prototype, "assert", {enumerable: false})
