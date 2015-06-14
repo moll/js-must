@@ -653,6 +653,19 @@ defineGetter(Must.prototype, "must", function() {
 })
 
 /**
+  * Pass-through property for a fluent chain.
+  *
+  * @example
+  * (42).must.be.the.number()
+  *
+  * @property the
+  * @on prototype
+  */
+defineGetter(Must.prototype, "the", function() {
+  return this
+})
+
+/**
  * Assert that a function throws.  
  * Optionally assert it throws `expected` (of possibly instance `constructor`).
  *

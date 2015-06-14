@@ -52,6 +52,7 @@ Must.js API Documentation
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
 - [string](#Must.prototype.string)()
+- [the](#Must.prototype.the)
 - [throw](#Must.prototype.throw)([constructor], [expected])
 - [to](#Must.prototype.to)
 - [true](#Must.prototype.true)()
@@ -650,6 +651,15 @@ Considers boxed string objects (`new String`) also strings.
 **Examples**:
 ```javascript
 "Hello".must.be.a.string()
+```
+
+<a name="Must.prototype.the" />
+### Must.prototype.the
+Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+(42).must.be.the.number()
 ```
 
 <a name="Must.prototype.throw" />

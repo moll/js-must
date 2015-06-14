@@ -7,8 +7,10 @@
 
 - Fixes a false positive in [`eql`][] when an object had some keys set to
   `undefined`.
+- Adds [`the`] for a fluent chain.
 
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
+[`the`]: https://github.com/moll/js-the/blob/master/doc/API.md#the.prototype.the
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.
