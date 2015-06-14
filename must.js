@@ -37,6 +37,32 @@ function Must(actual) {
 }
 
 /**
+  * Can also be used a pass-through property for a fluent chain.
+  *
+  * @example
+  * "Hello".must.be.a.string()
+  * new Date().must.be.a(Date)
+  *
+  * @method a
+  * @alias instanceof
+  */
+defineGetter(Must.prototype, "a", function() {
+  return chain(this, this.instanceof)
+})
+
+/**
+  * Can also be used a pass-through property for a fluent chain.
+  *
+  * @example
+  * [1, 2].must.be.an.array()
+  * new AwesomeClass().must.be.an(AwesomeClass)
+  *
+  * @method an
+  * @alias instanceof
+  */
+defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
+
+/**
   * Pass-through property for a fluent chain.
   *
   * @example
@@ -48,6 +74,20 @@ function Must(actual) {
   */
 defineGetter(Must.prototype, "at", function() {
   return this
+})
+
+/**
+  * Can also be used as a pass-through property for a fluent chain.
+  *
+  * @example
+  * true.must.be.true()
+  * (42).must.be(42)
+  *
+  * @method be
+  * @alias equal
+  */
+defineGetter(Must.prototype, "be", function() {
+  return chain(this, this.equal)
 })
 
 /**
@@ -337,30 +377,6 @@ function instanceofMessage(expected) {
 Must.prototype.instanceOf = Must.prototype.instanceof
 
 /**
-  * Can also be used a pass-through property for a fluent chain.
-  *
-  * @example
-  * "Hello".must.be.a.string()
-  * new Date().must.be.a(Date)
-  *
-  * @method a
-  * @alias instanceof
-  */
-defineGetter(Must.prototype, "a", chain(Must.prototype.instanceof))
-
-/**
-  * Can also be used a pass-through property for a fluent chain.
-  *
-  * @example
-  * [1, 2].must.be.an.array()
-  * new AwesomeClass().must.be.an(AwesomeClass)
-  *
-  * @method an
-  * @alias instanceof
-  */
-defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
-
-/**
  * Assert that an object is empty.  
  * Checks either the `length` for arrays and strings or the count of
  * enumerable keys. Inherited keys also counted.
@@ -404,18 +420,6 @@ Must.prototype.empty = function() {
 Must.prototype.equal = function(expected) {
   this.assert(this.actual === expected, "equal", {expected: expected})
 }
-
-/**
-  * Can also be used as a pass-through property for a fluent chain.
-  *
-  * @example
-  * true.must.be.true()
-  * (42).must.be(42)
-  *
-  * @method be
-  * @alias equal
-  */
-defineGetter(Must.prototype, "be", chain(Must.prototype.equal))
 
 /**
   * Can also be used as a pass-through property for a fluent chain.
