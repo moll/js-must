@@ -6,19 +6,13 @@ describe("Must.prototype.empty", function() {
   /* jshint -W053 */
 
   describe("given Boolean", function() {
-    it("must fail given a true literal", function() {
+    it("must fail given a boolean literal", function() {
       assert.fail(function() { Must(true).be.empty() })
-    })
-
-    it("must fail given a false literal", function() {
       assert.fail(function() { Must(false).be.empty() })
     })
 
-    it("must pass given a true object", function() {
+    it("must pass given a boolean object", function() {
       assert.pass(function() { Must(new Boolean(true)).be.empty() })
-    })
-
-    it("must pass given a false object", function() {
       assert.pass(function() { Must(new Boolean(false)).be.empty() })
     })
 
