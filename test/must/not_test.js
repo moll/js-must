@@ -14,9 +14,14 @@ describe("Must.prototype.not", function() {
     assert.pass(function() { Must(true).not.not.equal(true) })
   })
 
-  it("must return a new instance of Must", function() {
+  it("must not modify existing instance of Must", function() {
     var must = Must(true)
     assert.fail(function() { must.not.equal(true) })
     assert.pass(function() { must.equal(true) })
+  })
+
+  it("must inherit from existing instance", function() {
+    var must = Must(true)
+    assert.strictEqual(Object.getPrototypeOf(must.not), must)
   })
 })

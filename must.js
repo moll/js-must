@@ -116,9 +116,9 @@ defineGetter(Must.prototype, "have", function() {
   * @on prototype
   */
 defineGetter(Must.prototype, "not", function() {
-  var must = new this.constructor(this.actual)
-  must.negative = !this.negative
-  return must
+  var self = Object.create(this)
+  self.negative = !self.negative
+  return self
 })
 
 /**
