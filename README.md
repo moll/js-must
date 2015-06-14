@@ -56,6 +56,14 @@ tool is [Mocha][mocha].
   model.attributes.must.eql({title: "New", createdAt: new Date(2000, 1, 1)})
   ```
 
+- Built-in support for **asserting on promises** with stack traces leading back
+  to _your_ assertion, not to the library's internals.
+
+  ```javascript
+  Promise.resolve(42).must.then.equal(42)
+  Promise.resolve([1, 2, 3]).must.not.eventually.include(42)
+  ```
+
 [Must.prototype.eql]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql
 
 - **Human readable error messages** let you know if an object wasn't what you
@@ -206,6 +214,7 @@ For extended documentation on all functions, please see the
 - [enumerableProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.enumerableProperty)(property)
 - [eql](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql)(expected)
 - [equal](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.equal)(expected)
+- [eventually](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eventually)
 - [exist](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.exist)()
 - [false](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.false)()
 - [falsy](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.falsy)()
@@ -240,6 +249,7 @@ For extended documentation on all functions, please see the
 - [regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()
 - [string](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string)()
 - [the](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the)
+- [then](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then)
 - [throw](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.throw)([constructor], [expected])
 - [to](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.to)
 - [true](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.true)()

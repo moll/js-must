@@ -14,6 +14,24 @@
 - Changes [`true`] and [`false`] to not consider boxed boolean objects as
   either true or false.
 
+- Adds [`then`] for asserting on promises.
+
+  With [Mocha](http://mochajs.org), using this will look something like:
+
+  ```javascript
+  it("must pass", function() {
+    return Promise.resolve(42).must.then.equal(42)
+  })
+  ```
+
+  Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+  ```javascript
+  it("must pass", function*() {
+    yield Promise.resolve(42).must.then.equal(42)
+    yield Promise.resolve([1, 2, 3]).must.not.then.include(42)
+  })
+  ```
+
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 [`the`]: https://github.com/moll/js-the/blob/master/doc/API.md#the.prototype.the
 [`boolean`]: https://github.com/moll/js-boolean/blob/master/doc/API.md#boolean.prototype.boolean
@@ -21,6 +39,7 @@
 [`string`]: https://github.com/moll/js-string/blob/master/doc/API.md#string.prototype.string
 [`true`]: https://github.com/moll/js-true/blob/master/doc/API.md#true.prototype.true
 [`false`]: https://github.com/moll/js-false/blob/master/doc/API.md#false.prototype.false
+[`then`]: https://github.com/moll/js-then/blob/master/doc/API.md#then.prototype.then
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.

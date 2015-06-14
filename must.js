@@ -1,5 +1,6 @@
 var $ = require("oolong")
 var AssertionError = require("./lib/assertion_error")
+var Thenable = require("./lib/thenable")
 var kindof = require("kindof")
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
@@ -1029,6 +1030,48 @@ Must.prototype.between = function(begin, end) {
     return "be between " + stringify(begin) + " and " + stringify(end)
   })
 }
+/**
+ * Makes any matcher following the use of `then` wait till a promise resolves
+ * before asserting.  
+ * Returns a new promise that will either resolve if the assertion passed or
+ * fail with `AssertionError`.
+ *
+ * With [Mocha](http://mochajs.org), using this will look something like:
+ *
+ * ```javascript
+ * it("must pass", function() {
+ *   return Promise.resolve(42).must.then.equal(42)
+ * })
+ * ```
+ *
+ * Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+ * ```javascript
+ * it("must pass", function*() {
+ *   yield Promise.resolve(42).must.then.equal(42)
+ *   yield Promise.resolve([1, 2, 3]).must.not.then.include(42)
+ * })
+ * ```
+ *
+ * @example
+ * Promise.resolve(42).must.then.equal(42)
+ * Promise.resolve([1, 2, 3]).must.not.then.include(42)
+ *
+ * @property then
+ * @on prototype
+ */
+defineGetter(Must.prototype, "then", function() {
+  return Thenable(this)
+})
+
+/**
+ * @example
+ * Promise.resolve(42).must.eventually.equal(42)
+ *
+ * @property eventually
+ * @on prototype
+ * @alias then
+ */
+defineGetter(Must.prototype, "eventually", lookupGetter(Must.prototype, "then"))
 
 Must.prototype.assert = function assert(ok, message, opts) {
   if (!this.negative ? ok : !ok) return

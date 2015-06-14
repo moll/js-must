@@ -19,6 +19,7 @@ Must.js API Documentation
 - [enumerableProperty](#Must.prototype.enumerableProperty)(property)
 - [eql](#Must.prototype.eql)(expected)
 - [equal](#Must.prototype.equal)(expected)
+- [eventually](#Must.prototype.eventually)
 - [exist](#Must.prototype.exist)()
 - [false](#Must.prototype.false)()
 - [falsy](#Must.prototype.falsy)()
@@ -53,6 +54,7 @@ Must.js API Documentation
 - [regexp](#Must.prototype.regexp)()
 - [string](#Must.prototype.string)()
 - [the](#Must.prototype.the)
+- [then](#Must.prototype.then)
 - [throw](#Must.prototype.throw)([constructor], [expected])
 - [to](#Must.prototype.to)
 - [true](#Must.prototype.true)()
@@ -318,6 +320,15 @@ To compare arrays and objects by content, also use
 
 var date = new Date
 date.must.equal(date)
+```
+
+<a name="Must.prototype.eventually" />
+### Must.prototype.eventually
+Alias of [`then`](#Must.prototype.then).  
+
+**Examples**:
+```javascript
+Promise.resolve(42).must.eventually.equal(42)
 ```
 
 <a name="Must.prototype.exist" />
@@ -660,6 +671,35 @@ Pass-through property for a fluent chain.
 **Examples**:
 ```javascript
 (42).must.be.the.number()
+```
+
+<a name="Must.prototype.then" />
+### Must.prototype.then
+Makes any matcher following the use of `then` wait till a promise resolves
+before asserting.  
+Returns a new promise that will either resolve if the assertion passed or
+fail with `AssertionError`.
+
+With [Mocha](http://mochajs.org), using this will look something like:
+
+```javascript
+it("must pass", function() {
+  return Promise.resolve(42).must.then.equal(42)
+})
+```
+
+Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+```javascript
+it("must pass", function*() {
+  yield Promise.resolve(42).must.then.equal(42)
+  yield Promise.resolve([1, 2, 3]).must.not.then.include(42)
+})
+```
+
+**Examples**:
+```javascript
+Promise.resolve(42).must.then.equal(42)
+Promise.resolve([1, 2, 3]).must.not.then.include(42)
 ```
 
 <a name="Must.prototype.throw" />
