@@ -24,6 +24,9 @@ pack:
 publish:
 	npm publish
 
+publish-beta:
+	npm publish --tag beta
+
 # NOTE: Sorry, mocumentation is not yet published.
 doc: doc.json
 	@mkdir -p doc
