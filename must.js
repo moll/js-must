@@ -155,7 +155,8 @@ Must.prototype.true = function() {
 }
 
 /**
- * Assert object is `false` or `new Boolean(false)`.
+ * Assert object is `false`.  
+ * A boxed boolean object (`new Boolean(false`) is _not_ considered false.
  *
  * @example
  * false.must.be.false()

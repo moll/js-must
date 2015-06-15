@@ -346,7 +346,8 @@ Assert object is exists and thereby is not null or undefined.
 
 <a name="Must.prototype.false" />
 ### Must.prototype.false()
-Assert object is `false` or `new Boolean(false)`.
+Assert object is `false`.  
+A boxed boolean object (`new Boolean(false`) is _not_ considered false.
 
 **Examples**:
 ```javascript
