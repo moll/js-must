@@ -56,6 +56,7 @@ Must.js API Documentation
 - [regexp](#Must.prototype.regexp)()
 - [reject](#Must.prototype.reject)
 - [resolve](#Must.prototype.resolve)
+- [startWith](#Must.prototype.startWith)(expected)
 - [string](#Must.prototype.string)()
 - [the](#Must.prototype.the)
 - [then](#Must.prototype.then)
@@ -761,6 +762,15 @@ it("must pass", function*() {
 ```javascript
 Promise.resolve(42).must.resolve.to.equal(42)
 Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
+```
+
+<a name="Must.prototype.startWith" />
+### Must.prototype.startWith(expected)
+Assert a string starts with the given string.
+
+**Examples**:
+```javascript
+"Hello, John".must.startWith("Hello")
 ```
 
 <a name="Must.prototype.string" />

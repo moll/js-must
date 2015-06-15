@@ -251,6 +251,7 @@ For extended documentation on all functions, please see the
 - [regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()
 - [reject](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject)
 - [resolve](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.resolve)
+- [startWith](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.startWith)(expected)
 - [string](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string)()
 - [the](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the)
 - [then](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then)

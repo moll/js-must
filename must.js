@@ -7,6 +7,7 @@ var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 var defineGetter = $.defineGetter
 var lookupGetter = $.lookupGetter
+var startsWith = require("./lib/es6").startsWith
 var endsWith = require("./lib/es6").endsWith
 var ANY = {}
 exports = module.exports = Must
@@ -1177,6 +1178,20 @@ defineGetter(Must.prototype, "eventually",
 defineGetter(Must.prototype, "reject", function() {
   return Rejectable(this)
 })
+
+/**
+ * Assert a string starts with the given string.
+ *
+ * @example
+ * "Hello, John".must.startWith("Hello")
+ *
+ * @method startWith
+ * @param expected
+ */
+Must.prototype.startWith = function(expected) {
+  var ok = startsWith(this.actual, expected)
+  this.assert(ok, "start with", {expected: expected})
+}
 
 /**
   * Pass-through property for a fluent chain.
