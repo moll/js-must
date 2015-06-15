@@ -1,3 +1,6 @@
+## Unreleased
+- Fixes the stack trace when using promises with some particular matchers.
+
 ## 0.13.0-beta1 (Jun 15, 2015)
 - Adds [`must`] that returns self for those of us who sometimes write it twice:
 
