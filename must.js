@@ -78,9 +78,7 @@ defineGetter(Must.prototype, "an", lookupGetter(Must.prototype, "a"))
   * @property at
   * @on prototype
   */
-defineGetter(Must.prototype, "at", function() {
-  return this
-})
+defineGetter(Must.prototype, "at", passthrough)
 
 /**
   * Can also be used as a pass-through property for a fluent chain.
@@ -105,9 +103,7 @@ defineGetter(Must.prototype, "be", function() {
   * @property have
   * @on prototype
   */
-defineGetter(Must.prototype, "have", function() {
-  return this
-})
+defineGetter(Must.prototype, "have", passthrough)
 
 /**
   * Inverse the assertion.  
@@ -140,9 +136,7 @@ defineGetter(Must.prototype, "not", function() {
   * @property to
   * @on prototype
   */
-defineGetter(Must.prototype, "to", function() {
-  return this
-})
+defineGetter(Must.prototype, "to", passthrough)
 
 /**
  * Assert object is `true`.  
@@ -706,9 +700,7 @@ Must.prototype.match = function(expected) {
   * @property must
   * @on prototype
   */
-defineGetter(Must.prototype, "must", function() {
-  return this
-})
+defineGetter(Must.prototype, "must", passthrough)
 
 /**
   * Pass-through property for a fluent chain.
@@ -719,9 +711,7 @@ defineGetter(Must.prototype, "must", function() {
   * @property the
   * @on prototype
   */
-defineGetter(Must.prototype, "the", function() {
-  return this
-})
+defineGetter(Must.prototype, "the", passthrough)
 
 /**
  * Assert that a function throws.  
@@ -1214,9 +1204,7 @@ Must.prototype.startWith = function(expected) {
   * @property with
   * @on prototype
   */
-defineGetter(Must.prototype, "with", function() {
-  return this
-})
+defineGetter(Must.prototype, "with", passthrough)
 
 Must.prototype.assert = function assert(ok, message, opts) {
   if (!this.negative ? ok : !ok) return
@@ -1251,3 +1239,4 @@ function messageFromError(err) {
 }
 
 function isFunction(fn) { return typeof fn === "function" }
+function passthrough() { return this }
