@@ -237,6 +237,7 @@ For extended documentation on all functions, please see the
 - [match](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.match)(regexp)
 - [most](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.most)(expected)
 - [must](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must)
+- [nan](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nan)()
 - [nonenumerable](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nonenumerable)(property)
 - [nonenumerableProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nonenumerableProperty)(property)
 - [not](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.not)

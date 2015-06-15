@@ -40,6 +40,7 @@
   Similar to [`throw`], but useful for when you already have an error at hand.
 - Adds [`startWith`].
 - Adds [`endWith`].
+- Adds [`nan`] to test `NaN`.
 
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 [`the`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the
@@ -55,6 +56,7 @@
 [`error`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.error
 [`startWith`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.startWith
 [`endWith`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.endWith
+[`nan`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.nan
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.

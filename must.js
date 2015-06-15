@@ -171,6 +171,18 @@ Must.prototype.false = function() {
 }
 
 /**
+ * Assert object is `NaN`.
+ *
+ * @example
+ * NaN.must.be.nan()
+ *
+ * @method nan
+ */
+Must.prototype.nan = function() {
+  this.assert(this.actual !== this.actual, "be", {expected: NaN})
+}
+
+/**
  * Assert object is `null`.
  *
  * Because JavaScript does not allow method calls on `null`, you'll have to

@@ -42,6 +42,7 @@ Must.js API Documentation
 - [match](#Must.prototype.match)(regexp)
 - [most](#Must.prototype.most)(expected)
 - [must](#Must.prototype.must)
+- [nan](#Must.prototype.nan)()
 - [nonenumerable](#Must.prototype.nonenumerable)(property)
 - [nonenumerableProperty](#Must.prototype.nonenumerableProperty)(property)
 - [not](#Must.prototype.not)
@@ -561,6 +562,15 @@ Pass-through property for a fluent chain.
 **Examples**:
 ```javascript
 (42).must.must.must.must.equal(42)
+```
+
+<a name="Must.prototype.nan" />
+### Must.prototype.nan()
+Assert object is `NaN`.
+
+**Examples**:
+```javascript
+NaN.must.be.nan()
 ```
 
 <a name="Must.prototype.nonenumerable" />
