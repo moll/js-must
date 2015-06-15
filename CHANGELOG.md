@@ -35,6 +35,8 @@
   })
   ```
 
+- Adds [`with`] for a fluent chain.
+
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 [`the`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the
 [`boolean`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.boolean
@@ -45,6 +47,7 @@
 [`resolve`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.resolve
 [`reject`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject
 [`then`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then
+[`with`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.with
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.

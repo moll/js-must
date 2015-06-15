@@ -1128,6 +1128,19 @@ defineGetter(Must.prototype, "reject", function() {
   return Rejectable(this)
 })
 
+/**
+  * Pass-through property for a fluent chain.
+  *
+  * @example
+  * Promise.resolve(42).must.resolve.with.number()
+  *
+  * @property with
+  * @on prototype
+  */
+defineGetter(Must.prototype, "with", function() {
+  return this
+})
+
 Must.prototype.assert = function assert(ok, message, opts) {
   if (!this.negative ? ok : !ok) return
 

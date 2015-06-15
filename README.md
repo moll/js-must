@@ -257,6 +257,7 @@ For extended documentation on all functions, please see the
 - [true](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.true)()
 - [truthy](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.truthy)()
 - [undefined](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.undefined)()
+- [with](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.with)
 
 
 Migrating to Must.js

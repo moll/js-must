@@ -62,6 +62,7 @@ Must.js API Documentation
 - [true](#Must.prototype.true)()
 - [truthy](#Must.prototype.truthy)()
 - [undefined](#Must.prototype.undefined)()
+- [with](#Must.prototype.with)
 
 ### [Object](#Object)
 - [must](#Object.prototype.must)
@@ -830,6 +831,15 @@ If you want to assert that an object's property is `undefined`, see
 ```javascript
 var demand = require("must")
 demand(undefined).be.undefined()
+```
+
+<a name="Must.prototype.with" />
+### Must.prototype.with
+Pass-through property for a fluent chain.
+
+**Examples**:
+```javascript
+Promise.resolve(42).must.resolve.with.number()
 ```
 
 
