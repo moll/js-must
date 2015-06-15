@@ -1,4 +1,4 @@
-## Unreleased
+## 0.13.0-beta2 (Jun 15, 2015)
 - Fixes the stack trace when using promises with some particular matchers.
 
 ## 0.13.0-beta1 (Jun 15, 2015)
