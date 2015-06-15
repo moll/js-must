@@ -36,6 +36,8 @@
   ```
 
 - Adds [`with`] for a fluent chain.
+- Adds [`error`] to assert on errors.  
+  Similar to [`throw`], but useful for when you already have an error at hand.
 
 [`must`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.must
 [`the`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the
@@ -48,6 +50,7 @@
 [`reject`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject
 [`then`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then
 [`with`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.with
+[`error`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.error
 
 ## 0.12.0 (May 28, 2014)
 - Adds [`permutationOf`] to assert that two arrays contain the same elements.

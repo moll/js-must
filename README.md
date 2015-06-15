@@ -214,6 +214,7 @@ For extended documentation on all functions, please see the
 - [enumerableProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.enumerableProperty)(property)
 - [eql](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql)(expected)
 - [equal](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.equal)(expected)
+- [error](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.error)([constructor], [expected])
 - [eventually](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eventually)
 - [exist](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.exist)()
 - [false](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.false)()

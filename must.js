@@ -7,6 +7,7 @@ var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 var defineGetter = $.defineGetter
 var lookupGetter = $.lookupGetter
+var ANY = {}
 exports = module.exports = Must
 exports.AssertionError = AssertionError
 exports.stringify = stringify
@@ -423,6 +424,45 @@ Must.prototype.equal = function(expected) {
 }
 
 /**
+ * Assert that an object is an error (instance of `Error` by default).  
+ * Optionally assert it matches `expected` (and/or is of instance
+ * `constructor`).  
+ * When you have a function that's supposed to throw, use
+ * [`throw`](#Must.prototype.throw).
+ *
+ * Given `expected`, the error is asserted as follows:
+ * - A **string** is compared with the exception's `message` property.
+ * - A **regular expression** is matched against the exception's `message`
+ *   property.
+ * - A **function** (a.k.a. constructor) is used to check if the error
+ *   is an `instanceof` that constructor.
+ * - All other cases of `expected` are left unspecified for now.
+ *
+ * @example
+ * var err = throw new RangeError("Everything's amazing and nobody's happy") }
+ * err.must.be.an.error()
+ * err.must.be.an.error("Everything's amazing and nobody's happy")
+ * err.must.be.an.error(/amazing/)
+ * err.must.be.an.error(Error)
+ * err.must.be.an.error(RangeError)
+ * err.must.be.an.error(RangeError, "Everything's amazing and nobody's happy")
+ * err.must.be.an.error(RangeError, /amazing/)
+ *
+ * @method error
+ * @param [constructor]
+ * @param [expected]
+ */
+Must.prototype.error = function(type, expected) {
+  if (arguments.length <= 1) expected = ANY
+  if (arguments.length == 1 && !isFunction(type)) expected = type, type = null
+
+  var ok = isError(this.actual, type || Error, expected)
+  var msg = expected !== ANY ? "be an error matching" : "be an error"
+  var opts = expected !== ANY ? {expected: expected} : null
+  this.assert(ok, msg, opts)
+}
+
+/**
   * Can also be used as a pass-through property for a fluent chain.
   *
   * @example
@@ -658,7 +698,10 @@ defineGetter(Must.prototype, "the", function() {
 
 /**
  * Assert that a function throws.  
- * Optionally assert it throws `expected` (of possibly instance `constructor`).
+ * Optionally assert it throws `expected` (and/or is of instance
+ * `constructor`).  
+ * When you already have an error reference, use
+ * [`error`](#Must.prototype.error).
  *
  * Given `expected`, the error is asserted as follows:
  * - A **string** is compared with the exception's `message` property.
@@ -673,40 +716,33 @@ defineGetter(Must.prototype, "the", function() {
  * `obj.method.bind(obj).must.throw()`.
  *
  * @example
- * function omg() { throw new Error("Everything's amazing and nobody's happy") }
+ * function omg() {
+ *   throw new RangeError("Everything's amazing and nobody's happy")
+ * }
+ *
  * omg.must.throw()
  * omg.must.throw("Everything's amazing and nobody's happy")
  * omg.must.throw(/amazing/)
  * omg.must.throw(Error)
- * omg.must.throw(Error, "Everything's amazing and nobody's happy")
- * omg.must.throw(Error, /amazing/)
+ * omg.must.throw(RangeError)
+ * omg.must.throw(RangeError, "Everything's amazing and nobody's happy")
+ * omg.must.throw(RangeError, /amazing/)
  *
  * @method throw
  * @param [constructor]
  * @param [expected]
  */
-Must.prototype.throw = function(constructor, expected) {
-  if (arguments.length == 1) expected = constructor, constructor = null
+Must.prototype.throw = function(type, expected) {
+  if (arguments.length <= 1) expected = ANY
+  if (arguments.length == 1 && !isFunction(type)) expected = type, type = null
 
-  var ok, exception
+  var ok = false, exception
   try { this.actual.call(null) } catch (ex) { ok = true; exception = ex }
-  if (ok && constructor) ok = exception instanceof constructor
-  if (ok && arguments.length) ok = exceptionEql(exception, expected)
+  ok = ok && isError(exception, type, expected)
 
-  this.assert(ok, "throw", arguments.length > 0 ? {expected: expected} : null)
-}
-
-function exceptionEql(actual, expected) {
-  if (expected == null) return actual === expected
-  // NOTE: The message in new Error(message) gets converted to a string.
-  var msg = kindof(actual) == "string" ? actual : actual.message
-
-  var kind = kindof(expected)
-  if (kind == "string") return msg == expected
-  if (kind == "regexp") return expected.exec(msg)
-  if (kind == "function") return actual instanceof expected
-
-  return msg === expected
+  var opts = {actual: exception}
+  if (expected !== ANY) opts.expected = expected
+  this.assert(ok, "throw", opts)
 }
 
 /**
@@ -1156,3 +1192,21 @@ Must.prototype.assert = function assert(ok, message, opts) {
 }
 
 Object.defineProperty(Must.prototype, "assert", {enumerable: false})
+
+function isError(err, constructor, expected) {
+  if (constructor != null && !(err instanceof constructor)) return false
+  if (expected === ANY) return true
+
+  switch (kindof(expected)) {
+    case "string": return messageFromError(err) === expected
+    case "regexp": return expected.exec(messageFromError(err))
+    default: return err === expected
+  }
+}
+
+function messageFromError(err) {
+  // The message in new Error(message) gets converted to a string.
+  return err == null || typeof err == "string" ? err : err.message
+}
+
+function isFunction(fn) { return typeof fn === "function" }

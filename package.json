@@ -33,6 +33,7 @@
 
 	"devDependencies": {
 		"mocha": ">= 1.12.0 < 2",
-		"promise": ">= 7 < 8"
+		"promise": ">= 7 < 8",
+		"lodash": ">= 3 < 4"
 	}
 }

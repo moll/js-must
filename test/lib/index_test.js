@@ -93,4 +93,17 @@ describe("Must.stringify", function() {
       assert.strictEqual(stringify(obj), '{"name":"John","age":"[Undefined]"}')
     })
   })
+
+  describe("given Error", function() {
+    it("must stringify the message", function() {
+      var err = new Error("Problem")
+      assert.strictEqual(stringify(err), '{"message":"Problem"}')
+    })
+
+    it("must stringify other enumerable properties", function() {
+      var err = new Error("Not Found")
+      err.code = 404
+      assert.strictEqual(stringify(err), '{"code":404,"message":"Not Found"}')
+    })
+  })
 })

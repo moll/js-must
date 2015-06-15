@@ -19,6 +19,7 @@ Must.js API Documentation
 - [enumerableProperty](#Must.prototype.enumerableProperty)(property)
 - [eql](#Must.prototype.eql)(expected)
 - [equal](#Must.prototype.equal)(expected)
+- [error](#Must.prototype.error)([constructor], [expected])
 - [eventually](#Must.prototype.eventually)
 - [exist](#Must.prototype.exist)()
 - [false](#Must.prototype.false)()
@@ -323,6 +324,34 @@ To compare arrays and objects by content, also use
 
 var date = new Date
 date.must.equal(date)
+```
+
+<a name="Must.prototype.error" />
+### Must.prototype.error([constructor], [expected])
+Assert that an object is an error (instance of `Error` by default).  
+Optionally assert it matches `expected` (and/or is of instance
+`constructor`).  
+When you have a function that's supposed to throw, use
+[`throw`](#Must.prototype.throw).
+
+Given `expected`, the error is asserted as follows:
+- A **string** is compared with the exception's `message` property.
+- A **regular expression** is matched against the exception's `message`
+  property.
+- A **function** (a.k.a. constructor) is used to check if the error
+  is an `instanceof` that constructor.
+- All other cases of `expected` are left unspecified for now.
+
+**Examples**:
+```javascript
+var err = throw new RangeError("Everything's amazing and nobody's happy") }
+err.must.be.an.error()
+err.must.be.an.error("Everything's amazing and nobody's happy")
+err.must.be.an.error(/amazing/)
+err.must.be.an.error(Error)
+err.must.be.an.error(RangeError)
+err.must.be.an.error(RangeError, "Everything's amazing and nobody's happy")
+err.must.be.an.error(RangeError, /amazing/)
 ```
 
 <a name="Must.prototype.eventually" />
@@ -755,7 +784,10 @@ Promise.resolve(42).must.then.equal(42)
 <a name="Must.prototype.throw" />
 ### Must.prototype.throw([constructor], [expected])
 Assert that a function throws.  
-Optionally assert it throws `expected` (of possibly instance `constructor`).
+Optionally assert it throws `expected` (and/or is of instance
+`constructor`).  
+When you already have an error reference, use
+[`error`](#Must.prototype.error).
 
 Given `expected`, the error is asserted as follows:
 - A **string** is compared with the exception's `message` property.
@@ -771,13 +803,17 @@ context (`this`). If you want to test an instance method, bind it:
 
 **Examples**:
 ```javascript
-function omg() { throw new Error("Everything's amazing and nobody's happy") }
+function omg() {
+  throw new RangeError("Everything's amazing and nobody's happy")
+}
+
 omg.must.throw()
 omg.must.throw("Everything's amazing and nobody's happy")
 omg.must.throw(/amazing/)
 omg.must.throw(Error)
-omg.must.throw(Error, "Everything's amazing and nobody's happy")
-omg.must.throw(Error, /amazing/)
+omg.must.throw(RangeError)
+omg.must.throw(RangeError, "Everything's amazing and nobody's happy")
+omg.must.throw(RangeError, /amazing/)
 ```
 
 <a name="Must.prototype.to" />
