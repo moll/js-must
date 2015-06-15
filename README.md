@@ -61,7 +61,7 @@ tool is [Mocha][mocha].
 
   ```javascript
   Promise.resolve(42).must.then.equal(42)
-  Promise.resolve([1, 2, 3]).must.not.eventually.include(42)
+  Promise.resolve([1, 2, 3]).must.eventually.not.include(42)
   ```
 
 [Must.prototype.eql]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.eql
