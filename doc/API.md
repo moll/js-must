@@ -793,7 +793,8 @@ wish(life).to.be.truthy()
 
 <a name="Must.prototype.true" />
 ### Must.prototype.true()
-Assert object is `true` or `new Boolean(true)`.
+Assert object is `true`.  
+A boxed boolean object (`new Boolean(true`) is _not_ considered true.
 
 **Examples**:
 ```javascript

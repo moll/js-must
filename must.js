@@ -142,7 +142,8 @@ defineGetter(Must.prototype, "to", function() {
 })
 
 /**
- * Assert object is `true` or `new Boolean(true)`.
+ * Assert object is `true`.  
+ * A boxed boolean object (`new Boolean(true`) is _not_ considered true.
  *
  * @example
  * true.must.be.true()
