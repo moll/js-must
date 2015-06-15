@@ -2,7 +2,7 @@
 - Adds [`must`] that returns self for those of us who sometimes write it twice:
 
   ```javascript
-  demand(undefined).must.be.undefined().
+  demand(undefined).must.be.undefined()
   ```
 
 - Fixes a false positive in [`eql`][] when an object had some keys set to
