@@ -28,7 +28,7 @@
   ```javascript
   it("must pass", function*() {
     yield Promise.resolve(42).must.then.equal(42)
-    yield Promise.resolve([1, 2, 3]).must.not.then.include(42)
+    yield Promise.resolve([1, 2, 3]).must.eventually.not.include(42)
   })
   ```
 

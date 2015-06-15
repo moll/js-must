@@ -692,14 +692,14 @@ Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
 ```javascript
 it("must pass", function*() {
   yield Promise.resolve(42).must.then.equal(42)
-  yield Promise.resolve([1, 2, 3]).must.not.then.include(42)
+  yield Promise.resolve([1, 2, 3]).must.then.not.include(42)
 })
 ```
 
 **Examples**:
 ```javascript
 Promise.resolve(42).must.then.equal(42)
-Promise.resolve([1, 2, 3]).must.not.then.include(42)
+Promise.resolve([1, 2, 3]).must.then.not.include(42)
 ```
 
 <a name="Must.prototype.throw" />
