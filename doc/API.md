@@ -597,7 +597,7 @@ true.must.not.be.true()
 
 <a name="Must.prototype.null" />
 ### Must.prototype.null()
-Assert object is `null`.  
+Assert object is `null`.
 
 Because JavaScript does not allow method calls on `null`, you'll have to
 wrap an expected null with [`Must`](#Must). Assigning `require("must")` to
