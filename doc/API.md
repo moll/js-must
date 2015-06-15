@@ -15,6 +15,7 @@ Must.js API Documentation
 - [contain](#Must.prototype.contain)(expected)
 - [date](#Must.prototype.date)()
 - [empty](#Must.prototype.empty)()
+- [endWith](#Must.prototype.endWith)(expected)
 - [enumerable](#Must.prototype.enumerable)(property)
 - [enumerableProperty](#Must.prototype.enumerableProperty)(property)
 - [eql](#Must.prototype.eql)(expected)
@@ -251,6 +252,15 @@ enumerable keys. Inherited keys also counted.
 "".must.be.empty()
 [].must.be.empty()
 ({}).must.be.empty()
+```
+
+<a name="Must.prototype.endWith" />
+### Must.prototype.endWith(expected)
+Assert a string ends with the given string.
+
+**Examples**:
+```javascript
+"Hello, John".must.endWith("John")
 ```
 
 <a name="Must.prototype.enumerable" />

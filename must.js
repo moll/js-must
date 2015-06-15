@@ -7,6 +7,7 @@ var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 var defineGetter = $.defineGetter
 var lookupGetter = $.lookupGetter
+var endsWith = require("./lib/es6").endsWith
 var ANY = {}
 exports = module.exports = Must
 exports.AssertionError = AssertionError
@@ -400,6 +401,19 @@ Must.prototype.empty = function() {
     ok = $.isEmpty(this.actual)
 
   this.assert(ok, "be empty")
+}
+
+/**
+ * Assert a string ends with the given string.
+ *
+ * @example
+ * "Hello, John".must.endWith("John")
+ *
+ * @method endWith
+ * @param expected
+ */
+Must.prototype.endWith = function(expected) {
+  this.assert(endsWith(this.actual, expected), "end with", {expected: expected})
 }
 
 /**
