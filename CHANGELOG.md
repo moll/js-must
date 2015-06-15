@@ -14,21 +14,24 @@
 - Changes [`true`] and [`false`] to not consider boxed boolean objects as
   either true or false.
 
-- Adds [`then`] for asserting on promises.
+- Adds [`resolve`] and [`reject`] for asserting on promises.  
+  The former is also aliased to [`then`] and [`eventually`] for different
+  language styles.
 
   With [Mocha](http://mochajs.org), using this will look something like:
 
   ```javascript
   it("must pass", function() {
-    return Promise.resolve(42).must.then.equal(42)
+    return Promise.resolve(42).must.resolve.to.equal(42)
   })
   ```
 
   Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
   ```javascript
   it("must pass", function*() {
+    yield Promise.resolve(42).must.resolve.to.equal(42)
     yield Promise.resolve(42).must.then.equal(42)
-    yield Promise.resolve([1, 2, 3]).must.eventually.not.include(42)
+    yield Promise.reject(42).must.reject.and.equal(42)
   })
   ```
 
@@ -39,6 +42,8 @@
 [`string`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string
 [`true`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.true
 [`false`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.false
+[`resolve`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.resolve
+[`reject`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject
 [`then`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then
 
 ## 0.12.0 (May 28, 2014)

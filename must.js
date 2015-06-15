@@ -1,6 +1,7 @@
 var $ = require("oolong")
 var AssertionError = require("./lib/assertion_error")
-var Thenable = require("./lib/thenable")
+var Resolvable = require("./lib/resolvable")
+var Rejectable = require("./lib/rejectable")
 var kindof = require("kindof")
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
@@ -1031,37 +1032,51 @@ Must.prototype.between = function(begin, end) {
   })
 }
 /**
- * Makes any matcher following the use of `then` wait till a promise resolves
- * before asserting.  
+ * Makes any matcher following the use of `resolve` wait till a promise
+ * resolves before asserting.  
  * Returns a new promise that will either resolve if the assertion passed or
  * fail with `AssertionError`.
+ *
+ * Promises are transparent to matchers, so everything will also work with
+ * customer matchers you've added to `Must.prototype`. Internally Must just
+ * waits on the promise and calls the matcher function once it's resolved.
  *
  * With [Mocha](http://mochajs.org), using this will look something like:
  *
  * ```javascript
  * it("must pass", function() {
- *   return Promise.resolve(42).must.then.equal(42)
+ *   return Promise.resolve(42).must.resolve.to.equal(42)
  * })
  * ```
  *
  * Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
  * ```javascript
  * it("must pass", function*() {
- *   yield Promise.resolve(42).must.then.equal(42)
- *   yield Promise.resolve([1, 2, 3]).must.then.not.include(42)
+ *   yield Promise.resolve(42).must.resolve.to.equal(42)
+ *   yield Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
  * })
  * ```
  *
  * @example
+ * Promise.resolve(42).must.resolve.to.equal(42)
+ * Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
+ *
+ * @property resolve
+ * @on prototype
+ */
+defineGetter(Must.prototype, "resolve", function() {
+  return Resolvable(this)
+})
+
+/**
+ * @example
  * Promise.resolve(42).must.then.equal(42)
- * Promise.resolve([1, 2, 3]).must.then.not.include(42)
  *
  * @property then
  * @on prototype
+ * @alias resolve
  */
-defineGetter(Must.prototype, "then", function() {
-  return Thenable(this)
-})
+defineGetter(Must.prototype, "then", lookupGetter(Must.prototype, "resolve"))
 
 /**
  * @example
@@ -1069,9 +1084,47 @@ defineGetter(Must.prototype, "then", function() {
  *
  * @property eventually
  * @on prototype
- * @alias then
+ * @alias resolve
  */
-defineGetter(Must.prototype, "eventually", lookupGetter(Must.prototype, "then"))
+defineGetter(Must.prototype, "eventually",
+             lookupGetter(Must.prototype, "resolve"))
+
+/**
+ * Makes any matcher following the use of `reject` wait till a promise
+ * is rejected before asserting.  
+ * Returns a new promise that will either resolve if the assertion passed or
+ * fail with `AssertionError`.
+ *
+ * Promises are transparent to matchers, so everything will also work with
+ * customer matchers you've added to `Must.prototype`. Internally Must just
+ * waits on the promise and calls the matcher function once it's rejected.
+ *
+ * With [Mocha](http://mochajs.org), using this will look something like:
+ *
+ * ```javascript
+ * it("must pass", function() {
+ *   return Promise.reject(42).must.reject.to.equal(42)
+ * })
+ * ```
+ *
+ * Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+ * ```javascript
+ * it("must pass", function*() {
+ *   yield Promise.reject(42).must.reject.to.equal(42)
+ *   yield Promise.reject([1, 2, 3]).must.reject.to.not.include(42)
+ * })
+ * ```
+ *
+ * @example
+ * Promise.reject(42).must.reject.to.equal(42)
+ * Promise.reject([1, 2, 3]).must.reject.to.not.include(42)
+ *
+ * @property reject
+ * @on prototype
+ */
+defineGetter(Must.prototype, "reject", function() {
+  return Rejectable(this)
+})
 
 Must.prototype.assert = function assert(ok, message, opts) {
   if (!this.negative ? ok : !ok) return

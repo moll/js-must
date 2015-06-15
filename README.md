@@ -247,6 +247,8 @@ For extended documentation on all functions, please see the
 - [permutationOf](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.permutationOf)(expected)
 - [property](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.property)(property, [value])
 - [regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()
+- [reject](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject)
+- [resolve](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.resolve)
 - [string](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string)()
 - [the](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the)
 - [then](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then)

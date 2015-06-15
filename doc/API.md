@@ -52,6 +52,8 @@ Must.js API Documentation
 - [permutationOf](#Must.prototype.permutationOf)(expected)
 - [property](#Must.prototype.property)(property, [value])
 - [regexp](#Must.prototype.regexp)()
+- [reject](#Must.prototype.reject)
+- [resolve](#Must.prototype.resolve)
 - [string](#Must.prototype.string)()
 - [the](#Must.prototype.the)
 - [then](#Must.prototype.then)
@@ -324,7 +326,7 @@ date.must.equal(date)
 
 <a name="Must.prototype.eventually" />
 ### Must.prototype.eventually
-Alias of [`then`](#Must.prototype.then).  
+Alias of [`resolve`](#Must.prototype.resolve).  
 
 **Examples**:
 ```javascript
@@ -654,6 +656,72 @@ Assert object is a regular expression.
 /[a-z]/.must.be.a.regexp()
 ```
 
+<a name="Must.prototype.reject" />
+### Must.prototype.reject
+Makes any matcher following the use of `reject` wait till a promise
+is rejected before asserting.  
+Returns a new promise that will either resolve if the assertion passed or
+fail with `AssertionError`.
+
+Promises are transparent to matchers, so everything will also work with
+customer matchers you've added to `Must.prototype`. Internally Must just
+waits on the promise and calls the matcher function once it's rejected.
+
+With [Mocha](http://mochajs.org), using this will look something like:
+
+```javascript
+it("must pass", function() {
+  return Promise.reject(42).must.reject.to.equal(42)
+})
+```
+
+Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+```javascript
+it("must pass", function*() {
+  yield Promise.reject(42).must.reject.to.equal(42)
+  yield Promise.reject([1, 2, 3]).must.reject.to.not.include(42)
+})
+```
+
+**Examples**:
+```javascript
+Promise.reject(42).must.reject.to.equal(42)
+Promise.reject([1, 2, 3]).must.reject.to.not.include(42)
+```
+
+<a name="Must.prototype.resolve" />
+### Must.prototype.resolve
+Makes any matcher following the use of `resolve` wait till a promise
+resolves before asserting.  
+Returns a new promise that will either resolve if the assertion passed or
+fail with `AssertionError`.
+
+Promises are transparent to matchers, so everything will also work with
+customer matchers you've added to `Must.prototype`. Internally Must just
+waits on the promise and calls the matcher function once it's resolved.
+
+With [Mocha](http://mochajs.org), using this will look something like:
+
+```javascript
+it("must pass", function() {
+  return Promise.resolve(42).must.resolve.to.equal(42)
+})
+```
+
+Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
+```javascript
+it("must pass", function*() {
+  yield Promise.resolve(42).must.resolve.to.equal(42)
+  yield Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
+})
+```
+
+**Examples**:
+```javascript
+Promise.resolve(42).must.resolve.to.equal(42)
+Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
+```
+
 <a name="Must.prototype.string" />
 ### Must.prototype.string()
 Assert object is a string.  
@@ -675,31 +743,11 @@ Pass-through property for a fluent chain.
 
 <a name="Must.prototype.then" />
 ### Must.prototype.then
-Makes any matcher following the use of `then` wait till a promise resolves
-before asserting.  
-Returns a new promise that will either resolve if the assertion passed or
-fail with `AssertionError`.
-
-With [Mocha](http://mochajs.org), using this will look something like:
-
-```javascript
-it("must pass", function() {
-  return Promise.resolve(42).must.then.equal(42)
-})
-```
-
-Using [CoMocha](https://github.com/blakeembrey/co-mocha), it'll look like:
-```javascript
-it("must pass", function*() {
-  yield Promise.resolve(42).must.then.equal(42)
-  yield Promise.resolve([1, 2, 3]).must.then.not.include(42)
-})
-```
+Alias of [`resolve`](#Must.prototype.resolve).  
 
 **Examples**:
 ```javascript
 Promise.resolve(42).must.then.equal(42)
-Promise.resolve([1, 2, 3]).must.then.not.include(42)
 ```
 
 <a name="Must.prototype.throw" />

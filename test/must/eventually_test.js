@@ -3,9 +3,9 @@ var Must = require("../..")
 var assert = require("./assert")
 
 describe("Must.prototype.eventually", function() {
-  it("must be an alias of Must.prototype.then", function() {
-    var then = $.lookupGetter(Must.prototype, "then")
+  it("must be an alias of Must.prototype.resolve", function() {
     var eventually = $.lookupGetter(Must.prototype, "eventually")
-    assert.strictEqual(eventually, then)
+    var resolve = $.lookupGetter(Must.prototype, "resolve")
+    assert.strictEqual(eventually, resolve)
   })
 })
