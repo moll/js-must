@@ -25,10 +25,10 @@ describe("Must.prototype.throw", function() {
       assert.fail(function() { Must(noop).throw() })
     })
 
-    var noThrower = function() { 42 }
+    function noThrower() { 42 }
     require("./_assertion_error_test")(function() { Must(noThrower).throw() }, {
       actual: undefined,
-      message: "function () { 42 } must throw"
+      message: "function noThrower() { 42 } must throw"
     })
   })
 
@@ -92,13 +92,13 @@ describe("Must.prototype.throw", function() {
       assert.fail(function() { Must(noop).throw("Oh no!") })
     })
 
-    var thrower = function() { throw "Nope!" }
+    function thrower() { throw "Nope!" }
     require("./_assertion_error_test")(function() {
       Must(thrower).throw("Oh no!")
     }, {
       actual: "Nope!",
       expected: "Oh no!",
-      message: "function () { throw \"Nope!\" } must throw \"Oh no!\""
+      message: "function thrower() { throw \"Nope!\" } must throw \"Oh no!\""
     })
   })
 
