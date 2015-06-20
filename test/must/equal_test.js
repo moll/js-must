@@ -115,12 +115,12 @@ describe("Must.prototype.equal", function() {
     })
 
     it("must pass given identical arrays", function() {
-      var array = new Array
+      var array = []
       assert.pass(function() { Must(array).be.equal(array) })
     })
 
     it("must fail given unidentical arrays", function() {
-      assert.fail(function() { Must(new Array).be.equal(new Array) })
+      assert.fail(function() { Must([]).be.equal([]) })
     })
   })
 

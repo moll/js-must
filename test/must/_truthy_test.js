@@ -93,7 +93,7 @@ module.exports = function(name, truthy) {
 
   describe("given Array", function() {
     it("must "+pass+" given empty array", function() {
-      doesNotThrow(function() { Must(new Array).be[name]() })
+      doesNotThrow(function() { Must([]).be[name]() })
     })
   })
 
@@ -105,7 +105,7 @@ module.exports = function(name, truthy) {
 
   describe("given Object", function() {
     it("must "+pass+" given empty object", function() {
-      doesNotThrow(function() { Must(new Object).be[name]() })
+      doesNotThrow(function() { Must({}).be[name]() })
     })
   })
 

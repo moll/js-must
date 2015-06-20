@@ -178,7 +178,7 @@ describe("Must.prototype.eql", function() {
     })
 
     it("must pass given identical arrays", function() {
-      var array = new Array
+      var array = []
       assert.pass(function() { Must(array).be.eql(array) })
     })
 
