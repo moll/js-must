@@ -4,6 +4,7 @@ var assert = require("./assert")
 module.exports = function(name, inheritable) {
   // Allow using new Number:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
   var pass = inheritable ? "pass" : "fail"
   var doesNotThrow = inheritable ? assert.pass : assert.fail
   var errName = name.replace(/[A-Z]/, function(l) {return " "+l.toLowerCase()})
@@ -106,6 +107,7 @@ module.exports = function(name, inheritable) {
 
   it("must "+pass+" if function has inherited property", function() {
     function fn() {}
+    /* eslint no-proto: 0 */
     fn.__proto__ = Object.create(fn.__proto__, {love: {value: 69}})
     doesNotThrow(function() { Must(fn).have[name]("love") })
   })
@@ -113,6 +115,7 @@ module.exports = function(name, inheritable) {
   afterEach(function() { delete String.prototype.life })
 
   it("must "+pass+" if String.prototype has property", function() {
+    /* eslint no-extend-native: 0 */
     Object.defineProperty(String.prototype, "life", {
       value: 42, enumerable: false, configurable: true
     })
@@ -122,6 +125,7 @@ module.exports = function(name, inheritable) {
   afterEach(function() { delete Boolean.prototype.life })
 
   it("must "+pass+" if false's Boolean.prototype has property", function() {
+    /* eslint no-extend-native: 0 */
     Object.defineProperty(Boolean.prototype, "life", {
       value: 42, enumerable: false, configurable: true
     })

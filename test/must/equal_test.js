@@ -4,6 +4,7 @@ var assert = require("./assert")
 describe("Must.prototype.equal", function() {
   // Allow using new Boolean:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
 
   it("must pass given nulls", function() {
     assert.pass(function() { Must(null).be.equal(null) })

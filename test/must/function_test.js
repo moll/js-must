@@ -37,6 +37,7 @@ describe("Must.prototype.function", function() {
 
   it("must pass given a function with changed __proto__", function() {
     function fn() {}
+    /* eslint no-proto: 0 */
     fn.__proto__ = {}
     assert.pass(function() { Must(fn).be.function() })
   })

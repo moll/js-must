@@ -558,6 +558,8 @@ function eql(a, b, aStack, bStack) {
   switch (aType) {
     // Allow falling through:
     /* jshint -W086 */
+    /* eslint no-fallthrough: 0 */
+
     case "number":
       if (isNaN(a) && isNaN(b)) return true
       // Fall through.

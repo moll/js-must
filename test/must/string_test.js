@@ -4,6 +4,7 @@ var assert = require("./assert")
 describe("Must.prototype.string", function() {
   // Allow using new String:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
 
   it("must fail given null", function() {
     assert.fail(function() { Must(null).be.string() })

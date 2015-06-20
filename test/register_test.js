@@ -38,6 +38,7 @@ describe("Object.prototype.must", function() {
   describe("when called on", function() {
     // Allow using Boolean, Number, String as constructor in tests:
     /* jshint -W053 */
+    /* eslint no-new-wrappers: 0 */
 
     it("must not box boolean", function() {
       assert.strictEqual(true.must.actual, true)

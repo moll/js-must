@@ -4,6 +4,7 @@ var assert = require("./assert")
 describe("Must.prototype.match", function() {
   // Allow using new String:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
 
   describe("given String and RegExp", function() {
     var literal = "Year 2014 might be like 1984."

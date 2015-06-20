@@ -4,6 +4,7 @@ var assert = require("./assert")
 describe("Must.prototype.include", function() {
   // Allow using new String:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
 
   describe("given String", function() {
     var literal = "Hello! How are you?"

@@ -72,13 +72,16 @@ module.exports = function(name, inheritable) {
 
   it("must "+pass+" if function has inherited key", function() {
     function fn() {}
-    fn.__proto__ = Object.create(fn.__proto__, {love: {value: 1, enumerable:1}})
+    /* eslint no-proto: 0 */
+    var obj = {love: {value: 1, enumerable: 1}}
+    fn.__proto__ = Object.create(fn.__proto__, obj)
     doesNotThrow(function() { Must(fn).have[name](["love"]) })
   })
 
   afterEach(function() { delete Number.prototype.life })
 
   it("must "+pass+" if Number.prototype has inherited key", function() {
+    /* eslint no-extend-native: 0 */
     Object.defineProperty(Number.prototype, "life", {
       value: 42, enumerable: true, configurable: true
     })
@@ -88,6 +91,7 @@ module.exports = function(name, inheritable) {
   afterEach(function() { delete Boolean.prototype.life })
 
   it("must "+pass+" if false's Boolean.prototype has property", function() {
+    /* eslint no-extend-native: 0 */
     Object.defineProperty(Boolean.prototype, "life", {
       value: 42, enumerable: true, configurable: true
     })

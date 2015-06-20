@@ -1,4 +1,5 @@
 var Must = module.exports = require("./must")
+/* eslint no-extend-native: 0 */
 
 /**
  * Creates an instance of [`Must`](#Must) with the current object for asserting

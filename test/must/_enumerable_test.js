@@ -49,6 +49,7 @@ module.exports = function(name, truthy) {
 
   it("must "+pass+" if String.prototype's property is enumerable",
     function() {
+    /* eslint no-extend-native: 0 */
     String.prototype.life = 42
     doesNotThrow(function() { Must("Hello").have[name]("life") })
   })

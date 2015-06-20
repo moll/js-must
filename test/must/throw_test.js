@@ -2,6 +2,8 @@ var Must = require("../..")
 var assert = require("./assert")
 
 describe("Must.prototype.throw", function() {
+  /* eslint no-throw-literal: 0 */
+
   require("./_error_test")("throw", function(err) {
     return function() { throw err }
   })

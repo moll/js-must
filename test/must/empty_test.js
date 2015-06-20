@@ -4,6 +4,7 @@ var assert = require("./assert")
 describe("Must.prototype.empty", function() {
   // Allow using new Boolean:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
 
   describe("given Boolean", function() {
     it("must fail given a boolean literal", function() {

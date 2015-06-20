@@ -4,6 +4,7 @@ var assert = require("./assert")
 module.exports = function(name, truthy) {
   // Allow using new Boolean:
   /* jshint -W053 */
+  /* eslint no-new-wrappers: 0 */
   var pass = truthy ? "pass" : "fail"
   var fail = truthy ? "fail" : "pass"
   var throws = truthy ? assert.fail : assert.pass
