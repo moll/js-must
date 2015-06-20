@@ -1,5 +1,6 @@
 var assert = require("assert")
 var stringify = require("../..").stringify
+var jsonify = JSON.stringify
 
 describe("Must.stringify", function() {
   it("must return undefined", function() {
@@ -52,25 +53,25 @@ describe("Must.stringify", function() {
   describe("given Object", function() {
     it("must show recursively", function() {
       var obj = {a: {cool: 42}}
-      assert.strictEqual(stringify(obj), '{"a":{"cool":42}}')
+      assert.strictEqual(stringify(obj), jsonify(obj))
     })
 
     it("must show inherited properties", function() {
       var obj = Object.create({a: 42})
-      assert.strictEqual(stringify(obj), '{"a":42}')
+      assert.strictEqual(stringify(obj), jsonify({a: 42}))
     })
 
     it("must show circular objects as [Circular]", function() {
       var obj = {name: "John", likes: {sex: true}}
       obj.self = obj
-      var str = '{"name":"John","likes":{"sex":true},"self":"[Circular]"}'
+      var str = jsonify({name: "John", likes: {sex: true}, self: "[Circular]"})
       assert.strictEqual(stringify(obj), str)
     })
 
     it("must show nested circular objects as [Circular]", function() {
       var obj = {name: "John", likes: {}}
       obj.likes.likes = obj.likes
-      var str = '{"name":"John","likes":{"likes":"[Circular]"}}'
+      var str = jsonify({name: "John", likes: {likes: "[Circular]"}})
       assert.strictEqual(stringify(obj), str)
     })
 
@@ -78,32 +79,34 @@ describe("Must.stringify", function() {
       var obj = [1, 2, 3]
       obj.push(obj)
       obj.push(5)
-      assert.strictEqual(stringify(obj), '[1,2,3,"[Circular]",5]')
+      assert.strictEqual(stringify(obj), jsonify([1, 2, 3, "[Circular]", 5]))
     })
 
     it("must show circular inherited objects as [Circular]", function() {
       var obj = Object.create({name: "John"})
       obj.self = obj
-      var str = '{"self":"[Circular]","name":"John"}'
+      var str = jsonify({self: "[Circular]", name: "John"})
       assert.strictEqual(stringify(obj), str)
     })
 
     it("must include undefined values", function() {
       var obj = {name: "John", age: undefined}
-      assert.strictEqual(stringify(obj), '{"name":"John","age":"[Undefined]"}')
+      var str = jsonify({name: "John", age: "[Undefined]"})
+      assert.strictEqual(stringify(obj), str)
     })
   })
 
   describe("given Error", function() {
     it("must stringify the message", function() {
       var err = new Error("Problem")
-      assert.strictEqual(stringify(err), '{"message":"Problem"}')
+      assert.strictEqual(stringify(err), jsonify({message: "Problem"}))
     })
 
     it("must stringify other enumerable properties", function() {
       var err = new Error("Not Found")
       err.code = 404
-      assert.strictEqual(stringify(err), '{"code":404,"message":"Not Found"}')
+      var str = jsonify({code: 404, message: "Not Found"})
+      assert.strictEqual(stringify(err), str)
     })
   })
 })
