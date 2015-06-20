@@ -554,6 +554,7 @@ function eql(a, b, aStack, bStack) {
     bStack = bStack ? bStack.concat([b]) : [b]
   }
 
+  var i
   switch (aType) {
     // Allow falling through:
     /* jshint -W086 */
@@ -573,7 +574,7 @@ function eql(a, b, aStack, bStack) {
       if (a.length != b.length) return false
       if (a.length == 0) return true
 
-      for (var i = 0, l = a.length; i < l; ++i)
+      for (i = 0; i < a.length; ++i)
         if (!eql(a[i], b[i], aStack, bStack)) return false
       return true
 
