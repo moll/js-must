@@ -14,16 +14,16 @@ describe("Must.prototype.array", function() {
     assert.fail(function() { Must(undefined).be.array() })
   })
 
-  it("must fail given boolean literal", function() {
+  it("must fail given boolean primitive", function() {
     assert.fail(function() { Must(true).be.array() })
     assert.fail(function() { Must(false).be.array() })
   })
 
-  it("must fail given number literal", function() {
+  it("must fail given number primitive", function() {
     assert.fail(function() { Must(0).be.array() })
   })
 
-  it("must fail given string literal", function() {
+  it("must fail given string primitive", function() {
     assert.fail(function() { Must("").be.array() })
   })
 

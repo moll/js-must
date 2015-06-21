@@ -7,34 +7,37 @@ describe("Must.prototype.include", function() {
   /* eslint no-new-wrappers: 0 */
 
   describe("given String", function() {
-    var literal = "Hello! How are you?"
-    var object = new String(literal)
+    var primitive = "Hello! How are you?"
+    var object = new String(primitive)
 
-    it("must pass if given string literal includes string literal", function() {
-      assert.pass(function() { Must(literal).include("How") })
-    })
-
-    it("must fail if given string literal does not include string literal",
+    it("must pass if given string primitive includes string primitive",
       function() {
-      assert.fail(function() { Must(literal).include("good") })
+      assert.pass(function() { Must(primitive).include("How") })
     })
 
-    it("must pass if given string literal includes string object", function() {
+    it("must fail if given string primitive does not include string primitive",
+      function() {
+      assert.fail(function() { Must(primitive).include("good") })
+    })
+
+    it("must pass if given string primitive includes string object",
+      function() {
       assert.pass(function() {
-        Must(literal).include(new String("How"))
+        Must(primitive).include(new String("How"))
       })
     })
 
-    it("must fail if given string literal does not include string object",
+    it("must fail if given string primitive does not include string object",
       function() {
-      assert.fail(function() { Must(literal).include(new String("good")) })
+      assert.fail(function() { Must(primitive).include(new String("good")) })
     })
 
-    it("must pass if given string object includes string literal", function() {
+    it("must pass if given string object includes string primitive",
+      function() {
       assert.pass(function() { Must(object).include("How") })
     })
 
-    it("must fail if given string object does not include string literal",
+    it("must fail if given string object does not include string primitive",
       function() {
       assert.fail(function() { Must(object).include("good") })
     })
@@ -50,11 +53,12 @@ describe("Must.prototype.include", function() {
   })
 
   describe("given Array", function() {
-    it("must pass if given array includes number literal", function() {
+    it("must pass if given array includes number primitive", function() {
       assert.pass(function() { Must([1, 2, 3]).include(2) })
     })
 
-    it("must fail if given array does not include number literal", function() {
+    it("must fail if given array does not include number primitive",
+      function() {
       assert.fail(function() { Must([1, 2, 3]).include(42) })
     })
 
@@ -64,11 +68,12 @@ describe("Must.prototype.include", function() {
   })
 
   describe("given Object", function() {
-    it("must pass if given object includes number literal", function() {
+    it("must pass if given object includes number primitive", function() {
       assert.pass(function() { Must({a: 1, b: 2, c: 3}).include(2) })
     })
 
-    it("must fail if given array does not include number literal", function() {
+    it("must fail if given array does not include number primitive",
+      function() {
       assert.fail(function() { Must({a: 1, b: 2, c: 3}).include(42) })
     })
 

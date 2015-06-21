@@ -30,11 +30,11 @@ describe("Must.prototype.eql", function() {
 
   describe("given Boolean", function() {
     function mustPassBooleanEql(bool) {
-      it("must pass given "+bool+" literals", function() {
+      it("must pass given "+bool+" primitives", function() {
         assert.pass(function() { Must(bool).be.eql(bool) })
       })
 
-      it("must pass given "+bool+" literal and object", function() {
+      it("must pass given "+bool+" primitive and object", function() {
         assert.pass(function() { Must(bool).be.eql(new Boolean(bool)) })
         assert.pass(function() { Must(new Boolean(bool)).be.eql(bool) })
       })
@@ -45,7 +45,7 @@ describe("Must.prototype.eql", function() {
         })
       })
 
-      it("must fail given "+bool+" and "+!bool+" literals ", function() {
+      it("must fail given "+bool+" and "+!bool+" primitives ", function() {
         assert.fail(function() { Must(bool).be.eql(!bool) })
       })
 
@@ -61,11 +61,11 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given Number", function() {
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent primitives", function() {
       assert.pass(function() { Must(42).be.eql(42) })
     })
 
-    it("must pass given equivalent literal and object", function() {
+    it("must pass given equivalent primitive and object", function() {
       assert.pass(function() { Must(42).be.eql(new Number(42)) })
       assert.pass(function() { Must(new Number(42)).be.eql(42) })
     })
@@ -74,7 +74,7 @@ describe("Must.prototype.eql", function() {
       assert.pass(function() { Must(new Number(42)).be.eql(new Number(42)) })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent primitives", function() {
       assert.fail(function() { Must(42).be.eql(1337) })
     })
 
@@ -110,28 +110,28 @@ describe("Must.prototype.eql", function() {
   })
 
   describe("given String", function() {
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent primitives", function() {
       assert.pass(function() { Must("ok").be.eql("ok") })
     })
 
-    it("must pass given equivalent literal and object", function() {
+    it("must pass given equivalent primitive and object", function() {
       assert.pass(function() { Must("ok").be.eql(new String("ok")) })
       assert.pass(function() { Must(new String("ok")).be.eql("ok") })
     })
 
     it("must pass given equivalent objects", function() {
-      assert.pass(function() { Must(new String("ok")).be.eql(new String("ok")) })
+      assert.pass(function() { Must(new String("a")).be.eql(new String("a")) })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent primitives", function() {
       assert.fail(function() { Must("ok").be.eql("nok") })
     })
 
     it("must fail given unequivalent objects", function() {
-      assert.fail(function() { Must(new String("ok")).be.eql(new String("no")) })
+      assert.fail(function() { Must(new String("a")).be.eql(new String("b")) })
     })
 
-    it("must fail given equivalent number literal", function() {
+    it("must fail given equivalent number primitive", function() {
       assert.fail(function() { Must("1").be.eql(1) })
     })
 

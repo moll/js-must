@@ -22,7 +22,9 @@ describe("Must.prototype.length", function() {
     })
   })
 
-  require("./_assertion_error_test")(function() { Must("hello").have.length(42) }, {
+  require("./_assertion_error_test")(function() {
+    Must("hello").have.length(42)
+  }, {
     actual: "hello",
     expected: 42,
     message: "\"hello\" must have length of 42"

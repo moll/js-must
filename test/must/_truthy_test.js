@@ -19,7 +19,7 @@ module.exports = function(name, truthy) {
   })
 
   describe("given Boolean", function() {
-    it("must "+pass+" given true literal", function() {
+    it("must "+pass+" given true primitive", function() {
       doesNotThrow(function() { Must(true).be[name]() })
     })
 
@@ -27,7 +27,7 @@ module.exports = function(name, truthy) {
       doesNotThrow(function() { Must(new Boolean(true)).be[name]() })
     })
 
-    it("must "+fail+" given false literal", function() {
+    it("must "+fail+" given false primitive", function() {
       throws(function() { Must(false).be[name]() })
     })
 
@@ -37,7 +37,7 @@ module.exports = function(name, truthy) {
   })
 
   describe("given Number", function() {
-    it("must "+pass+" given literal", function() {
+    it("must "+pass+" given primitive", function() {
       doesNotThrow(function() { Must(1).be[name]() })
     })
 
@@ -45,7 +45,7 @@ module.exports = function(name, truthy) {
       doesNotThrow(function() { Must(new Number(1)).be[name]() })
     })
 
-    it("must "+fail+" given zero literal", function() {
+    it("must "+fail+" given zero primitive", function() {
       throws(function() { Must(0).be[name]() })
     })
 
@@ -55,7 +55,7 @@ module.exports = function(name, truthy) {
   })
 
   describe("given String", function() {
-    it("must "+pass+" given literal", function() {
+    it("must "+pass+" given primitive", function() {
       doesNotThrow(function() { Must("truthy").be[name]() })
     })
 
@@ -63,7 +63,7 @@ module.exports = function(name, truthy) {
       doesNotThrow(function() { Must(new String("truthy")).be[name]() })
     })
 
-    it("must "+pass+" given zero literal", function() {
+    it("must "+pass+" given zero primitive", function() {
       doesNotThrow(function() { Must("0").be[name]() })
     })
 
@@ -71,7 +71,7 @@ module.exports = function(name, truthy) {
       doesNotThrow(function() { Must(new String("0")).be[name]() })
     })
 
-    it("must "+fail+" given empty literal", function() {
+    it("must "+fail+" given empty primitive", function() {
       throws(function() { Must("").be[name]() })
     })
 

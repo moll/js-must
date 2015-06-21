@@ -7,15 +7,15 @@ describe("Must.prototype.match", function() {
   /* eslint no-new-wrappers: 0 */
 
   describe("given String and RegExp", function() {
-    var literal = "Year 2014 might be like 1984."
-    var object = new String(literal)
+    var primitive = "Year 2014 might be like 1984."
+    var object = new String(primitive)
 
-    it("must pass if given string literal matches", function() {
-      assert.pass(function() { Must(literal).match(/^Year \d+ might/) })
+    it("must pass if given string primitive matches", function() {
+      assert.pass(function() { Must(primitive).match(/^Year \d+ might/) })
     })
 
-    it("must fail if given string literal does not match", function() {
-      assert.fail(function() { Must(literal).match(/^\d+ might/) })
+    it("must fail if given string primitive does not match", function() {
+      assert.fail(function() { Must(primitive).match(/^\d+ might/) })
     })
 
     it("must pass if given string object matches", function() {
@@ -29,15 +29,15 @@ describe("Must.prototype.match", function() {
   })
 
   describe("given String and String", function() {
-    var literal = "Year 2014 might be like 1984."
-    var object = new String(literal)
+    var primitive = "Year 2014 might be like 1984."
+    var object = new String(primitive)
 
-    it("must pass if given string literal matches", function() {
-      assert.pass(function() {Must(literal).match("^Year \\d+ might")})
+    it("must pass if given string primitive matches", function() {
+      assert.pass(function() {Must(primitive).match("^Year \\d+ might")})
     })
 
-    it("must fail if given string literal does not match", function() {
-      assert.fail(function() { Must(literal).match("^\\d+ might") })
+    it("must fail if given string primitive does not match", function() {
+      assert.fail(function() { Must(primitive).match("^\\d+ might") })
     })
 
     it("must pass if given string object matches", function() {

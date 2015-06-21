@@ -7,7 +7,7 @@ describe("Must.prototype.instanceof", function() {
   /* eslint no-new-wrappers: 0 */
 
   describe("given Boolean", function() {
-    it("must fail given boolean literal", function() {
+    it("must fail given boolean primitive", function() {
       assert.fail(function() { Must(true).be.instanceof(Boolean) })
       assert.fail(function() { Must(false).be.instanceof(Boolean) })
     })
@@ -24,7 +24,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe("given Number", function() {
-    it("must fail given number literal", function() {
+    it("must fail given number primitive", function() {
       assert.fail(function() { Must(42).be.instanceof(Number) })
     })
 
@@ -40,7 +40,7 @@ describe("Must.prototype.instanceof", function() {
   })
 
   describe("given String", function() {
-    it("must fail given string literal", function() {
+    it("must fail given string primitive", function() {
       assert.fail(function() { Must("").be.instanceof(String) })
     })
 

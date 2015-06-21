@@ -10,16 +10,16 @@ describe("Must.prototype.function", function() {
     assert.fail(function() { Must(undefined).be.function() })
   })
 
-  it("must fail given boolean literal", function() {
+  it("must fail given boolean primitive", function() {
     assert.fail(function() { Must(true).be.function() })
     assert.fail(function() { Must(false).be.function() })
   })
 
-  it("must fail given number literal", function() {
+  it("must fail given number primitive", function() {
     assert.fail(function() { Must(0).be.function() })
   })
 
-  it("must fail given string literal", function() {
+  it("must fail given string primitive", function() {
     assert.fail(function() { Must("").be.function() })
   })
 

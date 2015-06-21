@@ -6,11 +6,11 @@ describe("Must.prototype.undefined", function() {
     assert.pass(function() { Must(undefined).be.undefined() })
   })
 
-  it("must fail given true literal", function() {
+  it("must fail given true primitive", function() {
     assert.fail(function() { Must(true).be.undefined() })
   })
 
-  it("must fail given false literal", function() {
+  it("must fail given false primitive", function() {
     assert.fail(function() { Must(false).be.undefined() })
   })
 

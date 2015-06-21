@@ -14,16 +14,16 @@ describe("Must.prototype.string", function() {
     assert.fail(function() { Must(undefined).be.string() })
   })
 
-  it("must fail given boolean literal", function() {
+  it("must fail given boolean primitive", function() {
     assert.fail(function() { Must(true).be.date() })
     assert.fail(function() { Must(false).be.date() })
   })
 
-  it("must fail given number literal", function() {
+  it("must fail given number primitive", function() {
     assert.fail(function() { Must(0).be.string() })
   })
 
-  it("must pass given string literal", function() {
+  it("must pass given string primitive", function() {
     assert.pass(function() { Must("").be.string() })
   })
 

@@ -14,7 +14,7 @@ describe("Must.prototype.boolean", function() {
     assert.fail(function() { Must(undefined).be.boolean() })
   })
 
-  it("must pass given boolean literal", function() {
+  it("must pass given boolean primitive", function() {
     assert.pass(function() { Must(true).be.boolean() })
     assert.pass(function() { Must(false).be.boolean() })
   })
@@ -24,11 +24,11 @@ describe("Must.prototype.boolean", function() {
     assert.fail(function() { Must(new Boolean(false)).be.boolean() })
   })
 
-  it("must fail given number literal", function() {
+  it("must fail given number primitive", function() {
     assert.fail(function() { Must(0).be.boolean() })
   })
 
-  it("must fail given string literal", function() {
+  it("must fail given string primitive", function() {
     assert.fail(function() { Must("").be.boolean() })
   })
 

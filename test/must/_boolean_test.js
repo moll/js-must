@@ -10,7 +10,7 @@ module.exports = function(name, truthy) {
   var throws = truthy ? assert.fail : assert.pass
   var doesNotThrow = truthy ? assert.pass : assert.fail
 
-  it("must "+pass+" given true literal", function() {
+  it("must "+pass+" given true primitive", function() {
     doesNotThrow(function() { Must(true).be[name]() })
   })
 
@@ -18,7 +18,7 @@ module.exports = function(name, truthy) {
     assert.fail(function() { Must(new Boolean(true)).be[name]() })
   })
 
-  it("must "+fail+" given false literal", function() {
+  it("must "+fail+" given false primitive", function() {
     throws(function() { Must(false).be[name]() })
   })
 
@@ -34,7 +34,7 @@ module.exports = function(name, truthy) {
     assert.fail(function() { Must(undefined).be[name]() })
   })
 
-  it("must fail given zero number literal", function() {
+  it("must fail given zero number primitive", function() {
     assert.fail(function() { Must(0).be[name]() })
   })
 

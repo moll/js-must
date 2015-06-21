@@ -24,16 +24,16 @@ describe("Must.prototype.equal", function() {
 
   describe("given Boolean", function() {
     function mustPassTrueEqual(bool) {
-      it("must pass given "+bool+" literals", function() {
+      it("must pass given "+bool+" primitives", function() {
         assert.pass(function() { Must(bool).be.equal(bool) })
       })
 
-      it("must fail given "+bool+" literal and object", function() {
+      it("must fail given "+bool+" primitive and object", function() {
         assert.fail(function() { Must(bool).be.equal(new Boolean(bool)) })
         assert.fail(function() { Must(new Boolean(bool)).be.equal(bool) })
       })
 
-      it("must fail given "+bool+" literal with "+!bool, function() {
+      it("must fail given "+bool+" primitive with "+!bool, function() {
         assert.fail(function() { Must(bool).be.equal(!bool) })
       })
     }
@@ -43,15 +43,15 @@ describe("Must.prototype.equal", function() {
   })
 
   describe("given Number", function() {
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent primitives", function() {
       assert.pass(function() { Must(42).be.equal(42) })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent primitives", function() {
       assert.fail(function() { Must(42).be.equal(1337) })
     })
 
-    it("must fail given equivalent literal and object", function() {
+    it("must fail given equivalent primitive and object", function() {
       assert.fail(function() { Must(42).be.equal(new Number(42)) })
       assert.fail(function() { Must(new Number(42)).be.equal(42) })
     })
@@ -62,15 +62,15 @@ describe("Must.prototype.equal", function() {
   })
 
   describe("given String", function() {
-    it("must pass given equivalent literals", function() {
+    it("must pass given equivalent primitives", function() {
       assert.pass(function() { Must("ok").be.equal("ok") })
     })
 
-    it("must fail given unequivalent literals", function() {
+    it("must fail given unequivalent primitives", function() {
       assert.fail(function() { Must("ok").be.equal("nok") })
     })
 
-    it("must fail given equivalent literal and object", function() {
+    it("must fail given equivalent primitive and object", function() {
       assert.fail(function() { Must("ok").be.equal(new String("ok")) })
       assert.fail(function() { Must(new String("ok")).be.equal("ok") })
     })

@@ -14,12 +14,12 @@ describe("Must.prototype.number", function() {
     assert.fail(function() { Must(undefined).be.number() })
   })
 
-  it("must fail given boolean literal", function() {
+  it("must fail given boolean primitive", function() {
     assert.fail(function() { Must(true).be.date() })
     assert.fail(function() { Must(false).be.date() })
   })
 
-  it("must pass given number literal", function() {
+  it("must pass given number primitive", function() {
     assert.pass(function() { Must(42).be.number() })
   })
 
@@ -27,7 +27,7 @@ describe("Must.prototype.number", function() {
     assert.fail(function() { Must(new Number(42)).be.number() })
   })
 
-  it("must fail given string literal", function() {
+  it("must fail given string primitive", function() {
     assert.fail(function() { Must("").be.number() })
   })
 

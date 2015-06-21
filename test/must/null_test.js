@@ -6,11 +6,11 @@ describe("Must.prototype.null", function() {
     assert.pass(function() { Must(null).be.null() })
   })
 
-  it("must fail given true literal", function() {
+  it("must fail given true primitive", function() {
     assert.fail(function() { Must(true).be.null() })
   })
 
-  it("must fail given false literal", function() {
+  it("must fail given false primitive", function() {
     assert.fail(function() { Must(false).be.null() })
   })
 

@@ -7,7 +7,7 @@ describe("Must.prototype.empty", function() {
   /* eslint no-new-wrappers: 0 */
 
   describe("given Boolean", function() {
-    it("must fail given a boolean literal", function() {
+    it("must fail given a boolean primitive", function() {
       assert.fail(function() { Must(true).be.empty() })
       assert.fail(function() { Must(false).be.empty() })
     })
@@ -25,11 +25,11 @@ describe("Must.prototype.empty", function() {
   })
 
   describe("given Number", function() {
-    it("must fail given an zero literal", function() {
+    it("must fail given an zero primitive", function() {
       assert.fail(function() { Must(0).be.empty() })
     })
 
-    it("must fail given a non-zero literal", function() {
+    it("must fail given a non-zero primitive", function() {
       assert.fail(function() { Must(1).be.empty() })
     })
 
@@ -49,11 +49,11 @@ describe("Must.prototype.empty", function() {
   })
 
   describe("given String", function() {
-    it("must pass given an empty literal", function() {
+    it("must pass given an empty primitive", function() {
       assert.pass(function() { Must("").be.empty() })
     })
 
-    it("must fail given a non-empty literal", function() {
+    it("must fail given a non-empty primitive", function() {
       assert.fail(function() { Must("a").be.empty() })
     })
 
@@ -83,11 +83,11 @@ describe("Must.prototype.empty", function() {
   })
 
   describe("given Array", function() {
-    it("must pass given an empty literal", function() {
+    it("must pass given an empty primitive", function() {
       assert.pass(function() { Must([]).be.empty() })
     })
 
-    it("must fail given a non-empty literal", function() {
+    it("must fail given a non-empty primitive", function() {
       assert.fail(function() { Must([1]).be.empty() })
     })
   })

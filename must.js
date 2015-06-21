@@ -504,9 +504,9 @@ defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
  * Also handles circular and self-referential objects.
  *
  * For most parts it asserts strict equality (`===`), but:
- * - `Boolean` objects are compared to boolean literals.
- * - `Number` objects are compared to number literals.
- * - `String` objects are compared to string literals.
+ * - `Boolean` objects are compared to boolean primitives.
+ * - `Number` objects are compared to number primitives.
+ * - `String` objects are compared to string primitives.
  * - `RegExp` objects are compared by their pattern and flags.
  * - `Date` objects are compared by their value.
  * - `Array` objects are compared recursively.

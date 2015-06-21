@@ -4,7 +4,9 @@ var assert = require("./assert")
 describe("Must.prototype.keys", function() {
   require("./_keys_test")("keys", true)
 
-  require("./_assertion_error_test")(function() { Must({a: 1}).have.keys(["a", "b"]) }, {
+  require("./_assertion_error_test")(function() {
+    Must({a: 1}).have.keys(["a", "b"])
+  }, {
     actual: {a: 1},
     expected: ["a", "b"],
     message: "{\"a\":1} must have keys [\"a\",\"b\"]"
