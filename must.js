@@ -118,6 +118,9 @@ defineGetter(Must.prototype, "have", passthrough)
   * @on prototype
   */
 defineGetter(Must.prototype, "not", function() {
+  // NOTE: Dear reader or plugin author, please don't depend on this property
+  // name will remain as-is. If you really need to, let me know how you'd like
+  // to use it. XO.
   var self = Object.create(this)
   self.negative = !self.negative
   return self
