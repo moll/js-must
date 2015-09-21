@@ -19,7 +19,7 @@
 
 	"licenses" : [{
 		"type" : "LAGPL",
-		"url" : "https://github.com/moll/js-must/blob/master/LICENSE"
+		"url": "https://github.com/moll/js-must/blob/master/LICENSE"
 	}],
 
 	"main": "register.js",
