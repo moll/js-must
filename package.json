@@ -26,7 +26,8 @@
 	"scripts": {"test": "make test"},
 
 	"dependencies": {
-		"kindof": ">= 1.0.0 < 2",
+		"kindof": ">= 2.0.0 < 3",
+		"egal": ">= 1.3.0 < 2",
 		"oolong": ">= 1.11.0 < 2",
 		"lodash.wrap": ">= 3 < 4"
 	},

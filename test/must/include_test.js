@@ -20,35 +20,9 @@ describe("Must.prototype.include", function() {
       assert.fail(function() { Must(primitive).include("good") })
     })
 
-    it("must pass if given string primitive includes string object",
+    it("must fail if given string object includes string primitive",
       function() {
-      assert.pass(function() {
-        Must(primitive).include(new String("How"))
-      })
-    })
-
-    it("must fail if given string primitive does not include string object",
-      function() {
-      assert.fail(function() { Must(primitive).include(new String("good")) })
-    })
-
-    it("must pass if given string object includes string primitive",
-      function() {
-      assert.pass(function() { Must(object).include("How") })
-    })
-
-    it("must fail if given string object does not include string primitive",
-      function() {
-      assert.fail(function() { Must(object).include("good") })
-    })
-
-    it("must pass if given string object includes string object", function() {
-      assert.pass(function() {Must(object).include(new String("How"))})
-    })
-
-    it("must fail if given string object does not include string object",
-      function() {
-      assert.fail(function() { Must(object).include(new String("good")) })
+      assert.fail(function() { Must(object).include("How") })
     })
   })
 
@@ -62,7 +36,7 @@ describe("Must.prototype.include", function() {
       assert.fail(function() { Must([1, 2, 3]).include(42) })
     })
 
-    it("must fail if given array includes equivalent number", function() {
+    it("must fail if given array includes number object", function() {
       assert.fail(function() { Must([1, 2, 3]).include(new Number(2)) })
     })
   })
@@ -77,7 +51,7 @@ describe("Must.prototype.include", function() {
       assert.fail(function() { Must({a: 1, b: 2, c: 3}).include(42) })
     })
 
-    it("must fail if given array includes equivalent number", function() {
+    it("must fail if given array includes number object", function() {
       var obj = ({a: 1, b: 2, c: 3})
       assert.fail(function() { Must(obj).include(new Number(2)) })
     })

@@ -3,6 +3,8 @@ var AssertionError = require("./lib/assertion_error")
 var Resolvable = require("./lib/resolvable")
 var Rejectable = require("./lib/rejectable")
 var kindof = require("kindof")
+var egal = require("egal")
+var deepEgal = egal.deepEgal
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
 var defineGetter = $.defineGetter
@@ -405,7 +407,7 @@ Must.prototype.instanceOf = Must.prototype.instanceof
  */
 Must.prototype.empty = function() {
   var ok = false
-  if (Array.isArray(this.actual) || kindof(this.actual) == "string")
+  if (typeof this.actual === "string" || Array.isArray(this.actual))
     ok = this.actual.length === 0
   else if (typeof this.actual == "object" || typeof this.actual == "function")
     ok = $.isEmpty(this.actual)
@@ -536,83 +538,8 @@ defineGetter(Must.prototype, "is", lookupGetter(Must.prototype, "be"))
  * @param expected
  */
 Must.prototype.eql = function(expected) {
-  var ok = eql(this.actual, expected)
+  var ok = deepEgal(this.actual, expected, eql)
   this.assert(ok, "be equivalent to", {expected: expected, diffable: true})
-}
-
-function eql(a, b, aStack, bStack) {
-  if (a === b) return true
-
-  var aType = $.isPlainObject(a) ? "plain" : kindof(a)
-  var bType = $.isPlainObject(b) ? "plain" : kindof(b)
-  if (aType != bType) return false
-
-  if (aType == "object" || aType == "plain" || aType == "array") {
-    var aPos = aStack && aStack.indexOf(a)
-    var bPos = bStack && bStack.indexOf(b)
-    if (aPos != bPos) return false
-    if (aPos != null && ~aPos) return true
-
-    aStack = aStack ? aStack.concat([a]) : [a]
-    bStack = bStack ? bStack.concat([b]) : [b]
-  }
-
-  var i
-  switch (aType) {
-    // Allow falling through:
-    /* jshint -W086 */
-    /* eslint no-fallthrough: 0 */
-
-    case "number":
-      if (isNaN(a) && isNaN(b)) return true
-      // Fall through.
-
-    case "boolean":
-    case "string":
-    case "date":
-      return a.valueOf() == b.valueOf()
-
-    case "regexp":
-      return a.toString() === b.toString()
-
-    case "array":
-      if (a.length != b.length) return false
-      if (a.length == 0) return true
-
-      for (i = 0; i < a.length; ++i)
-        if (!eql(a[i], b[i], aStack, bStack)) return false
-      return true
-
-    case "object":
-      if (getConstructorOf(a) !== getConstructorOf(b)) return false
-      if (getValueOf(a) && getValueOf(b)) return a.valueOf() === b.valueOf()
-      // Fall through.
-
-    case "plain":
-      var aKeys = $.keys(a)
-      var bKeys = $.keys(b)
-      if (aKeys.length != bKeys.length) return false
-      if (aKeys.length == 0) return true
-
-      aKeys.sort()
-      bKeys.sort()
-      for (i = 0; i < aKeys.length; ++i) if (aKeys[i] !== bKeys[i]) return false
-
-      for (var key in a) if (!eql(a[key], b[key], aStack, bStack)) return false
-      return true
-  }
-
-  return false
-}
-
-function getConstructorOf(obj) {
-  var prototype = obj && Object.getPrototypeOf(obj)
-  return prototype && prototype.constructor
-}
-
-function getValueOf(obj) {
-  var valueOf = typeof obj.valueOf == "function" && obj.valueOf
-  return valueOf && valueOf !== Object.prototype.valueOf ? valueOf : null
 }
 
 /**
@@ -632,7 +559,7 @@ function getValueOf(obj) {
  */
 Must.prototype.include = function(expected) {
   var found
-  if (Array.isArray(this.actual) || kindof(this.actual) == "string")
+  if (typeof this.actual === "string" || Array.isArray(this.actual))
     found = ~this.actual.indexOf(expected)
   else
     for (var key in this.actual)
@@ -1228,6 +1155,43 @@ Must.prototype.assert = function assert(ok, message, opts) {
 
 Object.defineProperty(Must.prototype, "assert", {enumerable: false})
 
+function eql(a, b) {
+  if (egal(a, b)) return true
+
+  var type = kindofPlain(a)
+  if (type !== kindofPlain(b)) return false
+  if (isNumber(a) && isNumber(b) && isNaN(+a) && isNaN(+b)) return true
+
+  switch (type) {
+    case "array":
+    case "plain":
+      return null
+
+    case "object":
+      if (getConstructorOf(a) !== getConstructorOf(b)) return false
+      if (hasValueOf(a) && hasValueOf(b)) return false
+      return null
+
+    default: return false
+  }
+}
+
+function getConstructorOf(obj) {
+  var prototype = Object.getPrototypeOf(obj)
+  return prototype === null ? undefined : prototype.constructor
+}
+
+function hasValueOf(obj) {
+  var valueOf = obj.valueOf
+  return typeof valueOf === "function" && valueOf !== Object.prototype.valueOf
+}
+
+function kindofPlain(obj) {
+  var type = kindof(obj)
+  if (type === "object" && $.isPlainObject(obj)) return "plain"
+  return type
+}
+
 function isError(err, constructor, expected) {
   if (constructor != null && !(err instanceof constructor)) return false
   if (expected === ANY) return true
@@ -1245,4 +1209,5 @@ function messageFromError(err) {
 }
 
 function isFunction(fn) { return typeof fn === "function" }
+function isNumber(n) { return typeof n === "number" || n instanceof Number }
 function passthrough() { return this }
