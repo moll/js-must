@@ -1,10 +1,10 @@
-var $ = require("oolong")
+var O = require("oolong")
 var assert = require("assert")
 var Must = require("../..")
 
 exports = module.exports = assert.bind(null)
 
-$.assign(exports, assert)
+O.assign(exports, assert)
 
 exports.pass = function(fn) { exports.doesNotThrow(fn) }
 

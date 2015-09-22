@@ -1,4 +1,4 @@
-var $ = require("oolong")
+var O = require("oolong")
 var AssertionError = require("./lib/assertion_error")
 var Resolvable = require("./lib/resolvable")
 var Rejectable = require("./lib/rejectable")
@@ -7,8 +7,8 @@ var egal = require("egal")
 var deepEgal = egal.deepEgal
 var stringify = require("./lib").stringify
 var chain = require("./lib").chain
-var defineGetter = $.defineGetter
-var lookupGetter = $.lookupGetter
+var defineGetter = O.defineGetter
+var lookupGetter = O.lookupGetter
 var startsWith = require("./lib/es6").startsWith
 var endsWith = require("./lib/es6").endsWith
 var ANY = {}
@@ -410,7 +410,7 @@ Must.prototype.empty = function() {
   if (typeof this.actual === "string" || Array.isArray(this.actual))
     ok = this.actual.length === 0
   else if (typeof this.actual == "object" || typeof this.actual == "function")
-    ok = $.isEmpty(this.actual)
+    ok = O.isEmpty(this.actual)
 
   this.assert(ok, "be empty")
 }
@@ -792,7 +792,7 @@ Must.prototype.own = Must.prototype.ownProperty
  */
 Must.prototype.keys = function(expected) {
   var ok = this.actual != null
-  ok = ok && isPermutationOf($.keys(Object(this.actual)), expected)
+  ok = ok && isPermutationOf(O.keys(Object(this.actual)), expected)
   this.assert(ok, "have keys", {expected: expected})
 }
 
@@ -1188,7 +1188,7 @@ function hasValueOf(obj) {
 
 function kindofPlain(obj) {
   var type = kindof(obj)
-  if (type === "object" && $.isPlainObject(obj)) return "plain"
+  if (type === "object" && O.isPlainObject(obj)) return "plain"
   return type
 }
 

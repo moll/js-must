@@ -1,4 +1,4 @@
-var $ = require("oolong")
+var O = require("oolong")
 var assert = require("assert")
 var AssertionError = require("..").AssertionError
 
@@ -77,12 +77,12 @@ describe("AssertionError", function() {
 
   describe(".prototype.stack", function() {
     it("must be unenumerable", function() {
-      assert($.keys(new AssertionError("Misery")).indexOf("assert") == -1)
+      assert(O.keys(new AssertionError("Misery")).indexOf("assert") == -1)
     })
 
     it("must be unenumerable if given", function() {
       var err = new AssertionError("Misery", {stack: "Problem at line 42"})
-      assert($.keys(err).indexOf("assert") == -1)
+      assert(O.keys(err).indexOf("assert") == -1)
     })
 
     it("must use given stack and replace first line", function() {
