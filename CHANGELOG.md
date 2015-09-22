@@ -5,11 +5,11 @@
 
   Must.js augments `egal` to continue to allow you to assert equivalence to
   `NaN`s and instances of classes that aren't value objects.  Egal.js doesn't
-  compare those out of the box as they're not thing you want to do in production
-  code.
+  compare those out of the box as they're not things you want to do in
+  production code.
 
-  With the transition to Egal.js, this also means [`eql`] now supports value
-  objects that return compound values. See [Egal.js's
+  With the transition to Egal.js, [`eql`] now also supports value objects that
+  return compound values. See [Egal.js's
   README](https://github.com/moll/js-egal#value-objects) for details.
 
 ## 0.13.0-beta2 (Jun 15, 2015)
