@@ -1,4 +1,4 @@
-## Unreleased
+## 0.13.0-rc1 (Sep 22, 2015)
 - Refactors [`eql`] to internally use
   [Egal.js](https://github.com/moll/js-egal), which was extracted from
   Must.js.
