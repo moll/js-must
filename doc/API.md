@@ -291,9 +291,6 @@ Assert object equality by content and if possible, recursively.
 Also handles circular and self-referential objects.
 
 For most parts it asserts strict equality (`===`), but:
-- `Boolean` objects are compared to boolean primitives.
-- `Number` objects are compared to number primitives.
-- `String` objects are compared to string primitives.
 - `RegExp` objects are compared by their pattern and flags.
 - `Date` objects are compared by their value.
 - `Array` objects are compared recursively.
