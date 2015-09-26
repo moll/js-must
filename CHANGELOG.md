@@ -1,3 +1,6 @@
+## 0.13.0 (Sep 26, 2015)
+- Lucky version. No changes since the previous release candidate.
+
 ## 0.13.0-rc1 (Sep 22, 2015)
 - Refactors [`eql`] to internally use
   [Egal.js](https://github.com/moll/js-egal), which was extracted from
