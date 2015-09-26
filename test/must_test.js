@@ -24,5 +24,15 @@ describe("Must", function() {
     it("must return an instance of Must", function() {
       assert(new Must instanceof Must)
     })
+
+    describe("given message", function() {
+      require("./must/_assertion_error_test")(function() {
+        Must(false, "Negativity").true()
+      }, {
+        actual: false,
+        expected: true,
+        message: "Negativity: false must be true"
+      })
+    })
   })
 })

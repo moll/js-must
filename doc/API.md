@@ -80,9 +80,12 @@ Must.js API Documentation
 
 
 <a name="Must" />
-Must(actual)
-------------
+Must(actual, [message])
+-----------------------
 The main class that wraps the asserted object and that you call matchers on.
+
+To include a custom error message for failure cases, pass a string as the
+second argument.
 
 Most of the time you'll be using
 [`Object.prototype.must`](#Object.prototype.must) to create this wrapper, but
@@ -98,7 +101,7 @@ var expect = require("must")
 expect(null).to.be.null()
 
 var demand = require("must")
-demand(undefined).be.undefined()
+demand(undefined, "The undefined undefineds").be.undefined()
 ```
 
 <a name="Must.prototype.a" />

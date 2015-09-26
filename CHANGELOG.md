@@ -1,3 +1,7 @@
+## Unreleased
+- Adds custom error message to
+  [`Must`](https://github.com/moll/js-must/blob/master/doc/API.md#Must).
+
 ## 0.13.0 (Sep 26, 2015)
 - Lucky version. No changes since the previous release candidate.
 

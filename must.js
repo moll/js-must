@@ -20,6 +20,9 @@ exports.chain = chain
 /**
  * The main class that wraps the asserted object and that you call matchers on.
  *
+ * To include a custom error message for failure cases, pass a string as the
+ * second argument.
+ *
  * Most of the time you'll be using
  * [`Object.prototype.must`](#Object.prototype.must) to create this wrapper, but
  * occasionally you might want to assert `null`s or `undefined`s and in those
@@ -33,15 +36,17 @@ exports.chain = chain
  * expect(null).to.be.null()
  *
  * var demand = require("must")
- * demand(undefined).be.undefined()
+ * demand(undefined, "The undefined undefineds").be.undefined()
  *
  * @class Must
  * @constructor
  * @param actual
+ * @param [message]
  */
-function Must(actual) {
-  if (!(this instanceof Must)) return new Must(actual)
+function Must(actual, message) {
+  if (!(this instanceof Must)) return new Must(actual, message)
   this.actual = actual
+  if (message != null) this.message = message
 }
 
 /**
@@ -1146,6 +1151,7 @@ Must.prototype.assert = function assert(ok, message, opts) {
   var msg = stringify(this.actual) + " must " + (this.negative ? "not " : "")
   if (typeof message == "function") msg += message.call(this)
   else msg += message + ("expected" in opts ? " "+stringify(opts.expected) : "")
+  if (this.message != null) msg = this.message + ": " + msg
 
   throw new AssertionError(msg, opts)
 }
