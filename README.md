@@ -21,6 +21,7 @@ tool is [Mocha][mocha].
 - Assert with a **beautiful and fluent chain** that saves you from wrapping
   objects manually and reads nicely, too:
   ```javascript
+  require("must/register")
   obj.must.be.true()
   ```
 
@@ -106,10 +107,10 @@ to use [Browserify][browserify] to have it run there till then.
 
 Using
 -----
-To use the **fluent chain**, just require Must.js and it'll make itself
-available everywhere:
+To use the **fluent chain**, just require Must.js's "register" file and it'll
+make itself available everywhere:
 ```javascript
-require("must")
+require("must/register")
 ```
 
 Then just access the `must` property on any object and call matchers on it.
@@ -171,7 +172,7 @@ For [Mocha][mocha], that file is `test/mocha.opts`:
 ### Full example
 Inside a test runner or framework things would look something like this:
 ```javascript
-require("must")
+require("must/register")
 var MySong = require("../my_song")
 
 describe("MySong", function() {
