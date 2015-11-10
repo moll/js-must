@@ -165,7 +165,7 @@ there so you wouldn't have to remember to `require` in each test file.
 
 For [Mocha][mocha], that file is `test/mocha.opts`:
 ```
---require must
+--require must/register
 ```
 
 ### Full example
