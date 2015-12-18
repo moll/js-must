@@ -59,6 +59,7 @@ Must.js API Documentation
 - [.prototype.resolve](#Must.prototype.resolve)
 - [.prototype.startWith](#Must.prototype.startWith)(expected)
 - [.prototype.string](#Must.prototype.string)()
+- [.prototype.symbol](#Must.prototype.symbol)()
 - [.prototype.the](#Must.prototype.the)
 - [.prototype.then](#Must.prototype.then)
 - [.prototype.throw](#Must.prototype.throw)([constructor], [expected])
@@ -791,6 +792,15 @@ Boxed string objects (`new String`) are _not_ considered strings.
 **Examples**:
 ```javascript
 "Hello".must.be.a.string()
+```
+
+<a name="Must.prototype.symbol" />
+### Must.prototype.symbol()
+Assert object is a symbol.
+
+**Examples**:
+```javascript
+Symbol().must.be.a.symbol()
 ```
 
 <a name="Must.prototype.the" />

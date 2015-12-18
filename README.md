@@ -266,6 +266,7 @@ For extended documentation on all functions, please see the
 - [.prototype.resolve](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.resolve)
 - [.prototype.startWith](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.startWith)(expected)
 - [.prototype.string](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.string)()
+- [.prototype.symbol](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.symbol)()
 - [.prototype.the](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.the)
 - [.prototype.then](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.then)
 - [.prototype.throw](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.throw)([constructor], [expected])

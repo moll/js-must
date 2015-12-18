@@ -1,6 +1,9 @@
 ## Unreleased
 - Fixes stringifying `Symbol`s for assertion errors.
 - Stringifies `RegExp`s nested in objects for assertion errors.
+- Adds [`symbol`].
+
+[`symbol`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.symbol
 
 ## 0.13.1 (Sep 26, 2015)
 - Adds custom error message to

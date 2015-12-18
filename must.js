@@ -266,6 +266,18 @@ Must.prototype.string = function() {
 }
 
 /**
+ * Assert object is a symbol.
+ *
+ * @example
+ * Symbol().must.be.a.symbol()
+ *
+ * @method symbol
+ */
+Must.prototype.symbol = function() {
+  this.assert(typeof this.actual == "symbol", "be a symbol")
+}
+
+/**
  * Assert object is a date.
  *
  * @example
