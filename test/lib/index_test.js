@@ -12,39 +12,39 @@ describe("Must.stringify", function() {
   })
 
   describe("given Number", function() {
-    it("must show 42 as 42", function() {
+    it("must stringify 42 as 42", function() {
       assert.strictEqual(stringify(42), "42")
     })
 
-    it("must show Infinity as Infinity", function() {
+    it("must stringify Infinity as Infinity", function() {
       assert.strictEqual(stringify(Infinity), "Infinity")
     })
 
-    it("must show -Infinity as -Infinity", function() {
+    it("must stringify -Infinity as -Infinity", function() {
       assert.strictEqual(stringify(-Infinity), "-Infinity")
     })
 
-    it("must show NaN as NaN", function() {
+    it("must stringify NaN as NaN", function() {
       assert.strictEqual(stringify(NaN), "NaN")
     })
   })
 
   describe("given Date", function() {
-    it("must show ISO string representation", function() {
+    it("must stringify ISO string representation", function() {
       var date = new Date(Date.UTC(1987, 5, 18, 2))
       assert.strictEqual(stringify(date), "1987-06-18T02:00:00.000Z")
     })
   })
 
   describe("given RegExp", function() {
-    it("must show source with flags", function() {
+    it("must stringify source with flags", function() {
       var regexp = /abc[de]./i
       assert.strictEqual(stringify(regexp), "/abc[de]./i")
     })
   })
 
   describe("given Function", function() {
-    it("must show source", function() {
+    it("must stringify source", function() {
       function awesome() { return 42 }
       assert.strictEqual(stringify(awesome), "function awesome() { return 42 }")
     })
@@ -64,17 +64,17 @@ describe("Must.stringify", function() {
   })
 
   describe("given Object", function() {
-    it("must show recursively", function() {
+    it("must stringify recursively", function() {
       var obj = {a: {cool: 42}}
       assert.strictEqual(stringify(obj), jsonify(obj))
     })
 
-    it("must show inherited properties", function() {
+    it("must stringify inherited properties", function() {
       var obj = Object.create({a: 42})
       assert.strictEqual(stringify(obj), jsonify({a: 42}))
     })
 
-    it("must show circular objects", function() {
+    it("must stringify circular objects", function() {
       var obj = {name: "John", likes: {sex: true}}
       obj.self = obj
 
@@ -85,28 +85,28 @@ describe("Must.stringify", function() {
       }))
     })
 
-    it("must show nested circular objects", function() {
+    it("must stringify nested circular objects", function() {
       var obj = {name: "John", likes: {}}
       obj.likes.likes = obj.likes
       var str = jsonify({name: "John", likes: {likes: "[Circular ~.likes]"}})
       assert.strictEqual(stringify(obj), str)
     })
 
-    it("must show circular arrays", function() {
+    it("must stringify circular arrays", function() {
       var obj = [1, 2, 3]
       obj.push(obj)
       obj.push(5)
       assert.strictEqual(stringify(obj), jsonify([1, 2, 3, "[Circular ~]", 5]))
     })
 
-    it("must show circular inherited objects", function() {
+    it("must stringify circular inherited objects", function() {
       var obj = Object.create({name: "John"})
       obj.self = obj
       var str = jsonify({self: "[Circular ~]", name: "John"})
       assert.strictEqual(stringify(obj), str)
     })
 
-    it("must include undefined values", function() {
+    it("must stringify undefined values", function() {
       var obj = {name: "John", age: undefined}
       var str = jsonify({name: "John", age: "[Undefined]"})
       assert.strictEqual(stringify(obj), str)
