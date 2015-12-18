@@ -63,6 +63,13 @@ describe("Must.stringify", function() {
     })
   })
 
+  describe("given Array", function() {
+    it("must stringify with toJSON", function() {
+      var obj = [{toJSON: function() { return 42 }}]
+      assert.strictEqual(stringify(obj), jsonify([42]))
+    })
+  })
+
   describe("given Object", function() {
     it("must stringify recursively", function() {
       var obj = {a: {cool: 42}}
@@ -110,6 +117,11 @@ describe("Must.stringify", function() {
       var obj = {name: "John", age: undefined}
       var str = jsonify({name: "John", age: "[Undefined]"})
       assert.strictEqual(stringify(obj), str)
+    })
+
+    it("must stringify with toJSON", function() {
+      var obj = {age: {toJSON: function() { return 42 }}}
+      assert.strictEqual(stringify(obj), jsonify({age: 42}))
     })
   })
 
