@@ -1,6 +1,7 @@
 var assert = require("assert")
 var stringify = require("../..").stringify
 var describeSymbol = typeof Symbol != "undefined" ? describe : xdescribe
+var itSymbol = typeof Symbol != "undefined" ? it : xit
 var INDENT = null
 
 describe("Must.stringify", function() {
@@ -143,6 +144,23 @@ describe("Must.stringify", function() {
     it("must stringify with toJSON", function() {
       var obj = {age: {toJSON: function() { return 42 }}}
       assert.strictEqual(stringify(obj), jsonify({age: 42}))
+    })
+
+    itSymbol("must stringify nested Symbol", function() {
+      var obj = {name: "John", type: Symbol("person")}
+      var str = jsonify({name: "John", type: "Symbol(person)"})
+      assert.strictEqual(stringify(obj), str)
+    })
+
+    it("must stringify nested RegExp", function() {
+      var obj = {name: "John", match: /tinder/i}
+      var str = jsonify({name: "John", match: "/tinder/i"})
+      assert.strictEqual(stringify(obj), str)
+    })
+
+    it("must not stringify nested Function", function() {
+      var obj = {name: "John", greet: function() {}}
+      assert.strictEqual(stringify(obj), jsonify({name: "John"}))
     })
   })
 

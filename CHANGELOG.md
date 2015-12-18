@@ -1,5 +1,6 @@
 ## Unreleased
-- Fixes stringifying `Symbol`s in assertion errors.
+- Fixes stringifying `Symbol`s for assertion errors.
+- Stringifies `RegExp`s nested in objects for assertion errors.
 
 ## 0.13.1 (Sep 26, 2015)
 - Adds custom error message to
