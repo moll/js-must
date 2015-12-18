@@ -1,6 +1,6 @@
 var assert = require("assert")
 var stringify = require("../..").stringify
-var jsonify = JSON.stringify
+var INDENT = null
 
 describe("Must.stringify", function() {
   it("must return undefined", function() {
@@ -74,31 +74,35 @@ describe("Must.stringify", function() {
       assert.strictEqual(stringify(obj), jsonify({a: 42}))
     })
 
-    it("must show circular objects as [Circular]", function() {
+    it("must show circular objects", function() {
       var obj = {name: "John", likes: {sex: true}}
       obj.self = obj
-      var str = jsonify({name: "John", likes: {sex: true}, self: "[Circular]"})
-      assert.strictEqual(stringify(obj), str)
+
+      assert.strictEqual(stringify(obj), jsonify({
+        name: "John",
+        likes: {sex: true},
+        self: "[Circular ~]"
+      }))
     })
 
-    it("must show nested circular objects as [Circular]", function() {
+    it("must show nested circular objects", function() {
       var obj = {name: "John", likes: {}}
       obj.likes.likes = obj.likes
-      var str = jsonify({name: "John", likes: {likes: "[Circular]"}})
+      var str = jsonify({name: "John", likes: {likes: "[Circular ~.likes]"}})
       assert.strictEqual(stringify(obj), str)
     })
 
-    it("must show circular arrays as [Circular]", function() {
+    it("must show circular arrays", function() {
       var obj = [1, 2, 3]
       obj.push(obj)
       obj.push(5)
-      assert.strictEqual(stringify(obj), jsonify([1, 2, 3, "[Circular]", 5]))
+      assert.strictEqual(stringify(obj), jsonify([1, 2, 3, "[Circular ~]", 5]))
     })
 
-    it("must show circular inherited objects as [Circular]", function() {
+    it("must show circular inherited objects", function() {
       var obj = Object.create({name: "John"})
       obj.self = obj
-      var str = jsonify({self: "[Circular]", name: "John"})
+      var str = jsonify({self: "[Circular ~]", name: "John"})
       assert.strictEqual(stringify(obj), str)
     })
 
@@ -123,3 +127,5 @@ describe("Must.stringify", function() {
     })
   })
 })
+
+function jsonify(obj) { return JSON.stringify(obj, null, INDENT) }
