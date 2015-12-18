@@ -1,5 +1,6 @@
 var assert = require("assert")
 var stringify = require("../..").stringify
+var describeSymbol = typeof Symbol != "undefined" ? describe : xdescribe
 var INDENT = null
 
 describe("Must.stringify", function() {
@@ -29,6 +30,24 @@ describe("Must.stringify", function() {
     })
   })
 
+  describe("given String", function() {
+    it("must stringify quoted", function() {
+      assert.strictEqual(stringify("Hello, world!"), "\"Hello, world!\"")
+    })
+  })
+
+  describeSymbol("given Symbol", function() {
+    it("must stringify a named symbol", function() {
+      var symbol = Symbol("iterator")
+      assert.strictEqual(stringify(symbol), "Symbol(iterator)")
+    })
+
+    it("must stringify an unnamed symbol", function() {
+      var symbol = Symbol()
+      assert.strictEqual(stringify(symbol), "Symbol()")
+    })
+  })
+
   describe("given Date", function() {
     it("must stringify ISO string representation", function() {
       var date = new Date(Date.UTC(1987, 5, 18, 2))
@@ -47,19 +66,6 @@ describe("Must.stringify", function() {
     it("must stringify source", function() {
       function awesome() { return 42 }
       assert.strictEqual(stringify(awesome), "function awesome() { return 42 }")
-    })
-  })
-
-  var describeSymbol = typeof Symbol != "undefined" ? describe : xdescribe
-  describeSymbol("given Symbol", function() {
-    it("must stringify a named symbol", function() {
-      var symbol = Symbol("iterator")
-      assert.strictEqual(stringify(symbol), "Symbol(iterator)")
-    })
-
-    it("must stringify an unnamed symbol", function() {
-      var symbol = Symbol()
-      assert.strictEqual(stringify(symbol), "Symbol()")
     })
   })
 
