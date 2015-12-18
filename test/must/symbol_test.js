@@ -1,7 +1,8 @@
 var Must = require("../..")
 var assert = require("./assert")
+var describeSymbol = typeof Symbol != "undefined" ? describe : xdescribe
 
-describe("Must.prototype.symbol", function() {
+describeSymbol("Must.prototype.symbol", function() {
   it("must fail given null", function() {
     assert.fail(function() { Must(null).be.symbol() })
   })
