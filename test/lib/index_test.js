@@ -64,9 +64,24 @@ describe("Must.stringify", function() {
   })
 
   describe("given Array", function() {
+    it("must stringify recursively", function() {
+      var array = [{cool: 42}]
+      assert.strictEqual(stringify(array), jsonify(array))
+    })
+
+    it("must stringify circular objects", function() {
+      var array = [{name: "John"}, {name: "Mark"}]
+      array[0].self = array[0]
+
+      assert.strictEqual(stringify(array), jsonify([
+        {name: "John", self: "[Circular ~.0]"},
+        {name: "Mark"}
+      ]))
+    })
+
     it("must stringify with toJSON", function() {
-      var obj = [{toJSON: function() { return 42 }}]
-      assert.strictEqual(stringify(obj), jsonify([42]))
+      var array = [{toJSON: function() { return 42 }}]
+      assert.strictEqual(stringify(array), jsonify([42]))
     })
   })
 
