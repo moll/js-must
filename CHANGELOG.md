@@ -1,3 +1,6 @@
+## Unreleased
+- Fixes stringifying `Symbol`s in assertion errors.
+
 ## 0.13.1 (Sep 26, 2015)
 - Adds custom error message to
   [`Must`](https://github.com/moll/js-must/blob/master/doc/API.md#Must).

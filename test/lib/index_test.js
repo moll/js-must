@@ -50,6 +50,19 @@ describe("Must.stringify", function() {
     })
   })
 
+  var describeSymbol = typeof Symbol != "undefined" ? describe : xdescribe
+  describeSymbol("given Symbol", function() {
+    it("must stringify a named symbol", function() {
+      var symbol = Symbol("iterator")
+      assert.strictEqual(stringify(symbol), "Symbol(iterator)")
+    })
+
+    it("must stringify an unnamed symbol", function() {
+      var symbol = Symbol()
+      assert.strictEqual(stringify(symbol), "Symbol()")
+    })
+  })
+
   describe("given Object", function() {
     it("must show recursively", function() {
       var obj = {a: {cool: 42}}
