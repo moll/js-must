@@ -10,7 +10,7 @@ function reload() {
 
 describe("Object.prototype.must", function() {
   beforeEach(reload)
-  afterEach(function() { delete global.must })
+  afterEach(function() { delete Object.prototype.must })
 
   it("must exist", function() {
     assert(true.must)
