@@ -11,6 +11,7 @@ var defineGetter = O.defineGetter
 var lookupGetter = O.lookupGetter
 var startsWith = require("./lib/es6").startsWith
 var endsWith = require("./lib/es6").endsWith
+var Map = require("./lib/es6").Map
 var ANY = {}
 exports = module.exports = Must
 exports.AssertionError = AssertionError
@@ -611,11 +612,25 @@ function isPermutationOf(actual, expected) {
   if (!Array.isArray(actual) || !Array.isArray(expected)) return false
   if (actual.length !== expected.length) return false
 
-  actual = actual.slice().sort()
-  expected = expected.slice().sort()
-  for (var i = 0; i < actual.length; i++) {
-    if (actual[i] !== expected[i]) return false
+  var expectedElementCount = new Map()
+  for (var i = 0; i < expected.length; ++i) {
+    var element = expected[i]
+    var count = expectedElementCount.get(element) || 0
+    expectedElementCount.set(element, count + 1)
   }
+
+  for (var i = 0; i < actual.length; ++i) {
+    var element = actual[i]
+    var count = expectedElementCount.get(element)
+    if (!count) return false
+    if (count === 1) {
+      expectedElementCount.delete(element)
+    } else {
+      expectedElementCount.set(element, count - 1)
+    }
+  }
+
+  if (expectedElementCount.size) return false
 
   return true
 }
