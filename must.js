@@ -11,6 +11,7 @@ var defineGetter = O.defineGetter
 var lookupGetter = O.lookupGetter
 var startsWith = require("./lib/es6").startsWith
 var endsWith = require("./lib/es6").endsWith
+var Map = require("./lib/es6").Map
 var ANY = {}
 exports = module.exports = Must
 exports.AssertionError = AssertionError
