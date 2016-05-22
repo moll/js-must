@@ -85,6 +85,12 @@ inspired me to write Must.js is that they have a **fundamental design mistake**
 that makes them both **surprising in a bad way** and **dangerous to use**. [Read
 more below](#asserting-on-property-access).
 
+### Extensible
+
+Must.js features a very simple implementation and one you can extend yourself. In Must.js, every matcher is a function on `Must.prototype` that calls `Must.prototype.assert`. For now, please see the source of Must for examples.
+
+There are [plugins for Must.js](#plugins) by others available, too.
+
 
 Installing
 ----------
@@ -380,7 +386,16 @@ Must.js **solves both problems** with the **simplest but effective solution**
 — `expect(problem).to.not.exist()`.
 
 [should.js]: https://github.com/visionmedia/should.js
-[chai.js]: http://chaijs.com 
+[chai.js]: http://chaijs.com
+
+
+Plugins
+-------
+- [must-sinon](https://www.npmjs.com/package/must-sinon) ([Repository](https://github.com/JohnnyEstilles/must-sinon)) — Sinon assertions.
+- [must-targaryen](https://www.npmjs.com/package/must-targaryen) ([Repository](https://github.com/jtwebman/must-targaryen)) — Firebase Targaryen assertions.
+- [must-jsx](https://www.npmjs.com/package/must-jsx) ([Repository](https://github.com/nwinch/must-jsx)] — React.js JSX assertions.
+
+If you have a module extending Must.js one not listed above, please let me know or create a pull request.
 
 
 License
