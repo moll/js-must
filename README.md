@@ -260,6 +260,7 @@ For extended documentation on all functions, please see the
 - [.prototype.ownKeys](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownKeys)(keys)
 - [.prototype.ownProperty](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownProperty)(property, [value])
 - [.prototype.permutationOf](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.permutationOf)(expected)
+- [.prototype.properties](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.properties)(properties)
 - [.prototype.property](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.property)(property, [value])
 - [.prototype.regexp](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.regexp)()
 - [.prototype.reject](https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.reject)

@@ -53,6 +53,7 @@ Must.js API Documentation
 - [.prototype.ownKeys](#Must.prototype.ownKeys)(keys)
 - [.prototype.ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [.prototype.permutationOf](#Must.prototype.permutationOf)(expected)
+- [.prototype.properties](#Must.prototype.properties)(properties)
 - [.prototype.property](#Must.prototype.property)(property, [value])
 - [.prototype.regexp](#Must.prototype.regexp)()
 - [.prototype.reject](#Must.prototype.reject)
@@ -684,6 +685,20 @@ Elements are checked with strict equals (`===`).
 ```javascript
 [1, 1, 2, 3].must.be.a.permutationOf([3, 2, 1, 1])
 [7, 8, 8, 9].must.not.be.a.permutationOf([9, 8, 7])
+```
+
+<a name="Must.prototype.properties" />
+### Must.prototype.properties(properties)
+Assert that an object has all of the properties given in `properties` with
+equal (`===`) values.  In other words, asserts that the given object is
+a subset of the one asserted against.
+
+Takes **inherited properties** into account.
+
+**Examples**:
+```javascript
+var john = {name: "John", age: 42, sex: "male"}
+john.must.have.properties({name: "John", sex: "male"})
 ```
 
 <a name="Must.prototype.property" />

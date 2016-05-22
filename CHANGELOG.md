@@ -2,8 +2,10 @@
 - Fixes stringifying `Symbol`s for assertion errors.
 - Stringifies `RegExp`s nested in objects for assertion errors.
 - Adds [`symbol`].
+- Adds [`properties`].
 
 [`symbol`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.symbol
+[`properties`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.properties
 
 ## 0.13.1 (Sep 26, 2015)
 - Adds custom error message to
