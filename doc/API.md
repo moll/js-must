@@ -51,6 +51,7 @@ Must.js API Documentation
 - [.prototype.object](#Must.prototype.object)()
 - [.prototype.own](#Must.prototype.own)(property, [value])
 - [.prototype.ownKeys](#Must.prototype.ownKeys)(keys)
+- [.prototype.ownProperties](#Must.prototype.ownProperties)(properties)
 - [.prototype.ownProperty](#Must.prototype.ownProperty)(property, [value])
 - [.prototype.permutationOf](#Must.prototype.permutationOf)(expected)
 - [.prototype.properties](#Must.prototype.properties)(properties)
@@ -660,6 +661,21 @@ Pass an array of strings as `keys`.
 ({life: 42, love: 69}).must.have.ownKeys(["life", "love"])
 ```
 
+<a name="Must.prototype.ownProperties" />
+### Must.prototype.ownProperties(properties)
+Assert that an object has all of the properties given in `properties` with
+equal (`===`) values and that they're own properties.  In other words,
+asserts that the given object is a subset of the one asserted against.
+
+**Does not** take **inherited properties** into account. To do so, see
+[`properties`](#Must.prototype.properties).
+
+**Examples**:
+```javascript
+var john = {name: "John", age: 42, sex: "male"}
+john.must.have.ownProperties({name: "John", sex: "male"})
+```
+
 <a name="Must.prototype.ownProperty" />
 ### Must.prototype.ownProperty(property, [value])
 Assert that an object has own property `property`.  
@@ -693,7 +709,8 @@ Assert that an object has all of the properties given in `properties` with
 equal (`===`) values.  In other words, asserts that the given object is
 a subset of the one asserted against.
 
-Takes **inherited properties** into account.
+Takes **inherited properties** into account. To not do so, see
+[`ownProperties`](#Must.prototype.ownProperties).
 
 **Examples**:
 ```javascript

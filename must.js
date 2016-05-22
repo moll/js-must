@@ -742,7 +742,8 @@ Must.prototype.frozen = function() {
  * equal (`===`) values.  In other words, asserts that the given object is
  * a subset of the one asserted against.
  *
- * Takes **inherited properties** into account.
+ * Takes **inherited properties** into account. To not do so, see
+ * [`ownProperties`](#Must.prototype.ownProperties).
  *
  * @example
  * var john = {name: "John", age: 42, sex: "male"}
@@ -761,6 +762,33 @@ Must.prototype.properties = function(props) {
   }
 
   this.assert(ok, "have properties", {expected: props, diffable: true})
+}
+
+/**
+ * Assert that an object has all of the properties given in `properties` with
+ * equal (`===`) values and that they're own properties.  In other words,
+ * asserts that the given object is a subset of the one asserted against.
+ *
+ * **Does not** take **inherited properties** into account. To do so, see
+ * [`properties`](#Must.prototype.properties).
+ *
+ * @example
+ * var john = {name: "John", age: 42, sex: "male"}
+ * john.must.have.ownProperties({name: "John", sex: "male"})
+ *
+ * @method ownProperties
+ * @param properties
+ */
+Must.prototype.ownProperties = function(props) {
+  var obj = this.actual
+  var ok = this.actual != null
+
+  if (ok) for (var key in props) {
+    ok = key in obj && hasOwn(obj, key) && obj[key] === props[key]
+    if (!ok) break
+  }
+
+  this.assert(ok, "have own properties", {expected: props, diffable: true})
 }
 
 /**

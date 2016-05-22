@@ -3,9 +3,11 @@
 - Stringifies `RegExp`s nested in objects for assertion errors.
 - Adds [`symbol`].
 - Adds [`properties`].
+- Adds [`ownProperties`].
 
 [`symbol`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.symbol
 [`properties`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.properties
+[`ownProperties`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.ownProperties
 
 ## 0.13.1 (Sep 26, 2015)
 - Adds custom error message to
