@@ -11,6 +11,7 @@ var defineGetter = O.defineGetter
 var lookupGetter = O.lookupGetter
 var startsWith = require("./lib/es6").startsWith
 var endsWith = require("./lib/es6").endsWith
+var hasOwn = Function.call.bind(Object.hasOwnProperty)
 var ANY = {}
 exports = module.exports = Must
 exports.AssertionError = AssertionError
@@ -802,7 +803,7 @@ Must.prototype.property = function(property, expected) {
  */
 Must.prototype.ownProperty = function(property, expected) {
   var ok = this.actual != null
-  ok = ok && Object.prototype.hasOwnProperty.call(this.actual, property)
+  ok = ok && hasOwn(this.actual, property)
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
   var msg = "have own property \"" + property + "\"", opts
