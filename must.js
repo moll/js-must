@@ -1213,7 +1213,12 @@ Must.prototype.assert = function assert(ok, message, opts) {
 
   opts = opts ? Object.create(opts) : {}
   if (!("actual" in opts)) opts.actual = this.actual
-  if (!("caller" in opts)) opts.caller = assert.caller
+
+  if (!("caller" in opts)) {
+    // Accessing caller in strict mode throws TypeError.
+    try { opts.caller = assert.caller }
+    catch (ex) { opts.caller = assert }
+  }
 
   var msg = stringify(this.actual) + " must " + (this.negative ? "not " : "")
   if (typeof message == "function") msg += message.call(this)

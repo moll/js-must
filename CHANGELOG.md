@@ -4,6 +4,8 @@
 - Adds [`symbol`].
 - Adds [`properties`].
 - Adds [`ownProperties`].
+- Adds preliminary support for running under strict mode (`"use strict"`).  
+  Assertion error stack traces will contain one Must.js function at the top at the moment. This will be fixed!
 
 [`symbol`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.symbol
 [`properties`]: https://github.com/moll/js-must/blob/master/doc/API.md#Must.prototype.properties

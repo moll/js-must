@@ -8,10 +8,11 @@ describe("Must.prototype.throw", function() {
     return function() { throw err }
   })
 
-  it("must invoke function in global context", function() {
+  it("must invoke function in no context", function() {
+    "use strict"
     var context
     Must(function() { context = this }).not.throw()
-    assert.strictEqual(context, global)
+    assert.strictEqual(context, null)
   })
 
   describe("given nothing", function() {
@@ -27,10 +28,10 @@ describe("Must.prototype.throw", function() {
       assert.fail(function() { Must(noop).throw() })
     })
 
-    function noThrower() { 42 }
+    function noThrower() { void 42 }
     require("./_assertion_error_test")(function() { Must(noThrower).throw() }, {
       actual: undefined,
-      message: "function noThrower() { 42 } must throw"
+      message: "function noThrower() { void 42 } must throw"
     })
   })
 
