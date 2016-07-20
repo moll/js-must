@@ -498,7 +498,7 @@ Must.prototype.equal = function(expected) {
  */
 Must.prototype.error = function(type, expected) {
   if (arguments.length <= 1) expected = ANY
-  if (arguments.length == 1 && !isFunction(type)) expected = type, type = null
+  if (arguments.length == 1 && !isFn(type)) { expected = type; type = null }
 
   var ok = isError(this.actual, type || Error, expected)
   var msg = expected !== ANY ? "be an error matching" : "be an error"
@@ -575,7 +575,7 @@ Must.prototype.eql = function(expected) {
 Must.prototype.include = function(expected) {
   var found
   if (typeof this.actual === "string" || Array.isArray(this.actual))
-    found = ~this.actual.indexOf(expected)
+    found = this.actual.indexOf(expected) >= 0
   else
     for (var key in this.actual)
       if (this.actual[key] === expected) { found = true; break }
@@ -699,7 +699,7 @@ defineGetter(Must.prototype, "the", passthrough)
  */
 Must.prototype.throw = function(type, expected) {
   if (arguments.length <= 1) expected = ANY
-  if (arguments.length == 1 && !isFunction(type)) expected = type, type = null
+  if (arguments.length == 1 && !isFn(type)) { expected = type; type = null }
 
   var ok = false, exception
   try { this.actual.call(null) } catch (ex) { ok = true; exception = ex }
@@ -811,7 +811,7 @@ Must.prototype.property = function(property, expected) {
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
   var msg = "have property \"" + property + "\"", opts
-  if (arguments.length > 1) msg += " equal to", opts = {expected: expected}
+  if (arguments.length > 1) { msg += " equal to"; opts = {expected: expected} }
   this.assert(ok, msg, opts)
 }
 
@@ -835,7 +835,7 @@ Must.prototype.ownProperty = function(property, expected) {
   if (ok && arguments.length > 1) ok = this.actual[property] === expected
 
   var msg = "have own property \"" + property + "\"", opts
-  if (arguments.length > 1) msg += " equal to", opts = {expected: expected}
+  if (arguments.length > 1) { msg += " equal to"; opts = {expected: expected} }
   this.assert(ok, msg, opts)
 }
 
@@ -1283,6 +1283,6 @@ function messageFromError(err) {
   return err == null || typeof err == "string" ? err : err.message
 }
 
-function isFunction(fn) { return typeof fn === "function" }
+function isFn(fn) { return typeof fn === "function" }
 function isNumber(n) { return typeof n === "number" || n instanceof Number }
 function passthrough() { return this }

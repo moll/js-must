@@ -23,7 +23,7 @@ describe("Must.prototype.undefined", function() {
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.pass(function() { Must(undefined).be.undefined })
+    assert.pass(function() { void Must(undefined).be.undefined })
   })
 
   require("./_assertion_error_test")(function() { Must(true).be.undefined() }, {

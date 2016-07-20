@@ -111,7 +111,7 @@ module.exports = function(name, truthy) {
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.pass(function() { Must(!truthy).be[name] })
+    assert.pass(function() { void Must(!truthy).be[name] })
   })
 
   require("./_assertion_error_test")(function() { Must(!truthy).be[name]() }, {

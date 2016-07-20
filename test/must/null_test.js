@@ -23,7 +23,7 @@ describe("Must.prototype.null", function() {
   })
 
   it("must not do anything when not called as a function", function() {
-    assert.pass(function() { Must(null).be.null })
+    assert.pass(function() { void Must(null).be.null })
   })
 
   require("./_assertion_error_test")(function() { Must(true).be.null() }, {
