@@ -1,4 +1,4 @@
-## Unreleased
+## 0.13.2 (Jul 20, 2016)
 - Fixes stringifying `Symbol`s for assertion errors.
 - Stringifies `RegExp`s nested in objects for assertion errors.
 - Adds [`symbol`].
