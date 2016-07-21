@@ -1,3 +1,9 @@
+## Unreleased
+- Adds a first draft of TypeScript definitions.  
+  Thanks, [Karl Purkhardt][@KarlPurk]!
+
+[@KarlPurk]: https://github.com/KarlPurk
+
 ## 0.13.2 (Jul 20, 2016)
 - Fixes stringifying `Symbol`s for assertion errors.
 - Stringifies `RegExp`s nested in objects for assertion errors.
