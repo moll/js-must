@@ -12,6 +12,8 @@
 		"url": "http://themoll.com"
 	},
 
+	"typings": "./must.d.ts",
+
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/moll/js-must.git"
