@@ -1,14 +1,11 @@
-interface a { (expected): Must }
-interface an { (expected): Must }
-interface be { (expected): Must }
 interface Must {
-    a;
+    a: CallableMust;
     above(expected): Must;
     after(expected): Must;
-    an;
-    array(expected): Must;
+    an: CallableMust;
+    array(): Must;
     at: Must;
-    be;
+    be: CallableMust;
     before(expected): Must;
     below(expected): Must;
     between(begin, end): Must;
@@ -72,8 +69,25 @@ interface Must {
     undefined(): Must;
     with: Must;
 }
-
+interface CallableMust extends Must {
+    (): Must;
+}
 declare function must(expected: any): Must;
 declare namespace must {}
 
 export = must;
+
+declare global {
+    interface String {
+        must: Must;
+    }
+    interface Boolean {
+        must: Must;
+    }
+    interface Number {
+        must: Must;
+    }
+    interface Array<T> {
+        must: Must;
+    }
+}
