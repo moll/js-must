@@ -87,6 +87,9 @@ declare global {
     interface Number {
         must: Must;
     }
+    interface Object {
+        must: Must;
+    }
     interface Array<T> {
         must: Must;
     }
