@@ -350,7 +350,7 @@ Migrate those to `it("must do good")` with this `sed` script:
 sed -i.should -E -e 's/it\("should/it("must/g' test/**/*.js
 ```
 
-<a name="asserting-on-property-access" />
+<a name="asserting-on-property-access"></a>
 ### Beware of libraries that assert on property access
 Among other things, one reason why [Should.js][should.js] and
 [Chai.js][chai.js] inspired me to write Must.js is that they have
