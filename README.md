@@ -15,7 +15,7 @@ tool is [Mocha][mocha].
 [npm-badge]: https://img.shields.io/npm/v/must.svg
 [travis-badge]: https://travis-ci.org/moll/js-must.png?branch=master
 [rfc2119]: https://www.ietf.org/rfc/rfc2119.txt
-[mocha]: http://visionmedia.github.io/mocha
+[mocha]: https://mochajs.org
 
 ### Tour
 - Assert with a **beautiful and fluent chain** that saves you from wrapping
