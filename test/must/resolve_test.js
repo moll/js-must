@@ -45,7 +45,7 @@ describe("Must.prototype.resolve", function() {
       return test().then(raise, function(err) {
         var stack = err.stack.split(/\r?\n/)
         assert(stack[0].match(/AssertionError/, "must include AssertionError"))
-        assert(stack[1].match(/[\\\/]test[\\\/]/), "must have test at top")
+        assert(stack[1].match(/[\\/]test[\\/]/), "must have test at top")
       })
     })
   })
