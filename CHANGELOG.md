@@ -1,6 +1,7 @@
 ## Unreleased
 - Adds a first draft of TypeScript definitions.  
   Thanks, [Karl Purkhardt][@KarlPurk]!
+- Serialize `NaN`s in objects in error messages as `"[NaN]"`.
 
 [@KarlPurk]: https://github.com/KarlPurk
 

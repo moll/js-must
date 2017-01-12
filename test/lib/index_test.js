@@ -141,6 +141,12 @@ describe("Must.stringify", function() {
       assert.strictEqual(stringify(obj), str)
     })
 
+    it("must stringify NaN", function() {
+      var obj = {age: NaN}
+      var str = jsonify({age: "[NaN]"})
+      assert.strictEqual(stringify(obj), str)
+    })
+
     it("must stringify with toJSON", function() {
       var obj = {age: {toJSON: function() { return 42 }}}
       assert.strictEqual(stringify(obj), jsonify({age: 42}))
