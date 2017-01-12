@@ -1,0 +1,11 @@
+root = true
+
+[Makefile]
+indent_style = tab
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = tab
