@@ -1,3 +1,6 @@
+## Unreleased
+- Tweaks `Must.prototype.be` et al. implementation to prevent [`source-map-support`](https://github.com/evanw/node-source-map-support) from throwing an exception during call stack retrieval. This only happened if that module was used with Must.js for source map support.
+
 ## 0.13.3 (Jan 12, 2017)
 - Adds a first draft of TypeScript definitions.  
   Thanks, [Karl Purkhardt][@KarlPurk]!
