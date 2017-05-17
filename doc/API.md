@@ -83,6 +83,7 @@ Must.js API Documentation
 
 
 <a name="Must" />
+
 Must(actual, [message])
 -----------------------
 The main class that wraps the asserted object and that you call matchers on.
@@ -108,6 +109,7 @@ demand(undefined, "The undefined undefineds").be.undefined()
 ```
 
 <a name="Must.prototype.a" />
+
 ### Must.prototype.a(class)
 Alias of [`instanceof`](#Must.prototype.instanceof).  
 Can also be used a pass-through property for a fluent chain.
@@ -119,6 +121,7 @@ new Date().must.be.a(Date)
 ```
 
 <a name="Must.prototype.above" />
+
 ### Must.prototype.above(expected)
 Assert that an object is above and greater than (`>`) `expected`.  
 Uses `>` for comparison, so it'll also work with value objects (those
@@ -130,6 +133,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 <a name="Must.prototype.after" />
+
 ### Must.prototype.after(expected)
 Alias of [`above`](#Must.prototype.above).  
 Works well with dates where saying *after* is more natural than *above* or
@@ -146,6 +150,7 @@ new Date(2030, 5, 18).must.be.after(new Date(2013, 9, 23))
 ```
 
 <a name="Must.prototype.an" />
+
 ### Must.prototype.an(class)
 Alias of [`instanceof`](#Must.prototype.instanceof).  
 Can also be used a pass-through property for a fluent chain.
@@ -157,6 +162,7 @@ new AwesomeClass().must.be.an(AwesomeClass)
 ```
 
 <a name="Must.prototype.array" />
+
 ### Must.prototype.array()
 Assert object is an array.
 
@@ -166,6 +172,7 @@ Assert object is an array.
 ```
 
 <a name="Must.prototype.at" />
+
 ### Must.prototype.at
 Pass-through property for a fluent chain.
 
@@ -176,6 +183,7 @@ Pass-through property for a fluent chain.
 ```
 
 <a name="Must.prototype.be" />
+
 ### Must.prototype.be(expected)
 Alias of [`equal`](#Must.prototype.equal).  
 Can also be used as a pass-through property for a fluent chain.
@@ -187,6 +195,7 @@ true.must.be.true()
 ```
 
 <a name="Must.prototype.before" />
+
 ### Must.prototype.before(expected)
 Alias of [`below`](#Must.prototype.below).  
 Works well with dates where saying *before* is more natural than *below* or
@@ -203,6 +212,7 @@ new Date(2000, 5, 18).must.be.before(new Date(2001, 0, 1))
 ```
 
 <a name="Must.prototype.below" />
+
 ### Must.prototype.below(expected)
 Assert that an object is below and less than (`<`) `expected`.  
 Uses `<` for comparison, so it'll also work with value objects (those
@@ -214,6 +224,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 <a name="Must.prototype.between" />
+
 ### Must.prototype.between(begin, end)
 Assert that an object is between `begin` and `end` (inclusive).  
 Uses `<` for comparison, so it'll also work with value objects (those
@@ -227,6 +238,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 <a name="Must.prototype.boolean" />
+
 ### Must.prototype.boolean()
 Assert object is a boolean (`true` or `false`).  
 Boxed boolean objects (`new Boolean`) are _not_ considered booleans.
@@ -237,10 +249,12 @@ true.must.be.a.boolean()
 ```
 
 <a name="Must.prototype.contain" />
+
 ### Must.prototype.contain(expected)
 Alias of [`include`](#Must.prototype.include).  
 
 <a name="Must.prototype.date" />
+
 ### Must.prototype.date()
 Assert object is a date.
 
@@ -250,6 +264,7 @@ new Date().must.be.a.date()
 ```
 
 <a name="Must.prototype.empty" />
+
 ### Must.prototype.empty()
 Assert that an object is empty.  
 Checks either the `length` for arrays and strings or the count of
@@ -263,6 +278,7 @@ enumerable keys. Inherited keys also counted.
 ```
 
 <a name="Must.prototype.endWith" />
+
 ### Must.prototype.endWith(expected)
 Assert a string ends with the given string.
 
@@ -272,6 +288,7 @@ Assert a string ends with the given string.
 ```
 
 <a name="Must.prototype.enumerable" />
+
 ### Must.prototype.enumerable(property)
 Assert that an object has an enumerable property `property`.  
 It will fail if the object lacks the property entirely.
@@ -288,10 +305,12 @@ For checking if a property exists *and* is non-enumerable, see
 ```
 
 <a name="Must.prototype.enumerableProperty" />
+
 ### Must.prototype.enumerableProperty(property)
 Alias of [`enumerable`](#Must.prototype.enumerable).  
 
 <a name="Must.prototype.eql" />
+
 ### Must.prototype.eql(expected)
 Assert object equality by content and if possible, recursively.  
 Also handles circular and self-referential objects.
@@ -325,6 +344,7 @@ new Answer(42).must.eql(new Answer(42))
 ```
 
 <a name="Must.prototype.equal" />
+
 ### Must.prototype.equal(expected)
 Assert object strict equality or identity (`===`).
 
@@ -342,6 +362,7 @@ date.must.equal(date)
 ```
 
 <a name="Must.prototype.error" />
+
 ### Must.prototype.error([constructor], [expected])
 Assert that an object is an error (instance of `Error` by default).  
 Optionally assert it matches `expected` (and/or is of instance
@@ -370,6 +391,7 @@ err.must.be.an.error(RangeError, /amazing/)
 ```
 
 <a name="Must.prototype.eventually" />
+
 ### Must.prototype.eventually
 Alias of [`resolve`](#Must.prototype.resolve).  
 
@@ -379,6 +401,7 @@ Promise.resolve(42).must.eventually.equal(42)
 ```
 
 <a name="Must.prototype.exist" />
+
 ### Must.prototype.exist()
 Assert object is exists and thereby is not null or undefined.
 
@@ -390,6 +413,7 @@ Assert object is exists and thereby is not null or undefined.
 ```
 
 <a name="Must.prototype.false" />
+
 ### Must.prototype.false()
 Assert object is `false`.  
 A boxed boolean object (`new Boolean(false`) is _not_ considered false.
@@ -400,6 +424,7 @@ false.must.be.false()
 ```
 
 <a name="Must.prototype.falsy" />
+
 ### Must.prototype.falsy()
 Assert object is falsy (`!obj`).
 
@@ -413,6 +438,7 @@ Everything else is truthy.
 ```
 
 <a name="Must.prototype.frozen" />
+
 ### Must.prototype.frozen()
 Assert that an object is frozen with `Object.isFrozen`.
 
@@ -422,6 +448,7 @@ Object.freeze({}).must.be.frozen()
 ```
 
 <a name="Must.prototype.function" />
+
 ### Must.prototype.function()
 Assert object is a function.
 
@@ -431,14 +458,17 @@ Assert object is a function.
 ```
 
 <a name="Must.prototype.gt" />
+
 ### Must.prototype.gt(expected)
 Alias of [`above`](#Must.prototype.above).  
 
 <a name="Must.prototype.gte" />
+
 ### Must.prototype.gte(expected)
 Alias of [`least`](#Must.prototype.least).  
 
 <a name="Must.prototype.have" />
+
 ### Must.prototype.have
 Pass-through property for a fluent chain.
 
@@ -448,6 +478,7 @@ Pass-through property for a fluent chain.
 ```
 
 <a name="Must.prototype.include" />
+
 ### Must.prototype.include(expected)
 Assert object includes `expected`.
 
@@ -463,10 +494,12 @@ objects the property values. Everything is checked with strict equals
 ```
 
 <a name="Must.prototype.instanceOf" />
+
 ### Must.prototype.instanceOf(class)
 Alias of [`instanceof`](#Must.prototype.instanceof).  
 
 <a name="Must.prototype.instanceof" />
+
 ### Must.prototype.instanceof(class)
 Assert that an object is an instance of something.  
 Uses `obj instanceof expected`.
@@ -477,6 +510,7 @@ new Date().must.be.an.instanceof(Date)
 ```
 
 <a name="Must.prototype.is" />
+
 ### Must.prototype.is(expected)
 Alias of [`equal`](#Must.prototype.equal).  
 Can also be used as a pass-through property for a fluent chain.
@@ -489,6 +523,7 @@ claim(42).is(42)
 ```
 
 <a name="Must.prototype.keys" />
+
 ### Must.prototype.keys(keys)
 Assert that an object has only the expected enumerable `keys`.  
 Pass an array of strings as `keys`.
@@ -503,6 +538,7 @@ Object.create({life: 42}).must.have.keys(["life"])
 ```
 
 <a name="Must.prototype.least" />
+
 ### Must.prototype.least(expected)
 Assert that an object is at least, greater than or equal to (`>=`),
 `expected`.  
@@ -516,6 +552,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 <a name="Must.prototype.length" />
+
 ### Must.prototype.length(expected)
 Assert that an object has a length property equal to `expected`.
 
@@ -526,14 +563,17 @@ Assert that an object has a length property equal to `expected`.
 ```
 
 <a name="Must.prototype.lt" />
+
 ### Must.prototype.lt(expected)
 Alias of [`below`](#Must.prototype.below).  
 
 <a name="Must.prototype.lte" />
+
 ### Must.prototype.lte(expected)
 Alias of [`most`](#Must.prototype.most).  
 
 <a name="Must.prototype.match" />
+
 ### Must.prototype.match(regexp)
 Assert object matches the given regular expression.
 
@@ -547,6 +587,7 @@ via `new RegExp(regexp)`.
 ```
 
 <a name="Must.prototype.most" />
+
 ### Must.prototype.most(expected)
 Assert that an object is at most, less than or equal to (`<=`), `expected`.  
 Uses `<=` for comparison, so it'll also work with value objects (those
@@ -559,6 +600,7 @@ implementing [`valueOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 <a name="Must.prototype.must" />
+
 ### Must.prototype.must
 Pass-through property for a fluent chain.
 
@@ -568,6 +610,7 @@ Pass-through property for a fluent chain.
 ```
 
 <a name="Must.prototype.nan" />
+
 ### Must.prototype.nan()
 Assert object is `NaN`.
 
@@ -577,6 +620,7 @@ NaN.must.be.nan()
 ```
 
 <a name="Must.prototype.nonenumerable" />
+
 ### Must.prototype.nonenumerable(property)
 Assert that an object has a non-enumerable property `property`.  
 It will fail if the object lacks the property entirely.
@@ -593,10 +637,12 @@ Object.create({}, {love: {enumerable: 0}}).must.have.nonenumerable("love")
 ```
 
 <a name="Must.prototype.nonenumerableProperty" />
+
 ### Must.prototype.nonenumerableProperty(property)
 Alias of [`nonenumerable`](#Must.prototype.nonenumerable).  
 
 <a name="Must.prototype.not" />
+
 ### Must.prototype.not
 Inverse the assertion.  
 Use it multiple times to create lots of fun!
@@ -609,6 +655,7 @@ true.must.not.be.true()
 ```
 
 <a name="Must.prototype.null" />
+
 ### Must.prototype.null()
 Assert object is `null`.
 
@@ -626,6 +673,7 @@ demand(null).be.null()
 ```
 
 <a name="Must.prototype.number" />
+
 ### Must.prototype.number()
 Assert object is a number.  
 Boxed number objects (`new Number`) are _not_ considered numbers.
@@ -636,6 +684,7 @@ Boxed number objects (`new Number`) are _not_ considered numbers.
 ```
 
 <a name="Must.prototype.object" />
+
 ### Must.prototype.object()
 Assert object is an.. object.
 
@@ -645,10 +694,12 @@ Assert object is an.. object.
 ```
 
 <a name="Must.prototype.own" />
+
 ### Must.prototype.own(property, [value])
 Alias of [`ownProperty`](#Must.prototype.ownProperty).  
 
 <a name="Must.prototype.ownKeys" />
+
 ### Must.prototype.ownKeys(keys)
 Assert that an object has only the expected enumerable `keys` of its own.  
 Pass an array of strings as `keys`.
@@ -662,6 +713,7 @@ Pass an array of strings as `keys`.
 ```
 
 <a name="Must.prototype.ownProperties" />
+
 ### Must.prototype.ownProperties(properties)
 Assert that an object has all of the properties given in `properties` with
 equal (`===`) values and that they're own properties.  In other words,
@@ -677,6 +729,7 @@ john.must.have.ownProperties({name: "John", sex: "male"})
 ```
 
 <a name="Must.prototype.ownProperty" />
+
 ### Must.prototype.ownProperty(property, [value])
 Assert that an object has own property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
@@ -690,6 +743,7 @@ Optionally assert it *equals* (`===`) to `value`.
 ```
 
 <a name="Must.prototype.permutationOf" />
+
 ### Must.prototype.permutationOf(expected)
 Assert that an array is a permutation of the given array.
 
@@ -704,6 +758,7 @@ Elements are checked with strict equals (`===`).
 ```
 
 <a name="Must.prototype.properties" />
+
 ### Must.prototype.properties(properties)
 Assert that an object has all of the properties given in `properties` with
 equal (`===`) values.  In other words, asserts that the given object is
@@ -719,6 +774,7 @@ john.must.have.properties({name: "John", sex: "male"})
 ```
 
 <a name="Must.prototype.property" />
+
 ### Must.prototype.property(property, [value])
 Assert that an object has property `property`.  
 Optionally assert it *equals* (`===`) to `value`.
@@ -733,6 +789,7 @@ Takes **inherited properties** into account. To not do so, see
 ```
 
 <a name="Must.prototype.regexp" />
+
 ### Must.prototype.regexp()
 Assert object is a regular expression.
 
@@ -742,6 +799,7 @@ Assert object is a regular expression.
 ```
 
 <a name="Must.prototype.reject" />
+
 ### Must.prototype.reject
 Makes any matcher following the use of `reject` wait till a promise
 is rejected before asserting.  
@@ -775,6 +833,7 @@ Promise.reject([1, 2, 3]).must.reject.to.not.include(42)
 ```
 
 <a name="Must.prototype.resolve" />
+
 ### Must.prototype.resolve
 Makes any matcher following the use of `resolve` wait till a promise
 resolves before asserting.  
@@ -808,6 +867,7 @@ Promise.resolve([1, 2, 3]).must.resolve.to.not.include(42)
 ```
 
 <a name="Must.prototype.startWith" />
+
 ### Must.prototype.startWith(expected)
 Assert a string starts with the given string.
 
@@ -817,6 +877,7 @@ Assert a string starts with the given string.
 ```
 
 <a name="Must.prototype.string" />
+
 ### Must.prototype.string()
 Assert object is a string.  
 Boxed string objects (`new String`) are _not_ considered strings.
@@ -827,6 +888,7 @@ Boxed string objects (`new String`) are _not_ considered strings.
 ```
 
 <a name="Must.prototype.symbol" />
+
 ### Must.prototype.symbol()
 Assert object is a symbol.
 
@@ -836,6 +898,7 @@ Symbol().must.be.a.symbol()
 ```
 
 <a name="Must.prototype.the" />
+
 ### Must.prototype.the
 Pass-through property for a fluent chain.
 
@@ -845,6 +908,7 @@ Pass-through property for a fluent chain.
 ```
 
 <a name="Must.prototype.then" />
+
 ### Must.prototype.then
 Alias of [`resolve`](#Must.prototype.resolve).  
 
@@ -854,6 +918,7 @@ Promise.resolve(42).must.then.equal(42)
 ```
 
 <a name="Must.prototype.throw" />
+
 ### Must.prototype.throw([constructor], [expected])
 Assert that a function throws.  
 Optionally assert it throws `expected` (and/or is of instance
@@ -889,6 +954,7 @@ omg.must.throw(RangeError, /amazing/)
 ```
 
 <a name="Must.prototype.to" />
+
 ### Must.prototype.to
 Pass-through property for a fluent chain.
 
@@ -902,6 +968,7 @@ wish(life).to.be.truthy()
 ```
 
 <a name="Must.prototype.true" />
+
 ### Must.prototype.true()
 Assert object is `true`.  
 A boxed boolean object (`new Boolean(true`) is _not_ considered true.
@@ -912,6 +979,7 @@ true.must.be.true()
 ```
 
 <a name="Must.prototype.truthy" />
+
 ### Must.prototype.truthy()
 Assert object is truthy (`!!obj`).
 
@@ -925,6 +993,7 @@ Everything else is truthy.
 ```
 
 <a name="Must.prototype.undefined" />
+
 ### Must.prototype.undefined()
 Assert object is `undefined`.
 
@@ -942,6 +1011,7 @@ demand(undefined).be.undefined()
 ```
 
 <a name="Must.prototype.with" />
+
 ### Must.prototype.with
 Pass-through property for a fluent chain.
 
@@ -952,11 +1022,13 @@ Promise.resolve(42).must.resolve.with.number()
 
 
 <a name="Object" />
+
 Object
 ------
 
 
 <a name="Object.prototype.must" />
+
 ### Object.prototype.must
 Creates an instance of [`Must`](#Must) with the current object for asserting
 and calling matchers on.
@@ -977,15 +1049,18 @@ true.must.be.true()
 
 
 <a name="AssertionError" />
+
 AssertionError(message, [options])
 ----------------------------------
 Error object thrown when an assertion fails.
 
 <a name="assertionError.actual" />
+
 ### assertionError.actual
 The asserted object.
 
 <a name="assertionError.diffable" />
+
 ### assertionError.diffable
 Whether it makes sense to compare objects granularly or even show a diff
 view of the objects involved.  
@@ -997,16 +1072,19 @@ like [`eql`](#Must.prototype.eql), are more granular and comparing them
 line by line helps understand how they differ.
 
 <a name="assertionError.expected" />
+
 ### assertionError.expected
 If the matcher took an argument or asserted against something (like
 `foo.must.be.true()`), then this is the expected value.
 
 <a name="assertionError.showDiff" />
+
 ### assertionError.showDiff
 Alias of [`diffable`](#assertionError.diffable).  
 Some test runners (like [Mocha](http://visionmedia.github.io/mocha/)) expect
 this property instead.
 
 <a name="assertionError.stack" />
+
 ### assertionError.stack
 The stack trace starting from the code that called `must`.
