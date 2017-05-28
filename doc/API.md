@@ -361,7 +361,7 @@ Assert object is exists and thereby is not null or undefined.
 
 **Examples**:
 ```javascript
-0.must.exist()
+0..must.exist()
 "".must.exist()
 ({}).must.exist()
 ```
@@ -383,7 +383,7 @@ Everything else is truthy.
 
 **Examples**:
 ```javascript
-0.must.be.falsy()
+0..must.be.falsy()
 "".must.be.falsy()
 ```
 

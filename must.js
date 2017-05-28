@@ -362,7 +362,7 @@ Must.prototype.truthy = function() {
  * Everything else is truthy.
  *
  * @example
- * 0.must.be.falsy()
+ * 0..must.be.falsy()
  * "".must.be.falsy()
  *
  * @method falsy
@@ -375,7 +375,7 @@ Must.prototype.falsy = function() {
  * Assert object is exists and thereby is not null or undefined.
  *
  * @example
- * 0.must.exist()
+ * 0..must.exist()
  * "".must.exist()
  * ({}).must.exist()
  *
