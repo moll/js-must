@@ -1305,7 +1305,7 @@ Must.prototype.fulfill = function(fulfilledCondition) {
  * @method betray
  * @param catchCondition
  */
-defineGetter(Must.prototype, "betray", function(catchCondition) {
+Must.prototype.betray = function(catchCondition) {
   var must = this
   must.promise()
   return must.actual.then(
@@ -1314,7 +1314,7 @@ defineGetter(Must.prototype, "betray", function(catchCondition) {
     },
     catchCondition || nop
   )
-})
+}
 
 /**
  * Assert a string starts with the given string.
