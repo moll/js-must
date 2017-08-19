@@ -1219,6 +1219,8 @@ Must.prototype.promise = function() {
   )
 }
 
+function nop() {}
+
 /**
  * Assert a string starts with the given string.
  *
