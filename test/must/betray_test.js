@@ -37,19 +37,19 @@ describe("Must.prototype.betray", function() {
     }
   )
 
-  it( // MUDO this test has issues
+  it(
     "must pass given a Promise that rejects and a catchCondition that throws, " +
     "and eventually pass, and reject to the rejection of the catchCondition",
     function(done) {
       var called = false
       assert.pass(function() {
-        Must(Promise.reject(43).betray(function(err) {
+        Must(Promise.reject(42)).betray(function(err) {
           called = true
           err.must.be.a.number()
           err.must.be.truthy()
           throw err // the resulting promise will be rejected
         })
-        .then(raise(done), assertStrictEqual(done, 42, function() { return called })))
+        .then(raise(done), assertStrictEqual(done, 42, function() { return called }))
       })
     }
   )
