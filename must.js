@@ -1311,10 +1311,18 @@ Must.prototype.fulfill = function(fulfilledCondition) {
 Must.prototype.betray = function(catchCondition) {
   var must = this
   must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual})
-  var resolved = must.actual.then(function(result) {
-    must.assert(false, "reject, but got fulfilled with \'" + stringify(result) + "\'")
-  })
-  return catchCondition ? resolved.catch(catchCondition) : resolved
+  return must.actual.then(
+    function(result) {
+      must.assert(
+        false,
+        "reject, but got fulfilled with \'" + stringify(result) + "\'",
+        {actual: must.actual}
+      )
+    },
+    catchCondition
+      ? catchCondition
+      : function(err) { throw err }
+  )
 }
 
 /**
