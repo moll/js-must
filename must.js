@@ -1184,7 +1184,7 @@ defineGetter(Must.prototype, "reject", function() {
 })
 
 /**
- * Assert that an object is a promise.
+ * Assert that an object is a promise, and returns it.
  *
  * The determination uses duck typing, i.e., it checks whether the object has
  * a `then` and a `catch` method.
@@ -1213,6 +1213,7 @@ defineGetter(Must.prototype, "reject", function() {
  */
 Must.prototype.promise = function() {
   this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
+  return this.actual
 }
 
 /**
