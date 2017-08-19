@@ -15,7 +15,7 @@ describe("Must.prototype.promise", function() {
     })
 
     it("must pass given a Promise implementation, with a rejected promise", function () {
-      assert.pass(function () { Must(Promise.resolve(new Error())).be.promise() })
+      assert.pass(function () { Must(Promise.reject(new Error())).be.promise() })
     })
   }
 })
