@@ -1183,6 +1183,34 @@ defineGetter(Must.prototype, "reject", function() {
   return Rejectable(this)
 })
 
+/**
+ * Assert that an object is a promise.
+ *
+ * The determination uses duck typing, i.e., it checks whether the object has
+ * a `then` and a `catch` method.
+ *
+ * There are several implementations of promises in the wild, and a promise you
+ * receive from a library might not be an `instanceof` _your_ `Promise` type,
+ * although they can work together.
+ *
+ * ```javascript
+ * promise.must.be.a(Promise)
+ * ```
+ *
+ * might fail, while
+ *
+ * ```javascript
+ * promise.must.be.a.promise
+ * ```
+ *
+ * might be upheld.
+ *
+ * @example
+ * Promise.resolve(42).must.be.a.promise()
+ * Promise.reject(42).must.be.a.promise()
+ *
+ * @method promise
+ */
 defineGetter(Must.prototype, "promise", function() {
   this.assert(
     typeof this.actual.then === "function" && typeof this.actual.catch === "function",
