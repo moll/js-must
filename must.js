@@ -1213,8 +1213,9 @@ defineGetter(Must.prototype, "reject", function() {
  */
 defineGetter(Must.prototype, "promise", function() {
   this.assert(
-    typeof this.actual.then === "function" && typeof this.actual.catch === "function",
-    "be a promise (i.e., have a \'then\' and a \'catch\' function)"
+    this.actual && typeof this.actual.then === "function" && typeof this.actual.catch === "function",
+    "be a promise (i.e., have a \'then\' and a \'catch\' function)",
+    { actual: this.actual }
   )
 })
 
