@@ -1221,6 +1221,16 @@ Must.prototype.promise = function() {
 
 function nop() {}
 
+defineGetter(Must.prototype, "fulfill", function(fulfilledCondition) {
+  var must = this
+  must.promise()
+  return must.actual
+             .catch(function(err) {
+                must.assert(false, "resolve, but got rejected with \'" + err.message + "\'")
+              })
+             .then(fulfilledCondition || nop)
+})
+
 /**
  * Assert a string starts with the given string.
  *
