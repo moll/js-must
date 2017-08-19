@@ -1258,7 +1258,7 @@ function nop() {}
  * @method fulfill
  * @param fulfilledCondition
  */
-defineGetter(Must.prototype, "fulfill", function(fulfilledCondition) {
+Must.prototype.fulfill = function(fulfilledCondition) {
   var must = this
   must.promise()
   return must.actual
@@ -1266,7 +1266,7 @@ defineGetter(Must.prototype, "fulfill", function(fulfilledCondition) {
                 must.assert(false, "resolve, but got rejected with \'" + err.message + "\'")
               })
              .then(fulfilledCondition || nop)
-})
+}
 
 /**
  * Assert a string starts with the given string.
