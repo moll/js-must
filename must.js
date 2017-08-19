@@ -1211,13 +1211,13 @@ defineGetter(Must.prototype, "reject", function() {
  *
  * @method promise
  */
-defineGetter(Must.prototype, "promise", function() {
+Must.prototype.promise = function() {
   this.assert(
     this.actual && typeof this.actual.then === "function" && typeof this.actual.catch === "function",
     "be a promise (i.e., have a \'then\' and a \'catch\' function)",
     { actual: this.actual }
   )
-})
+}
 
 /**
  * Assert a string starts with the given string.
