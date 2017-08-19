@@ -37,7 +37,7 @@ describe("Must.prototype.betray", function() {
     }
   )
 
-  it(
+  it( // MUDO this test has issues
     "must pass given a Promise that rejects and a catchCondition that throws, " +
     "and eventually pass, and reject to the rejection of the catchCondition",
     function(done) {
