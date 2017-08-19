@@ -1226,6 +1226,9 @@ Must.prototype.promise = function() {
  * This approach makes it possible to immediate express assertions about the original
  * promise's resolve result.
  *
+ * You should not use `not` to negate `fulfill`. Things will get weird. Use `betray`
+ * to express that the promise should be rejected instead.
+ *
  * @example
  * Promise.resolve(42).must.fulfill()
  * Promise.resolve(42).must.fulfill(function(result) {
@@ -1275,6 +1278,9 @@ Must.prototype.fulfill = function(fulfilledCondition) {
  *
  * This approach makes it possible to immediate express assertions about the original
  * promise's reject error.
+ *
+ * You should not use `not` to negate `betray`. Things will get weird. Use `fulfill`
+ * to express that the promise should be resolved instead.
  *
  * @example
  * Promise.reject(new Error()).must.betray()
