@@ -72,11 +72,8 @@ describe("Must.prototype.fulfill", function() {
     function(done) {
       var called = false
       assert.pass(function() {
-        Must(Promise.reject(new Error('rejection'))).fulfill(function(result) { // fulfill fails, callback is not executed
+        Must(Promise.reject(new Error('rejection'))).fulfill(function() { // fulfill fails, callback is not executed
           called = true
-          result.must.not.be.a.number() // fails
-          result.must.be.truthy()
-          return result
         })
         .then(raise(done), assertThrown(done, function() { return !called }))
       })
