@@ -6,6 +6,7 @@ describe("Must.prototype.reject", function() {
   it("must return a promise from a matcher", function() {
     var promise = Must(Promise.resolve(42)).reject.number()
     assert.strictEqual(typeof promise.then, "function")
+    return promise.then(raise, assertThrown) // prevent UnhandledPromiseRejectionWarning
   })
 
   it("must resolve given a rejected promise with expected value", function() {
