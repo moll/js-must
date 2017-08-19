@@ -1212,11 +1212,7 @@ defineGetter(Must.prototype, "reject", function() {
  * @method promise
  */
 Must.prototype.promise = function() {
-  this.assert(
-    this.actual && typeof this.actual.then === "function" && typeof this.actual.catch === "function",
-    "be a promise (i.e., have a \'then\' and a \'catch\' function)",
-    { actual: this.actual }
-  )
+  this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
 }
 
 function nop() {}
@@ -1260,12 +1256,12 @@ function nop() {}
  */
 Must.prototype.fulfill = function(fulfilledCondition) {
   var must = this
-  must.promise()
   return must.actual
              .catch(function(err) {
                 must.assert(false, "resolve, but got rejected with \'" + err.message + "\'")
               })
              .then(fulfilledCondition || nop)
+  must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual})
 }
 
 /**
@@ -1307,13 +1303,13 @@ Must.prototype.fulfill = function(fulfilledCondition) {
  */
 Must.prototype.betray = function(catchCondition) {
   var must = this
-  must.promise()
   return must.actual.then(
     function(result) {
       must.assert(false, "reject, but got fulfilled with \'" + stringify(result) + "\'")
     },
     catchCondition || nop
   )
+  must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual})
 }
 
 /**
@@ -1418,4 +1414,10 @@ function messageFromError(err) {
 
 function isFn(fn) { return typeof fn === "function" }
 function isNumber(n) { return typeof n === "number" || n instanceof Number }
+
+var isPromiseMsg = "be a promise (i.e., have a \'then\' and a \'catch\' function)"
+function isPromise(p) {
+  return p && typeof p.then === "function" && typeof p.catch === "function"
+}
+
 function passthrough() { return this }
