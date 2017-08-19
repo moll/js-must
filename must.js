@@ -1215,8 +1215,6 @@ Must.prototype.promise = function() {
   this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
 }
 
-function nop() {}
-
 /**
  * Assert that an object is a promise (see `promise`), that eventually resolves.
  * The assertion returns a promise that settles to the outcome (resolve result or
@@ -1256,12 +1254,15 @@ function nop() {}
  */
 Must.prototype.fulfill = function(fulfilledCondition) {
   var must = this
-  return must.actual
-             .catch(function(err) {
-                must.assert(false, "resolve, but got rejected with \'" + err.message + "\'")
-              })
-             .then(fulfilledCondition || nop)
   must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual})
+  var caught = must.actual.catch(function(err) {
+    must.assert(
+      false,
+      "resolve, but got rejected with \'" + (err && err.message ? err.message : err) + "\'",
+      {actual: must.actual}
+    )
+  })
+  return fulfilledCondition ? caught.then(fulfilledCondition) : caught
 }
 
 /**
@@ -1303,13 +1304,11 @@ Must.prototype.fulfill = function(fulfilledCondition) {
  */
 Must.prototype.betray = function(catchCondition) {
   var must = this
-  return must.actual.then(
-    function(result) {
-      must.assert(false, "reject, but got fulfilled with \'" + stringify(result) + "\'")
-    },
-    catchCondition || nop
-  )
   must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual})
+  var resolved = must.actual.then(function(result) {
+    must.assert(false, "reject, but got fulfilled with \'" + stringify(result) + "\'")
+  })
+  return catchCondition ? resolved.catch(catchCondition) : resolved
 }
 
 /**
