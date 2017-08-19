@@ -45,16 +45,16 @@ describe("Must.prototype.promise", function() {
     assert.fail(function () { Must(catchNoThen).be.promise() })
   })
 
-  it("must pass given an object with a catch and a then function", function () { // NOK
+  it("must pass given an object with a catch and a then function", function () {
     assert.pass(function () { Must(catchAndThen).be.promise() })
   })
 
   if (Promise) {
-    it("must pass given a Promise implementation, with a resolved promise", function () { // NOK
+    it("must pass given a Promise implementation, with a resolved promise", function () {
       assert.pass(function () { Must(Promise.resolve(42)).be.promise() })
     })
 
-    it("must pass given a Promise implementation, with a rejected promise", function () { // NOK
+    it("must pass given a Promise implementation, with a rejected promise", function () {
       assert.pass(function () { Must(Promise.resolve(new Error())).be.promise() })
     })
   }
