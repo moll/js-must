@@ -1268,6 +1268,43 @@ Must.prototype.fulfill = function(fulfilledCondition) {
              .then(fulfilledCondition || nop)
 }
 
+/**
+ * Assert that an object is a promise (see `promise`), that eventually rejects ("betrays" the promise).
+ * The assertion returns a promise that settles to the outcome (resolve result or
+ * reject error) of `catchCondition`. `catchCondition` is called with the
+ * error (reject result) of the original promise when it rejects.
+ * If the original promise is fulfilled (resolved), this assertion fails, and `catchCondition`
+ * is not called. `catchCondition` is optional.
+ *
+ * This approach makes it possible to immediate express assertions about the original
+ * promise's reject error.
+ *
+ * @example
+ * Promise.reject(new Error()).must.betray()
+ * Promise.reject(42).must.betray(function(err) {
+ *   err.must.be.a.number()
+ *   err.must.be.truthy()
+ *   return result // the resulting promise will be fulfilled
+ * })
+ * Promise.reject(42).must.betray(function(err) {
+ *   err.must.be.a.number()
+ *   err.must.be.truthy()
+ *   throw result // the resulting promise will be rejected
+ * })
+ * Promise.reject(42).must.betray(function(err) {
+ *   err.must.not.be.a.number() // fails
+ *   err.must.be.truthy()
+ *   return result
+ * })
+ * Promise.resolve(42).must.betray(function(err) { // betray fails, callback is not executed
+ *   err.must.not.be.a.number()
+ *   err.must.be.truthy()
+ *   return result
+ * })
+ *
+ * @method betray
+ * @param catchCondition
+ */
 defineGetter(Must.prototype, "betray", function(catchCondition) {
   var must = this
   must.promise()
