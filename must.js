@@ -1268,6 +1268,17 @@ Must.prototype.fulfill = function(fulfilledCondition) {
              .then(fulfilledCondition || nop)
 }
 
+defineGetter(Must.prototype, "betray", function(catchCondition) {
+  var must = this
+  must.promise()
+  return must.actual.then(
+    function(result) {
+      must.assert(false, "reject, but got fulfilled with \'" + stringify(result) + "\'")
+    },
+    catchCondition || nop
+  )
+})
+
 /**
  * Assert a string starts with the given string.
  *
