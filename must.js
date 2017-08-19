@@ -1221,6 +1221,43 @@ Must.prototype.promise = function() {
 
 function nop() {}
 
+/**
+ * Assert that an object is a promise (see `promise`), that eventually resolves.
+ * The assertion returns a promise that settles to the outcome (resolve result or
+ * reject error) of `fulfilledCondition`. `fulfilledCondition` is called with the
+ * resolution (resolve result) of the original promise when it resolves.
+ * If the original promise is rejected, this assertion fails, and `fulfilledCondition`
+ * is not called. `fulfilledCondition` is optional.
+ *
+ * This approach makes it possible to immediate express assertions about the original
+ * promise's resolve result.
+ *
+ * @example
+ * Promise.resolve(42).must.fulfill()
+ * Promise.resolve(42).must.fulfill(function(result) {
+ *   result.must.be.a.number()
+ *   result.must.be.truthy()
+ *   return result // the resulting promise will be fulfilled
+ * })
+ * Promise.resolve(42).must.fulfill(function(result) {
+ *   result.must.be.a.number()
+ *   result.must.be.truthy()
+ *   throw result // the resulting promise will be rejected
+ * })
+ * Promise.resolve(42).must.fulfill(function(result) {
+ *   result.must.not.be.a.number() // fails
+ *   result.must.be.truthy()
+ *   return result
+ * })
+ * Promise.reject(new Error()).must.fulfill(function(result) { // fulfill fails, callback is not executed
+ *   result.must.not.be.a.number()
+ *   result.must.be.truthy()
+ *   return result
+ * })
+ *
+ * @method fulfill
+ * @param fulfilledCondition
+ */
 defineGetter(Must.prototype, "fulfill", function(fulfilledCondition) {
   var must = this
   must.promise()
