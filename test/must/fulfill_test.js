@@ -2,6 +2,7 @@ var Promise = global.Promise || require("promise")
 var Must = require("../..")
 var failingPromiseTests = require("./_failing_promise_tests")
 var assert = require("./assert")
+var stringify = require("../../lib").stringify
 
 describe("Must.prototype.fulfill", function() {
   failingPromiseTests(function(must) { must.fulfill() })
@@ -92,7 +93,7 @@ describe("Must.prototype.fulfill", function() {
             err,
             {
               actual: subject,
-              message: "{} must resolve, but got rejected with \'" + message + "\'"
+              message: stringify(subject) + " must resolve, but got rejected with \'" + message + "\'"
             }
           )
           done()

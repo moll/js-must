@@ -95,7 +95,7 @@ describe("Must.prototype.betray", function() {
             err,
             {
               actual: subject,
-              message: "{} must reject, but got fulfilled with \'" + stringify(resolution) + "\'"
+              message: stringify(subject) + " must reject, but got fulfilled with \'" + stringify(resolution) + "\'"
             }
           )
           done()
