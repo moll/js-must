@@ -86,15 +86,19 @@ describe("Must.prototype.fulfill", function() {
     Must(subject).fulfill().then(
       raise(done),
       function(err) {
-        assert(err instanceof Must.AssertionError)
-        assert.deepEqual(
-          err,
-          {
-            actual: subject,
-            message: "{} must resolve, but got rejected with \'" + message + "\'"
-          }
-        )
-        done()
+        try {
+          assert(err instanceof Must.AssertionError)
+          assert.deepEqual(
+            err,
+            {
+              actual: subject,
+              message: "{} must resolve, but got rejected with \'" + message + "\'"
+            }
+          )
+          done()
+        } catch (assertErr) {
+          done(assertErr)
+        }
       }
     )
   })

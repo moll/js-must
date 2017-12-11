@@ -89,15 +89,20 @@ describe("Must.prototype.betray", function() {
     Must(subject).betray().then(
       raise(done),
       function(err) {
-        assert(err instanceof Must.AssertionError)
-        assert.deepEqual(
-          err,
-          {
-            actual: subject,
-            message: "{} must reject, but got fulfilled with \'" + stringify(resolution) + "\'"
-          }
-        )
-        done()
+        try {
+          assert(err instanceof Must.AssertionError)
+          assert.deepEqual(
+            err,
+            {
+              actual: subject,
+              message: "{} must reject, but got fulfilled with \'" + stringify(resolution) + "\'"
+            }
+          )
+          done()
+        }
+        catch (assertErr) {
+          done(assertErr)
+        }
       }
     )
   })
