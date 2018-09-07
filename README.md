@@ -86,7 +86,6 @@ that makes them both **surprising in a bad way** and **dangerous to use**. [Read
 more below](#asserting-on-property-access).
 
 ### Extensible
-
 Must.js features a very simple implementation and one you can extend yourself. In Must.js, every matcher is a function on `Must.prototype` that calls `Must.prototype.assert`. For now, please see the source of Must for examples.
 
 There are [plugins for Must.js](#plugins) by others available, too.
@@ -415,7 +414,8 @@ For more convoluted language, see the `LICENSE` file.
 About
 -----
 **[Andri Möll](http://themoll.com)** typed this and the code.  
-[Monday Calendar](https://mondayapp.com) supported the engineering work.
+[Monday Calendar](https://mondayapp.com) supported the engineering work.  
+[BrowserStack](https://browserstack.com) supports with cross-browser testing.
 
 If you find Must.js needs improving, please don't hesitate to type to me now at
 [andri@dot.ee][email] or [create an issue online][issues].
