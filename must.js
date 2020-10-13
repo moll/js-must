@@ -342,7 +342,7 @@ Must.prototype.object = function() {
 /**
  * Assert object is truthy (`!!obj`).
  *
- * Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+ * Only `null`, `undefined`, `0`, `false`, `NaN` and `""` are falsy in JavaScript.
  * Everything else is truthy.
  *
  * @example
@@ -358,7 +358,7 @@ Must.prototype.truthy = function() {
 /**
  * Assert object is falsy (`!obj`).
  *
- * Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+ * Only `null`, `undefined`, `0`, `false`, `NaN` and `""` are falsy in JavaScript.
  * Everything else is truthy.
  *
  * @example

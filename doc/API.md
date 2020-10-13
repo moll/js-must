@@ -403,7 +403,7 @@ false.must.be.false()
 ### Must.prototype.falsy()
 Assert object is falsy (`!obj`).
 
-Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+Only `null`, `undefined`, `0`, `false`, `NaN` and `""` are falsy in JavaScript.
 Everything else is truthy.
 
 **Examples**:
@@ -915,7 +915,7 @@ true.must.be.true()
 ### Must.prototype.truthy()
 Assert object is truthy (`!!obj`).
 
-Only `null`, `undefined`, `0`, `false` and `""` are falsy in JavaScript.
+Only `null`, `undefined`, `0`, `false`, `NaN` and `""` are falsy in JavaScript.
 Everything else is truthy.
 
 **Examples**:

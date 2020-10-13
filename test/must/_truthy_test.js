@@ -14,6 +14,10 @@ module.exports = function(name, truthy) {
     throws(function() { Must(null).be[name]() })
   })
 
+  it("must "+fail+" given NaN", function() {
+    throws(function() { Must(NaN).be[name]() })
+  })
+
   it("must "+fail+" given undefined", function() {
     throws(function() { Must(undefined).be[name]() })
   })
