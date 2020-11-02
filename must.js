@@ -721,8 +721,9 @@ Must.prototype.throw = function(type, expected) {
  * @param expected
  */
 Must.prototype.length = function(expected) {
-  var ok = this.actual.length == expected
-  this.assert(ok, "have length of", {expected: expected})
+  var actualLength = this.actual.length
+  var ok = actualLength == expected
+  this.assert(ok, "have length of", {actual: actualLength, expected: expected})
 }
 
 /**
