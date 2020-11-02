@@ -1,8 +1,13 @@
 ## Unreleased
 - Improves documentation around `NaN`s.  
-  Thanks, [Jacek Nowacki](@dzek69)!
+  Thanks, [Jacek Nowacki][@dzek69]!
+- Adds another TypeScript type signature.  
+  Thanks, [Kevin Turner][@kpturner], [Theodoros Klikas][@klikas] and [Chris Gedrim][@chrisgedrim]!
 
 [@dzek69]: https://github.com/dzek69
+[@kpturner]: https://github.com/kpturner
+[@klikas]: https://github.com/klikas
+[@chrisgedrim]: https://github.com/chrisgedrim
 
 ## 0.13.4 (Jan 13, 2017)
 - Tweaks `Must.prototype.be` et al. implementation to prevent [`source-map-support`](https://github.com/evanw/node-source-map-support) from throwing an exception during call stack retrieval. This only happened if that module was used with Must.js for source map support.

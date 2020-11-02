@@ -73,6 +73,7 @@ interface CallableMust extends Must {
     (): Must;
 }
 declare function must(expected: any): Must;
+declare function must(expected: any, msg?: string): Must;
 declare namespace must {}
 
 export = must;
