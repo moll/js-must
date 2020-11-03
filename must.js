@@ -1224,6 +1224,7 @@ Must.prototype.assert = function assert(ok, message, opts) {
   var msg = stringify(this.actual) + " must " + (this.negative ? "not " : "")
   if (typeof message == "function") msg += message.call(this)
   else msg += message + ("expected" in opts ? " "+stringify(opts.expected) : "")
+  if ("have length of" == message) msg += ". +expected, -actual : +" + opts.expected + " -" + this.actual.length
   if (this.message != null) msg = this.message + ": " + msg
 
   throw new AssertionError(msg, opts)

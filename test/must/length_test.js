@@ -27,7 +27,7 @@ describe("Must.prototype.length", function() {
   }, {
     actual: "hello".length,
     expected: 42,
-    message: "\"hello\" must have length of 42"
+    message: "\"hello\" must have length of 42. +expected, -actual : +42 -5"
   })
 
   describe(".not", function() {
